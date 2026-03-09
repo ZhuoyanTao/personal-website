@@ -99,15 +99,18 @@
     }
 
     .nav-links a:hover { color: var(--white); }
-
+    
     /* ─── HERO ─── */
     .hero {
-      min-height: 100vh; 
+      min-height: 100vh;
       background: var(--dark);
-      position: relative; 
-      display: grid;
-      grid-template-columns: 1fr 420px;  /* ← change 420px to 360px */
-      align-items: center; 
+      position: relative;
+      /* CHANGE STARTS HERE */
+      display: flex;             /* Switch to Flexbox for better centering */
+      justify-content: center;   /* Center content horizontally */
+      align-items: center;       
+      gap: 4vw;                  /* Fluid gap between text and image */
+      padding: 0 5vw;            /* Prevent edge-touching on smaller screens */
       overflow: hidden;
     }
 
