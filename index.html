@@ -102,8 +102,13 @@
 
     /* ─── HERO ─── */
     .hero {
-      min-height: 100vh; background: var(--dark);
-      position: relative; display: flex; align-items: center; overflow: hidden;
+      min-height: 100vh; 
+      background: var(--dark);
+      position: relative; 
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      align-items: center; 
+      overflow: hidden;
     }
 
     /* Spectrogram-inspired column texture */
@@ -147,6 +152,69 @@
     .hero-content {
       position: relative; z-index: 2;
       padding: 10rem 5rem 8rem; max-width: 860px;
+    }
+
+        /* ─── HERO PHOTO COLUMN ─── */
+    .hero-photo-col {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 10rem 3rem 8rem 0;
+    }
+
+    .hero-photo-wrap {
+      position: relative;
+      width: 300px;
+      opacity: 0;
+      animation: riseIn 1s cubic-bezier(.16,1,.3,1) forwards 0.9s;
+    }
+
+    /* Frame outline */
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: 10px;
+      bottom: 10px;
+      border: 1px solid rgba(106,140,175,0.2);
+      border-radius: 3px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-photo-wrap img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 3px;
+      position: relative;
+      z-index: 1;
+      filter: brightness(0.88) contrast(1.05) saturate(0.85);
+    }
+
+    /* Caption overlay */
+    .hero-photo-caption {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(13,14,20,0.85) 0%, transparent 100%);
+      padding: 2rem 1rem 0.85rem;
+      border-radius: 0 0 3px 3px;
+      z-index: 2;
+    }
+
+    .hero-photo-caption span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(244,244,246,0.45);
     }
 
     .hero-kicker {
@@ -457,8 +525,12 @@
       opacity: 0; transform: translateY(18px);
       transition: opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1);
     }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 880px) {
@@ -472,6 +544,13 @@
       .contact-row { grid-template-columns: 1fr; }
       .cr-item { grid-template-columns: 3rem 1fr 1.25rem; }
       .cr-badge { display: none; }
+      .hero {
+          grid-template-columns: 1fr;
+        }
+
+      .hero-photo-col {
+        display: none;
+      }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.75rem; }
     }
   </style>
@@ -509,6 +588,8 @@
         <span class="kicker-text">USC · Applied Mathematics & Computer Science</span>
       </div>
 
+
+
       <div class="hero-name">
         <span class="name-zhuoyan">Zhuoyan</span>
         <span class="name-terry">Terry</span>
@@ -526,6 +607,15 @@
       <div class="hero-btns">
         <a href="#" class="btn-primary">Curriculum Vitae ↗</a>
         <a href="#about" class="btn-outline">About me</a>
+      </div>
+    </div>
+          <!-- HERO PHOTO -->
+    <div class="hero-photo-col">
+      <div class="hero-photo-wrap">
+        <img src="assets/hawaii_photo.webp" alt="Terry at Kualoa Ranch, Oahu" />
+        <div class="hero-photo-caption">
+          <span>Kualoa Ranch · Oahu, Hawaii</span>
+        </div>
       </div>
     </div>
   </section>
@@ -646,12 +736,22 @@
     window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
 
     // ── Scroll reveal
+    // Replace your observer with this more robust version:
     const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80);
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target); // stop watching once visible
+        }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' }); // lower threshold
+
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Fallback: force-show everything after 2s in case observer fails
+    setTimeout(() => {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }, 2000);
 
     // ── Section wave accents — animated bars with staggered timing
     const waveShapes = [
