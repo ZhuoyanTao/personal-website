@@ -406,6 +406,15 @@
   hyphens: auto;
 }
 
+    /* ADD THIS NEW CLASS */
+    .meta-sub {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+      line-height: 1.4;
+    }
+
     /* ─── RESEARCH ─── */
     .research-grid {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -676,17 +685,32 @@ html.theme-dark {
           <p>My work sits at the boundary of signal processing, machine learning, and linguistics — I'm drawn to the question of how meaning is carried in speech beyond just words.</p>
           <p>In August 2026, I'll be joining CMU's <strong>Master of Intelligent Information Systems</strong> program in the School of Computer Science and Language Technologies Institute. Outside of research, I enjoy exploring new places ☀️</p>
         </div>
-        <div class="meta-list reveal">
-        <div class="meta-item">
-          <span class="meta-key">USC → CMU</span>
-          <span class="meta-val">
-            B.S. Computer Science & Mathematics<br />
-            <strong>Trustee Scholar — Full-Tuition Merit Scholarship, USC</strong><br />
-            MIIS at LTI (2026–)
-          </span>
-        </div>
-          <div class="meta-item"><span class="meta-key">Research</span><span class="meta-val">Speech processing & audio ML</span></div>
-          <div class="meta-item"><span class="meta-key">Publishes as</span><span class="meta-val">Zhuoyan Tao</span></div>
+<div class="meta-list reveal">
+          <div class="meta-item">
+            <span class="meta-key">Education</span>
+            <span class="meta-val">
+              USC · B.S. CS & Math
+              <span class="meta-sub">Incoming MIIS at CMU LTI (2026–)</span>
+            </span>
+          </div>
+          
+          <div class="meta-item">
+            <span class="meta-key">Honors</span>
+            <span class="meta-val">
+              Trustee Scholar
+              <span class="meta-sub">Full-Tuition Merit Scholarship, USC</span>
+            </span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-key">Research</span>
+            <span class="meta-val">Speech processing & audio ML</span>
+          </div>
+          
+          <div class="meta-item">
+            <span class="meta-key">Publishes as</span>
+            <span class="meta-val">Zhuoyan Tao</span>
+          </div>
         </div>
       </div>
     </div>
