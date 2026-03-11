@@ -556,6 +556,35 @@
       }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.75rem; }
     }
+
+    /* ---------- Minimal theme support (append to existing style) ---------- */
+/* Respect system preference by default, allow forced dark with .theme-dark on <html> */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d0e14;
+    --ink: #f4f4f6;
+    --muted: #b8bdc6;
+    --border: rgba(255,255,255,0.04);
+    --white: #f4f4f6;
+    --white-dim: rgba(244,244,246,0.5);
+  }
+}
+
+/* Forced dark when html.theme-dark is present */
+html.theme-dark {
+  --bg: #0d0e14;
+  --ink: #f4f4f6;
+  --muted: #b8bdc6;
+  --border: rgba(255,255,255,0.04);
+  --white: #f4f4f6;
+  --white-dim: rgba(244,244,246,0.5);
+}
+
+/* Ensure page uses variables already present in your CSS (body/nav/footer already reference var(...) ) */
+/* Minimal styling for the toggle button so it sits nicely in the nav */
+#themeToggle { display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 4px; }
+#themeToggle:focus { outline: 2px solid rgba(106,140,175,0.25); outline-offset: 2px; }
+
   </style>
 </head>
 <body>
@@ -578,6 +607,10 @@
       <li><a href="#creations">Experience</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <!-- theme toggle (minimal) -->
+    <button id="themeToggle" aria-label="Toggle color theme" title="Toggle theme" style="background:transparent;border:0;cursor:pointer;color:inherit;font-size:0.95rem;padding:0.25rem 0.5rem;">
+      <span id="themeIcon">🌙</span>
+    </button>
   </nav>
 
   <!-- HERO -->
@@ -889,6 +922,50 @@
     }
 
     drawWave();
+    /* ---------- Minimal theme toggle (append to end of script) ---------- */
+(function () {
+  const root = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+  const icon = document.getElementById('themeIcon');
+
+  function applyTheme(theme) {
+    if (theme === 'dark') {
+      root.classList.add('theme-dark');
+      icon.textContent = '☀️'; // shows sun to indicate it will switch to light
+      toggle?.setAttribute('aria-pressed', 'true');
+    } else {
+      root.classList.remove('theme-dark');
+      icon.textContent = '🌙';
+      toggle?.setAttribute('aria-pressed', 'false');
+    }
+  }
+
+  // Load saved preference
+  const saved = localStorage.getItem('theme'); // 'dark' | 'light' | null
+  if (saved) {
+    applyTheme(saved);
+  } else {
+    // Default to system preference
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(prefersDark ? 'dark' : 'light');
+  }
+
+  // Toggle handler
+  toggle?.addEventListener('click', () => {
+    const nowDark = root.classList.contains('theme-dark');
+    const next = nowDark ? 'light' : 'dark';
+    applyTheme(next);
+    localStorage.setItem('theme', next);
+  });
+
+  // If user hasn't chosen, respect future system changes
+  const mq = window.matchMedia('(prefers-color-scheme: dark)');
+  mq.addEventListener && mq.addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      applyTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+})();
   </script>
 </body>
 </html>
