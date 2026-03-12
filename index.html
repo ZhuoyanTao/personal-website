@@ -52,7 +52,6 @@
       border-bottom: 1px solid var(--border-dk);
     }
 
-    /* Logo with tiny frequency bars */
     .nav-logo {
       display: flex; align-items: center; gap: 0.75rem;
       text-decoration: none;
@@ -99,22 +98,20 @@
     }
 
     .nav-links a:hover { color: var(--white); }
-    
+
     /* ─── HERO ─── */
     .hero {
       min-height: 100vh;
       background: var(--dark);
       position: relative;
-      /* CHANGE STARTS HERE */
-      display: flex;             /* Switch to Flexbox for better centering */
-      justify-content: center;   /* Center content horizontally */
-      align-items: center;       
-      gap: 4vw;                  /* Fluid gap between text and image */
-      padding: 0 5vw;            /* Prevent edge-touching on smaller screens */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4vw;
+      padding: 0 5vw;
       overflow: hidden;
     }
 
-    /* Spectrogram-inspired column texture */
     .hero::before {
       content: '';
       position: absolute; inset: 0;
@@ -128,7 +125,6 @@
       pointer-events: none;
     }
 
-    /* Soft radial glow */
     .hero-orb {
       position: absolute;
       width: 600px; height: 600px; border-radius: 50%;
@@ -143,7 +139,6 @@
       50%      { transform: translateY(-53%) scale(1.05); }
     }
 
-    /* Waveform canvas — quiet, at the bottom of the hero */
     #waveCanvas {
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -157,7 +152,6 @@
       padding: 10rem 5rem 8rem; max-width: 860px;
     }
 
-        /* ─── HERO PHOTO COLUMN ─── */
     .hero-photo-col {
       position: relative;
       z-index: 2;
@@ -174,14 +168,10 @@
       animation: riseIn 1s cubic-bezier(.16,1,.3,1) forwards 0.9s;
     }
 
-    /* Frame outline */
     .hero-photo-wrap::before {
       content: '';
       position: absolute;
-      top: -10px;
-      left: -10px;
-      right: 10px;
-      bottom: 10px;
+      top: -10px; left: -10px; right: 10px; bottom: 10px;
       border: 1px solid rgba(106,140,175,0.2);
       border-radius: 3px;
       pointer-events: none;
@@ -200,12 +190,9 @@
       filter: brightness(0.88) contrast(1.05) saturate(0.85);
     }
 
-    /* Caption overlay */
     .hero-photo-caption {
       position: absolute;
-      bottom: -1px;
-      left: 0;
-      right: 0;
+      bottom: -1px; left: 0; right: 0;
       background: linear-gradient(to top, rgba(13,14,20,0.85) 0%, transparent 100%);
       padding: 2rem 1rem 0.85rem;
       border-radius: 0 0 3px 3px;
@@ -308,7 +295,7 @@
 
     .btn-outline:hover { border-color: var(--blue-mid); color: var(--white); transform: translateY(-2px); }
 
-    /* ─── SECTION DIVIDER — wave canvas ─── */
+    /* ─── SECTION DIVIDER ─── */
     .freq-divider {
       width: 100%;
       height: 80px;
@@ -316,7 +303,7 @@
       background: #0d0e14;
     }
 
-    /* ─── LIGHT SECTIONS ─── */
+    /* ─── LIGHT / DARK SECTIONS ─── */
     .light-section { background: var(--bg); }
     .dark-section  { background: var(--dark); }
 
@@ -327,7 +314,6 @@
       margin-bottom: 3.5rem;
     }
 
-    /* Animated waveform beside section titles */
     .sec-wave {
       display: flex; align-items: center; gap: 2.5px; height: 28px;
     }
@@ -367,7 +353,6 @@
     .about-text p { font-size: 1rem; color: var(--muted); line-height: 1.9; margin-bottom: 1.2rem; }
     .about-text p strong { color: var(--ink); font-weight: 500; }
 
-    /* Speech processing tag */
     .field-tag {
       display: inline-flex; align-items: center; gap: 0.5rem;
       font-family: 'DM Mono', monospace;
@@ -378,7 +363,6 @@
       margin-bottom: 1.5rem;
     }
 
-    /* Mini inline waveform in the tag */
     .tag-wave { display: flex; align-items: center; gap: 1.5px; height: 10px; }
     .tag-wave span { display: block; width: 1.5px; background: var(--blue); border-radius: 1px; }
 
@@ -398,15 +382,14 @@
     }
 
     .meta-val {
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: var(--ink);
-  line-height: 1.35;           /* safer spacing for multi-line items */
-  overflow-wrap: anywhere;     /* allow breaking long words */
-  hyphens: auto;
-}
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
 
-    /* ADD THIS NEW CLASS */
     .meta-sub {
       display: block;
       font-size: 0.75rem;
@@ -437,7 +420,6 @@
 
     .r-card:hover::before { opacity: 1; }
 
-    /* Subtle frequency bar decoration top-right of card */
     .r-card-bars {
       position: absolute; top: 1.5rem; right: 1.75rem;
       display: flex; align-items: flex-end; gap: 2px; height: 18px; opacity: 0.18;
@@ -460,7 +442,7 @@
 
     .r-body { font-size: 0.86rem; color: rgba(244,244,246,0.38); line-height: 1.75; }
 
-    /* ─── CREATIONS ─── */
+    /* ─── EXPERIENCE ─── */
     .creations-list { display: flex; flex-direction: column; }
 
     .cr-item {
@@ -518,7 +500,6 @@
 
     .footer-left { display: flex; align-items: center; gap: 0.85rem; }
 
-    /* footer waveform */
     .footer-wave { display: flex; align-items: center; gap: 2px; height: 14px; }
     .footer-wave span { display: block; width: 2px; background: var(--blue); border-radius: 1px; opacity: 0.35; }
 
@@ -549,8 +530,6 @@
       transform: translateY(0);
     }
 
-    
-
     /* ─── RESPONSIVE ─── */
     @media (max-width: 880px) {
       nav { padding: 1.25rem 1.75rem; }
@@ -563,40 +542,30 @@
       .contact-row { grid-template-columns: 1fr; }
       .cr-item { grid-template-columns: 3rem 1fr 1.25rem; }
       .cr-badge { display: none; }
-      .hero {
-          grid-template-columns: 1fr;
-        }
-
-      .hero-photo-col {
-        display: none;
-      }
+      .hero { grid-template-columns: 1fr; }
+      .hero-photo-col { display: none; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.75rem; }
     }
 
-    /* ---------- Minimal theme support (append to existing style) ---------- */
-/* Respect system preference by default, allow forced dark with .theme-dark on <html> */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0d0e14;
-    --ink: #f4f4f6;
-    --muted: #b8bdc6;
-    --border: rgba(255,255,255,0.04);
-    --white: #f4f4f6;
-    --white-dim: rgba(244,244,246,0.5);
-  }
-}
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d0e14;
+        --ink: #f4f4f6;
+        --muted: #b8bdc6;
+        --border: rgba(255,255,255,0.04);
+        --white: #f4f4f6;
+        --white-dim: rgba(244,244,246,0.5);
+      }
+    }
 
-/* Forced dark when html.theme-dark is present */
-html.theme-dark {
-  --bg: #0d0e14;
-  --ink: #f4f4f6;
-  --muted: #b8bdc6;
-  --border: rgba(255,255,255,0.04);
-  --white: #f4f4f6;
-  --white-dim: rgba(244,244,246,0.5);
-}
-
-
+    html.theme-dark {
+      --bg: #0d0e14;
+      --ink: #f4f4f6;
+      --muted: #b8bdc6;
+      --border: rgba(255,255,255,0.04);
+      --white: #f4f4f6;
+      --white-dim: rgba(244,244,246,0.5);
+    }
   </style>
 </head>
 <body>
@@ -632,8 +601,6 @@ html.theme-dark {
         <span class="kicker-text">USC · Applied Mathematics & Computer Science</span>
       </div>
 
-
-
       <div class="hero-name">
         <span class="name-zhuoyan">Zhuoyan</span>
         <span class="name-terry">Terry</span>
@@ -649,11 +616,12 @@ html.theme-dark {
       </p>
 
       <div class="hero-btns">
-        <a href="#" class="btn-primary">Curriculum Vitae ↗</a>
+        <a href="assets/Terry_Tao_Resume_03_12_2026.pdf" target="_blank" rel="noopener" class="btn-primary">Curriculum Vitae ↗</a>
         <a href="#about" class="btn-outline">About me</a>
       </div>
     </div>
-          <!-- HERO PHOTO -->
+
+    <!-- HERO PHOTO -->
     <div class="hero-photo-col">
       <div class="hero-photo-wrap">
         <img src="assets/hawaii_photo.webp" alt="Terry at Kualoa Ranch, Oahu" />
@@ -685,7 +653,7 @@ html.theme-dark {
           <p>My work sits at the boundary of signal processing, machine learning, and linguistics — I'm drawn to the question of how meaning is carried in speech beyond just words.</p>
           <p>In August 2026, I'll be joining CMU's <strong>Master of Intelligent Information Systems</strong> program in the School of Computer Science and Language Technologies Institute. Outside of research, I enjoy exploring new places ☀️</p>
         </div>
-<div class="meta-list reveal">
+        <div class="meta-list reveal">
           <div class="meta-item">
             <span class="meta-key">Education</span>
             <span class="meta-val">
@@ -693,7 +661,6 @@ html.theme-dark {
               <span class="meta-sub">Incoming MIIS at CMU LTI (2026–)</span>
             </span>
           </div>
-          
           <div class="meta-item">
             <span class="meta-key">Honors</span>
             <span class="meta-val">
@@ -701,12 +668,10 @@ html.theme-dark {
               <span class="meta-sub">Full-Tuition Merit Scholarship, USC</span>
             </span>
           </div>
-
           <div class="meta-item">
             <span class="meta-key">Research</span>
             <span class="meta-val">Speech processing & audio ML</span>
           </div>
-          
           <div class="meta-item">
             <span class="meta-key">Publishes as</span>
             <span class="meta-val">Zhuoyan Tao</span>
@@ -753,7 +718,7 @@ html.theme-dark {
     </div>
   </section>
 
-  <!-- CREATIONS -->
+  <!-- EXPERIENCE -->
   <section class="light-section" id="creations">
     <div class="wrap">
       <div class="sec-head reveal">
@@ -762,11 +727,36 @@ html.theme-dark {
         <h2>Experience</h2>
       </div>
       <div class="creations-list">
-        <a href="#" class="cr-item reveal"><div class="cr-num">001</div><div><div class="cr-title">Apple Inc. — Satellite Connectivity Group</div><div class="cr-sub">Incoming Software Engineering Intern · C++ & Python · Summer 2026</div></div><div class="cr-badge">Industry</div><div class="cr-arrow">→</div></a>
-        <a href="#" class="cr-item reveal"><div class="cr-num">002</div><div><div class="cr-title">CMU WavLab</div><div class="cr-sub">Student Researcher · Speech translation, evaluation & synthesis · 2025–present</div></div><div class="cr-badge">Research</div><div class="cr-arrow">→</div></a>
-        <a href="#" class="cr-item reveal"><div class="cr-num">003</div><div><div class="cr-title">USC SAIL Lab</div><div class="cr-sub">Student Researcher · Multilingual speech diarization · 2023–present</div></div><div class="cr-badge">Research</div><div class="cr-arrow">→</div></a>
-        <a href="#" class="cr-item reveal"><div class="cr-num">004</div><div><div class="cr-title">USC Interaction Lab</div><div class="cr-sub">Multimodal ML for early Alzheimer's detection · 2023</div></div><div class="cr-badge">Research</div><div class="cr-arrow">→</div></a>
-        <a href="#" class="cr-item reveal"><div class="cr-num">005</div><div><div class="cr-title">Unity 2D Platformer</div><div class="cr-sub">Executive Producer · Steam launch · 85% positive reviews · Ableton & Wwise</div></div><div class="cr-badge">Project</div><div class="cr-arrow">→</div></a>
+        <a href="https://www.apple.com/careers/" target="_blank" rel="noopener" class="cr-item reveal">
+          <div class="cr-num">001</div>
+          <div><div class="cr-title">Apple Inc. — Satellite Connectivity Group</div><div class="cr-sub">Incoming Software Engineering Intern · C++ & Python · Summer 2026</div></div>
+          <div class="cr-badge">Industry</div>
+          <div class="cr-arrow">→</div>
+        </a>
+        <a href="https://wavlab.org" target="_blank" rel="noopener" class="cr-item reveal">
+          <div class="cr-num">002</div>
+          <div><div class="cr-title">CMU WavLab</div><div class="cr-sub">Student Researcher · Speech translation, evaluation & synthesis · 2025–present</div></div>
+          <div class="cr-badge">Research</div>
+          <div class="cr-arrow">→</div>
+        </a>
+        <a href="https://sail.usc.edu" target="_blank" rel="noopener" class="cr-item reveal">
+          <div class="cr-num">003</div>
+          <div><div class="cr-title">USC SAIL Lab</div><div class="cr-sub">Student Researcher · Multilingual speech diarization · 2023–present</div></div>
+          <div class="cr-badge">Research</div>
+          <div class="cr-arrow">→</div>
+        </a>
+        <a href="https://uscinteractionlab.web.app/" target="_blank" rel="noopener" class="cr-item reveal">
+          <div class="cr-num">004</div>
+          <div><div class="cr-title">USC Interaction Lab</div><div class="cr-sub">Multimodal ML for early Alzheimer's detection · 2023</div></div>
+          <div class="cr-badge">Research</div>
+          <div class="cr-arrow">→</div>
+        </a>
+        <a href="https://store.steampowered.com/app/2372070/Bone_Boy/" target="_blank" rel="noopener" class="cr-item reveal">
+          <div class="cr-num">005</div>
+          <div><div class="cr-title">Unity 2D Platformer</div><div class="cr-sub">Executive Producer · Steam launch · 85% positive reviews · Ableton & Wwise</div></div>
+          <div class="cr-badge">Project</div>
+          <div class="cr-arrow">→</div>
+        </a>
       </div>
     </div>
   </section>
@@ -780,9 +770,21 @@ html.theme-dark {
         <h2>Links & Contact</h2>
       </div>
       <div class="contact-row">
-        <a href="https://www.linkedin.com/in/zhuoyan-tao/" target="_blank" class="cl reveal"><div class="cl-icon">💼</div><div class="cl-name">LinkedIn</div><div class="cl-handle">linkedin.com/in/zhuoyan-tao</div></a>
-        <a href="https://github.com/ZhuoyanTao" target="_blank" class="cl reveal"><div class="cl-icon">⌥</div><div class="cl-name">GitHub</div><div class="cl-handle">github.com/ZhuoyanTao</div></a>
-        <a href="mailto:terryt at usc dot edu" class="cl reveal"><div class="cl-icon">✉</div><div class="cl-name">Email</div><div class="cl-handle">terryt at usc dot edu</div></a>
+        <a href="https://www.linkedin.com/in/zhuoyan-tao/" target="_blank" rel="noopener" class="cl reveal">
+          <div class="cl-icon">💼</div>
+          <div class="cl-name">LinkedIn</div>
+          <div class="cl-handle">linkedin.com/in/zhuoyan-tao</div>
+        </a>
+        <a href="https://github.com/ZhuoyanTao" target="_blank" rel="noopener" class="cl reveal">
+          <div class="cl-icon">⌥</div>
+          <div class="cl-name">GitHub</div>
+          <div class="cl-handle">github.com/ZhuoyanTao</div>
+        </a>
+        <a href="mailto:terryt@usc.edu" class="cl reveal">
+          <div class="cl-icon">✉</div>
+          <div class="cl-name">Email</div>
+          <div class="cl-handle">terryt@usc.edu</div>
+        </a>
       </div>
     </div>
   </section>
@@ -802,24 +804,22 @@ html.theme-dark {
     window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
 
     // ── Scroll reveal
-    // Replace your observer with this more robust version:
     const obs = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         if (e.isIntersecting) {
           e.target.classList.add('visible');
-          obs.unobserve(e.target); // stop watching once visible
+          obs.unobserve(e.target);
         }
       });
-    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' }); // lower threshold
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-    // Fallback: force-show everything after 2s in case observer fails
     setTimeout(() => {
       document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
     }, 2000);
 
-    // ── Section wave accents — animated bars with staggered timing
+    // ── Section wave accents
     const waveShapes = [
       [4, 9, 6, 14, 8, 12, 5, 16, 9, 13, 6, 11, 5, 14, 7, 10, 4, 13, 8, 11, 5],
       [6, 11, 5, 16, 9, 13, 6, 18, 10, 14, 7, 12, 5, 15, 8, 11, 6, 14, 9, 12, 5],
@@ -842,7 +842,7 @@ html.theme-dark {
       });
     });
 
-    // ── Static bar helpers (tag, footer, research cards)
+    // ── Static bar helpers
     function buildBars(el, heights) {
       if (!el) return;
       heights.forEach(h => {
@@ -861,7 +861,7 @@ html.theme-dark {
     ];
     ['rb1','rb2','rb3','rb4'].forEach((id, i) => buildBars(document.getElementById(id), cardBars[i]));
 
-    // ── Wave divider canvas — elegant sine waves only
+    // ── Wave divider canvas
     const freqCanvas = document.getElementById('freqDiv');
     const freqCtx = freqCanvas.getContext('2d');
 
@@ -908,7 +908,7 @@ html.theme-dark {
 
     drawDivider();
 
-    // ── Hero waveform canvas (quiet, ambient)
+    // ── Hero waveform canvas
     const canvas = document.getElementById('waveCanvas');
     const ctx = canvas.getContext('2d');
 
@@ -919,7 +919,6 @@ html.theme-dark {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Multiple slow sine waves layered together — like a speech envelope
     const waves = [
       { amp: 18, freq: 0.012, speed: 0.006, phase: 0,    color: 'rgba(106,140,175,0.6)' },
       { amp: 10, freq: 0.025, speed: 0.010, phase: 1.2,  color: 'rgba(106,140,175,0.4)' },
@@ -952,7 +951,6 @@ html.theme-dark {
     }
 
     drawWave();
-
   </script>
 </body>
 </html>
