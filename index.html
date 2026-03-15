@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zhuoyan (Terry) Tao</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <!-- Vercel Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
+  <!-- Vercel Speed Insights (optional but recommended) -->
+  <script defer src="/_vercel/speed-insights/script.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -98,6 +102,31 @@
     }
 
     .nav-links a:hover { color: var(--white); }
+
+    /* ─── MOBILE NAV HAMBURGER ─── */
+    .nav-toggle {
+      display: none;
+      background: none; border: none; cursor: pointer;
+      width: 28px; height: 20px;
+      position: relative; z-index: 210;
+      flex-shrink: 0;
+    }
+
+    .nav-toggle span {
+      display: block; width: 100%; height: 1.5px;
+      background: var(--white-dim);
+      border-radius: 1px;
+      position: absolute; left: 0;
+      transition: transform 0.3s, opacity 0.3s, top 0.3s;
+    }
+
+    .nav-toggle span:nth-child(1) { top: 0; }
+    .nav-toggle span:nth-child(2) { top: 9px; }
+    .nav-toggle span:nth-child(3) { top: 18px; }
+
+    .nav-toggle.open span:nth-child(1) { top: 9px; transform: rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { top: 9px; transform: rotate(-45deg); }
 
     /* ─── HERO ─── */
     .hero {
@@ -216,6 +245,7 @@
     .kicker-dot {
       width: 6px; height: 6px; border-radius: 50%;
       background: var(--blue); box-shadow: 0 0 10px rgba(106,140,175,0.5);
+      flex-shrink: 0;
     }
 
     .kicker-text {
@@ -489,7 +519,7 @@
     .cl:hover { border-color: var(--blue-mid); background: var(--dark3); transform: translateY(-3px); }
     .cl-icon { font-size: 1.2rem; opacity: 0.8; }
     .cl-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 500; color: var(--white); }
-    .cl-handle { font-family: 'DM Mono', monospace; font-size: 0.63rem; color: rgba(244,244,246,0.28); }
+    .cl-handle { font-family: 'DM Mono', monospace; font-size: 0.63rem; color: rgba(244,244,246,0.28); word-break: break-all; }
 
     /* ─── FOOTER ─── */
     footer {
@@ -530,21 +560,217 @@
       transform: translateY(0);
     }
 
-    /* ─── RESPONSIVE ─── */
+    /* ─── RESPONSIVE — TABLET ─── */
     @media (max-width: 880px) {
       nav { padding: 1.25rem 1.75rem; }
       .nav-links { gap: 1.75rem; }
-      .hero-content { padding: 7rem 2rem 6rem; }
+      .hero { flex-direction: column; gap: 0; }
+      .hero-content { padding: 7rem 2rem 3rem; }
+      .hero-photo-col { padding: 0 2rem 5rem; }
+      .hero-photo-wrap { width: 240px; }
       .wrap { padding: 4rem 2rem; }
-      .freq-divider { padding: 0 2rem; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       .research-grid { grid-template-columns: 1fr; }
       .contact-row { grid-template-columns: 1fr; }
-      .cr-item { grid-template-columns: 3rem 1fr 1.25rem; }
-      .cr-badge { display: none; }
-      .hero { grid-template-columns: 1fr; }
-      .hero-photo-col { display: none; }
+      .cr-item { grid-template-columns: 3rem 1fr auto 1.25rem; gap: 1rem; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.75rem; }
+    }
+
+    /* ─── RESPONSIVE — MOBILE ─── */
+    @media (max-width: 600px) {
+      /* Nav: hamburger menu */
+      nav {
+        padding: 1rem 1.25rem;
+      }
+
+      .logo-text { font-size: 0.92rem; }
+
+      .nav-toggle { display: block; }
+
+      .nav-links {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(13, 14, 20, 0.97);
+        backdrop-filter: blur(24px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.35s ease;
+        z-index: 205;
+      }
+
+      .nav-links.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-links a {
+        font-size: 0.85rem;
+        letter-spacing: 0.18em;
+        color: var(--white-dim);
+      }
+
+      /* Hero */
+      .hero {
+        min-height: auto;
+        flex-direction: column;
+        padding: 0;
+      }
+
+      .hero-content {
+        padding: 6.5rem 1.5rem 2rem;
+        max-width: 100%;
+      }
+
+      .hero-kicker { margin-bottom: 1.75rem; }
+
+      .kicker-text { font-size: 0.58rem; letter-spacing: 0.14em; }
+
+      .name-zhuoyan { font-size: clamp(1.6rem, 7vw, 2.4rem); }
+      .name-terry   { font-size: clamp(3.5rem, 16vw, 5.5rem); }
+      .name-tao     { font-size: clamp(1.6rem, 7vw, 2.4rem); }
+
+      .hero-rule { margin: 1.75rem 0; }
+
+      .hero-bio {
+        font-size: 0.95rem;
+        line-height: 1.8;
+        margin-bottom: 2rem;
+      }
+
+      .hero-btns {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .btn-primary, .btn-outline {
+        justify-content: center;
+        padding: 0.9rem 1.5rem;
+        font-size: 0.8rem;
+      }
+
+      /* Show photo on mobile — compact centered version */
+      .hero-photo-col {
+        display: flex;
+        padding: 0 1.5rem 3.5rem;
+      }
+
+      .hero-photo-wrap {
+        width: 200px;
+      }
+
+      .hero-photo-wrap::before {
+        top: -6px; left: -6px; right: 6px; bottom: 6px;
+      }
+
+      .hero-orb {
+        width: 300px; height: 300px;
+        right: -10%;
+      }
+
+      #waveCanvas { height: 60px; }
+
+      /* Divider */
+      .freq-divider { height: 50px; }
+
+      /* Sections */
+      .wrap { padding: 3.5rem 1.25rem; }
+
+      .sec-head {
+        gap: 0.85rem;
+        margin-bottom: 2.25rem;
+        flex-wrap: wrap;
+      }
+
+      .sec-wave { height: 22px; }
+
+      h2 { font-size: 1.55rem; }
+
+      /* About */
+      .about-grid { gap: 2rem; }
+
+      .field-tag { font-size: 0.58rem; padding: 0.25rem 0.6rem; }
+
+      .about-text p { font-size: 0.92rem; line-height: 1.8; }
+
+      .meta-item {
+        grid-template-columns: 1fr;
+        gap: 0.35rem;
+        padding: 0.85rem 0;
+      }
+
+      .meta-val { font-size: 0.85rem; }
+
+      /* Research cards */
+      .r-card { padding: 1.5rem 1.25rem; }
+
+      .r-eyebrow { font-size: 0.55rem; letter-spacing: 0.12em; }
+
+      .r-title { font-size: 1rem; }
+
+      .r-body { font-size: 0.82rem; }
+
+      .r-card-bars { top: 1.25rem; right: 1.25rem; }
+
+      /* Experience list */
+      .cr-item {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        padding: 1.25rem 0;
+      }
+
+      .cr-num { display: none; }
+
+      .cr-badge { display: none; }
+
+      .cr-arrow { display: none; }
+
+      .cr-title { font-size: 1rem; }
+
+      .cr-sub { font-size: 0.78rem; }
+
+      /* Contact */
+      .contact-row { gap: 0.75rem; }
+
+      .cl {
+        padding: 1.25rem 1.25rem;
+        gap: 0.4rem;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .cl-icon { font-size: 1rem; margin-right: 0.5rem; }
+
+      .cl-info { flex: 1; min-width: 0; }
+
+      .cl-name { font-size: 0.9rem; }
+
+      .cl-handle { font-size: 0.56rem; }
+
+      /* Footer */
+      footer {
+        padding: 1.5rem 1.25rem;
+        gap: 0.4rem;
+      }
+
+      .footer-name { font-size: 0.85rem; }
+      .footer-note { font-size: 0.55rem; }
+    }
+
+    /* ─── SMALL PHONES ─── */
+    @media (max-width: 380px) {
+      .hero-content { padding: 6rem 1rem 1.5rem; }
+
+      .name-terry { font-size: clamp(3rem, 18vw, 4.5rem); }
+
+      .hero-bio { font-size: 0.88rem; }
+
+      .wrap { padding: 3rem 1rem; }
+
+      h2 { font-size: 1.35rem; }
     }
 
     @media (prefers-color-scheme: dark) {
@@ -582,7 +808,10 @@
       </div>
       <span class="logo-text">Zhuoyan <em>Tao</em></span>
     </a>
-    <ul class="nav-links">
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#research">Research</a></li>
       <li><a href="#creations">Experience</a></li>
@@ -772,18 +1001,24 @@
       <div class="contact-row">
         <a href="https://www.linkedin.com/in/zhuoyan-tao/" target="_blank" rel="noopener" class="cl reveal">
           <div class="cl-icon">💼</div>
-          <div class="cl-name">LinkedIn</div>
-          <div class="cl-handle">linkedin.com/in/zhuoyan-tao</div>
+          <div class="cl-info">
+            <div class="cl-name">LinkedIn</div>
+            <div class="cl-handle">linkedin.com/in/zhuoyan-tao</div>
+          </div>
         </a>
         <a href="https://github.com/ZhuoyanTao" target="_blank" rel="noopener" class="cl reveal">
           <div class="cl-icon">⌥</div>
-          <div class="cl-name">GitHub</div>
-          <div class="cl-handle">github.com/ZhuoyanTao</div>
+          <div class="cl-info">
+            <div class="cl-name">GitHub</div>
+            <div class="cl-handle">github.com/ZhuoyanTao</div>
+          </div>
         </a>
         <a href="mailto:terryt@usc.edu" class="cl reveal">
           <div class="cl-icon">✉</div>
-          <div class="cl-name">Email</div>
-          <div class="cl-handle">terryt@usc.edu</div>
+          <div class="cl-info">
+            <div class="cl-name">Email</div>
+            <div class="cl-handle">terryt@usc.edu</div>
+          </div>
         </a>
       </div>
     </div>
@@ -802,6 +1037,25 @@
     // ── Nav scroll
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+
+    // ── Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+      document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+    });
+
+    // Close menu on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('open');
+        navLinks.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
 
     // ── Scroll reveal
     const obs = new IntersectionObserver((entries) => {
