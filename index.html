@@ -589,24 +589,31 @@
         padding: 1rem 1.25rem;
       }
 
+      /* When menu is open, nav covers full screen */
+      nav.menu-open {
+        position: fixed;
+        inset: 0;
+        background: #0d0e14;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        z-index: 200;
+      }
+
       .logo-text { font-size: 0.92rem; }
 
       .nav-toggle { display: block; }
 
       .nav-links {
         display: none;
-        position: fixed;
-        inset: 0;
-        background: #0d0e14;
+        width: 100%;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
         gap: 2.5rem;
-        z-index: 300;
+        padding: 30vh 0;
         list-style: none;
       }
 
-      .nav-links.open {
+      nav.menu-open .nav-links {
         display: flex;
       }
 
@@ -614,11 +621,6 @@
         font-size: 1rem;
         letter-spacing: 0.18em;
         color: var(--white-dim);
-      }
-
-      /* Keep hamburger above overlay */
-      .nav-toggle {
-        z-index: 310;
       }
 
       /* Hero */
@@ -1052,15 +1054,15 @@
 
     navToggle.addEventListener('click', () => {
       navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-      document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+      nav.classList.toggle('menu-open');
+      document.body.style.overflow = nav.classList.contains('menu-open') ? 'hidden' : '';
     });
 
     // Close menu on link click
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         navToggle.classList.remove('open');
-        navLinks.classList.remove('open');
+        nav.classList.remove('menu-open');
         document.body.style.overflow = '';
       });
     });
