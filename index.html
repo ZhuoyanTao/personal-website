@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zhuoyan (Terry) Tao</title>
-  <meta name="description" content="Zhuoyan (Terry) Tao — speech processing and audio ML researcher at USC and CMU WavLab. Incoming MIIS at CMU LTI. Exploring how meaning is carried in speech beyond words." />
+  <meta name="description" content="Zhuoyan (Terry) Tao — speech processing and audio ML researcher at CMU WavLab. MIIS student at CMU LTI. Exploring how meaning is carried in speech beyond words." />
   <meta property="og:title" content="Zhuoyan (Terry) Tao" />
-  <meta property="og:description" content="Speech processing and audio ML researcher at USC and CMU WavLab. Incoming MIIS at CMU LTI." />
+  <meta property="og:description" content="Speech processing and audio ML researcher at CMU WavLab. MIIS student at CMU LTI." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://zhuoyantao.com" />
   <link rel="icon" href="assets/favicon.ico" sizes="32x32" />
@@ -104,7 +104,7 @@
 
     .logo-text em { font-style: italic; color: var(--blue); }
 
-    .nav-links { display: flex; gap: 2.75rem; list-style: none; }
+    .nav-links { display: flex; gap: 2.25rem; list-style: none; }
 
     .nav-links a {
       font-family: 'DM Mono', monospace;
@@ -483,6 +483,55 @@
 
     .r-body { font-size: 0.86rem; color: rgba(244,244,246,0.38); line-height: 1.75; }
 
+    /* ─── PUBLICATIONS ─── */
+    .pub-list { display: flex; flex-direction: column; }
+
+    .pub-item {
+      display: grid; grid-template-columns: 3.5rem 1fr;
+      gap: 2rem; padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pub-item:first-child { border-top: 1px solid var(--border); }
+
+    .pub-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); padding-top: 0.35rem; }
+
+    .pub-title {
+      font-family: 'Playfair Display', serif; font-size: 1.08rem;
+      font-weight: 400; color: var(--ink); line-height: 1.4;
+      margin-bottom: 0.4rem;
+    }
+
+    .pub-authors { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+    .pub-authors strong { color: var(--ink); font-weight: 500; }
+
+    .pub-meta {
+      display: flex; align-items: center; gap: 0.85rem;
+      flex-wrap: wrap; margin-top: 0.75rem;
+    }
+
+    .pub-venue {
+      font-family: 'DM Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--blue); background: var(--blue-dim);
+      border: 1px solid var(--blue-mid);
+      padding: 0.2rem 0.65rem; border-radius: 2px; white-space: nowrap;
+    }
+
+    .pub-venue.pending {
+      color: var(--muted); background: transparent;
+      border-color: var(--border);
+    }
+
+    .pub-link {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.06em; color: var(--blue);
+      text-decoration: none; border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .pub-link:hover { border-bottom-color: var(--blue-mid); }
+
     /* ─── EXPERIENCE ─── */
     .creations-list { display: flex; flex-direction: column; }
 
@@ -490,12 +539,14 @@
       display: grid; grid-template-columns: 3.5rem 1fr auto 1.5rem;
       align-items: center; gap: 2rem; padding: 1.6rem 0;
       border-bottom: 1px solid var(--border);
-      text-decoration: none; color: inherit; cursor: pointer;
+      text-decoration: none; color: inherit;
     }
 
+    a.cr-item { cursor: pointer; }
+
     .cr-item:first-child { border-top: 1px solid var(--border); }
-    .cr-item:hover .cr-title { color: var(--blue); }
-    .cr-item:hover .cr-arrow { transform: translateX(4px); color: var(--blue); }
+    a.cr-item:hover .cr-title { color: var(--blue); }
+    a.cr-item:hover .cr-arrow { transform: translateX(4px); color: var(--blue); }
 
     .cr-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); }
 
@@ -574,7 +625,7 @@
     /* ─── RESPONSIVE — TABLET ─── */
     @media (max-width: 880px) {
       nav { padding: 1.25rem 1.75rem; }
-      .nav-links { gap: 1.75rem; }
+      .nav-links { gap: 1.5rem; }
       .hero { flex-direction: column; gap: 0; }
       .hero-content { padding: 7rem 2rem 3rem; }
       .hero-photo-col { padding: 0 2rem 5rem; }
@@ -584,6 +635,7 @@
       .research-grid { grid-template-columns: 1fr; }
       .contact-row { grid-template-columns: 1fr; }
       .cr-item { grid-template-columns: 3rem 1fr auto 1.25rem; gap: 1rem; }
+      .pub-item { grid-template-columns: 3rem 1fr; gap: 1rem; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.75rem; }
     }
 
@@ -613,8 +665,8 @@
         width: 100%;
         flex-direction: column;
         align-items: center;
-        gap: 2.5rem;
-        padding: 30vh 0;
+        gap: 2rem;
+        padding: 26vh 0;
         list-style: none;
       }
 
@@ -730,6 +782,21 @@
 
       .r-card-bars { top: 1.25rem; right: 1.25rem; }
 
+      /* Publications */
+      .pub-item {
+        grid-template-columns: 1fr;
+        gap: 0.35rem;
+        padding: 1.35rem 0;
+      }
+
+      .pub-num { display: none; }
+
+      .pub-title { font-size: 0.98rem; }
+
+      .pub-authors { font-size: 0.78rem; }
+
+      .pub-meta { gap: 0.6rem; margin-top: 0.6rem; }
+
       /* Experience list */
       .cr-item {
         grid-template-columns: 1fr;
@@ -788,6 +855,16 @@
       h2 { font-size: 1.35rem; }
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+
     @media (prefers-color-scheme: dark) {
       :root {
         --bg: #0d0e14;
@@ -829,6 +906,7 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
       <li><a href="#creations">Experience</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -842,7 +920,7 @@
     <div class="hero-content">
       <div class="hero-kicker">
         <div class="kicker-dot"></div>
-        <span class="kicker-text">USC · Applied Mathematics & Computer Science</span>
+        <span class="kicker-text">CMU · Language Technologies Institute</span>
       </div>
 
       <div class="hero-name">
@@ -854,13 +932,13 @@
       <div class="hero-rule"></div>
 
       <p class="hero-bio">
-        Undergraduate researcher working in <strong>speech processing</strong>
-        and the mathematics of computation.
+        Graduate researcher in <strong>speech processing</strong>
+        and audio machine learning at CMU WavLab.
         Drawn to problems where signal meets meaning. ✌&#xFE0E;
       </p>
 
       <div class="hero-btns">
-        <a href="assets/Terry_Tao_Resume_03_12_2026.pdf" target="_blank" rel="noopener" class="btn-primary">Curriculum Vitae ↗&#xFE0E;</a>
+        <a href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener" class="btn-primary">Curriculum Vitae ↗&#xFE0E;</a>
         <a href="#about" class="btn-outline">About me</a>
       </div>
     </div>
@@ -893,28 +971,37 @@
             <div class="tag-wave" id="tw1"></div>
             Speech Processing · Audio ML · NLP
           </div>
-          <p>I'm <strong>Zhuoyan Tao</strong> — Terry to friends and colleagues. I study Computer Science and Mathematics at USC, with research spanning spoken language understanding, multilingual speech, and audio generation.</p>
-          <p>My work sits at the boundary of signal processing, machine learning, and linguistics — I'm drawn to the question of how meaning is carried in speech beyond just words.</p>
-          <p>In August 2026, I'll be joining CMU's <strong>Master of Intelligent Information Systems</strong> program in the School of Computer Science and Language Technologies Institute. Outside of research, I enjoy exploring new places ☀&#xFE0E;</p>
+          <p>I'm <strong>Zhuoyan Tao</strong>, Terry to friends and colleagues. I'm a master's student in CMU's <strong>Intelligent Information Systems</strong> program at the Language Technologies Institute, advised by Prof. Shinji Watanabe at WavLab.</p>
+          <p>My research spans speech quality evaluation, spoken language diarization, and speech-to-speech translation. It sits at the boundary of signal processing, machine learning, and linguistics, and keeps circling one question: how meaning is carried in speech beyond just the words.</p>
+          <p>Before CMU I finished dual B.S. degrees in Computer Science and Applied Mathematics at USC, and I spent summer 2026 at Apple building simulation tooling for satellite connectivity. I also contribute to <strong>ESPnet</strong>. Outside of research, I enjoy exploring new places ☀&#xFE0E;</p>
         </div>
         <div class="meta-list reveal">
           <div class="meta-item">
             <span class="meta-key">Education</span>
             <span class="meta-val">
-              USC · B.S. CS & Math
-              <span class="meta-sub">Incoming MIIS at CMU LTI (2026–)</span>
+              CMU · M.S. Intelligent Information Systems
+              <span class="meta-sub">Language Technologies Institute, expected Dec 2027</span>
+            </span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-key">Previously</span>
+            <span class="meta-val">
+              USC · B.S. CS & Applied Math
+              <span class="meta-sub">Magna Cum Laude, May 2026</span>
             </span>
           </div>
           <div class="meta-item">
             <span class="meta-key">Honors</span>
             <span class="meta-val">
-              Trustee Scholar
-              <span class="meta-sub">Full-Tuition Merit Scholarship, USC</span>
+              Phi Beta Kappa · Trustee Scholar
+              <span class="meta-sub">Full-tuition merit scholarship, USC · NAE Grand Challenges Scholar</span>
             </span>
           </div>
           <div class="meta-item">
-            <span class="meta-key">Research</span>
-            <span class="meta-val">Speech processing & audio ML</span>
+            <span class="meta-key">Advisor</span>
+            <span class="meta-val">Prof. Shinji Watanabe
+              <span class="meta-sub">CMU WavLab</span>
+            </span>
           </div>
           <div class="meta-item">
             <span class="meta-key">Publishes as</span>
@@ -936,56 +1023,103 @@
       <div class="research-grid">
         <div class="r-card reveal">
           <div class="r-card-bars" id="rb1"></div>
-          <div class="r-eyebrow">USC SAIL Lab · IEEE SPL under review</div>
-          <div class="r-title">Multilingual Diarization & Code-Switching</div>
-          <div class="r-body">Spoken language diarization for Hindi, English, and Malayalam in code-switching conversations. Built a synthetic data pipeline combining rule-based and LLM-assisted methods for language change-point detection.</div>
+          <div class="r-eyebrow">CMU WavLab · Interspeech 2026 Oral</div>
+          <div class="r-title">ANCHOR: Speech Quality from Partial Audio</div>
+          <div class="r-body">Extends ARECHO to predict speech quality before an utterance finishes. Dual-resolution query tokens with chunk-first decoding in a shared Transformer decoder cut PLCMOS MAE by 48% on 2-second prefixes and locate a 4 to 6 second perceptual context horizon.</div>
         </div>
         <div class="r-card reveal">
           <div class="r-card-bars" id="rb2"></div>
-          <div class="r-eyebrow">CMU WavLab · Interspeech 2026</div>
-          <div class="r-title">Pragmatic Intent in Speech Translation</div>
-          <div class="r-body">Leading modeling for the Interspeech 2026 S2ST challenge — building HuBERT- and prosody-based systems that preserve stance, emotion, and dialog function in English–Spanish speech translation.</div>
+          <div class="r-eyebrow">USC SAIL Lab · EMNLP under review</div>
+          <div class="r-title">Diagnosing Spoken Language Diarization</div>
+          <div class="r-body">Introduces off-target LID posterior mass as a measure that predicts probe gains on pre-trained speech encoders. Pre-registered on unseen language pairs and validated across Whisper, MMS, and classical LID on DISPLACE and MUCS Hindi-English code-switching data.</div>
         </div>
         <div class="r-card reveal">
           <div class="r-card-bars" id="rb3"></div>
-          <div class="r-eyebrow">CMU WavLab · First-author in progress</div>
-          <div class="r-title">Unified Spoken Language Evaluation</div>
-          <div class="r-body">A chain-based multi-metric framework for evaluating spoken language quality — covering MOS, intelligibility, language correctness, and sub-utterance granularity in a single unified system.</div>
+          <div class="r-eyebrow">CMU WavLab · Interspeech 2026 S2ST Challenge</div>
+          <div class="r-title">Pragmatic Intent in Speech Translation</div>
+          <div class="r-body">HuBERT- and prosody-based speech-to-speech translation systems that preserve stance, emotion, and dialog function across English and Spanish, so the translated speech keeps what the speaker meant, not only what they said.</div>
         </div>
         <div class="r-card reveal">
           <div class="r-card-bars" id="rb4"></div>
-          <div class="r-eyebrow">CMU WavLab · ICML 2026</div>
-          <div class="r-title">Non-Human Singing Voice Synthesis</div>
-          <div class="r-body">3rd-author contribution to non-human singing synthesis. Also contributed to ESPnet: ~50× faster speaker-embedding extraction, new TTS recipes, and a Tacotron-1 CBHG fix.</div>
+          <div class="r-eyebrow">CMU WavLab · IEEE SLT 2026 under review</div>
+          <div class="r-title">TurnBench: Turn-Taking in Spoken Dialogue</div>
+          <div class="r-body">A multi-domain benchmark for turn-taking dynamics in spoken dialogue, measuring how well models anticipate when a speaker yields the floor across conversational settings.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section class="light-section" id="publications">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-num">03</span>
+        <div class="sec-wave" id="sw3"></div>
+        <h2>Publications</h2>
+      </div>
+      <div class="pub-list">
+        <div class="pub-item reveal">
+          <div class="pub-num">001</div>
+          <div>
+            <div class="pub-title">ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling</div>
+            <div class="pub-authors"><strong>Z. Tao</strong>, J. Shi, H. Shim, S. Watanabe</div>
+            <div class="pub-meta">
+              <span class="pub-venue">Interspeech 2026 · Oral</span>
+              <span class="pub-venue">First author</span>
+              <a class="pub-link" href="https://arxiv.org/abs/2606.10233" target="_blank" rel="noopener">arXiv:2606.10233 ↗&#xFE0E;</a>
+            </div>
+          </div>
+        </div>
+        <div class="pub-item reveal">
+          <div class="pub-num">002</div>
+          <div>
+            <div class="pub-title">Off-Target LID Posterior Mass Predicts Probe Gains in Spoken Language Diarization: A Pre-Registered Validation</div>
+            <div class="pub-authors"><strong>Z. Tao</strong>, A. Kommineni, S. Narayanan</div>
+            <div class="pub-meta">
+              <span class="pub-venue pending">EMNLP · Under review</span>
+              <span class="pub-venue">First author</span>
+            </div>
+          </div>
+        </div>
+        <div class="pub-item reveal">
+          <div class="pub-num">003</div>
+          <div>
+            <div class="pub-title">TurnBench: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue</div>
+            <div class="pub-authors">F. Jiang, R. Sanabria, S. Deshmukh, …, <strong>Z. Tao</strong> et al.</div>
+            <div class="pub-meta">
+              <span class="pub-venue pending">IEEE SLT 2026 · Under review</span>
+              <a class="pub-link" href="https://arxiv.org/abs/2608.25218" target="_blank" rel="noopener">arXiv:2608.25218 ↗&#xFE0E;</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- EXPERIENCE -->
-  <section class="light-section" id="creations">
+  <section class="dark-section" id="creations">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="sec-num">03</span>
-        <div class="sec-wave" id="sw3"></div>
+        <span class="sec-num">04</span>
+        <div class="sec-wave" id="sw4"></div>
         <h2>Experience</h2>
       </div>
       <div class="creations-list">
         <a href="https://www.apple.com/careers/" target="_blank" rel="noopener" class="cr-item reveal">
           <div class="cr-num">001</div>
-          <div><div class="cr-title">Apple Inc. — Satellite Connectivity Group</div><div class="cr-sub">Incoming Software Engineering Intern · C++ & Python · Summer 2026</div></div>
+          <div><div class="cr-title">Apple Inc. · Satellite Connectivity Group</div><div class="cr-sub">Software Engineering Intern · Simulation tooling & performance, Python/Go · Summer 2026</div></div>
           <div class="cr-badge">Industry</div>
           <div class="cr-arrow">→</div>
         </a>
         <a href="https://wavlab.org" target="_blank" rel="noopener" class="cr-item reveal">
           <div class="cr-num">002</div>
-          <div><div class="cr-title">CMU WavLab</div><div class="cr-sub">Student Researcher · Speech translation, evaluation & synthesis · 2025–present</div></div>
+          <div><div class="cr-title">CMU WavLab</div><div class="cr-sub">Graduate Researcher · Speech quality, translation & open-source tooling · 2025–present</div></div>
           <div class="cr-badge">Research</div>
           <div class="cr-arrow">→</div>
         </a>
         <a href="https://sail.usc.edu" target="_blank" rel="noopener" class="cr-item reveal">
           <div class="cr-num">003</div>
-          <div><div class="cr-title">USC SAIL Lab</div><div class="cr-sub">Student Researcher · Multilingual speech diarization · 2023–present</div></div>
+          <div><div class="cr-title">USC SAIL Lab</div><div class="cr-sub">Student Researcher · Multilingual speech diarization · 2023–2026</div></div>
           <div class="cr-badge">Research</div>
           <div class="cr-arrow">→</div>
         </a>
@@ -995,8 +1129,14 @@
           <div class="cr-badge">Research</div>
           <div class="cr-arrow">→</div>
         </a>
-        <a href="https://store.steampowered.com/app/2372070/Bone_Boy/" target="_blank" rel="noopener" class="cr-item reveal">
+        <div class="cr-item reveal">
           <div class="cr-num">005</div>
+          <div><div class="cr-title">USC MATH 229 · Supplemental Instruction</div><div class="cr-sub">SI Leader · 98 students weekly; review sessions reached ~300, a program record · 2023–2026</div></div>
+          <div class="cr-badge">Teaching</div>
+          <div class="cr-arrow"></div>
+        </div>
+        <a href="https://store.steampowered.com/app/2372070/Bone_Boy/" target="_blank" rel="noopener" class="cr-item reveal">
+          <div class="cr-num">006</div>
           <div><div class="cr-title">Unity 2D Platformer</div><div class="cr-sub">Executive Producer · Steam launch · 85% positive reviews · Ableton & Wwise</div></div>
           <div class="cr-badge">Project</div>
           <div class="cr-arrow">→</div>
@@ -1009,8 +1149,8 @@
   <section class="dark-section" id="contact">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="sec-num">04</span>
-        <div class="sec-wave" id="sw4"></div>
+        <span class="sec-num">05</span>
+        <div class="sec-wave" id="sw5"></div>
         <h2>Links & Contact</h2>
       </div>
       <div class="contact-row">
@@ -1028,11 +1168,11 @@
             <div class="cl-handle">github.com/ZhuoyanTao</div>
           </div>
         </a>
-        <a href="mailto:terryt@usc.edu" class="cl reveal">
+        <a href="mailto:terrytao@andrew.cmu.edu" class="cl reveal">
           <div class="cl-icon">✉&#xFE0E;</div>
           <div class="cl-info">
             <div class="cl-name">Email</div>
-            <div class="cl-handle">terryt@usc.edu</div>
+            <div class="cl-handle">terrytao@andrew.cmu.edu</div>
           </div>
         </a>
       </div>
@@ -1045,7 +1185,7 @@
       <div class="footer-wave" id="fw"></div>
       <div class="footer-name">Zhuoyan (Terry) Tao</div>
     </div>
-    <div class="footer-note">Los Angeles · © 2025–2026</div>
+    <div class="footer-note">Pittsburgh · © 2025–2026</div>
   </footer>
 
   <script>
@@ -1094,12 +1234,13 @@
       [6, 11, 5, 16, 9, 13, 6, 18, 10, 14, 7, 12, 5, 15, 8, 11, 6, 14, 9, 12, 5],
       [5, 10, 7, 13, 5, 15, 9, 12, 6, 14, 7, 10, 5, 13, 8, 11, 6, 14, 7, 10, 4],
       [4, 12, 7, 11, 6, 16, 9, 13, 5, 14, 8, 10, 6, 15, 7, 12, 5, 13, 8, 10, 6],
+      [7, 10, 5, 15, 8, 12, 6, 17, 9, 11, 7, 13, 5, 16, 8, 10, 6, 12, 9, 14, 5],
     ];
 
     const durations = [1.0, 0.85, 1.3, 0.95, 1.15, 0.8, 1.25, 1.0, 0.9, 1.2,
                        0.85, 1.1, 0.95, 1.3, 0.8, 1.05, 0.9, 1.2, 1.0, 0.88, 1.15];
 
-    ['sw1','sw2','sw3','sw4'].forEach((id, i) => {
+    ['sw1','sw2','sw3','sw4','sw5'].forEach((id, i) => {
       const el = document.getElementById(id);
       if (!el) return;
       waveShapes[i].forEach((h, j) => {
