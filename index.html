@@ -529,6 +529,56 @@
       line-height: 1.4;
     }
 
+    .degree-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-top: 0.55rem;
+    }
+
+    .degree {
+      display: grid;
+      grid-template-columns: 2.3rem 1fr;
+      column-gap: 0.5rem;
+      align-items: baseline;
+    }
+
+    .degree-abbr {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: var(--blue);
+      white-space: nowrap;
+    }
+
+    .degree-name {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .degree-where {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--muted);
+      opacity: 0.75;
+      line-height: 1.4;
+      margin-top: 0.1rem;
+    }
+
+    .meta-foot {
+      display: block;
+      margin-top: 0.7rem;
+      padding-top: 0.55rem;
+      border-top: 1px solid var(--border);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
     /* ─── RESEARCH ─── */
     .research-grid {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -1103,21 +1153,39 @@
           </div>
           <p>I'm <strong>Zhuoyan Tao</strong>, Terry to friends and colleagues. I'm a master's student in CMU's <strong>Intelligent Information Systems</strong> program at the Language Technologies Institute, advised by Prof. Shinji Watanabe at WavLab.</p>
           <p>My research spans speech quality evaluation, spoken language diarization, and speech-to-speech translation. It sits at the boundary of signal processing, machine learning, and linguistics, and keeps circling one question: how meaning is carried in speech beyond just the words.</p>
-          <p>Before CMU I finished dual B.S. degrees in Computer Science and Applied &amp; Computational Mathematics at USC, and I spent summer 2026 at Apple building simulation tooling for satellite connectivity. I also contribute to <strong>ESPnet</strong>. Outside of research, I enjoy exploring new places ☀&#xFE0E;</p>
+          <p>Before CMU I finished dual B.S. degrees in Computer Science and Applied and Computational Mathematics at USC, and I spent summer 2026 at Apple building simulation tooling for satellite connectivity. I also contribute to <strong>ESPnet</strong>. Outside of research, I enjoy exploring new places ☀&#xFE0E;</p>
         </div>
         <div class="meta-list reveal">
           <div class="meta-item">
             <span class="meta-key">Education</span>
             <span class="meta-val">
-              CMU · M.S. Intelligent Information Systems
-              <span class="meta-sub">Language Technologies Institute, expected Dec 2027</span>
+              Carnegie Mellon University
+              <span class="degree-list">
+                <span class="degree">
+                  <span class="degree-abbr">M.S.</span>
+                  <span class="degree-name">Intelligent Information Systems
+                    <span class="degree-where">Language Technologies Institute</span>
+                  </span>
+                </span>
+              </span>
+              <span class="meta-foot">Expected Dec 2027</span>
             </span>
           </div>
           <div class="meta-item">
             <span class="meta-key">Previously</span>
             <span class="meta-val">
-              USC · Dual B.S. degrees
-              <span class="meta-sub">Computer Science<br />Applied &amp; Computational Mathematics<br />Magna Cum Laude, May 2026</span>
+              University of Southern California
+              <span class="degree-list">
+                <span class="degree">
+                  <span class="degree-abbr">B.S.</span>
+                  <span class="degree-name">Computer Science</span>
+                </span>
+                <span class="degree">
+                  <span class="degree-abbr">B.S.</span>
+                  <span class="degree-name">Applied and Computational Mathematics</span>
+                </span>
+              </span>
+              <span class="meta-foot">Magna Cum Laude · May 2026</span>
             </span>
           </div>
           <div class="meta-item">
