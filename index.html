@@ -3,16 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zhuoyan (Terry) Tao</title>
+  <title>Zhuoyan (Terry) Tao — Speech Processing Researcher, CMU LTI</title>
   <meta name="description" content="Zhuoyan (Terry) Tao — speech processing and audio ML researcher at CMU WavLab. MIIS student at CMU LTI. Exploring how meaning is carried in speech beyond words." />
+  <meta name="author" content="Zhuoyan Tao" />
+  <link rel="canonical" href="https://zhuoyantao.com/" />
   <meta property="og:title" content="Zhuoyan (Terry) Tao" />
   <meta property="og:description" content="Speech processing and audio ML researcher at CMU WavLab. MIIS student at CMU LTI." />
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content="profile" />
   <meta property="og:url" content="https://zhuoyantao.com" />
+  <meta property="og:image" content="https://zhuoyantao.com/assets/hawaii_photo.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="assets/favicon.ico" sizes="32x32" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Zhuoyan Tao",
+    "alternateName": "Terry Tao",
+    "url": "https://zhuoyantao.com",
+    "email": "mailto:terrytao@andrew.cmu.edu",
+    "jobTitle": "Graduate Researcher, Speech Processing",
+    "affiliation": {
+      "@type": "CollegeOrUniversity",
+      "name": "Carnegie Mellon University, Language Technologies Institute"
+    },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "University of Southern California"
+    },
+    "knowsAbout": ["Speech Processing", "Audio Machine Learning", "Natural Language Processing", "Speech Quality Assessment", "Spoken Language Diarization"],
+    "sameAs": [
+      "https://www.linkedin.com/in/zhuoyan-tao/",
+      "https://github.com/ZhuoyanTao"
+    ]
+  }
+  </script>
+
   <!-- Vercel Web Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
   <!-- Vercel Speed Insights -->
@@ -39,6 +71,9 @@
       --muted:       #6b6f80;
       --border:      #e4e5ed;
       --border-dk:   rgba(255,255,255,0.07);
+      --surface-1:   #f9f9fb;
+      --surface-2:   #f2f2f7;
+      --rule:        #e4e5ed;
     }
 
     html { scroll-behavior: smooth; }
@@ -52,19 +87,36 @@
       overflow-x: hidden;
     }
 
+    /* ─── SKIP LINK ─── */
+    .skip-link {
+      position: absolute; left: -9999px; top: 0; z-index: 400;
+      background: var(--blue); color: #fff;
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.75rem 1.25rem; text-decoration: none; border-radius: 0 0 3px 0;
+    }
+    .skip-link:focus { left: 0; }
+
+    :focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
     /* ─── NAV ─── */
     nav {
       position: fixed; top: 0; left: 0; right: 0;
       z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.5rem 5rem;
-      transition: background 0.5s, border-color 0.5s;
+      transition: background 0.5s, border-color 0.5s, padding 0.4s;
     }
 
     nav.scrolled {
       background: rgba(13, 14, 20, 0.9);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-dk);
+      padding-top: 1.1rem; padding-bottom: 1.1rem;
     }
 
     .nav-logo {
@@ -107,12 +159,25 @@
     .nav-links { display: flex; gap: 2.25rem; list-style: none; }
 
     .nav-links a {
+      position: relative;
+      display: inline-block;
       font-family: 'DM Mono', monospace;
       font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--white-dim); text-decoration: none; transition: color 0.25s;
+      padding-bottom: 2px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute; left: 0; right: 0; bottom: -2px;
+      height: 1px; background: var(--blue);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s cubic-bezier(.16,1,.3,1);
     }
 
     .nav-links a:hover { color: var(--white); }
+    .nav-links a.active { color: var(--white); }
+    .nav-links a.active::after { transform: scaleX(1); }
 
     /* ─── MOBILE NAV HAMBURGER ─── */
     .nav-toggle {
@@ -344,15 +409,18 @@
       background: #0d0e14;
     }
 
-    /* ─── LIGHT / DARK SECTIONS ─── */
-    .light-section { background: var(--bg); }
-    .dark-section  { background: var(--dark); }
+    /* ─── SECTION SURFACES ─── */
+    .light-section { background: var(--surface-1); }
+    .dark-section  { background: var(--surface-2); }
+    .light-section + .dark-section,
+    .dark-section + .light-section,
+    .dark-section + .dark-section { border-top: 1px solid var(--rule); }
 
     .wrap { max-width: 1080px; margin: 0 auto; padding: 6.5rem 5rem; }
 
     .sec-head {
       display: flex; align-items: center; gap: 1.25rem;
-      margin-bottom: 3.5rem;
+      margin-bottom: 1.25rem;
     }
 
     .sec-wave {
@@ -377,13 +445,34 @@
       letter-spacing: 0.2em; color: var(--blue);
     }
 
+    .sec-intro {
+      font-size: 0.95rem; color: var(--muted);
+      max-width: 46rem; line-height: 1.85;
+      margin-bottom: 3.25rem;
+    }
+
+    .sec-head:last-child,
+    .sec-head + .about-grid,
+    .sec-head + .research-grid,
+    .sec-head + .pub-list,
+    .sec-head + .creations-list,
+    .sec-head + .contact-row { margin-top: 3.5rem; }
+
     h2 {
       font-family: 'Playfair Display', serif; font-size: 2rem;
       font-weight: 500; letter-spacing: -0.01em;
+      color: var(--ink);
     }
 
-    .light-section h2 { color: var(--ink); }
-    .dark-section  h2 { color: var(--white); }
+    h3.group-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; font-weight: 400;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--blue);
+      margin: 3rem 0 0.85rem;
+    }
+
+    h3.group-label:first-child { margin-top: 0; }
 
     /* ─── ABOUT ─── */
     .about-grid {
@@ -392,6 +481,7 @@
     }
 
     .about-text p { font-size: 1rem; color: var(--muted); line-height: 1.9; margin-bottom: 1.2rem; }
+    .about-text p:last-child { margin-bottom: 0; }
     .about-text p strong { color: var(--ink); font-weight: 500; }
 
     .field-tag {
@@ -479,6 +569,7 @@
     .r-title {
       font-family: 'Playfair Display', serif; font-size: 1.1rem;
       font-weight: 500; color: var(--white); margin-bottom: 0.75rem; line-height: 1.35;
+      padding-right: 3.5rem;
     }
 
     .r-body { font-size: 0.86rem; color: rgba(244,244,246,0.38); line-height: 1.75; }
@@ -505,9 +596,17 @@
     .pub-authors { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
     .pub-authors strong { color: var(--ink); font-weight: 500; }
 
+    .pub-summary {
+      font-size: 0.85rem; color: var(--muted);
+      line-height: 1.8; margin-top: 0.7rem;
+      max-width: 52rem;
+      border-left: 1px solid var(--border);
+      padding-left: 1rem;
+    }
+
     .pub-meta {
       display: flex; align-items: center; gap: 0.85rem;
-      flex-wrap: wrap; margin-top: 0.75rem;
+      flex-wrap: wrap; margin-top: 0.85rem;
     }
 
     .pub-venue {
@@ -536,7 +635,7 @@
     .creations-list { display: flex; flex-direction: column; }
 
     .cr-item {
-      display: grid; grid-template-columns: 3.5rem 1fr auto 1.5rem;
+      display: grid; grid-template-columns: 5.5rem 1fr auto 1.5rem;
       align-items: center; gap: 2rem; padding: 1.6rem 0;
       border-bottom: 1px solid var(--border);
       text-decoration: none; color: inherit;
@@ -548,7 +647,11 @@
     a.cr-item:hover .cr-title { color: var(--blue); }
     a.cr-item:hover .cr-arrow { transform: translateX(4px); color: var(--blue); }
 
-    .cr-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); }
+    .cr-year {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.06em; color: var(--muted);
+      white-space: nowrap;
+    }
 
     .cr-title {
       font-family: 'Playfair Display', serif; font-size: 1.1rem;
@@ -568,7 +671,11 @@
     .cr-arrow { color: var(--muted); font-size: 0.95rem; transition: transform 0.2s, color 0.2s; }
 
     /* ─── CONTACT ─── */
-    .contact-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .contact-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
 
     .cl {
       display: flex; flex-direction: column; gap: 0.65rem;
@@ -633,8 +740,7 @@
       .wrap { padding: 4rem 2rem; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       .research-grid { grid-template-columns: 1fr; }
-      .contact-row { grid-template-columns: 1fr; }
-      .cr-item { grid-template-columns: 3rem 1fr auto 1.25rem; gap: 1rem; }
+      .cr-item { grid-template-columns: 5.5rem 1fr auto 1.25rem; gap: 1rem; }
       .pub-item { grid-template-columns: 3rem 1fr; gap: 1rem; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.75rem; }
     }
@@ -679,6 +785,8 @@
         letter-spacing: 0.18em;
         color: var(--white-dim);
       }
+
+      .nav-links a::after { display: none; }
 
       /* Hero */
       .hero {
@@ -748,13 +856,23 @@
 
       .sec-head {
         gap: 0.85rem;
-        margin-bottom: 2.25rem;
+        margin-bottom: 1rem;
         flex-wrap: wrap;
       }
+
+      .sec-intro { font-size: 0.9rem; margin-bottom: 2.25rem; }
+
+      .sec-head + .about-grid,
+      .sec-head + .research-grid,
+      .sec-head + .pub-list,
+      .sec-head + .creations-list,
+      .sec-head + .contact-row { margin-top: 2.25rem; }
 
       .sec-wave { height: 22px; }
 
       h2 { font-size: 1.55rem; }
+
+      h3.group-label { margin-top: 2.25rem; }
 
       /* About */
       .about-grid { gap: 2rem; }
@@ -776,7 +894,7 @@
 
       .r-eyebrow { font-size: 0.55rem; letter-spacing: 0.12em; }
 
-      .r-title { font-size: 1rem; }
+      .r-title { font-size: 1rem; padding-right: 3rem; }
 
       .r-body { font-size: 0.82rem; }
 
@@ -795,16 +913,18 @@
 
       .pub-authors { font-size: 0.78rem; }
 
-      .pub-meta { gap: 0.6rem; margin-top: 0.6rem; }
+      .pub-summary { font-size: 0.8rem; padding-left: 0.85rem; }
+
+      .pub-meta { gap: 0.6rem; margin-top: 0.75rem; }
 
       /* Experience list */
       .cr-item {
         grid-template-columns: 1fr;
-        gap: 0.5rem;
+        gap: 0.35rem;
         padding: 1.25rem 0;
       }
 
-      .cr-num { display: none; }
+      .cr-year { order: -1; }
 
       .cr-badge { display: none; }
 
@@ -815,7 +935,7 @@
       .cr-sub { font-size: 0.78rem; }
 
       /* Contact */
-      .contact-row { gap: 0.75rem; }
+      .contact-row { gap: 0.75rem; grid-template-columns: 1fr; }
 
       .cl {
         padding: 1.25rem 1.25rem;
@@ -870,9 +990,12 @@
         --bg: #0d0e14;
         --ink: #f4f4f6;
         --muted: #b8bdc6;
-        --border: rgba(255,255,255,0.04);
+        --border: rgba(255,255,255,0.06);
         --white: #f4f4f6;
         --white-dim: rgba(244,244,246,0.5);
+        --surface-1: #0d0e14;
+        --surface-2: #11131c;
+        --rule: rgba(255,255,255,0.05);
       }
     }
 
@@ -880,18 +1003,23 @@
       --bg: #0d0e14;
       --ink: #f4f4f6;
       --muted: #b8bdc6;
-      --border: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.06);
       --white: #f4f4f6;
       --white-dim: rgba(244,244,246,0.5);
+      --surface-1: #0d0e14;
+      --surface-2: #11131c;
+      --rule: rgba(255,255,255,0.05);
     }
   </style>
 </head>
 <body>
 
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <!-- NAV -->
   <nav id="nav">
-    <a href="#" class="nav-logo">
-      <div class="logo-bars">
+    <a href="#" class="nav-logo" aria-label="Zhuoyan Tao — home">
+      <div class="logo-bars" aria-hidden="true">
         <div class="logo-bar"></div>
         <div class="logo-bar"></div>
         <div class="logo-bar"></div>
@@ -900,36 +1028,38 @@
       </div>
       <span class="logo-text">Zhuoyan <em>Tao</em></span>
     </a>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#research">Research</a></li>
       <li><a href="#publications">Publications</a></li>
-      <li><a href="#creations">Experience</a></li>
+      <li><a href="#experience">Experience</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
+  <main id="main">
+
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-orb"></div>
-    <canvas id="waveCanvas"></canvas>
+  <section class="hero" aria-label="Introduction">
+    <div class="hero-orb" aria-hidden="true"></div>
+    <canvas id="waveCanvas" aria-hidden="true"></canvas>
 
     <div class="hero-content">
       <div class="hero-kicker">
-        <div class="kicker-dot"></div>
+        <div class="kicker-dot" aria-hidden="true"></div>
         <span class="kicker-text">CMU · Language Technologies Institute</span>
       </div>
 
-      <div class="hero-name">
+      <h1 class="hero-name">
         <span class="name-zhuoyan">Zhuoyan</span>
         <span class="name-terry">Terry</span>
         <span class="name-tao">Tao</span>
-      </div>
+      </h1>
 
-      <div class="hero-rule"></div>
+      <div class="hero-rule" aria-hidden="true"></div>
 
       <p class="hero-bio">
         Graduate researcher in <strong>speech processing</strong>
@@ -939,14 +1069,14 @@
 
       <div class="hero-btns">
         <a href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener" class="btn-primary">Curriculum Vitae ↗&#xFE0E;</a>
-        <a href="#about" class="btn-outline">About me</a>
+        <a href="#publications" class="btn-outline">Publications</a>
       </div>
     </div>
 
     <!-- HERO PHOTO -->
     <div class="hero-photo-col">
       <div class="hero-photo-wrap">
-        <img src="assets/hawaii_photo.webp" alt="Terry at Kualoa Ranch, Oahu" />
+        <img src="assets/hawaii_photo.webp" width="300" height="400" alt="Terry at Kualoa Ranch, Oahu" />
         <div class="hero-photo-caption">
           <span>Kualoa Ranch · Oahu, Hawaii</span>
         </div>
@@ -955,20 +1085,20 @@
   </section>
 
   <!-- FREQ DIVIDER -->
-  <canvas class="freq-divider" id="freqDiv"></canvas>
+  <canvas class="freq-divider" id="freqDiv" aria-hidden="true"></canvas>
 
   <!-- ABOUT -->
-  <section class="light-section" id="about">
+  <section class="light-section" id="about" aria-labelledby="about-h">
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="sec-num">01</span>
-        <div class="sec-wave" id="sw1"></div>
-        <h2>About Me</h2>
+        <div class="sec-wave" id="sw1" aria-hidden="true"></div>
+        <h2 id="about-h">About</h2>
       </div>
       <div class="about-grid">
         <div class="about-text reveal">
           <div class="field-tag">
-            <div class="tag-wave" id="tw1"></div>
+            <div class="tag-wave" id="tw1" aria-hidden="true"></div>
             Speech Processing · Audio ML · NLP
           </div>
           <p>I'm <strong>Zhuoyan Tao</strong>, Terry to friends and colleagues. I'm a master's student in CMU's <strong>Intelligent Information Systems</strong> program at the Language Technologies Institute, advised by Prof. Shinji Watanabe at WavLab.</p>
@@ -986,21 +1116,28 @@
           <div class="meta-item">
             <span class="meta-key">Previously</span>
             <span class="meta-val">
-              USC · B.S. CS & Applied Math
-              <span class="meta-sub">Magna Cum Laude, May 2026</span>
+              USC · B.S. Computer Science
+              <span class="meta-sub">B.S. Applied &amp; Computational Mathematics · Magna Cum Laude, May 2026</span>
+            </span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-key">Advisor</span>
+            <span class="meta-val">Prof. Shinji Watanabe
+              <span class="meta-sub">CMU WavLab · previously Prof. Shrikanth Narayanan, USC SAIL</span>
             </span>
           </div>
           <div class="meta-item">
             <span class="meta-key">Honors</span>
             <span class="meta-val">
               Phi Beta Kappa · Trustee Scholar
-              <span class="meta-sub">Full-tuition merit scholarship, USC · NAE Grand Challenges Scholar</span>
+              <span class="meta-sub">Full-tuition merit scholarship, USC · NAE Grand Challenges Scholar, 2026</span>
             </span>
           </div>
           <div class="meta-item">
-            <span class="meta-key">Advisor</span>
-            <span class="meta-val">Prof. Shinji Watanabe
-              <span class="meta-sub">CMU WavLab</span>
+            <span class="meta-key">Toolkit</span>
+            <span class="meta-val">
+              PyTorch · ESPnet · VERSA
+              <span class="meta-sub">Whisper, MMS, WavLM, HuBERT · Python, C++, Go · SLURM, Docker</span>
             </span>
           </div>
           <div class="meta-item">
@@ -1013,354 +1150,459 @@
   </section>
 
   <!-- RESEARCH -->
-  <section class="dark-section" id="research">
+  <section class="dark-section" id="research" aria-labelledby="research-h">
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="sec-num">02</span>
-        <div class="sec-wave" id="sw2"></div>
-        <h2>Research</h2>
+        <div class="sec-wave" id="sw2" aria-hidden="true"></div>
+        <h2 id="research-h">Research</h2>
       </div>
+      <p class="sec-intro reveal">Four threads run through my current work. Each one asks what a speech model can recover from the signal that a transcript alone would throw away.</p>
       <div class="research-grid">
         <div class="r-card reveal">
-          <div class="r-card-bars" id="rb1"></div>
-          <div class="r-eyebrow">CMU WavLab · Interspeech 2026 Oral</div>
-          <div class="r-title">ANCHOR: Speech Quality from Partial Audio</div>
-          <div class="r-body">Extends ARECHO to predict speech quality before an utterance finishes. Dual-resolution query tokens with chunk-first decoding in a shared Transformer decoder cut PLCMOS MAE by 48% on 2-second prefixes and locate a 4 to 6 second perceptual context horizon.</div>
+          <div class="r-card-bars" id="rb1" aria-hidden="true"></div>
+          <div class="r-eyebrow">CMU WavLab</div>
+          <h3 class="r-title">Perceptual Speech Quality</h3>
+          <p class="r-body">Non-intrusive models that predict how a listener will rate speech — including before the utterance has finished. The open question is how much acoustic context a quality judgment actually needs, and how to keep predictions stable while that context is still arriving.</p>
         </div>
         <div class="r-card reveal">
-          <div class="r-card-bars" id="rb2"></div>
-          <div class="r-eyebrow">USC SAIL Lab · EMNLP under review</div>
-          <div class="r-title">Diagnosing Spoken Language Diarization</div>
-          <div class="r-body">Introduces off-target LID posterior mass as a measure that predicts probe gains on pre-trained speech encoders. Pre-registered on unseen language pairs and validated across Whisper, MMS, and classical LID on DISPLACE and MUCS Hindi-English code-switching data.</div>
+          <div class="r-card-bars" id="rb2" aria-hidden="true"></div>
+          <div class="r-eyebrow">USC SAIL Lab</div>
+          <h3 class="r-title">Multilingual &amp; Code-Switched Speech</h3>
+          <p class="r-body">Spoken language diarization for conversational, code-switching speech. I study what pre-trained speech encoders already encode about language identity, and when a lightweight probe is enough to recover it.</p>
         </div>
         <div class="r-card reveal">
-          <div class="r-card-bars" id="rb3"></div>
-          <div class="r-eyebrow">CMU WavLab · Interspeech 2026 S2ST Challenge</div>
-          <div class="r-title">Pragmatic Intent in Speech Translation</div>
-          <div class="r-body">HuBERT- and prosody-based speech-to-speech translation systems that preserve stance, emotion, and dialog function across English and Spanish, so the translated speech keeps what the speaker meant, not only what they said.</div>
+          <div class="r-card-bars" id="rb3" aria-hidden="true"></div>
+          <div class="r-eyebrow">CMU WavLab</div>
+          <h3 class="r-title">Prosody, Stance &amp; Pragmatic Intent</h3>
+          <p class="r-body">Speech-to-speech translation that carries stance, emotion, and dialog function across languages — so the translated speech keeps what the speaker meant, not only what they said.</p>
         </div>
         <div class="r-card reveal">
-          <div class="r-card-bars" id="rb4"></div>
-          <div class="r-eyebrow">CMU WavLab · IEEE SLT 2026 under review</div>
-          <div class="r-title">TurnBench: Turn-Taking in Spoken Dialogue</div>
-          <div class="r-body">A multi-domain benchmark for turn-taking dynamics in spoken dialogue, measuring how well models anticipate when a speaker yields the floor across conversational settings.</div>
+          <div class="r-card-bars" id="rb4" aria-hidden="true"></div>
+          <div class="r-eyebrow">Open Source · ESPnet</div>
+          <h3 class="r-title">Reproducible Speech Tooling</h3>
+          <p class="r-body">Merged contributions to ESPnet (16k+ stars), including a ≈50× speedup for speaker-embedding extraction and new TTS recipes. Benchmarks and evaluation code are part of the result, not an afterthought — other groups should be able to pick the work up and run it.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- PUBLICATIONS -->
-  <section class="light-section" id="publications">
+  <section class="light-section" id="publications" aria-labelledby="publications-h">
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="sec-num">03</span>
-        <div class="sec-wave" id="sw3"></div>
-        <h2>Publications</h2>
+        <div class="sec-wave" id="sw3" aria-hidden="true"></div>
+        <h2 id="publications-h">Publications</h2>
       </div>
+      <p class="sec-intro reveal">Author names in order; my name in bold.</p>
+
+      <h3 class="group-label reveal">Peer-reviewed</h3>
       <div class="pub-list">
-        <div class="pub-item reveal">
+        <article class="pub-item reveal">
           <div class="pub-num">001</div>
           <div>
-            <div class="pub-title">ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling</div>
+            <h4 class="pub-title">ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling</h4>
             <div class="pub-authors"><strong>Z. Tao</strong>, J. Shi, H. Shim, S. Watanabe</div>
+            <p class="pub-summary">Extends ARECHO to predict speech quality before an utterance finishes. Dual-resolution query tokens with chunk-first decoding in a shared Transformer decoder cut PLCMOS MAE by 48% on 2-second prefixes and locate a 4 to 6 second perceptual context horizon.</p>
             <div class="pub-meta">
               <span class="pub-venue">Interspeech 2026 · Oral</span>
               <span class="pub-venue">First author</span>
               <a class="pub-link" href="https://arxiv.org/abs/2606.10233" target="_blank" rel="noopener">arXiv:2606.10233 ↗&#xFE0E;</a>
             </div>
           </div>
-        </div>
-        <div class="pub-item reveal">
+        </article>
+      </div>
+
+      <h3 class="group-label reveal">Under review</h3>
+      <div class="pub-list">
+        <article class="pub-item reveal">
           <div class="pub-num">002</div>
           <div>
-            <div class="pub-title">Off-Target LID Posterior Mass Predicts Probe Gains in Spoken Language Diarization: A Pre-Registered Validation</div>
+            <h4 class="pub-title">Off-Target LID Posterior Mass Predicts Probe Gains in Spoken Language Diarization: A Pre-Registered Validation</h4>
             <div class="pub-authors"><strong>Z. Tao</strong>, A. Kommineni, S. Narayanan</div>
+            <p class="pub-summary">Introduces off-target LID posterior mass as a measure that predicts probe gains on pre-trained speech encoders. Pre-registered on unseen language pairs and validated across Whisper, MMS, and classical LID on DISPLACE and MUCS Hindi-English code-switching data.</p>
             <div class="pub-meta">
               <span class="pub-venue pending">EMNLP · Under review</span>
               <span class="pub-venue">First author</span>
             </div>
           </div>
-        </div>
-        <div class="pub-item reveal">
+        </article>
+        <article class="pub-item reveal">
           <div class="pub-num">003</div>
           <div>
-            <div class="pub-title">TurnBench: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue</div>
+            <h4 class="pub-title">TurnBench: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue</h4>
             <div class="pub-authors">F. Jiang, R. Sanabria, S. Deshmukh, …, <strong>Z. Tao</strong> et al.</div>
+            <p class="pub-summary">A multi-domain benchmark for turn-taking dynamics in spoken dialogue, measuring how well models anticipate when a speaker yields the floor across conversational settings.</p>
             <div class="pub-meta">
               <span class="pub-venue pending">IEEE SLT 2026 · Under review</span>
               <a class="pub-link" href="https://arxiv.org/abs/2608.25218" target="_blank" rel="noopener">arXiv:2608.25218 ↗&#xFE0E;</a>
             </div>
           </div>
-        </div>
+        </article>
+      </div>
+
+      <h3 class="group-label reveal">In progress</h3>
+      <div class="pub-list">
+        <article class="pub-item reveal">
+          <div class="pub-num">004</div>
+          <div>
+            <h4 class="pub-title">Pragmatic Intent Preservation in Speech-to-Speech Translation</h4>
+            <div class="pub-authors"><strong>Z. Tao</strong>, CMU WavLab</div>
+            <p class="pub-summary">HuBERT- and prosody-based speech-to-speech translation systems that preserve stance, emotion, and dialog function across English and Spanish.</p>
+            <div class="pub-meta">
+              <span class="pub-venue pending">Interspeech 2026 S2ST Challenge</span>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- EXPERIENCE -->
-  <section class="dark-section" id="creations">
+  <section class="dark-section" id="experience" aria-labelledby="experience-h">
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="sec-num">04</span>
-        <div class="sec-wave" id="sw4"></div>
-        <h2>Experience</h2>
+        <div class="sec-wave" id="sw4" aria-hidden="true"></div>
+        <h2 id="experience-h">Experience</h2>
       </div>
       <div class="creations-list">
         <a href="https://www.apple.com/careers/" target="_blank" rel="noopener" class="cr-item reveal">
-          <div class="cr-num">001</div>
-          <div><div class="cr-title">Apple Inc. · Satellite Connectivity Group</div><div class="cr-sub">Software Engineering Intern · Simulation tooling & performance, Python/Go · Summer 2026</div></div>
+          <div class="cr-year">Summer 2026</div>
+          <div><div class="cr-title">Apple Inc. · Satellite Connectivity</div><div class="cr-sub">Software Engineering Intern · Sole author of a sweep-orchestration tool for the team's network simulator: ~1000× experiment throughput, ~12× faster interference hot path · Python/Go</div></div>
           <div class="cr-badge">Industry</div>
-          <div class="cr-arrow">→</div>
+          <div class="cr-arrow" aria-hidden="true">→</div>
         </a>
         <a href="https://wavlab.org" target="_blank" rel="noopener" class="cr-item reveal">
-          <div class="cr-num">002</div>
-          <div><div class="cr-title">CMU WavLab</div><div class="cr-sub">Graduate Researcher · Speech quality, translation & open-source tooling · 2025–present</div></div>
+          <div class="cr-year">2025 — present</div>
+          <div><div class="cr-title">CMU WavLab</div><div class="cr-sub">Graduate Researcher, advised by Prof. Shinji Watanabe · Speech quality, speech-to-speech translation &amp; ESPnet</div></div>
           <div class="cr-badge">Research</div>
-          <div class="cr-arrow">→</div>
+          <div class="cr-arrow" aria-hidden="true">→</div>
         </a>
         <a href="https://sail.usc.edu" target="_blank" rel="noopener" class="cr-item reveal">
-          <div class="cr-num">003</div>
-          <div><div class="cr-title">USC SAIL Lab</div><div class="cr-sub">Student Researcher · Multilingual speech diarization · 2023–2026</div></div>
+          <div class="cr-year">2023 — 2026</div>
+          <div><div class="cr-title">USC SAIL Lab</div><div class="cr-sub">Student Researcher, advised by Prof. Shrikanth Narayanan · Multilingual speech &amp; spoken language diarization</div></div>
           <div class="cr-badge">Research</div>
-          <div class="cr-arrow">→</div>
+          <div class="cr-arrow" aria-hidden="true">→</div>
         </a>
         <a href="https://uscinteractionlab.web.app/" target="_blank" rel="noopener" class="cr-item reveal">
-          <div class="cr-num">004</div>
-          <div><div class="cr-title">USC Interaction Lab</div><div class="cr-sub">Multimodal ML for early Alzheimer's detection · 2023</div></div>
+          <div class="cr-year">2023</div>
+          <div><div class="cr-title">USC Interaction Lab</div><div class="cr-sub">Student Researcher · Multimodal ML for early Alzheimer's detection</div></div>
           <div class="cr-badge">Research</div>
-          <div class="cr-arrow">→</div>
+          <div class="cr-arrow" aria-hidden="true">→</div>
         </a>
         <div class="cr-item reveal">
-          <div class="cr-num">005</div>
-          <div><div class="cr-title">USC MATH 229 · Supplemental Instruction</div><div class="cr-sub">SI Leader · 98 students weekly; review sessions reached ~300, a program record · 2023–2026</div></div>
+          <div class="cr-year">2023 — 2026</div>
+          <div><div class="cr-title">USC MATH 229 · Multivariable Calculus</div><div class="cr-sub">Supplemental Instruction Leader · 3–4 sessions weekly for 98 students; review sessions reached ~300, the highest in program history</div></div>
           <div class="cr-badge">Teaching</div>
-          <div class="cr-arrow"></div>
+          <div class="cr-arrow" aria-hidden="true"></div>
         </div>
         <a href="https://store.steampowered.com/app/2372070/Bone_Boy/" target="_blank" rel="noopener" class="cr-item reveal">
-          <div class="cr-num">006</div>
-          <div><div class="cr-title">Unity 2D Platformer</div><div class="cr-sub">Executive Producer · Steam launch · 85% positive reviews · Ableton & Wwise</div></div>
+          <div class="cr-year">2023 — 2024</div>
+          <div><div class="cr-title">Unity 2D Platformer · Open Alpha Game Design Club</div><div class="cr-sub">VP &amp; Executive Producer · Led a 10-member audio team (Ableton &amp; Wwise); shipped on Steam, 85% positive · Taught a semester-long Unity &amp; SFX curriculum to 40 students</div></div>
           <div class="cr-badge">Project</div>
-          <div class="cr-arrow">→</div>
+          <div class="cr-arrow" aria-hidden="true">→</div>
         </a>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section class="dark-section" id="contact">
+  <section class="light-section" id="contact" aria-labelledby="contact-h">
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="sec-num">05</span>
-        <div class="sec-wave" id="sw5"></div>
-        <h2>Links & Contact</h2>
+        <div class="sec-wave" id="sw5" aria-hidden="true"></div>
+        <h2 id="contact-h">Contact</h2>
       </div>
+      <p class="sec-intro reveal">Email is the fastest way to reach me — happy to talk about speech evaluation, code-switching, or anything in the sections above.</p>
       <div class="contact-row">
-        <a href="https://www.linkedin.com/in/zhuoyan-tao/" target="_blank" rel="noopener" class="cl reveal">
-          <div class="cl-icon" style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:1.1rem;letter-spacing:-0.02em">in</div>
+        <a href="mailto:terrytao@andrew.cmu.edu" class="cl reveal">
+          <div class="cl-icon" aria-hidden="true">✉&#xFE0E;</div>
           <div class="cl-info">
-            <div class="cl-name">LinkedIn</div>
-            <div class="cl-handle">linkedin.com/in/zhuoyan-tao</div>
+            <div class="cl-name">Email</div>
+            <div class="cl-handle">terrytao@andrew.cmu.edu</div>
           </div>
         </a>
         <a href="https://github.com/ZhuoyanTao" target="_blank" rel="noopener" class="cl reveal">
-          <div class="cl-icon">⌥</div>
+          <div class="cl-icon" aria-hidden="true">⌥</div>
           <div class="cl-info">
             <div class="cl-name">GitHub</div>
             <div class="cl-handle">github.com/ZhuoyanTao</div>
           </div>
         </a>
-        <a href="mailto:terrytao@andrew.cmu.edu" class="cl reveal">
-          <div class="cl-icon">✉&#xFE0E;</div>
+        <a href="https://www.linkedin.com/in/zhuoyan-tao/" target="_blank" rel="noopener" class="cl reveal">
+          <div class="cl-icon" aria-hidden="true" style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:1.1rem;letter-spacing:-0.02em">in</div>
           <div class="cl-info">
-            <div class="cl-name">Email</div>
-            <div class="cl-handle">terrytao@andrew.cmu.edu</div>
+            <div class="cl-name">LinkedIn</div>
+            <div class="cl-handle">linkedin.com/in/zhuoyan-tao</div>
+          </div>
+        </a>
+        <a href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener" class="cl reveal">
+          <div class="cl-icon" aria-hidden="true">↗&#xFE0E;</div>
+          <div class="cl-info">
+            <div class="cl-name">Curriculum Vitae</div>
+            <div class="cl-handle">PDF · updated 2026</div>
           </div>
         </a>
       </div>
     </div>
   </section>
 
+  </main>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-left">
-      <div class="footer-wave" id="fw"></div>
+      <div class="footer-wave" id="fw" aria-hidden="true"></div>
       <div class="footer-name">Zhuoyan (Terry) Tao</div>
     </div>
     <div class="footer-note">Pittsburgh · © 2025–2026</div>
   </footer>
 
   <script>
-    // ── Nav scroll
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+    (function () {
+      'use strict';
 
-    // ── Mobile nav toggle
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      nav.classList.toggle('menu-open');
-      document.body.style.overflow = nav.classList.contains('menu-open') ? 'hidden' : '';
-    });
+      // ── Nav scroll state
+      const nav = document.getElementById('nav');
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          nav.classList.toggle('scrolled', window.scrollY > 50);
+          ticking = false;
+        });
+      }, { passive: true });
 
-    // Close menu on link click
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
+      // ── Mobile nav toggle
+      const navToggle = document.getElementById('navToggle');
+      const navLinks = document.getElementById('navLinks');
+
+      function closeMenu() {
         navToggle.classList.remove('open');
         nav.classList.remove('menu-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'Open menu');
         document.body.style.overflow = '';
-      });
-    });
+      }
 
-    // ── Scroll reveal
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          obs.unobserve(e.target);
+      navToggle.addEventListener('click', () => {
+        const open = !nav.classList.contains('menu-open');
+        navToggle.classList.toggle('open', open);
+        nav.classList.toggle('menu-open', open);
+        navToggle.setAttribute('aria-expanded', String(open));
+        navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        document.body.style.overflow = open ? 'hidden' : '';
+      });
+
+      navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+      // ── Scroll reveal
+      const revealEls = document.querySelectorAll('.reveal');
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        revealEls.forEach(el => el.classList.add('visible'));
+      } else {
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('visible');
+              obs.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+        revealEls.forEach(el => obs.observe(el));
+
+        // Fallback so nothing stays hidden if the observer misfires
+        setTimeout(() => revealEls.forEach(el => el.classList.add('visible')), 2500);
+      }
+
+      // ── Scroll-spy nav
+      const linkMap = new Map();
+      navLinks.querySelectorAll('a[href^="#"]').forEach(a => linkMap.set(a.getAttribute('href').slice(1), a));
+      const spySections = document.querySelectorAll('main section[id]');
+
+      if ('IntersectionObserver' in window && spySections.length) {
+        const spy = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            linkMap.forEach(a => a.classList.remove('active'));
+            const active = linkMap.get(e.target.id);
+            if (active) active.classList.add('active');
+          });
+        }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+        spySections.forEach(s => spy.observe(s));
+      }
+
+      // ── Section wave accents
+      const waveShapes = [
+        [4, 9, 6, 14, 8, 12, 5, 16, 9, 13, 6, 11, 5, 14, 7, 10, 4, 13, 8, 11, 5],
+        [6, 11, 5, 16, 9, 13, 6, 18, 10, 14, 7, 12, 5, 15, 8, 11, 6, 14, 9, 12, 5],
+        [5, 10, 7, 13, 5, 15, 9, 12, 6, 14, 7, 10, 5, 13, 8, 11, 6, 14, 7, 10, 4],
+        [4, 12, 7, 11, 6, 16, 9, 13, 5, 14, 8, 10, 6, 15, 7, 12, 5, 13, 8, 10, 6],
+        [7, 10, 5, 15, 8, 12, 6, 17, 9, 11, 7, 13, 5, 16, 8, 10, 6, 12, 9, 14, 5],
+      ];
+
+      const durations = [1.0, 0.85, 1.3, 0.95, 1.15, 0.8, 1.25, 1.0, 0.9, 1.2,
+                         0.85, 1.1, 0.95, 1.3, 0.8, 1.05, 0.9, 1.2, 1.0, 0.88, 1.15];
+
+      ['sw1','sw2','sw3','sw4','sw5'].forEach((id, i) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        waveShapes[i].forEach((h, j) => {
+          const s = document.createElement('span');
+          s.style.height = h + 'px';
+          s.style.setProperty('--bar-dur', durations[j % durations.length] + 's');
+          s.style.setProperty('--bar-delay', (j * 0.06) + 's');
+          el.appendChild(s);
+        });
+      });
+
+      // ── Static bar helpers
+      function buildBars(el, heights) {
+        if (!el) return;
+        heights.forEach(h => {
+          const s = document.createElement('span');
+          s.style.height = h + 'px';
+          el.appendChild(s);
+        });
+      }
+      buildBars(document.getElementById('tw1'), [3, 6, 4, 8, 5, 7, 4, 6, 3]);
+      buildBars(document.getElementById('fw'),  [4, 7, 5, 10, 6, 9, 5, 8, 4, 7, 5]);
+      const cardBars = [
+        [6, 12, 8, 16, 10, 14, 7, 11, 9],
+        [9, 14, 7, 18, 11, 15, 8, 13, 6],
+        [7, 11, 9, 15, 6, 13, 10, 12, 8],
+        [8, 13, 6, 17, 9, 14, 7, 12, 10],
+      ];
+      ['rb1','rb2','rb3','rb4'].forEach((id, i) => buildBars(document.getElementById(id), cardBars[i]));
+
+      // ── Canvas helpers: crisp on HiDPI, paused when off-screen or backgrounded
+      function fitCanvas(canvas, ctx) {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const w = canvas.offsetWidth;
+        const h = canvas.offsetHeight;
+        canvas.width = Math.max(1, Math.round(w * dpr));
+        canvas.height = Math.max(1, Math.round(h * dpr));
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        return { w, h };
+      }
+
+      function runLoop(el, step) {
+        if (reduceMotion) { step(); return; }
+        let visible = true;
+        let running = false;
+
+        function frame() {
+          if (!visible || document.hidden) { running = false; return; }
+          step();
+          requestAnimationFrame(frame);
         }
-      });
-    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
-
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-    setTimeout(() => {
-      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
-    }, 2000);
-
-    // ── Section wave accents
-    const waveShapes = [
-      [4, 9, 6, 14, 8, 12, 5, 16, 9, 13, 6, 11, 5, 14, 7, 10, 4, 13, 8, 11, 5],
-      [6, 11, 5, 16, 9, 13, 6, 18, 10, 14, 7, 12, 5, 15, 8, 11, 6, 14, 9, 12, 5],
-      [5, 10, 7, 13, 5, 15, 9, 12, 6, 14, 7, 10, 5, 13, 8, 11, 6, 14, 7, 10, 4],
-      [4, 12, 7, 11, 6, 16, 9, 13, 5, 14, 8, 10, 6, 15, 7, 12, 5, 13, 8, 10, 6],
-      [7, 10, 5, 15, 8, 12, 6, 17, 9, 11, 7, 13, 5, 16, 8, 10, 6, 12, 9, 14, 5],
-    ];
-
-    const durations = [1.0, 0.85, 1.3, 0.95, 1.15, 0.8, 1.25, 1.0, 0.9, 1.2,
-                       0.85, 1.1, 0.95, 1.3, 0.8, 1.05, 0.9, 1.2, 1.0, 0.88, 1.15];
-
-    ['sw1','sw2','sw3','sw4','sw5'].forEach((id, i) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      waveShapes[i].forEach((h, j) => {
-        const s = document.createElement('span');
-        s.style.height = h + 'px';
-        s.style.setProperty('--bar-dur', durations[j % durations.length] + 's');
-        s.style.setProperty('--bar-delay', (j * 0.06) + 's');
-        el.appendChild(s);
-      });
-    });
-
-    // ── Static bar helpers
-    function buildBars(el, heights) {
-      if (!el) return;
-      heights.forEach(h => {
-        const s = document.createElement('span');
-        s.style.height = h + 'px';
-        el.appendChild(s);
-      });
-    }
-    buildBars(document.getElementById('tw1'), [3, 6, 4, 8, 5, 7, 4, 6, 3]);
-    buildBars(document.getElementById('fw'),  [4, 7, 5, 10, 6, 9, 5, 8, 4, 7, 5]);
-    const cardBars = [
-      [6, 12, 8, 16, 10, 14, 7, 11, 9],
-      [9, 14, 7, 18, 11, 15, 8, 13, 6],
-      [7, 11, 9, 15, 6, 13, 10, 12, 8],
-      [8, 13, 6, 17, 9, 14, 7, 12, 10],
-    ];
-    ['rb1','rb2','rb3','rb4'].forEach((id, i) => buildBars(document.getElementById(id), cardBars[i]));
-
-    // ── Wave divider canvas
-    const freqCanvas = document.getElementById('freqDiv');
-    const freqCtx = freqCanvas.getContext('2d');
-
-    function resizeFreq() {
-      freqCanvas.width  = freqCanvas.offsetWidth;
-      freqCanvas.height = freqCanvas.offsetHeight;
-    }
-    resizeFreq();
-    window.addEventListener('resize', resizeFreq);
-
-    const divWaves = [
-      { amp: 0.30, freq: 0.011, speed: 0.006, phase: 0.0, alpha: 0.50, lw: 1.2 },
-      { amp: 0.18, freq: 0.024, speed: 0.010, phase: 1.6, alpha: 0.28, lw: 0.9 },
-      { amp: 0.10, freq: 0.047, speed: 0.017, phase: 2.9, alpha: 0.16, lw: 0.7 },
-    ];
-
-    let divT = 0;
-
-    function drawDivider() {
-      const W = freqCanvas.width;
-      const H = freqCanvas.height;
-      freqCtx.clearRect(0, 0, W, H);
-
-      const cy = H * 0.5;
-      const ampPx = H * 0.38;
-
-      divWaves.forEach(w => {
-        freqCtx.beginPath();
-        freqCtx.strokeStyle = `rgba(106,140,175,${w.alpha})`;
-        freqCtx.lineWidth = w.lw;
-        for (let x = 0; x <= W; x += 1.5) {
-          const y = cy
-            + Math.sin(x * w.freq + divT * w.speed + w.phase) * (ampPx * w.amp / 0.30)
-            + Math.sin(x * w.freq * 2.1 + divT * w.speed * 1.6 + w.phase + 0.5) * (ampPx * w.amp / 0.30) * 0.22;
-          x === 0 ? freqCtx.moveTo(x, y) : freqCtx.lineTo(x, y);
-        }
-        freqCtx.stroke();
-        w.phase += w.speed * 0.55;
-      });
-
-      divT++;
-      requestAnimationFrame(drawDivider);
-    }
-
-    drawDivider();
-
-    // ── Hero waveform canvas
-    const canvas = document.getElementById('waveCanvas');
-    const ctx = canvas.getContext('2d');
-
-    function resizeCanvas() {
-      canvas.width  = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    const waves = [
-      { amp: 18, freq: 0.012, speed: 0.006, phase: 0,    color: 'rgba(106,140,175,0.6)' },
-      { amp: 10, freq: 0.025, speed: 0.010, phase: 1.2,  color: 'rgba(106,140,175,0.4)' },
-      { amp: 6,  freq: 0.048, speed: 0.018, phase: 2.5,  color: 'rgba(106,140,175,0.25)' },
-    ];
-
-    let t = 0;
-
-    function drawWave() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const cy = canvas.height / 2;
-
-      waves.forEach(w => {
-        ctx.beginPath();
-        ctx.strokeStyle = w.color;
-        ctx.lineWidth = 1.2;
-
-        for (let x = 0; x <= canvas.width; x += 2) {
-          const y = cy + Math.sin(x * w.freq + t * w.speed + w.phase) * w.amp
-                       + Math.sin(x * w.freq * 2.3 + t * w.speed * 1.4 + w.phase) * (w.amp * 0.4);
-          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        function kick() {
+          if (visible && !document.hidden && !running) { running = true; requestAnimationFrame(frame); }
         }
 
-        ctx.stroke();
-        w.phase += w.speed;
-      });
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; kick(); }, { threshold: 0 }).observe(el);
+        }
+        document.addEventListener('visibilitychange', kick);
+        kick();
+      }
 
-      t++;
-      requestAnimationFrame(drawWave);
-    }
+      // ── Wave divider canvas
+      const freqCanvas = document.getElementById('freqDiv');
+      const freqCtx = freqCanvas.getContext('2d');
+      let freqSize = fitCanvas(freqCanvas, freqCtx);
 
-    drawWave();
+      const divWaves = [
+        { amp: 0.30, freq: 0.011, speed: 0.006, phase: 0.0, alpha: 0.50, lw: 1.2 },
+        { amp: 0.18, freq: 0.024, speed: 0.010, phase: 1.6, alpha: 0.28, lw: 0.9 },
+        { amp: 0.10, freq: 0.047, speed: 0.017, phase: 2.9, alpha: 0.16, lw: 0.7 },
+      ];
+
+      let divT = 0;
+
+      function drawDivider() {
+        const W = freqSize.w;
+        const H = freqSize.h;
+        freqCtx.clearRect(0, 0, W, H);
+
+        const cy = H * 0.5;
+        const ampPx = H * 0.38;
+
+        divWaves.forEach(w => {
+          freqCtx.beginPath();
+          freqCtx.strokeStyle = 'rgba(106,140,175,' + w.alpha + ')';
+          freqCtx.lineWidth = w.lw;
+          for (let x = 0; x <= W; x += 1.5) {
+            const y = cy
+              + Math.sin(x * w.freq + divT * w.speed + w.phase) * (ampPx * w.amp / 0.30)
+              + Math.sin(x * w.freq * 2.1 + divT * w.speed * 1.6 + w.phase + 0.5) * (ampPx * w.amp / 0.30) * 0.22;
+            x === 0 ? freqCtx.moveTo(x, y) : freqCtx.lineTo(x, y);
+          }
+          freqCtx.stroke();
+          w.phase += w.speed * 0.55;
+        });
+
+        divT++;
+      }
+
+      // ── Hero waveform canvas
+      const canvas = document.getElementById('waveCanvas');
+      const ctx = canvas.getContext('2d');
+      let heroSize = fitCanvas(canvas, ctx);
+
+      const waves = [
+        { amp: 18, freq: 0.012, speed: 0.006, phase: 0,   color: 'rgba(106,140,175,0.6)' },
+        { amp: 10, freq: 0.025, speed: 0.010, phase: 1.2, color: 'rgba(106,140,175,0.4)' },
+        { amp: 6,  freq: 0.048, speed: 0.018, phase: 2.5, color: 'rgba(106,140,175,0.25)' },
+      ];
+
+      let t = 0;
+
+      function drawWave() {
+        const W = heroSize.w;
+        const H = heroSize.h;
+        ctx.clearRect(0, 0, W, H);
+        const cy = H / 2;
+
+        waves.forEach(w => {
+          ctx.beginPath();
+          ctx.strokeStyle = w.color;
+          ctx.lineWidth = 1.2;
+
+          for (let x = 0; x <= W; x += 2) {
+            const y = cy + Math.sin(x * w.freq + t * w.speed + w.phase) * w.amp
+                         + Math.sin(x * w.freq * 2.3 + t * w.speed * 1.4 + w.phase) * (w.amp * 0.4);
+            x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+          }
+
+          ctx.stroke();
+          w.phase += w.speed;
+        });
+
+        t++;
+      }
+
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          freqSize = fitCanvas(freqCanvas, freqCtx);
+          heroSize = fitCanvas(canvas, ctx);
+          if (reduceMotion) { drawDivider(); drawWave(); }
+        }, 150);
+      }, { passive: true });
+
+      runLoop(freqCanvas, drawDivider);
+      runLoop(document.querySelector('.hero'), drawWave);
+    })();
   </script>
 </body>
 </html>
