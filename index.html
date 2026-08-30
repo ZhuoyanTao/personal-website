@@ -476,8 +476,8 @@
 
     /* ─── ABOUT ─── */
     .about-grid {
-      display: grid; grid-template-columns: 1.55fr 1fr;
-      gap: 6rem; align-items: start;
+      display: grid; grid-template-columns: 1.35fr 1fr;
+      gap: 4rem; align-items: start;
     }
 
     .about-text p { font-size: 1rem; color: var(--muted); line-height: 1.9; margin-bottom: 1.2rem; }
@@ -500,17 +500,26 @@
     .meta-list { display: flex; flex-direction: column; }
 
     .meta-item {
-      padding: 1rem 0; border-bottom: 1px solid var(--border);
-      display: grid; grid-template-columns: 1fr 1.2fr;
-      gap: 1rem; align-items: start;
+      padding: 1.15rem 0; border-bottom: 1px solid var(--border);
+      display: block;
     }
 
     .meta-item:first-child { border-top: 1px solid var(--border); }
 
     .meta-key {
+      display: block;
       font-family: 'DM Mono', monospace; font-size: 0.6rem;
       letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue);
+      margin-bottom: 0.4rem;
     }
+
+    .meta-link {
+      color: inherit; text-decoration: none;
+      border-bottom: 1px solid var(--blue-mid);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .meta-link:hover { color: var(--blue); border-bottom-color: var(--blue); }
 
     .meta-val {
       font-size: 0.9rem;
@@ -1190,8 +1199,9 @@
           </div>
           <div class="meta-item">
             <span class="meta-key">Advisor</span>
-            <span class="meta-val">Prof. Shinji Watanabe
-              <span class="meta-sub">CMU WavLab · previously Prof. Shrikanth Narayanan, USC SAIL</span>
+            <span class="meta-val">
+              <a class="meta-link" href="https://sites.google.com/view/shinjiwatanabe" target="_blank" rel="noopener">Prof. Shinji Watanabe</a>
+              <span class="meta-sub">CMU WavLab · previously <a class="meta-link" href="https://sail.usc.edu/people/shri.html" target="_blank" rel="noopener">Prof. Shrikanth Narayanan</a>, USC SAIL</span>
             </span>
           </div>
           <div class="meta-item">
@@ -1384,7 +1394,7 @@
         <div class="sec-wave" id="sw5" aria-hidden="true"></div>
         <h2 id="contact-h">Contact</h2>
       </div>
-      <p class="sec-intro reveal">Email is the fastest way to reach me. Happy to talk about speech evaluation, code-switching, or anything in the sections above.</p>
+      <p class="sec-intro reveal">Email is the fastest way to reach me — happy to talk about speech evaluation, code-switching, or anything in the sections above.</p>
       <div class="contact-row">
         <a href="mailto:terrytao@andrew.cmu.edu" class="cl reveal">
           <div class="cl-icon" aria-hidden="true">✉&#xFE0E;</div>
