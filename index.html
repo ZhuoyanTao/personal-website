@@ -588,6 +588,9 @@
       color: var(--muted);
     }
 
+    .edu-block { display: block; }
+    .edu-block + .edu-block { margin-top: 1.6rem; }
+
     .fact-list {
       display: flex;
       flex-direction: column;
@@ -1222,40 +1225,39 @@
             Speech Processing · Audio ML · NLP
           </div>
           <p>I'm <strong>Zhuoyan Tao</strong>, Terry to friends and colleagues. I'm a master's student in CMU's <strong>Intelligent Information Systems</strong> program at the Language Technologies Institute, advised by Prof. Shinji Watanabe at WavLab.</p>
-          <p>My research spans speech quality evaluation, spoken language diarization, and speech-to-speech translation. It sits at the boundary of signal processing, machine learning, and linguistics, and keeps circling one question: how meaning is carried in speech beyond just the words.</p>
-          <p>Before CMU I finished dual B.S. degrees in Computer Science and Applied and Computational Mathematics at USC, and I spent summer 2026 at Apple building simulation tooling for satellite connectivity. I also contribute to <strong>ESPnet</strong>. Outside of research, I enjoy exploring new places ☀&#xFE0E;</p>
+          <p>My work sits at the boundary of signal processing, machine learning, and linguistics, and keeps circling one question: how meaning is carried in speech beyond just the words.</p>
+          <p>Before CMU I finished dual B.S. degrees at USC, and spent summer 2026 at Apple building simulation tooling for satellite connectivity. Outside of research, I enjoy exploring new places ☀&#xFE0E;</p>
         </div>
         <div class="meta-list reveal">
           <div class="meta-item">
             <span class="meta-key">Education</span>
             <span class="meta-val">
-              Carnegie Mellon University
-              <span class="degree-list">
-                <span class="degree">
-                  <span class="degree-abbr">M.S.</span>
-                  <span class="degree-name">Intelligent Information Systems
-                    <span class="degree-where">Language Technologies Institute</span>
+              <span class="edu-block">
+                Carnegie Mellon University
+                <span class="degree-list">
+                  <span class="degree">
+                    <span class="degree-abbr">M.S.</span>
+                    <span class="degree-name">Intelligent Information Systems
+                      <span class="degree-where">Language Technologies Institute</span>
+                    </span>
                   </span>
                 </span>
+                <span class="meta-foot">Expected Dec 2027</span>
               </span>
-              <span class="meta-foot">Expected Dec 2027</span>
-            </span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-key">Previously</span>
-            <span class="meta-val">
-              University of Southern California
-              <span class="degree-list">
-                <span class="degree">
-                  <span class="degree-abbr">B.S.</span>
-                  <span class="degree-name">Computer Science</span>
+              <span class="edu-block">
+                University of Southern California
+                <span class="degree-list">
+                  <span class="degree">
+                    <span class="degree-abbr">B.S.</span>
+                    <span class="degree-name">Computer Science</span>
+                  </span>
+                  <span class="degree">
+                    <span class="degree-abbr">B.S.</span>
+                    <span class="degree-name">Applied and Computational Mathematics</span>
+                  </span>
                 </span>
-                <span class="degree">
-                  <span class="degree-abbr">B.S.</span>
-                  <span class="degree-name">Applied and Computational Mathematics</span>
-                </span>
+                <span class="meta-foot">Magna Cum Laude · May 2026</span>
               </span>
-              <span class="meta-foot">Magna Cum Laude · May 2026</span>
             </span>
           </div>
           <div class="meta-item">
@@ -1327,13 +1329,12 @@
         <div class="sec-wave" id="sw2" aria-hidden="true"></div>
         <h2 id="research-h">Research</h2>
       </div>
-      <p class="sec-intro reveal">Four threads run through my current work. Each one asks what a speech model can recover from the signal that a transcript alone would throw away.</p>
       <div class="research-grid">
         <div class="r-card reveal">
           <div class="r-card-bars" id="rb1" aria-hidden="true"></div>
           <div class="r-eyebrow">CMU WavLab</div>
           <h3 class="r-title">Perceptual Speech Quality</h3>
-          <p class="r-body">Non-intrusive models that predict how a listener will rate speech — including before the utterance has finished. The open question is how much acoustic context a quality judgment actually needs, and how to keep predictions stable while that context is still arriving.</p>
+          <p class="r-body">Non-intrusive models that predict how a listener will rate speech from partial audio. The open question is how much acoustic context a quality judgment needs, and how to stay accurate while that context is still arriving.</p>
         </div>
         <div class="r-card reveal">
           <div class="r-card-bars" id="rb2" aria-hidden="true"></div>
@@ -1345,13 +1346,13 @@
           <div class="r-card-bars" id="rb3" aria-hidden="true"></div>
           <div class="r-eyebrow">CMU WavLab</div>
           <h3 class="r-title">Prosody, Stance &amp; Pragmatic Intent</h3>
-          <p class="r-body">Speech-to-speech translation that carries stance, emotion, and dialog function across languages — so the translated speech keeps what the speaker meant, not only what they said.</p>
+          <p class="r-body">Speech-to-speech translation that carries pragmatic intent across languages, so the output keeps what the speaker meant and not only what they said.</p>
         </div>
         <div class="r-card reveal">
           <div class="r-card-bars" id="rb4" aria-hidden="true"></div>
           <div class="r-eyebrow">Open Source · ESPnet</div>
           <h3 class="r-title">Reproducible Speech Tooling</h3>
-          <p class="r-body">Merged contributions to ESPnet (16k+ stars), including a ≈50× speedup for speaker-embedding extraction and new TTS recipes. Benchmarks and evaluation code are part of the result, not an afterthought — other groups should be able to pick the work up and run it.</p>
+          <p class="r-body">Merged contributions to ESPnet (16k+ stars), including a ≈50× speedup for speaker-embedding extraction and new TTS recipes. Benchmarks and evaluation code ship with the research so other groups can build on it.</p>
         </div>
       </div>
     </div>
@@ -1439,19 +1440,19 @@
       <div class="creations-list">
         <a href="https://www.apple.com/careers/" target="_blank" rel="noopener" class="cr-item reveal">
           <div class="cr-year">Summer 2026</div>
-          <div><div class="cr-title">Apple Inc. · Satellite Connectivity</div><div class="cr-sub">Software Engineering Intern · Sole author of a sweep-orchestration tool for the team's satellite network simulator, scaling to ~2000 concurrent experiments (~1000× throughput); ~12× faster interference hot path · Python/Go</div></div>
+          <div><div class="cr-title">Apple Inc. · Satellite Connectivity</div><div class="cr-sub">Software Engineering Intern · Sole author of a sweep-orchestration tool for the satellite network simulator: ~2000 concurrent experiments (~1000× throughput), ~12× faster interference hot path · Python/Go</div></div>
           <div class="cr-badge">Industry</div>
           <div class="cr-arrow" aria-hidden="true">→</div>
         </a>
         <a href="https://wavlab.org" target="_blank" rel="noopener" class="cr-item reveal">
           <div class="cr-year">2025–Present</div>
-          <div><div class="cr-title">CMU WavLab</div><div class="cr-sub">Graduate Researcher, advised by Prof. Shinji Watanabe · Speech quality, speech-to-speech translation &amp; ESPnet</div></div>
+          <div><div class="cr-title">CMU WavLab</div><div class="cr-sub">Graduate Researcher · Speech quality, speech-to-speech translation &amp; ESPnet</div></div>
           <div class="cr-badge">Research</div>
           <div class="cr-arrow" aria-hidden="true">→</div>
         </a>
         <a href="https://sail.usc.edu" target="_blank" rel="noopener" class="cr-item reveal">
           <div class="cr-year">2023–2026</div>
-          <div><div class="cr-title">USC SAIL Lab</div><div class="cr-sub">Student Researcher, advised by Prof. Shrikanth Narayanan · Multilingual speech &amp; spoken language diarization</div></div>
+          <div><div class="cr-title">USC SAIL Lab</div><div class="cr-sub">Student Researcher · Multilingual speech &amp; spoken language diarization</div></div>
           <div class="cr-badge">Research</div>
           <div class="cr-arrow" aria-hidden="true">→</div>
         </a>
@@ -1469,7 +1470,7 @@
         </div>
         <a href="https://store.steampowered.com/app/2372070/Bone_Boy/" target="_blank" rel="noopener" class="cr-item reveal">
           <div class="cr-year">2023–2024</div>
-          <div><div class="cr-title">Unity 2D Platformer · Open Alpha Game Design Club</div><div class="cr-sub">VP &amp; Executive Producer · Led a 10-member audio team (Ableton &amp; Wwise); shipped on Steam, 85% positive · Taught a semester-long Unity &amp; SFX curriculum to 40 students</div></div>
+          <div><div class="cr-title">Unity 2D Platformer · Open Alpha Game Design Club</div><div class="cr-sub">VP &amp; Executive Producer · Led a 10-member audio team (Ableton &amp; Wwise); shipped on Steam, 85% positive · Taught a Unity &amp; SFX curriculum to 40 students</div></div>
           <div class="cr-badge">Project</div>
           <div class="cr-arrow" aria-hidden="true">→</div>
         </a>
@@ -1485,7 +1486,7 @@
         <div class="sec-wave" id="sw5" aria-hidden="true"></div>
         <h2 id="contact-h">Contact</h2>
       </div>
-      <p class="sec-intro reveal">Email is the fastest way to reach me — happy to talk about speech evaluation, code-switching, or anything in the sections above.</p>
+      <p class="sec-intro reveal">Email is the fastest way to reach me.</p>
       <div class="contact-row">
         <a href="mailto:terrytao@andrew.cmu.edu" class="cl reveal">
           <div class="cl-icon" aria-hidden="true">✉&#xFE0E;</div>
