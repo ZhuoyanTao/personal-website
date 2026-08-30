@@ -588,6 +588,61 @@
       color: var(--muted);
     }
 
+    .fact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin-top: 0.15rem;
+    }
+
+    .fact {
+      display: grid;
+      grid-template-columns: 0.9rem 1fr;
+      column-gap: 0.5rem;
+    }
+
+    .fact::before {
+      content: '';
+      width: 6px; height: 1px;
+      background: var(--blue);
+      opacity: 0.55;
+      margin-top: 0.62rem;
+    }
+
+    .fact-body {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .fact-note {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.45;
+      margin-top: 0.1rem;
+    }
+
+    .fact-list--labeled .fact { grid-template-columns: 4.6rem 1fr; column-gap: 0.65rem; }
+    .fact-list--labeled .fact::before { display: none; }
+
+    .fact-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      opacity: 0.85;
+      white-space: nowrap;
+      margin-top: 0.28rem;
+    }
+
+    .fact-list--labeled .fact-body {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
     /* ─── RESEARCH ─── */
     .research-grid {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -679,6 +734,12 @@
     .pub-venue.pending {
       color: var(--muted); background: transparent;
       border-color: var(--border);
+    }
+
+    .pub-role {
+      font-family: 'DM Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); white-space: nowrap;
     }
 
     .pub-link {
@@ -1207,20 +1268,53 @@
           <div class="meta-item">
             <span class="meta-key">Honors</span>
             <span class="meta-val">
-              Phi Beta Kappa · Trustee Scholar
-              <span class="meta-sub">Full-tuition merit scholarship, USC · NAE Grand Challenges Scholar, 2026</span>
+              <span class="fact-list">
+                <span class="fact">
+                  <span class="fact-body">Phi Beta Kappa
+                    <span class="fact-note">Elected 2025</span>
+                  </span>
+                </span>
+                <span class="fact">
+                  <span class="fact-body"><a class="meta-link" href="https://admission.usc.edu/scholarship-guide/" target="_blank" rel="noopener">Trustee Scholar</a>
+                    <span class="fact-note">Full-tuition merit scholarship, USC</span>
+                  </span>
+                </span>
+                <span class="fact">
+                  <span class="fact-body">Grand Challenges Scholar
+                    <span class="fact-note">NAE · USC Viterbi, 2026</span>
+                  </span>
+                </span>
+              </span>
             </span>
           </div>
           <div class="meta-item">
             <span class="meta-key">Toolkit</span>
             <span class="meta-val">
-              PyTorch · ESPnet · VERSA
-              <span class="meta-sub">Whisper, MMS, WavLM, HuBERT · Python, C++, Go · SLURM, Docker</span>
+              <span class="fact-list fact-list--labeled">
+                <span class="fact">
+                  <span class="fact-tag">Speech &amp; ML</span>
+                  <span class="fact-body">PyTorch · torchaudio · Hugging Face Transformers · ESPnet · VERSA</span>
+                </span>
+                <span class="fact">
+                  <span class="fact-tag">Models</span>
+                  <span class="fact-body">Whisper · MMS · WavLM · HuBERT</span>
+                </span>
+                <span class="fact">
+                  <span class="fact-tag">Systems</span>
+                  <span class="fact-body">Python · C++ · Go · Bash · Docker · Linux · SLURM · Git</span>
+                </span>
+                <span class="fact">
+                  <span class="fact-tag">Compute</span>
+                  <span class="fact-body">Distributed training (DDP) · profiling &amp; vectorization · NCSA Delta, PSC Bridges-2 GPU clusters</span>
+                </span>
+              </span>
             </span>
           </div>
           <div class="meta-item">
             <span class="meta-key">Publishes as</span>
-            <span class="meta-val">Zhuoyan Tao</span>
+            <span class="meta-val">Zhuoyan Tao
+              <span class="meta-sub">Terry is a preferred name — papers and citations use Zhuoyan Tao</span>
+            </span>
           </div>
         </div>
       </div>
@@ -1282,10 +1376,10 @@
           <div>
             <h4 class="pub-title">ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling</h4>
             <div class="pub-authors"><strong>Z. Tao</strong>, J. Shi, H. Shim, S. Watanabe</div>
-            <p class="pub-summary">Extends ARECHO to predict speech quality before an utterance finishes. Dual-resolution query tokens with chunk-first decoding in a shared Transformer decoder cut PLCMOS MAE by 48% on 2-second prefixes and locate a 4 to 6 second perceptual context horizon.</p>
+            <p class="pub-summary">Extends ARECHO (NeurIPS 2025 Spotlight) to predict speech quality before an utterance finishes. Dual-resolution query tokens with chunk-first decoding in a shared Transformer decoder cut PLCMOS MAE by 48% on 2-second prefixes and locate a 4 to 6 second perceptual context horizon.</p>
             <div class="pub-meta">
               <span class="pub-venue">Interspeech 2026 · Oral</span>
-              <span class="pub-venue">First author</span>
+              <span class="pub-role">First author</span>
               <a class="pub-link" href="https://arxiv.org/abs/2606.10233" target="_blank" rel="noopener">arXiv:2606.10233 ↗&#xFE0E;</a>
             </div>
           </div>
@@ -1302,7 +1396,7 @@
             <p class="pub-summary">Introduces off-target LID posterior mass as a measure that predicts probe gains on pre-trained speech encoders. Pre-registered on unseen language pairs and validated across Whisper, MMS, and classical LID on DISPLACE and MUCS Hindi-English code-switching data.</p>
             <div class="pub-meta">
               <span class="pub-venue pending">EMNLP · Under review</span>
-              <span class="pub-venue">First author</span>
+              <span class="pub-role">First author</span>
             </div>
           </div>
         </article>
@@ -1326,7 +1420,6 @@
           <div class="pub-num">004</div>
           <div>
             <h4 class="pub-title">Pragmatic Intent Preservation in Speech-to-Speech Translation</h4>
-            <div class="pub-authors"><strong>Z. Tao</strong>, CMU WavLab</div>
             <p class="pub-summary">HuBERT- and prosody-based speech-to-speech translation systems that preserve stance, emotion, and dialog function across English and Spanish.</p>
             <div class="pub-meta">
               <span class="pub-venue pending">Interspeech 2026 S2ST Challenge</span>
@@ -1348,18 +1441,18 @@
       <div class="creations-list">
         <a href="https://www.apple.com/careers/" target="_blank" rel="noopener" class="cr-item reveal">
           <div class="cr-year">Summer 2026</div>
-          <div><div class="cr-title">Apple Inc. · Satellite Connectivity</div><div class="cr-sub">Software Engineering Intern · Sole author of a sweep-orchestration tool for the team's network simulator: ~1000× experiment throughput, ~12× faster interference hot path · Python/Go</div></div>
+          <div><div class="cr-title">Apple Inc. · Satellite Connectivity</div><div class="cr-sub">Software Engineering Intern · Sole author of a sweep-orchestration tool for the team's satellite network simulator, scaling to ~2000 concurrent experiments (~1000× throughput); ~12× faster interference hot path · Python/Go</div></div>
           <div class="cr-badge">Industry</div>
           <div class="cr-arrow" aria-hidden="true">→</div>
         </a>
         <a href="https://wavlab.org" target="_blank" rel="noopener" class="cr-item reveal">
-          <div class="cr-year">2025 — present</div>
+          <div class="cr-year">2025–Present</div>
           <div><div class="cr-title">CMU WavLab</div><div class="cr-sub">Graduate Researcher, advised by Prof. Shinji Watanabe · Speech quality, speech-to-speech translation &amp; ESPnet</div></div>
           <div class="cr-badge">Research</div>
           <div class="cr-arrow" aria-hidden="true">→</div>
         </a>
         <a href="https://sail.usc.edu" target="_blank" rel="noopener" class="cr-item reveal">
-          <div class="cr-year">2023 — 2026</div>
+          <div class="cr-year">2023–2026</div>
           <div><div class="cr-title">USC SAIL Lab</div><div class="cr-sub">Student Researcher, advised by Prof. Shrikanth Narayanan · Multilingual speech &amp; spoken language diarization</div></div>
           <div class="cr-badge">Research</div>
           <div class="cr-arrow" aria-hidden="true">→</div>
@@ -1371,13 +1464,13 @@
           <div class="cr-arrow" aria-hidden="true">→</div>
         </a>
         <div class="cr-item reveal">
-          <div class="cr-year">2023 — 2026</div>
+          <div class="cr-year">2023–2026</div>
           <div><div class="cr-title">USC MATH 229 · Multivariable Calculus</div><div class="cr-sub">Supplemental Instruction Leader · 3–4 sessions weekly for 98 students; review sessions reached ~300, the highest in program history</div></div>
           <div class="cr-badge">Teaching</div>
           <div class="cr-arrow" aria-hidden="true"></div>
         </div>
         <a href="https://store.steampowered.com/app/2372070/Bone_Boy/" target="_blank" rel="noopener" class="cr-item reveal">
-          <div class="cr-year">2023 — 2024</div>
+          <div class="cr-year">2023–2024</div>
           <div><div class="cr-title">Unity 2D Platformer · Open Alpha Game Design Club</div><div class="cr-sub">VP &amp; Executive Producer · Led a 10-member audio team (Ableton &amp; Wwise); shipped on Steam, 85% positive · Taught a semester-long Unity &amp; SFX curriculum to 40 students</div></div>
           <div class="cr-badge">Project</div>
           <div class="cr-arrow" aria-hidden="true">→</div>
@@ -1421,7 +1514,7 @@
           <div class="cl-icon" aria-hidden="true">↗&#xFE0E;</div>
           <div class="cl-info">
             <div class="cl-name">Curriculum Vitae</div>
-            <div class="cl-handle">PDF · updated 2026</div>
+            <div class="cl-handle">PDF · one page</div>
           </div>
         </a>
       </div>
