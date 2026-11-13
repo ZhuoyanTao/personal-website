@@ -6,7 +6,7 @@ Contact: terrytao@andrew.cmu.edu. Based in Pittsburgh, PA.
 
 ## Current work
 - Target-speaker speech restoration (lead student researcher, CMU WavLab in collaboration with Amazon AGI): generatively recovering one speaker from a damaged two-party phone call given a short voice sample; trained on 7.8K calls; built an evaluation suite (WER/cpWER, speaker similarity, wrong-speaker rate, VERSA, paired bootstrap) benchmarking 9 external systems; 1.20x faster encoder training with 26% less memory via SDPA with a custom position-bias backward.
-- Perceptual speech quality from partial audio (ANCHOR, Interspeech 2026 oral); follow-ups include a ~20x faster one-pass variant at equal accuracy and a zero-shot A/B judge within 0.01 SRCC of the top VoiceMOS 2026 entry on URGENT 2026 pairs.
+- Perceptual speech quality from partial audio (ANCHOR, Interspeech 2026 oral): 21-35% lower PLCMOS error than ARECHO on 2-second prefixes (corrected from the 48% in the published version; erratum in preparation), 4-6 s perceptual context horizon; [live demo](https://huggingface.co/spaces/ZhuoyanTao/anchor-demo); follow-ups include a ~20x faster one-pass variant at equal accuracy and a zero-shot A/B judge within 0.01 SRCC of the top VoiceMOS 2026 entry on URGENT 2026 pairs.
 - Multilingual and code-switched speech: a training-free diagnostic (off-target posterior mass) for when fine-tuning spoken language diarization probes pays off.
 
 ## Publications

@@ -710,7 +710,9 @@
       border-left: 1px solid var(--line-2); padding-left: 1rem;
     }
     .pub-contrib { font-size: 0.85rem; line-height: 1.6; margin-top: 0.8rem; max-width: 46rem; }
-    .pub-contrib span { font-size: 0.6rem; color: var(--blue-text); margin-right: 0.6rem; }
+    .pub-contrib span, .pub-note span { font-size: 0.6rem; color: var(--blue-text); margin-right: 0.6rem; }
+    .pub-note { font-size: 0.8rem; line-height: 1.65; color: var(--faint); margin-top: 0.7rem; max-width: 46rem; }
+    .pub-note span { font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.14em; }
 
     .pub-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 0.55rem 1.1rem; margin-top: 1.05rem; }
     .pub-venue {
@@ -1113,8 +1115,8 @@
         <li>
           <a class="hl" href="#pub-anchor">
             <span class="hl-key">Interspeech 2026 · Oral</span>
-            <span class="hl-num">48<em>%</em></span>
-            <span class="hl-label">Lower quality-prediction error on 2-second audio prefixes (ANCHOR, first author)</span>
+            <span class="hl-num">21–35<em>%</em></span>
+            <span class="hl-label">Lower PLCMOS prediction error on 2-second audio prefixes (ANCHOR, first author)</span>
           </a>
         </li>
         <li>
@@ -1303,8 +1305,9 @@
           <div class="r-card-bars" id="rb2" aria-hidden="true"></div>
           <div class="r-eyebrow">CMU WavLab</div>
           <h3 class="r-title">Perceptual Speech Quality</h3>
-          <p class="r-body">Predicting how listeners would rate speech from partial audio, with no clean reference, for streaming and generative systems. ANCHOR cut error by <strong>48%</strong> on 2-second prefixes and located a 4–6 s perceptual context horizon. Since then: a ~20× faster one-pass variant at equal accuracy, and a zero-shot A/B judge within 0.01 Spearman correlation of the top VoiceMOS 2026 entry on URGENT 2026 pairs.</p>
+          <p class="r-body">Predicting how listeners would rate speech from partial audio, with no clean reference, for streaming and generative systems. ANCHOR cut PLCMOS error by <strong>21–35%</strong> on 2-second prefixes and located a 4–6 s perceptual context horizon. Since then: a ~20× faster one-pass variant at equal accuracy, a zero-shot A/B judge within 0.01 Spearman correlation of the top VoiceMOS 2026 entry on URGENT 2026 pairs, and best-of-N TTS sample selection from the first 2 seconds.</p>
           <a class="r-link" href="#pub-anchor">ANCHOR · Interspeech 2026 oral →</a>
+          <a class="r-link" href="https://huggingface.co/spaces/ZhuoyanTao/anchor-demo" target="_blank" rel="noopener">Live demo ↗&#xFE0E;</a>
         </div>
         <div class="r-card reveal">
           <div class="r-card-bars" id="rb3" aria-hidden="true"></div>
@@ -1353,14 +1356,16 @@
             <h4 class="pub-title"><a href="https://www.isca-archive.org/interspeech_2026/tao26_interspeech.html" target="_blank" rel="noopener">ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling</a></h4>
             <div class="pub-authors"><strong>Zhuoyan Tao</strong>, Jiatong Shi, Hye-jin Shim, Shinji Watanabe</div>
             <div class="pub-cite">Proc. Interspeech 2026, pp. 5672–5677</div>
-            <p class="pub-tldr">Predicts how listeners will rate speech before the utterance finishes, with <strong>48% lower error</strong> on 2-second prefixes.</p>
+            <p class="pub-tldr">Predicts how listeners will rate speech before the utterance finishes, with <strong>21–35% lower PLCMOS error</strong> than ARECHO on 2-second prefixes.</p>
             <p class="pub-summary">Streaming and generative systems need quality estimates from partial audio, but existing predictors assume the full utterance. Extending ARECHO (NeurIPS 2025 Spotlight), ANCHOR models chunk- and utterance-level quality in one autoregressive decoder with dual-resolution query tokens, and shows that judgments converge after a 4–6 s perceptual context horizon.</p>
+            <p class="pub-note"><span>Correction</span> The published version reports 48%. We later found a resampling bug in the toolkit that labelled the baseline's PLCMOS training data; with corrected labels the gain is 21–35%. UTMOS, DNSMOS, and NISQA results and the 4–6 s horizon are unaffected. Erratum in preparation.</p>
             <div class="pub-meta">
               <span class="pub-venue">Interspeech 2026 · Oral</span>
               <span class="pub-role">First author</span>
               <a class="pub-link" href="https://www.isca-archive.org/interspeech_2026/tao26_interspeech.pdf" target="_blank" rel="noopener" aria-label="ANCHOR paper PDF">PDF ↗&#xFE0E;</a>
               <a class="pub-link" href="https://doi.org/10.21437/Interspeech.2026-927" target="_blank" rel="noopener" aria-label="ANCHOR DOI">DOI ↗&#xFE0E;</a>
               <a class="pub-link" href="https://arxiv.org/abs/2606.10233" target="_blank" rel="noopener" aria-label="ANCHOR on arXiv">arXiv ↗&#xFE0E;</a>
+              <a class="pub-link" href="https://huggingface.co/spaces/ZhuoyanTao/anchor-demo" target="_blank" rel="noopener" aria-label="ANCHOR live demo on Hugging Face">Demo ↗&#xFE0E;</a>
               <button class="pub-link bib-toggle" type="button" aria-expanded="false" aria-controls="bib-anchor" aria-label="BibTeX for ANCHOR">BibTeX</button>
             </div>
             <div class="bib" id="bib-anchor" hidden>
@@ -1387,7 +1392,7 @@
             <div class="pub-cite">Proc. IEEE Spoken Language Technology Workshop (SLT) 2026</div>
             <p class="pub-tldr">No current turn-taking system matches humans, who start speaking a median <strong>151 ms</strong> before a turn ends, without excessive false positives.</p>
             <p class="pub-summary">Thirty hours of hand-labeled, triple-annotated dyadic conversation across six interaction styles, a standardized protocol for end-of-turn and interruption detection, 14 benchmarked systems, and a released 104-hour training set and public leaderboard.</p>
-            <p class="pub-contrib"><span>My contribution</span> The frozen causal WavLM turn-taking baselines (base and large).</p>
+            <p class="pub-contrib"><span>My contribution</span> Helped design the evaluation protocol and submitted an ANCHOR-based model as an initial baseline.</p>
             <div class="pub-meta">
               <span class="pub-venue">IEEE SLT 2026</span>
               <a class="pub-link" href="https://arxiv.org/pdf/2608.25218" target="_blank" rel="noopener" aria-label="TurnBench paper PDF">PDF ↗&#xFE0E;</a>
