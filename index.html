@@ -454,7 +454,7 @@
     }
     .hero-links a:hover { color: var(--ink); border-bottom-color: var(--blue-mid); }
 
-    /* Portrait: duotone that blooms into color on hover */
+    /* Portrait (full color, gently toned for the dark palette) */
     .hero-photo-col { position: relative; }
     .hero-photo-wrap {
       position: relative; width: 300px;
@@ -468,16 +468,10 @@
     .hero-photo-frame img {
       display: block; width: 100%; height: auto; aspect-ratio: 3/4;
       object-fit: cover; object-position: center top;
-      filter: grayscale(1) contrast(1.06) brightness(0.9);
-      transition: filter 0.9s var(--ease);
+      filter: brightness(0.9) contrast(1.05) saturate(0.88);
+      transition: filter 0.6s var(--ease);
     }
-    .hero-photo-frame::after {
-      content: ''; position: absolute; inset: 0; pointer-events: none;
-      background: linear-gradient(160deg, rgba(120,160,205,0.55), rgba(70,100,140,0.35));
-      mix-blend-mode: color; transition: opacity 0.9s var(--ease);
-    }
-    .hero-photo-wrap:hover .hero-photo-frame img { filter: grayscale(0) contrast(1.02) brightness(0.94) saturate(0.9); }
-    .hero-photo-wrap:hover .hero-photo-frame::after { opacity: 0; }
+    .hero-photo-wrap:hover .hero-photo-frame img { filter: brightness(0.96) contrast(1.04) saturate(0.95); }
     .hero-photo-caption {
       position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
       background: linear-gradient(to top, rgba(13,14,20,0.88) 0%, transparent 100%);
@@ -959,11 +953,6 @@
       .name-terry { font-size: clamp(3.1rem, 18vw, 4.5rem); }
       .hero-bio { font-size: 0.9rem; }
       h2 { font-size: 1.6rem; }
-    }
-
-    @media (hover: none) {
-      .hero-photo-frame img { filter: grayscale(0.55) contrast(1.04) brightness(0.92); }
-      .hero-photo-frame::after { opacity: 0.55; }
     }
 
     @media (prefers-reduced-motion: reduce) {
