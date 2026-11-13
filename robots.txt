@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zhuoyantao.com/sitemap.xml
+Sitemap: https://www.zhuoyantao.com/sitemap.xml

@@ -1,0 +1,38 @@
+# Zhuoyan (Terry) Tao
+
+> Speech and audio machine-learning researcher. M.S. student in Intelligent Information Systems at Carnegie Mellon University's Language Technologies Institute (expected Dec 2027), researching at WavLab with Prof. Shinji Watanabe. Open to Summer 2027 research-scientist or ML-engineering internships in speech and audio ML. Publishes as "Zhuoyan Tao" (not the mathematician Terence Tao).
+
+Contact: terrytao@andrew.cmu.edu. Based in Pittsburgh, PA.
+
+## Current work
+- Target-speaker speech restoration (lead student researcher, CMU WavLab in collaboration with Amazon AGI): generatively recovering one speaker from a damaged two-party phone call given a short voice sample; trained on 7.8K calls; built an evaluation suite (WER/cpWER, speaker similarity, wrong-speaker rate, VERSA, paired bootstrap) benchmarking 9 external systems; 1.20x faster encoder training with 26% less memory via SDPA with a custom position-bias backward.
+- Perceptual speech quality from partial audio (ANCHOR, Interspeech 2026 oral); follow-ups include a ~20x faster one-pass variant at equal accuracy and a zero-shot A/B judge within 0.01 SRCC of the top VoiceMOS 2026 entry on URGENT 2026 pairs.
+- Multilingual and code-switched speech: a training-free diagnostic (off-target posterior mass) for when fine-tuning spoken language diarization probes pays off.
+
+## Publications
+- [ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling](https://doi.org/10.21437/Interspeech.2026-927): Z. Tao, J. Shi, H. Shim, S. Watanabe. Proc. Interspeech 2026, pp. 5672-5677. Oral. First author. arXiv:2606.10233.
+- [TurnBench: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue](https://arxiv.org/abs/2608.25218): F. Jiang, R. Sanabria, S. Deshmukh, ..., Z. Tao, ..., H.-y. Lee, S. Watanabe. Proc. IEEE SLT 2026.
+- [Off-target posterior mass: A training-free diagnostic for fine-tuning spoken language diarization probes](https://arxiv.org/abs/2611.13430): Z. Tao, A. Kommineni, S. Narayanan. Submitted to JASA Express Letters, 2026. First author.
+
+## Experience
+- Apple, Software Engineering Intern, Satellite Connectivity (Austin, TX; May-Aug 2026): sole author of a sweep-orchestration tool for the team's satellite network simulator (~1000x experiment throughput, ~2000 concurrent experiments; presented org-wide); Gaussian-process sensitivity analysis; ~12x speedup of the interference-computation hot path; root-caused a Python/Go clock-scheduler race that under-reported capacity by up to ~2x.
+- CMU WavLab, Graduate Researcher (Jun 2025-present), advisor Prof. Shinji Watanabe.
+- USC SAIL, Student Researcher (Aug 2023-May 2026), advisor Prof. Shrikanth Narayanan.
+
+## Open source
+- [ESPnet](https://github.com/espnet/espnet) (merged PRs): Sidon speech-restoration recipe (#6636), parallel speaker-embedding extraction for TTS recipes, >20x faster (#6227), TTS fixes.
+- [VERSA](https://github.com/wavlab-speech/versa) (merged PRs): multi-source signal-metric fix with permutation-invariant option, Slurm launcher resource safeguards, metric bug fixes.
+
+## Education
+- Carnegie Mellon University: M.S. Intelligent Information Systems, Language Technologies Institute (expected Dec 2027).
+- University of Southern California: B.S. Computer Science and B.S. Applied and Computational Mathematics, Magna Cum Laude, GPA 3.84 (May 2026). Phi Beta Kappa; Trustee Scholar; NAE Grand Challenges Scholar.
+
+## Skills
+PyTorch, torchaudio, Hugging Face Transformers, ESPnet, VERSA, LoRA; Whisper, MMS, WavLM, HuBERT, w2v-BERT; Python, C++, Go, Bash, Docker, Linux, SLURM; distributed training (DDP), profiling, vectorization; NCSA Delta and PSC Bridges-2 GPU clusters.
+
+## Links
+- [Website](https://www.zhuoyantao.com/)
+- [CV (PDF)](https://www.zhuoyantao.com/assets/Zhuoyan_Terry_Tao_Resume.pdf)
+- [Google Scholar](https://scholar.google.com/citations?user=V1Z3wyoAAAAJ)
+- [GitHub](https://github.com/ZhuoyanTao)
+- [LinkedIn](https://www.linkedin.com/in/zhuoyan-tao/)
