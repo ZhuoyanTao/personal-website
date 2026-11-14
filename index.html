@@ -1074,6 +1074,18 @@
       .seeking { padding: 1.4rem 1.25rem; }
       .hero-photo-wrap::after { display: none; }
     }
+    .hero-name { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.35rem 0.85rem; }
+    .name-primary { display: block; font-family: var(--serif); font-size: clamp(2.6rem, 4.6vw, 4.2rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.025em; color: var(--ink); }
+    .name-familiar { display: block; font-family: var(--sans); font-size: 1.15rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; color: var(--body); }
+    .pub-details { margin: 0.7rem 0 1rem; }
+    .pub-details summary { width: fit-content; cursor: pointer; font-size: 0.82rem; color: var(--blue-text); }
+    .pub-details summary:hover { color: var(--ink); }
+    .pub-details[open] summary { margin-bottom: 0.7rem; }
+    @media (max-width: 600px) {
+      .name-primary { font-size: clamp(1.8rem, 7.7vw, 2.8rem); }
+      .name-familiar { flex-basis: 100%; font-size: 0.95rem; }
+    }
+
     /* Restrained portfolio layout */
     body::after, .hero::before, .hero-photo-wrap::after, .hero-photo-wrap::before,
     .sec-head::after, .xp-list::before, .xp-item::before, .r-card::before,
@@ -1193,9 +1205,8 @@
       </div>
 
       <h1 class="hero-name">
-        <span class="name-zhuoyan">Zhuoyan</span>
-        <span class="name-terry">Terry</span>
-        <span class="name-tao">Tao</span>
+        <span class="name-primary">Zhuoyan Tao</span>
+        <span class="name-familiar">(Terry)</span>
       </h1>
 
       <div class="hero-rule" aria-hidden="true"></div>
@@ -1397,7 +1408,10 @@
             <div class="pub-authors"><strong>Zhuoyan Tao</strong>, Jiatong Shi, Hye-jin Shim, Shinji Watanabe</div>
             <div class="pub-cite">Proc. Interspeech 2026, pp. 5672–5677</div>
             <p class="pub-tldr">Predicts how listeners will rate speech before the utterance finishes, with <strong>21–35% lower PLCMOS error</strong> than ARECHO on 2-second prefixes.</p>
-            <p class="pub-summary">Streaming and generative systems need quality estimates from partial audio, but existing predictors assume the full utterance. Extending ARECHO (NeurIPS 2025 Spotlight), ANCHOR models chunk- and utterance-level quality in one autoregressive decoder with dual-resolution query tokens, and shows that judgments converge after a 4–6 s perceptual context horizon.</p>
+            <details class="pub-details">
+              <summary>Details</summary>
+              <p class="pub-summary">Streaming and generative systems need quality estimates from partial audio, but existing predictors assume the full utterance. Extending ARECHO (NeurIPS 2025 Spotlight), ANCHOR models chunk- and utterance-level quality in one autoregressive decoder with dual-resolution query tokens, and shows that judgments converge after a 4–6 s perceptual context horizon.</p>
+            </details>
             <div class="pub-meta">
               <span class="pub-venue">Interspeech 2026 · Oral</span>
               <span class="pub-role">First author</span>
@@ -1430,8 +1444,11 @@
             <div class="pub-authors">Freeman Jiang, Ramon Sanabria, Soham Deshmukh, …, <strong>Zhuoyan Tao</strong>, …, Hung-yi Lee, Shinji Watanabe <span class="pub-count">(19 authors)</span></div>
             <div class="pub-cite">Proc. IEEE Spoken Language Technology Workshop (SLT) 2026</div>
             <p class="pub-tldr">No current turn-taking system matches humans, who start speaking a median <strong>151 ms</strong> before a turn ends, without excessive false positives.</p>
-            <p class="pub-summary">Thirty hours of hand-labeled, triple-annotated dyadic conversation across six interaction styles, a standardized protocol for end-of-turn and interruption detection, 14 benchmarked systems, and a released 104-hour training set and public leaderboard.</p>
+            <details class="pub-details">
+              <summary>Details</summary>
+              <p class="pub-summary">Thirty hours of hand-labeled, triple-annotated dyadic conversation across six interaction styles, a standardized protocol for end-of-turn and interruption detection, 14 benchmarked systems, and a released 104-hour training set and public leaderboard.</p>
             <p class="pub-contrib"><span>My contribution</span> Helped design the evaluation protocol and submitted an ANCHOR-based model as an initial baseline.</p>
+            </details>
             <div class="pub-meta">
               <span class="pub-venue">IEEE SLT 2026</span>
               <a class="pub-link" href="https://arxiv.org/pdf/2608.25218" target="_blank" rel="noopener" aria-label="TurnBench paper PDF">PDF ↗&#xFE0E;</a>
@@ -1465,7 +1482,10 @@
             <div class="pub-authors"><strong>Zhuoyan Tao</strong>, Aditya Kommineni, Shrikanth Narayanan</div>
             <div class="pub-cite">Submitted to JASA Express Letters · arXiv:2611.13430</div>
             <p class="pub-tldr">A single training-free number, computed from language-ID posteriors, that forecasts whether fine-tuning a diarization probe will pay off.</p>
-            <p class="pub-summary">Off-target posterior mass (OTPM) correlates with probe gains at 0.56 on unseen synthetic bilingual data and 0.23 on real-world corpora (DISPLACE; MUCS Hindi–English code-switching). The evaluation was pre-registered on unseen language pairs and run across Whisper, MMS, and classical language-ID encoders.</p>
+            <details class="pub-details">
+              <summary>Details</summary>
+              <p class="pub-summary">Off-target posterior mass (OTPM) correlates with probe gains at 0.56 on unseen synthetic bilingual data and 0.23 on real-world corpora (DISPLACE; MUCS Hindi–English code-switching). The evaluation was pre-registered on unseen language pairs and run across Whisper, MMS, and classical language-ID encoders.</p>
+            </details>
             <div class="pub-meta">
               <span class="pub-venue pending">JASA-EL · Under review</span>
               <span class="pub-role">First author</span>
