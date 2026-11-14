@@ -454,7 +454,7 @@
     }
     .hero-links a:hover { color: var(--ink); border-bottom-color: var(--blue-mid); }
 
-    /* Portrait (full color, gently toned for the dark palette) */
+    /* Portrait (color grade is baked into the image) */
     .hero-photo-col { position: relative; }
     .hero-photo-wrap {
       position: relative; width: 300px;
@@ -468,10 +468,7 @@
     .hero-photo-frame img {
       display: block; width: 100%; height: auto; aspect-ratio: 3/4;
       object-fit: cover; object-position: center top;
-      filter: brightness(0.9) contrast(1.05) saturate(0.88);
-      transition: filter 0.6s var(--ease);
     }
-    .hero-photo-wrap:hover .hero-photo-frame img { filter: brightness(0.96) contrast(1.04) saturate(0.95); }
     .hero-photo-caption {
       position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
       background: linear-gradient(to top, rgba(13,14,20,0.88) 0%, transparent 100%);
@@ -1089,10 +1086,7 @@
     <div class="hero-photo-col">
       <div class="hero-photo-wrap">
         <div class="hero-photo-frame">
-          <img src="assets/portrait.webp" srcset="assets/portrait-400.webp 400w, assets/portrait.webp 600w" sizes="(max-width: 600px) 210px, (max-width: 1024px) 260px, 300px" width="300" height="400" fetchpriority="high" alt="Terry at Kualoa Ranch, Oahu" />
-          <div class="hero-photo-caption">
-            <span>Kualoa Ranch · Oahu, Hawaii</span>
-          </div>
+          <img src="assets/portrait.webp" srcset="assets/portrait-400.webp 400w, assets/portrait.webp 600w" sizes="(max-width: 600px) 210px, (max-width: 1024px) 260px, 300px" width="300" height="400" fetchpriority="high" alt="Portrait of Zhuoyan (Terry) Tao" />
         </div>
       </div>
     </div>
