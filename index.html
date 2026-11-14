@@ -33,7 +33,7 @@
   <link rel="icon" href="assets/favicon.ico" sizes="32x32" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-  <link rel="preload" as="image" href="assets/portrait.webp" imagesrcset="assets/portrait-400.webp 400w, assets/portrait.webp 600w" imagesizes="(max-width: 600px) 210px, (max-width: 1024px) 260px, 300px" type="image/webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="assets/portrait.webp" imagesrcset="assets/portrait-400.webp 400w, assets/portrait.webp 600w" imagesizes="(max-width: 600px) 112px, (max-width: 1024px) 260px, 300px" type="image/webp" fetchpriority="high" />
   <link rel="preload" as="font" href="assets/fonts/playfair-display-latin.woff2" type="font/woff2" crossorigin />
   <link rel="preload" as="font" href="assets/fonts/dm-sans-latin.woff2" type="font/woff2" crossorigin />
   <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable summary" />
@@ -1099,6 +1099,14 @@
     .contact-note { max-width: 42rem; font-size: 1.05rem; line-height: 1.8; color: var(--body); }
     @media (max-width: 600px) {
       .hero { padding-top: 4rem; }
+      .hero-inner { grid-template-columns: minmax(0, 1fr) 112px; column-gap: 1rem; row-gap: 0; padding-top: 3rem; }
+      .hero-content { display: contents; }
+      .hero-content > * { grid-column: 1 / -1; }
+      .hero-kicker { grid-row: 1; }
+      .hero-name { grid-column: 1; grid-row: 2; }
+      .hero-photo-col { grid-column: 2; grid-row: 2; align-self: center; }
+      .hero-photo-wrap { width: 112px; margin: 0; }
+      .name-terry { font-size: clamp(3rem, 15vw, 5rem); }
       .research-grid { gap: 2rem; }
       .wrap { padding-top: 3rem; padding-bottom: 3rem; }
     }
@@ -1216,7 +1224,7 @@
     <div class="hero-photo-col">
       <div class="hero-photo-wrap">
         <div class="hero-photo-frame">
-          <img src="assets/portrait.webp" srcset="assets/portrait-400.webp 400w, assets/portrait.webp 600w" sizes="(max-width: 600px) 210px, (max-width: 1024px) 260px, 300px" width="300" height="400" fetchpriority="high" alt="Portrait of Zhuoyan (Terry) Tao" />
+          <img src="assets/portrait.webp" srcset="assets/portrait-400.webp 400w, assets/portrait.webp 600w" sizes="(max-width: 600px) 112px, (max-width: 1024px) 260px, 300px" width="300" height="400" fetchpriority="high" alt="Portrait of Zhuoyan (Terry) Tao" />
         </div>
       </div>
     </div>
@@ -1236,12 +1244,8 @@
 
       <div class="about-grid">
         <div class="about-text">
-          <div class="field-tag">
-            Speech Processing · Audio ML · NLP
-          </div>
-          <p>I'm <strong>Zhuoyan Tao</strong>, Terry to friends and colleagues. I'm a master's student in CMU's <strong>Intelligent Information Systems</strong> program at the Language Technologies Institute, advised by Prof. Shinji Watanabe at WavLab.</p>
-          <p>At WavLab, I lead a project with Amazon AGI on recovering one speaker from damaged two-person calls. I also work on predicting speech quality from short audio clips and understanding how speech models represent language.</p>
-          <p>Before CMU I finished dual B.S. degrees at USC, where I worked on multilingual speech with Prof. Shrikanth Narayanan at SAIL, and spent summer 2026 at Apple building simulation tooling for satellite connectivity. Outside research, I have worked on game audio and led the audio team for <a class="meta-link" href="https://store.steampowered.com/app/2372070/Bone_Boy/" target="_blank" rel="noopener">Bone Boy</a>, a student-built game released on Steam.</p>
+          <p>Before CMU, I studied computer science and applied mathematics at USC, where I worked on multilingual speech with Prof. Shrikanth Narayanan at SAIL. I spent summer 2026 at Apple building simulation tools for satellite connectivity.</p>
+          <p>I also enjoy making games and working with audio. At USC, I led the audio team for <a class="meta-link" href="https://store.steampowered.com/app/2372070/Bone_Boy/" target="_blank" rel="noopener">Bone Boy</a>, a student-built game released on Steam, and taught multivariable calculus review sessions.</p>
         </div>
         <div class="meta-list">
           <div class="meta-item">
@@ -1501,10 +1505,8 @@
             <h4 class="xp-org">Apple</h4>
             <div class="xp-role">Software Engineering Intern · Satellite Connectivity <span class="xp-where">· Austin, TX</span></div>
             <ul class="xp-points">
-              <li>Sole author of a sweep-orchestration tool for the team's satellite network simulator, scaling throughput <strong>~1000×</strong> to ~2000 concurrent experiments on an internal compute cluster; presented org-wide.</li>
-              <li>Used it to run analysis the team couldn't before: swept projected demand over years of growth to model how capacity and performance evolve, with Gaussian-process sensitivity analysis ranking the most influential parameters.</li>
-              <li><strong>~12× speedup</strong> on the simulator's interference-computation hot path via batched vectorization; unified random-number generation and the simulation clock for reproducibility.</li>
-              <li>Root-caused a Python/Go clock-scheduler race that silently skipped ~half of scheduling cycles and under-reported capacity by up to <strong>~2×</strong> under load.</li>
+              <li>Built a tool to run satellite-network simulations at scale, increasing experiment throughput <strong>~1000×</strong> and supporting ~2000 concurrent experiments.</li>
+              <li>Sped up interference calculations <strong>~12×</strong> and fixed timing issues that caused the simulator to under-report network capacity.</li>
             </ul>
 
           </div>
