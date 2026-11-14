@@ -1,6 +1,6 @@
 # Zhuoyan (Terry) Tao
 
-> Speech and audio machine-learning researcher. M.S. student in Intelligent Information Systems at Carnegie Mellon University's Language Technologies Institute (expected Dec 2027), researching at WavLab with Prof. Shinji Watanabe. Open to Summer 2027 research-scientist or ML-engineering internships in speech and audio ML. Publishes as "Zhuoyan Tao" (not the mathematician Terence Tao).
+> Speech and audio machine-learning researcher. M.S. student in Intelligent Information Systems at Carnegie Mellon University's Language Technologies Institute (expected Dec 2027), researching at WavLab with Prof. Shinji Watanabe. Open to Summer 2027 research or ML-engineering internships in speech and audio ML. Publishes as "Zhuoyan Tao" (not the mathematician Terence Tao).
 
 Contact: terrytao@andrew.cmu.edu. Based in Pittsburgh, PA.
 
@@ -32,7 +32,7 @@ PyTorch, torchaudio, Hugging Face Transformers, ESPnet, VERSA, LoRA; Whisper, MM
 
 ## Links
 - [Website](https://www.zhuoyantao.com/)
-- [CV (PDF)](https://www.zhuoyantao.com/assets/Zhuoyan_Terry_Tao_Resume.pdf)
+- [Résumé (PDF)](https://www.zhuoyantao.com/assets/Zhuoyan_Terry_Tao_Resume.pdf)
 - [Google Scholar](https://scholar.google.com/citations?user=V1Z3wyoAAAAJ)
 - [GitHub](https://github.com/ZhuoyanTao)
 - [LinkedIn](https://www.linkedin.com/in/zhuoyan-tao/)
