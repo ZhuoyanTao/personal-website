@@ -964,6 +964,119 @@
       .reveal { opacity: 1; transform: none; }
     }
 
+    /* ═══ POLISH LAYER ═══ */
+    /* Film grain for depth on flat dark surfaces */
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: 300; pointer-events: none;
+      opacity: 0.055; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* Reading progress */
+    .progress {
+      position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 250;
+      background: linear-gradient(90deg, var(--blue-deep), var(--blue-text));
+      transform: scaleX(0); transform-origin: 0 50%;
+    }
+
+    /* Ambient light: each section gets a soft glow from alternating corners */
+    .light-section { background-image: radial-gradient(55% 45% at 0% 0%, rgba(106,140,175,0.055), transparent 70%); }
+    .dark-section  { background-image: radial-gradient(55% 45% at 100% 0%, rgba(106,140,175,0.07), transparent 70%); }
+    #contact { background-image: radial-gradient(70% 60% at 50% 100%, rgba(106,140,175,0.10), transparent 70%); }
+
+    /* Ghost numerals */
+    .sec-head::after {
+      content: attr(data-n); margin-left: auto;
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: clamp(3.5rem, 6vw, 5.5rem); line-height: 0.8; letter-spacing: -0.02em;
+      color: transparent; -webkit-text-stroke: 1px rgba(106,140,175,0.26);
+      user-select: none;
+    }
+    .sec-num { display: none; }
+
+    /* Gradient numerals in the highlight cards */
+    .hl-num {
+      background: linear-gradient(180deg, #ffffff 20%, #c3cfdd 100%);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+      padding-bottom: 0.08em;
+    }
+    .hl-num em { -webkit-text-fill-color: var(--blue); }
+    .hl { padding-top: 1.75rem; }
+    .hl::before {
+      content: ''; position: absolute; left: 1.5rem; top: 0; width: 2rem; height: 2px;
+      background: var(--blue); opacity: 0.8; transition: width 0.4s var(--ease);
+    }
+    .hl:hover::before { width: 4rem; }
+
+    /* Honors row */
+    .honors-row {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; list-style: none; margin-top: 0.85rem;
+      background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
+    }
+    .honors-row li { background: var(--surface); padding: 1.15rem 1.4rem 1.25rem; display: flex; flex-direction: column; gap: 0.25rem; }
+    .honor-name { font-family: var(--serif); font-size: 1.08rem; font-weight: 500; color: var(--ink); }
+    .honor-note { font-size: 0.8rem; color: var(--faint); }
+    .about-grid + h3.group-label { margin-top: 4rem; }
+
+    /* Hero: stronger signal, glow behind the portrait */
+    #waveCanvas { opacity: 0.28; }
+    .hero-photo-frame { box-shadow: 0 30px 60px -30px rgba(0,0,0,0.8), 0 0 140px -20px rgba(106,140,175,0.28); }
+    .hero-photo-wrap::after {
+      content: ''; position: absolute; right: -22px; bottom: -22px; width: 84px; height: 84px; pointer-events: none;
+      background-image: radial-gradient(rgba(143,176,207,0.55) 1px, transparent 1.5px); background-size: 12px 12px;
+      z-index: -1;
+    }
+
+    /* Paper figures: larger and legible */
+    .pub-item { grid-template-columns: 15.5rem minmax(0, 1fr); }
+    .pub-thumb { padding: 0.9rem; background: #171b27; }
+    .pub-thumb img { filter: invert(1) hue-rotate(180deg) brightness(1.45) contrast(1.12) saturate(1.35); }
+
+    /* Experience as a timeline */
+    .xp-list { position: relative; }
+    .xp-list::before {
+      content: ''; position: absolute; top: 2.4rem; bottom: 1.5rem; left: calc(8rem + 1rem - 0.5px);
+      width: 1px; background: linear-gradient(180deg, var(--blue-mid), var(--line) 85%, transparent);
+    }
+    .xp-item { position: relative; border-bottom: none; padding: 1.7rem 0 1.4rem; gap: 2.6rem; }
+    .xp-item.compact { padding: 1.2rem 0; }
+    .xp-item::before {
+      content: ''; position: absolute; left: calc(8rem + 1rem - 4.5px); top: 2.3rem;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--bg); border: 1.5px solid var(--blue); box-shadow: 0 0 0 4px var(--bg);
+    }
+    .xp-item.compact::before { top: 1.75rem; border-color: var(--blue-mid); }
+    .xp-list .xp-item:first-child::before { background: var(--blue); box-shadow: 0 0 0 4px var(--bg), 0 0 14px rgba(106,140,175,0.8); }
+    .xp-when { text-align: right; padding-right: 0.25rem; }
+
+    /* Contact: typographic call to action */
+    .seeking { max-width: none; padding: 2rem 2.25rem; align-items: flex-start; }
+    .seeking .status-dot { margin-top: 0.95rem; }
+    .seeking p > strong:first-child {
+      display: block; font-family: var(--serif); font-weight: 500;
+      font-size: clamp(1.5rem, 2.4vw, 2rem); line-height: 1.2; letter-spacing: -0.01em; margin-bottom: 0.5rem;
+    }
+    .seeking p { max-width: 46rem; }
+
+    @media (max-width: 880px) {
+      .honors-row { grid-template-columns: 1fr; }
+      .pub-item { grid-template-columns: 11rem minmax(0, 1fr); }
+      .xp-list::before { left: calc(6.5rem + 0.625rem - 0.5px); }
+      .xp-item::before { left: calc(6.5rem + 0.625rem - 4.5px); }
+    }
+    @media (max-width: 600px) {
+      .sec-head::after { font-size: 3rem; }
+      .pub-item { grid-template-columns: 1fr; }
+      .xp-list::before, .xp-item::before { display: none; }
+      .xp-item { border-bottom: 1px solid var(--line); }
+      .xp-when { text-align: left; }
+      .seeking { padding: 1.4rem 1.25rem; }
+      .hero-photo-wrap::after { display: none; }
+    }
+    @media print {
+      body::after, .progress, .sec-head::after, .xp-list::before, .xp-item::before { display: none !important; }
+    }
+
     /* ═══ PRINT ═══ */
     @media print {
       @page { margin: 1.6cm; }
@@ -1001,6 +1114,7 @@
 <body>
 
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 
   <!-- NAV -->
   <nav id="nav" aria-label="Primary">
@@ -1099,7 +1213,7 @@
   <!-- ABOUT -->
   <section class="light-section" id="about" aria-labelledby="about-h">
     <div class="wrap">
-      <div class="sec-head reveal">
+      <div class="sec-head reveal" data-n="01">
         <span class="sec-num">01</span>
         <div class="sec-wave" id="sw1" aria-hidden="true"></div>
         <h2 id="about-h">About</h2>
@@ -1196,40 +1310,24 @@
             </span>
           </div>
           <div class="meta-item">
-            <span class="meta-key">Honors</span>
-            <span class="meta-val">
-              <span class="fact-list">
-                <span class="fact">
-                  <span class="fact-body"><a class="meta-link" href="https://www.pbk.org/" target="_blank" rel="noopener">Phi Beta Kappa</a>
-                    <span class="fact-note">Elected 2025</span>
-                  </span>
-                </span>
-                <span class="fact">
-                  <span class="fact-body"><a class="meta-link" href="https://admission.usc.edu/scholarship-guide/" target="_blank" rel="noopener">Trustee Scholar</a>
-                    <span class="fact-note">Full-tuition merit scholarship, USC</span>
-                  </span>
-                </span>
-                <span class="fact">
-                  <span class="fact-body"><a class="meta-link" href="https://viterbiundergrad.usc.edu/gcsp/" target="_blank" rel="noopener">Grand Challenges Scholar</a>
-                    <span class="fact-note">NAE · USC Viterbi, 2026</span>
-                  </span>
-                </span>
-              </span>
-            </span>
-          </div>
-          <div class="meta-item">
             <span class="meta-key">Publishes as</span>
             <span class="meta-val">Zhuoyan Tao · <a class="meta-link" href="https://scholar.google.com/citations?user=V1Z3wyoAAAAJ" target="_blank" rel="noopener">Google Scholar</a></span>
           </div>
         </div>
       </div>
+      <h3 class="group-label reveal">Honors</h3>
+      <ul class="honors-row reveal">
+        <li><span class="honor-name"><a class="meta-link" href="https://www.pbk.org/" target="_blank" rel="noopener">Phi Beta Kappa</a></span><span class="honor-note">Elected 2025</span></li>
+        <li><span class="honor-name"><a class="meta-link" href="https://admission.usc.edu/scholarship-guide/" target="_blank" rel="noopener">Trustee Scholar</a></span><span class="honor-note">Full-tuition merit scholarship, USC</span></li>
+        <li><span class="honor-name"><a class="meta-link" href="https://viterbiundergrad.usc.edu/gcsp/" target="_blank" rel="noopener">Grand Challenges Scholar</a></span><span class="honor-note">NAE · USC Viterbi, 2026</span></li>
+      </ul>
     </div>
   </section>
 
   <!-- NEWS -->
   <section class="dark-section" id="news" aria-labelledby="news-h">
     <div class="wrap">
-      <div class="sec-head reveal">
+      <div class="sec-head reveal" data-n="02">
         <span class="sec-num">02</span>
         <div class="sec-wave" id="sw2" aria-hidden="true"></div>
         <h2 id="news-h">News</h2>
@@ -1275,7 +1373,7 @@
   <!-- RESEARCH -->
   <section class="light-section" id="research" aria-labelledby="research-h">
     <div class="wrap">
-      <div class="sec-head reveal">
+      <div class="sec-head reveal" data-n="03">
         <span class="sec-num">03</span>
         <div class="sec-wave" id="sw3" aria-hidden="true"></div>
         <h2 id="research-h">Research</h2>
@@ -1333,7 +1431,7 @@
   <!-- PUBLICATIONS -->
   <section class="dark-section" id="publications" aria-labelledby="publications-h">
     <div class="wrap">
-      <div class="sec-head reveal">
+      <div class="sec-head reveal" data-n="04">
         <span class="sec-num">04</span>
         <div class="sec-wave" id="sw4" aria-hidden="true"></div>
         <h2 id="publications-h">Publications</h2>
@@ -1448,7 +1546,7 @@
   <!-- EXPERIENCE -->
   <section class="light-section" id="experience" aria-labelledby="experience-h">
     <div class="wrap">
-      <div class="sec-head reveal">
+      <div class="sec-head reveal" data-n="05">
         <span class="sec-num">05</span>
         <div class="sec-wave" id="sw5" aria-hidden="true"></div>
         <h2 id="experience-h">Experience</h2>
@@ -1543,7 +1641,7 @@
   <!-- CONTACT -->
   <section class="dark-section" id="contact" aria-labelledby="contact-h">
     <div class="wrap">
-      <div class="sec-head reveal">
+      <div class="sec-head reveal" data-n="06">
         <span class="sec-num">06</span>
         <div class="sec-wave" id="sw6" aria-hidden="true"></div>
         <h2 id="contact-h">Contact</h2>
@@ -1624,12 +1722,15 @@
 
       // ── Nav scroll state
       const nav = document.getElementById('nav');
+      const progress = document.getElementById('progress');
       let ticking = false;
       window.addEventListener('scroll', () => {
         if (ticking) return;
         ticking = true;
         requestAnimationFrame(() => {
           nav.classList.toggle('scrolled', window.scrollY > 50);
+          const max = document.documentElement.scrollHeight - window.innerHeight;
+          progress.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ')';
           ticking = false;
         });
       }, { passive: true });
