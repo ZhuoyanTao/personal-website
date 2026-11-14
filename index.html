@@ -467,7 +467,8 @@
     .hero-photo-frame { position: relative; border-radius: 6px; overflow: hidden; box-shadow: 0 30px 60px -30px rgba(0,0,0,0.8); }
     .hero-photo-frame img {
       display: block; width: 100%; height: auto; aspect-ratio: 3/4;
-      object-fit: cover; object-position: center top;
+      object-fit: cover; object-position: center;
+      transform: scale(1.18); transform-origin: 50% 100%;
     }
     .hero-photo-caption {
       position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
@@ -1073,6 +1074,35 @@
       .seeking { padding: 1.4rem 1.25rem; }
       .hero-photo-wrap::after { display: none; }
     }
+    /* Restrained portfolio layout */
+    body::after, .hero::before, .hero-photo-wrap::after, .hero-photo-wrap::before,
+    .sec-head::after, .xp-list::before, .xp-item::before, .r-card::before,
+    .progress { display: none; }
+    .hero, .light-section, .dark-section, #contact { background: var(--bg); }
+    .light-section::before, .dark-section::before { background: var(--line); }
+    .hero { min-height: auto; padding-top: 5rem; }
+    .hero-photo-frame { box-shadow: none; }
+    #waveCanvas { opacity: 0.12; }
+    .hero-kicker, .hero-name, .hero-rule, .hero-bio, .hero-status, .hero-btns,
+    .hero-links, .hero-photo-col, .hero-photo-wrap { animation: none; opacity: 1; transform: none; }
+    .hero-status { padding: 0; background: none; border: 0; border-radius: 0; color: var(--body); }
+    .name-tao { background: none; -webkit-text-fill-color: var(--ink); }
+    .wrap { padding-top: 4rem; padding-bottom: 4rem; }
+    .sec-head { margin-bottom: 2rem; }
+    .research-grid { gap: 3rem; background: none; border: none; border-radius: 0; }
+    .r-card, .r-card:hover { padding: 0; background: none; }
+    .honors-row { display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; border: 0; background: none; }
+    .honors-row li { padding: 0; background: none; }
+    .xp-item { border-bottom: 1px solid var(--line); }
+    .xp-when { text-align: left; }
+    .btn-primary, .btn-primary:hover { box-shadow: none; }
+    .contact-note { max-width: 42rem; font-size: 1.05rem; line-height: 1.8; color: var(--body); }
+    @media (max-width: 600px) {
+      .hero { padding-top: 4rem; }
+      .research-grid { gap: 2rem; }
+      .wrap { padding-top: 3rem; padding-bottom: 3rem; }
+    }
+
     @media print {
       body::after, .progress, .sec-head::after, .xp-list::before, .xp-item::before { display: none !important; }
     }
@@ -1146,13 +1176,11 @@
 
   <!-- HERO -->
   <section class="hero" aria-label="Introduction">
-    <div class="hero-orb" aria-hidden="true"></div>
     <canvas id="waveCanvas" aria-hidden="true"></canvas>
 
     <div class="hero-inner">
     <div class="hero-content">
       <div class="hero-kicker">
-        <div class="kicker-dot" aria-hidden="true"></div>
         <span class="kicker-text">CMU · Language Technologies Institute</span>
       </div>
 
@@ -1164,22 +1192,10 @@
 
       <div class="hero-rule" aria-hidden="true"></div>
 
-      <p class="hero-bio">
-        M.S. student at CMU's Language Technologies Institute and researcher at
-        <strong>WavLab</strong>, building models that perceive and repair speech:
-        target-speaker restoration, speech quality from partial audio, and multilingual speech.
-        Drawn to problems where signal meets meaning. ✌&#xFE0E;
-      </p>
+      <p class="hero-bio">I'm Terry, a master's student at CMU working with Prof. Shinji Watanabe at WavLab. I study speech restoration and speech quality: how to recover a speaker's voice from damaged audio, and how to tell whether it sounds right.</p>
 
-      <ul class="hero-creds" aria-label="Highlights">
-        <li>Interspeech 2026 oral · first author</li>
-        <li>Amazon AGI collaboration</li>
-        <li>ESPnet &amp; VERSA contributor</li>
-        <li>Apple SWE intern ’26</li>
-      </ul>
 
       <a href="#contact" class="hero-status">
-        <span class="status-dot" aria-hidden="true"></span>
         Open to Summer 2027 internships
       </a>
 
@@ -1213,54 +1229,21 @@
   <!-- ABOUT -->
   <section class="light-section" id="about" aria-labelledby="about-h">
     <div class="wrap">
-      <div class="sec-head reveal" data-n="01">
-        <span class="sec-num">01</span>
-        <div class="sec-wave" id="sw1" aria-hidden="true"></div>
+      <div class="sec-head">
         <h2 id="about-h">About</h2>
       </div>
 
-      <ul class="hl-grid reveal" aria-label="Selected results">
-        <li>
-          <a class="hl" href="#pub-anchor">
-            <span class="hl-key">Interspeech 2026 · Oral</span>
-            <span class="hl-num">21–35<em>%</em></span>
-            <span class="hl-label">Lower PLCMOS prediction error on 2-second audio prefixes (ANCHOR, first author)</span>
-          </a>
-        </li>
-        <li>
-          <a class="hl" href="#research">
-            <span class="hl-key">Collaboration</span>
-            <span class="hl-num">Amazon <em>AGI</em></span>
-            <span class="hl-label">Lead student researcher on target-speaker speech restoration</span>
-          </a>
-        </li>
-        <li>
-          <a class="hl" href="https://github.com/espnet/espnet/pull/6227" target="_blank" rel="noopener">
-            <span class="hl-key">Open source · ESPnet</span>
-            <span class="hl-num">&gt;20<em>×</em></span>
-            <span class="hl-label">Faster speaker-embedding extraction, a step that took 40+ hours on many-speaker datasets</span>
-          </a>
-        </li>
-        <li>
-          <a class="hl" href="#experience">
-            <span class="hl-key">Industry · Apple</span>
-            <span class="hl-num">~1000<em>×</em></span>
-            <span class="hl-label">Experiment throughput from the sweep-orchestration tool I wrote</span>
-          </a>
-        </li>
-      </ul>
 
       <div class="about-grid">
-        <div class="about-text reveal">
+        <div class="about-text">
           <div class="field-tag">
-            <div class="tag-wave" id="tw1" aria-hidden="true"></div>
             Speech Processing · Audio ML · NLP
           </div>
           <p>I'm <strong>Zhuoyan Tao</strong>, Terry to friends and colleagues. I'm a master's student in CMU's <strong>Intelligent Information Systems</strong> program at the Language Technologies Institute, advised by Prof. Shinji Watanabe at WavLab.</p>
-          <p>My work sits at the boundary of signal processing, machine learning, and linguistics, and keeps circling one question: what listeners take from speech beyond the words, and how to measure and recover it when the signal is partial, degraded, or switching between languages. Right now I'm the lead student researcher on <strong>target-speaker speech restoration</strong> with Amazon AGI.</p>
-          <p>Before CMU I finished dual B.S. degrees at USC, where I worked on multilingual speech with Prof. Shrikanth Narayanan at SAIL, and spent summer 2026 at Apple building simulation tooling for satellite connectivity. Outside of research, I enjoy exploring new places ☀&#xFE0E;</p>
+          <p>At WavLab, I lead a project with Amazon AGI on recovering one speaker from damaged two-person calls. I also work on predicting speech quality from short audio clips and understanding how speech models represent language.</p>
+          <p>Before CMU I finished dual B.S. degrees at USC, where I worked on multilingual speech with Prof. Shrikanth Narayanan at SAIL, and spent summer 2026 at Apple building simulation tooling for satellite connectivity. Outside research, I have worked on game audio and led the audio team for <a class="meta-link" href="https://store.steampowered.com/app/2372070/Bone_Boy/" target="_blank" rel="noopener">Bone Boy</a>, a student-built game released on Steam.</p>
         </div>
-        <div class="meta-list reveal">
+        <div class="meta-list">
           <div class="meta-item">
             <span class="meta-key">Education</span>
             <span class="meta-val">
@@ -1315,8 +1298,8 @@
           </div>
         </div>
       </div>
-      <h3 class="group-label reveal">Honors</h3>
-      <ul class="honors-row reveal">
+      <h3 class="group-label">Honors</h3>
+      <ul class="honors-row">
         <li><span class="honor-name"><a class="meta-link" href="https://www.pbk.org/" target="_blank" rel="noopener">Phi Beta Kappa</a></span><span class="honor-note">Elected 2025</span></li>
         <li><span class="honor-name"><a class="meta-link" href="https://admission.usc.edu/scholarship-guide/" target="_blank" rel="noopener">Trustee Scholar</a></span><span class="honor-note">Full-tuition merit scholarship, USC</span></li>
         <li><span class="honor-name"><a class="meta-link" href="https://viterbiundergrad.usc.edu/gcsp/" target="_blank" rel="noopener">Grand Challenges Scholar</a></span><span class="honor-note">NAE · USC Viterbi, 2026</span></li>
@@ -1327,34 +1310,32 @@
   <!-- NEWS -->
   <section class="dark-section" id="news" aria-labelledby="news-h">
     <div class="wrap">
-      <div class="sec-head reveal" data-n="02">
-        <span class="sec-num">02</span>
-        <div class="sec-wave" id="sw2" aria-hidden="true"></div>
+      <div class="sec-head">
         <h2 id="news-h">News</h2>
       </div>
       <ul class="news-list">
-        <li class="news-item reveal">
+        <li class="news-item">
           <time class="news-date" datetime="2026-11">Nov 2026</time>
           <p class="news-body">New preprint with Aditya Kommineni and Prof. Shrikanth Narayanan: <a class="meta-link" href="#pub-otpm">Off-target posterior mass</a>, a training-free diagnostic for fine-tuning spoken language diarization probes. Submitted to <strong>JASA Express Letters</strong>.</p>
         </li>
-        <li class="news-item reveal">
+        <li class="news-item">
           <time class="news-date" datetime="2026-10">Oct 2026</time>
           <p class="news-body">The <strong>Sidon speech-restoration recipe</strong> was merged into ESPnet (<a class="meta-link" href="https://github.com/espnet/espnet/pull/6636" target="_blank" rel="noopener">#6636</a>; I wrote 41 of its 52 commits).</p>
         </li>
-        <li class="news-item reveal">
+        <li class="news-item">
           <time class="news-date" datetime="2026-09">Sep 2026</time>
           <p class="news-body"><a class="meta-link" href="#pub-anchor">ANCHOR</a> was presented as an <strong>oral at Interspeech 2026</strong> in Sydney.</p>
         </li>
-        <li class="news-item reveal">
+        <li class="news-item">
           <time class="news-date" datetime="2026-09">Sep 2026</time>
           <p class="news-body"><a class="meta-link" href="#pub-turnbench">TurnBench</a>, a multi-domain benchmark for turn-taking in spoken dialogue, was accepted to <strong>IEEE SLT 2026</strong> (Palermo, December 2026).</p>
         </li>
-        <li class="news-item reveal">
+        <li class="news-item">
           <time class="news-date" datetime="2026-08">Aug 2026</time>
           <p class="news-body">Started the M.S. in Intelligent Information Systems at <strong>CMU LTI</strong>, after a summer as a software engineering intern at <strong>Apple</strong>.</p>
         </li>
       </ul>
-      <details class="news-more reveal">
+      <details class="news-more">
         <summary>Earlier news</summary>
         <ul class="news-list">
           <li class="news-item">
@@ -1373,20 +1354,16 @@
   <!-- RESEARCH -->
   <section class="light-section" id="research" aria-labelledby="research-h">
     <div class="wrap">
-      <div class="sec-head reveal" data-n="03">
-        <span class="sec-num">03</span>
-        <div class="sec-wave" id="sw3" aria-hidden="true"></div>
+      <div class="sec-head">
         <h2 id="research-h">Research</h2>
       </div>
       <div class="research-grid">
-        <div class="r-card reveal">
-          <div class="r-card-bars" id="rb1" aria-hidden="true"></div>
+        <div class="r-card">
           <div class="r-eyebrow">CMU WavLab × Amazon AGI · Lead student researcher</div>
           <h3 class="r-title">Target-Speaker Speech Restoration</h3>
           <p class="r-body">Recovering one speaker from a damaged two-person phone call using a short voice sample. Trained models on <strong>7.8K calls</strong> and built an evaluation suite benchmarking <strong>nine external systems</strong>.</p>
         </div>
-        <div class="r-card reveal">
-          <div class="r-card-bars" id="rb2" aria-hidden="true"></div>
+        <div class="r-card">
           <div class="r-eyebrow">CMU WavLab · Interspeech 2026 oral</div>
           <h3 class="r-title">Perceptual Speech Quality</h3>
           <p class="r-body">Predicting speech quality before an utterance finishes. ANCHOR reduces PLCMOS error by <strong>21–35%</strong> on two-second audio prefixes.</p>
@@ -1400,16 +1377,14 @@
   <!-- PUBLICATIONS -->
   <section class="dark-section" id="publications" aria-labelledby="publications-h">
     <div class="wrap">
-      <div class="sec-head reveal" data-n="04">
-        <span class="sec-num">04</span>
-        <div class="sec-wave" id="sw4" aria-hidden="true"></div>
+      <div class="sec-head">
         <h2 id="publications-h">Publications</h2>
       </div>
-      <p class="sec-intro reveal">Author names in order; my name in bold. Also on <a class="meta-link" href="https://scholar.google.com/citations?user=V1Z3wyoAAAAJ" target="_blank" rel="noopener">Google Scholar</a>.</p>
+      <p class="sec-intro">Author names in order; my name in bold. Also on <a class="meta-link" href="https://scholar.google.com/citations?user=V1Z3wyoAAAAJ" target="_blank" rel="noopener">Google Scholar</a>.</p>
 
-      <h3 class="group-label reveal">Peer-reviewed</h3>
+      <h3 class="group-label">Peer-reviewed</h3>
       <div class="pub-list">
-        <article class="pub-item reveal" id="pub-anchor">
+        <article class="pub-item" id="pub-anchor">
           <a class="pub-thumb" href="https://www.isca-archive.org/interspeech_2026/tao26_interspeech.html" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
             <img src="assets/papers/anchor.webp" width="502" height="232" loading="lazy" decoding="async" alt="" />
           </a>
@@ -1442,7 +1417,7 @@
             </div>
           </div>
         </article>
-        <article class="pub-item reveal" id="pub-turnbench">
+        <article class="pub-item" id="pub-turnbench">
           <a class="pub-thumb" href="https://arxiv.org/abs/2608.25218" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
             <img src="assets/papers/turnbench.webp" width="720" height="308" loading="lazy" decoding="async" alt="" />
           </a>
@@ -1475,9 +1450,9 @@
         </article>
       </div>
 
-      <h3 class="group-label reveal">Under review</h3>
+      <h3 class="group-label">Under review</h3>
       <div class="pub-list">
-        <article class="pub-item reveal" id="pub-otpm">
+        <article class="pub-item" id="pub-otpm">
           <a class="pub-thumb" href="https://arxiv.org/abs/2611.13430" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
             <img src="assets/papers/otpm.webp" width="720" height="238" loading="lazy" decoding="async" alt="" />
           </a>
@@ -1514,15 +1489,13 @@
   <!-- EXPERIENCE -->
   <section class="light-section" id="experience" aria-labelledby="experience-h">
     <div class="wrap">
-      <div class="sec-head reveal" data-n="05">
-        <span class="sec-num">05</span>
-        <div class="sec-wave" id="sw5" aria-hidden="true"></div>
+      <div class="sec-head">
         <h2 id="experience-h">Experience</h2>
       </div>
 
-      <h3 class="group-label reveal">Industry</h3>
+      <h3 class="group-label">Industry</h3>
       <div class="xp-list">
-        <article class="xp-item reveal">
+        <article class="xp-item">
           <div class="xp-when">May&nbsp;–&nbsp;Aug&nbsp;2026</div>
           <div>
             <h4 class="xp-org">Apple</h4>
@@ -1533,16 +1506,14 @@
               <li><strong>~12× speedup</strong> on the simulator's interference-computation hot path via batched vectorization; unified random-number generation and the simulation clock for reproducibility.</li>
               <li>Root-caused a Python/Go clock-scheduler race that silently skipped ~half of scheduling cycles and under-reported capacity by up to <strong>~2×</strong> under load.</li>
             </ul>
-            <ul class="xp-tags" aria-label="Tools">
-              <li>Python</li><li>Go</li><li>Gaussian processes</li><li>Vectorization</li><li>Cluster computing</li>
-            </ul>
+
           </div>
         </article>
       </div>
 
-      <h3 class="group-label reveal">Research</h3>
+      <h3 class="group-label">Research</h3>
       <div class="xp-list">
-        <article class="xp-item reveal">
+        <article class="xp-item">
           <div class="xp-when">Jun&nbsp;2025 – Present</div>
           <div>
             <h4 class="xp-org"><a href="https://wavlab.org" target="_blank" rel="noopener">CMU WavLab <span aria-hidden="true">↗&#xFE0E;</span></a></h4>
@@ -1552,12 +1523,10 @@
               <li>First-author <strong>Interspeech 2026 oral</strong> on speech-quality prediction from partial audio; English–Spanish system for the Interspeech 2026 S2ST Challenge.</li>
               <li>Merged ESPnet and VERSA contributions, including the Sidon restoration recipe and a <strong>&gt;20× speaker-embedding speedup</strong>.</li>
             </ul>
-            <ul class="xp-tags" aria-label="Tools">
-              <li>PyTorch</li><li>ESPnet</li><li>VERSA</li><li>HuBERT · WavLM</li><li>SLURM</li>
-            </ul>
+
           </div>
         </article>
-        <article class="xp-item reveal">
+        <article class="xp-item">
           <div class="xp-when">Aug&nbsp;2023 – May&nbsp;2026</div>
           <div>
             <h4 class="xp-org"><a href="https://sail.usc.edu" target="_blank" rel="noopener">USC SAIL Lab <span aria-hidden="true">↗&#xFE0E;</span></a></h4>
@@ -1568,7 +1537,7 @@
             </ul>
           </div>
         </article>
-        <article class="xp-item compact reveal">
+        <article class="xp-item compact">
           <div class="xp-when">2023</div>
           <div>
             <h4 class="xp-org"><a href="https://uscinteractionlab.web.app/" target="_blank" rel="noopener">USC Interaction Lab <span aria-hidden="true">↗&#xFE0E;</span></a></h4>
@@ -1577,16 +1546,16 @@
         </article>
       </div>
 
-      <h3 class="group-label reveal">Teaching &amp; projects</h3>
+      <h3 class="group-label">Teaching &amp; projects</h3>
       <div class="xp-list">
-        <article class="xp-item compact reveal">
+        <article class="xp-item compact">
           <div class="xp-when">Aug&nbsp;2023 – May&nbsp;2026</div>
           <div>
             <h4 class="xp-org">USC MATH 229 · Multivariable Calculus</h4>
             <div class="xp-role">Supplemental Instruction Leader · 3–4 weekly sessions for 98 students; review sessions reached ~300 attendees, the highest in program history</div>
           </div>
         </article>
-        <article class="xp-item compact reveal">
+        <article class="xp-item compact">
           <div class="xp-when">2023&nbsp;–&nbsp;2024</div>
           <div>
             <h4 class="xp-org"><a href="https://store.steampowered.com/app/2372070/Bone_Boy/" target="_blank" rel="noopener">Unity 2D Platformer · Open Alpha Game Design Club <span aria-hidden="true">↗&#xFE0E;</span></a></h4>
@@ -1595,72 +1564,23 @@
         </article>
       </div>
 
-      <h3 class="group-label reveal">Toolkit</h3>
-      <dl class="toolkit reveal">
-        <div><dt>Speech &amp; ML</dt><dd>PyTorch · torchaudio · Hugging Face Transformers · ESPnet · VERSA · LoRA</dd></div>
-        <div><dt>Models</dt><dd>Whisper · MMS · WavLM · HuBERT · w2v-BERT</dd></div>
-        <div><dt>Systems</dt><dd>Python · C++ · Go · Bash · Docker · Linux · SLURM · Git</dd></div>
-        <div><dt>Compute</dt><dd>Distributed training (DDP) · profiling (py-spy, cProfile) · vectorization · NCSA Delta &amp; PSC Bridges-2 GPU clusters</dd></div>
-        <div><dt>Data</dt><dd>NumPy · pandas · Matplotlib · Gaussian-process regression</dd></div>
-      </dl>
+
     </div>
   </section>
 
   <!-- CONTACT -->
   <section class="dark-section" id="contact" aria-labelledby="contact-h">
     <div class="wrap">
-      <div class="sec-head reveal" data-n="06">
-        <span class="sec-num">06</span>
-        <div class="sec-wave" id="sw6" aria-hidden="true"></div>
+      <div class="sec-head">
         <h2 id="contact-h">Contact</h2>
       </div>
-      <div class="seeking reveal">
-        <span class="status-dot" aria-hidden="true"></span>
-        <div>
-          <p><strong>Open to Summer 2027 internships</strong> in speech &amp; audio ML, as a research scientist or ML engineering intern. Email is the fastest way to reach me, and my <a class="meta-link" href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener">CV</a> has the details. Research collaborators are always welcome too.</p>
-          <div class="seeking-actions">
-            <a class="btn-primary btn-sm" href="mailto:terrytao@andrew.cmu.edu?subject=Hello%20Terry">Email me</a>
-            <button class="btn-outline btn-sm copy-email" type="button" data-email="terrytao@andrew.cmu.edu">Copy address</button>
-          </div>
-        </div>
-      </div>
-      <div class="contact-row">
-        <a href="mailto:terrytao@andrew.cmu.edu" class="cl cl-primary reveal">
-          <div class="cl-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6.5 9 6.5 9-6.5"/></svg></div>
-          <div class="cl-info">
-            <div class="cl-name">Email</div>
-            <div class="cl-handle">terrytao@andrew.cmu.edu</div>
-          </div>
-        </a>
-        <a href="https://scholar.google.com/citations?user=V1Z3wyoAAAAJ" target="_blank" rel="me noopener" class="cl reveal">
-          <div class="cl-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9.5 12 4.5l10 5-10 5z"/><path d="M6 11.5v4.5c3.2 2.6 8.8 2.6 12 0v-4.5"/><path d="M22 9.5v5.5"/></svg></div>
-          <div class="cl-info">
-            <div class="cl-name">Google Scholar</div>
-            <div class="cl-handle">scholar.google.com</div>
-          </div>
-        </a>
-        <a href="https://github.com/ZhuoyanTao" target="_blank" rel="me noopener" class="cl reveal">
-          <div class="cl-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
-          <div class="cl-info">
-            <div class="cl-name">GitHub</div>
-            <div class="cl-handle">github.com/ZhuoyanTao</div>
-          </div>
-        </a>
-        <a href="https://www.linkedin.com/in/zhuoyan-tao/" target="_blank" rel="me noopener" class="cl reveal">
-          <div class="cl-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
-          <div class="cl-info">
-            <div class="cl-name">LinkedIn</div>
-            <div class="cl-handle">linkedin.com/in/zhuoyan-tao</div>
-          </div>
-        </a>
-        <a href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener" class="cl reveal">
-          <div class="cl-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg></div>
-          <div class="cl-info">
-            <div class="cl-name">Curriculum Vitae</div>
-            <div class="cl-handle">PDF · one page</div>
-          </div>
-        </a>
-      </div>
+      <p class="contact-note">I'm looking for Summer 2027 internships in speech and audio ML. You can reach me at <a class="meta-link" href="mailto:terrytao@andrew.cmu.edu">terrytao@andrew.cmu.edu</a>.</p>
+      <ul class="hero-links" aria-label="Contact and profiles">
+        <li><a href="https://scholar.google.com/citations?user=V1Z3wyoAAAAJ" target="_blank" rel="noopener">Google Scholar</a></li>
+        <li><a href="https://github.com/ZhuoyanTao" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/zhuoyan-tao/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener">CV ↗</a></li>
+      </ul>
     </div>
   </section>
 
@@ -1669,7 +1589,6 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-left">
-      <div class="footer-wave" id="fw" aria-hidden="true"></div>
       <div class="footer-name">Zhuoyan (Terry) Tao</div>
     </div>
     <ul class="footer-links" aria-label="Elsewhere">
@@ -1727,26 +1646,6 @@
       navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
       document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
-      // ── Scroll reveal
-      const revealEls = document.querySelectorAll('.reveal');
-      if (reduceMotion || !('IntersectionObserver' in window)) {
-        revealEls.forEach(el => el.classList.add('visible'));
-      } else {
-        const obs = new IntersectionObserver((entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              e.target.classList.add('visible');
-              obs.unobserve(e.target);
-            }
-          });
-        }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
-
-        revealEls.forEach(el => obs.observe(el));
-
-        // Fallback so nothing stays hidden if the observer misfires
-        setTimeout(() => revealEls.forEach(el => el.classList.add('visible')), 2500);
-      }
-
       // ── Scroll-spy nav
       const linkMap = new Map();
       navLinks.querySelectorAll('a[href^="#"]').forEach(a => linkMap.set(a.getAttribute('href').slice(1), a));
@@ -1763,51 +1662,6 @@
         }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
         spySections.forEach(s => spy.observe(s));
       }
-
-      // ── Section wave accents
-      const waveShapes = [
-        [4, 9, 6, 14, 8, 12, 5, 16, 9, 13, 6, 11, 5, 14, 7, 10, 4, 13, 8, 11, 5],
-        [6, 11, 5, 16, 9, 13, 6, 18, 10, 14, 7, 12, 5, 15, 8, 11, 6, 14, 9, 12, 5],
-        [5, 10, 7, 13, 5, 15, 9, 12, 6, 14, 7, 10, 5, 13, 8, 11, 6, 14, 7, 10, 4],
-        [4, 12, 7, 11, 6, 16, 9, 13, 5, 14, 8, 10, 6, 15, 7, 12, 5, 13, 8, 10, 6],
-        [7, 10, 5, 15, 8, 12, 6, 17, 9, 11, 7, 13, 5, 16, 8, 10, 6, 12, 9, 14, 5],
-        [5, 13, 8, 11, 6, 17, 10, 12, 7, 15, 6, 11, 8, 14, 5, 12, 9, 16, 6, 10, 4],
-      ];
-
-      const durations = [1.0, 0.85, 1.3, 0.95, 1.15, 0.8, 1.25, 1.0, 0.9, 1.2,
-                         0.85, 1.1, 0.95, 1.3, 0.8, 1.05, 0.9, 1.2, 1.0, 0.88, 1.15];
-
-      ['sw1','sw2','sw3','sw4','sw5','sw6'].forEach((id, i) => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        waveShapes[i].forEach((h, j) => {
-          const s = document.createElement('span');
-          s.style.height = h + 'px';
-          s.style.setProperty('--bar-dur', durations[j % durations.length] + 's');
-          s.style.setProperty('--bar-delay', (j * 0.06) + 's');
-          el.appendChild(s);
-        });
-      });
-
-      // ── Static bar helpers
-      function buildBars(el, heights) {
-        if (!el) return;
-        heights.forEach(h => {
-          const s = document.createElement('span');
-          s.style.height = h + 'px';
-          el.appendChild(s);
-        });
-      }
-      buildBars(document.getElementById('tw1'), [3, 6, 4, 8, 5, 7, 4, 6, 3]);
-      buildBars(document.getElementById('fw'),  [4, 7, 5, 10, 6, 9, 5, 8, 4, 7, 5]);
-      const cardBars = [
-        [6, 12, 8, 16, 10, 14, 7, 11, 9],
-        [9, 14, 7, 18, 11, 15, 8, 13, 6],
-        [7, 11, 9, 15, 6, 13, 10, 12, 8],
-        [8, 13, 6, 17, 9, 14, 7, 12, 10],
-        [6, 10, 14, 8, 16, 11, 7, 13, 9],
-      ];
-      ['rb1','rb2','rb3','rb4','rb5'].forEach((id, i) => buildBars(document.getElementById(id), cardBars[i]));
 
       // ── BibTeX: toggle + copy to clipboard
       document.querySelectorAll('.bib-toggle').forEach(btn => {
@@ -1899,44 +1753,6 @@
         kick();
       }
 
-      // ── Wave divider canvas
-      const freqCanvas = document.getElementById('freqDiv');
-      const freqCtx = freqCanvas.getContext('2d');
-      let freqSize = fitCanvas(freqCanvas, freqCtx);
-
-      const divWaves = [
-        { amp: 0.30, freq: 0.011, speed: 0.006, phase: 0.0, alpha: 0.50, lw: 1.2 },
-        { amp: 0.18, freq: 0.024, speed: 0.010, phase: 1.6, alpha: 0.28, lw: 0.9 },
-        { amp: 0.10, freq: 0.047, speed: 0.017, phase: 2.9, alpha: 0.16, lw: 0.7 },
-      ];
-
-      let divT = 0;
-
-      function drawDivider() {
-        const W = freqSize.w;
-        const H = freqSize.h;
-        freqCtx.clearRect(0, 0, W, H);
-
-        const cy = H * 0.5;
-        const ampPx = H * 0.38;
-
-        divWaves.forEach(w => {
-          freqCtx.beginPath();
-          freqCtx.strokeStyle = 'rgba(106,140,175,' + w.alpha + ')';
-          freqCtx.lineWidth = w.lw;
-          for (let x = 0; x <= W; x += 1.5) {
-            const y = cy
-              + Math.sin(x * w.freq + divT * w.speed + w.phase) * (ampPx * w.amp / 0.30)
-              + Math.sin(x * w.freq * 2.1 + divT * w.speed * 1.6 + w.phase + 0.5) * (ampPx * w.amp / 0.30) * 0.22;
-            x === 0 ? freqCtx.moveTo(x, y) : freqCtx.lineTo(x, y);
-          }
-          freqCtx.stroke();
-          w.phase += w.speed * 0.55;
-        });
-
-        divT++;
-      }
-
       // ── Hero waveform canvas
       const canvas = document.getElementById('waveCanvas');
       const ctx = canvas.getContext('2d');
@@ -1978,13 +1794,11 @@
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
-          freqSize = fitCanvas(freqCanvas, freqCtx);
           heroSize = fitCanvas(canvas, ctx);
-          if (reduceMotion) { drawDivider(); drawWave(); }
+          if (reduceMotion) { drawWave(); }
         }, 150);
       }, { passive: true });
 
-      runLoop(freqCanvas, drawDivider);
       runLoop(document.querySelector('.hero'), drawWave);
     })();
   </script>
