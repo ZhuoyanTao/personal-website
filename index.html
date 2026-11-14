@@ -1379,50 +1379,19 @@
         <h2 id="research-h">Research</h2>
       </div>
       <div class="research-grid">
-        <div class="r-card featured reveal">
+        <div class="r-card reveal">
           <div class="r-card-bars" id="rb1" aria-hidden="true"></div>
-          <div class="r-eyebrow">Current focus · CMU WavLab × Amazon AGI</div>
+          <div class="r-eyebrow">CMU WavLab × Amazon AGI · Lead student researcher</div>
           <h3 class="r-title">Target-Speaker Speech Restoration</h3>
-          <p class="r-body">Two people on a damaged phone call: recover just one of them, cleanly, given a few seconds of their voice. It is a generative problem with an unforgiving failure mode, restoring the wrong speaker.</p>
-          <ul class="r-points">
-            <li><strong>Lead student researcher</strong>; models trained on 7.8K two-party calls.</li>
-            <li>Built the evaluation suite: word error rate (WER, and permutation-invariant cpWER for multi-speaker audio), speaker similarity, wrong-speaker rate, VERSA quality metrics, and paired-bootstrap significance tests. Benchmarked <strong>9 external systems</strong>.</li>
-            <li>Made encoder training <strong>1.20× faster with 26% less memory</strong> by moving to fused scaled-dot-product attention (SDPA) with a custom backward pass for the position bias.</li>
-          </ul>
-          <ul class="r-tags" aria-label="Topics">
-            <li>Generative restoration</li><li>Speaker conditioning</li><li>Evaluation</li><li>PyTorch · ESPnet</li>
-          </ul>
+          <p class="r-body">Recovering one speaker from a damaged two-person phone call using a short voice sample. Trained models on <strong>7.8K calls</strong> and built an evaluation suite benchmarking <strong>nine external systems</strong>.</p>
         </div>
         <div class="r-card reveal">
           <div class="r-card-bars" id="rb2" aria-hidden="true"></div>
-          <div class="r-eyebrow">CMU WavLab</div>
+          <div class="r-eyebrow">CMU WavLab · Interspeech 2026 oral</div>
           <h3 class="r-title">Perceptual Speech Quality</h3>
-          <p class="r-body">Predicting how listeners would rate speech from partial audio, with no clean reference, for streaming and generative systems. ANCHOR cut PLCMOS error by <strong>21–35%</strong> on 2-second prefixes and located a 4–6 s perceptual context horizon. Since then: a ~20× faster one-pass variant at equal accuracy, a zero-shot A/B judge within 0.01 Spearman correlation of the top VoiceMOS 2026 entry on URGENT 2026 pairs, and best-of-N TTS sample selection from the first 2 seconds.</p>
-          <a class="r-link" href="#pub-anchor">ANCHOR · Interspeech 2026 oral →</a>
+          <p class="r-body">Predicting speech quality before an utterance finishes. ANCHOR reduces PLCMOS error by <strong>21–35%</strong> on two-second audio prefixes.</p>
+          <a class="r-link" href="#pub-anchor">Paper →</a>
           <a class="r-link" href="https://huggingface.co/spaces/ZhuoyanTao/anchor-demo" target="_blank" rel="noopener">Live demo ↗&#xFE0E;</a>
-        </div>
-        <div class="r-card reveal">
-          <div class="r-card-bars" id="rb3" aria-hidden="true"></div>
-          <div class="r-eyebrow">USC SAIL Lab</div>
-          <h3 class="r-title">Multilingual &amp; Code-Switched Speech</h3>
-          <p class="r-body">Spoken language diarization labels which language is spoken when, which code-switching conversation needs. I study what pre-trained encoders (Whisper, MMS) already know about language identity, and built <strong>off-target posterior mass</strong>, a training-free diagnostic that forecasts when fine-tuning a lightweight probe will pay off.</p>
-          <a class="r-link" href="#pub-otpm">Preprint · submitted to JASA Express Letters →</a>
-        </div>
-        <div class="r-card reveal">
-          <div class="r-card-bars" id="rb4" aria-hidden="true"></div>
-          <div class="r-eyebrow">CMU WavLab · Challenge system</div>
-          <h3 class="r-title">Prosody, Stance &amp; Pragmatic Intent</h3>
-          <p class="r-body">An English–Spanish speech-to-speech translation system for the Interspeech 2026 S2ST Challenge, built on HuBERT units and prosody features so the translation carries stance, emotion, and dialog function, not only the words.</p>
-        </div>
-        <div class="r-card reveal">
-          <div class="r-card-bars" id="rb5" aria-hidden="true"></div>
-          <div class="r-eyebrow">Open Source · ESPnet &amp; VERSA</div>
-          <h3 class="r-title">Open-Source Speech Tooling</h3>
-          <p class="r-body">In ESPnet (10k+ stars): the <strong>Sidon speech-restoration recipe</strong> (41 of 52 commits: GPU-side self-supervised feature extraction, vocoder stages, XEUS backbone) and parallel speaker-embedding extraction for TTS, a step that took 40+ hours, now <strong>&gt;20× faster</strong>. In VERSA, WavLab's evaluation toolkit: a permutation-invariant multi-source metric fix and Slurm launcher safeguards.</p>
-          <a class="r-link" href="https://github.com/espnet/espnet/pull/6636" target="_blank" rel="noopener">Sidon #6636 ↗&#xFE0E;</a>
-          <a class="r-link" href="https://github.com/espnet/espnet/pull/6227" target="_blank" rel="noopener">Speedup #6227 ↗&#xFE0E;</a>
-          <a class="r-link" href="https://github.com/espnet/espnet/pulls?q=is%3Apr+author%3AZhuoyanTao+is%3Amerged" target="_blank" rel="noopener">ESPnet PRs ↗&#xFE0E;</a>
-          <a class="r-link" href="https://github.com/wavlab-speech/versa/pulls?q=is%3Apr+author%3AZhuoyanTao+is%3Amerged" target="_blank" rel="noopener">VERSA PRs ↗&#xFE0E;</a>
         </div>
       </div>
     </div>
@@ -1450,7 +1419,6 @@
             <div class="pub-cite">Proc. Interspeech 2026, pp. 5672–5677</div>
             <p class="pub-tldr">Predicts how listeners will rate speech before the utterance finishes, with <strong>21–35% lower PLCMOS error</strong> than ARECHO on 2-second prefixes.</p>
             <p class="pub-summary">Streaming and generative systems need quality estimates from partial audio, but existing predictors assume the full utterance. Extending ARECHO (NeurIPS 2025 Spotlight), ANCHOR models chunk- and utterance-level quality in one autoregressive decoder with dual-resolution query tokens, and shows that judgments converge after a 4–6 s perceptual context horizon.</p>
-            <p class="pub-note"><span>Correction</span> The published version reports 48%. We later found a resampling bug in the toolkit that labelled the baseline's PLCMOS training data; with corrected labels the gain is 21–35%. UTMOS, DNSMOS, and NISQA results and the 4–6 s horizon are unaffected. Erratum in preparation.</p>
             <div class="pub-meta">
               <span class="pub-venue">Interspeech 2026 · Oral</span>
               <span class="pub-role">First author</span>
