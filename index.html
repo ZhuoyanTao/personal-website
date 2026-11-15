@@ -147,6 +147,11 @@
   <!-- Vercel Web Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
   <!-- Vercel Speed Insights -->
+  <dialog class="figure-dialog" id="figureDialog" aria-labelledby="figureTitle">
+    <header><h2 id="figureTitle"></h2><button class="figure-close" type="button" autofocus>Close</button></header>
+    <div class="figure-scroll" tabindex="0" role="region" aria-label="Enlarged figure; scroll horizontally on small screens"><img id="figureImage" alt="" /></div>
+  </dialog>
+
   <script>
     window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
   </script>
@@ -682,11 +687,10 @@
       background: var(--surface); border: 1px solid var(--line); border-radius: 6px;
       transition: border-color 0.3s, transform 0.35s var(--ease);
     }
-    /* Figures are white-background PDFs; invert them into the dark palette */
+    /* Preserve the published figure colors. */
     .pub-thumb img {
       display: block; width: 100%; height: 100%; object-fit: contain;
-      filter: invert(1) hue-rotate(180deg) saturate(1.25) brightness(0.92);
-      mix-blend-mode: lighten;
+      filter: none;
     }
     .pub-item:hover .pub-thumb { border-color: var(--blue-mid); transform: translateY(-2px); }
 
@@ -1030,8 +1034,7 @@
 
     /* Paper figures: larger and legible */
     .pub-item { grid-template-columns: 15.5rem minmax(0, 1fr); }
-    .pub-thumb { padding: 0.9rem; background: #171b27; }
-    .pub-thumb img { filter: invert(1) hue-rotate(180deg) brightness(1.45) contrast(1.12) saturate(1.35); }
+    .pub-thumb { padding: 0.9rem; background: #fff; cursor: zoom-in; }
 
     /* Experience as a timeline */
     .xp-list { position: relative; }
@@ -1207,6 +1210,15 @@
       .kicker-text { font-size: 0.8rem; }
     }
 
+    .figure-dialog { margin: auto; width: min(64rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); padding: 1.25rem; border: 1px solid var(--line-2); border-radius: 6px; background: var(--bg); color: var(--ink); }
+    .figure-dialog::backdrop { background: rgba(0, 0, 0, 0.8); }
+    .figure-dialog header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+    .figure-dialog h2 { font: 500 1rem/1.5 var(--sans); }
+    .figure-close { flex-shrink: 0; background: none; color: var(--ink); border: 1px solid var(--line-2); border-radius: 4px; padding: 0.5rem 0.75rem; cursor: pointer; font: inherit; }
+    .figure-scroll { overflow-x: auto; }
+    @media (max-width: 600px) { .figure-dialog img { min-width: 640px; } }
+    .figure-dialog img { display: block; width: 100%; height: auto; background: white; }
+
     @media print {
       body::after, .progress, .sec-head::after, .xp-list::before, .xp-item::before { display: none !important; }
     }
@@ -1287,7 +1299,7 @@
 
       <div class="hero-rule" aria-hidden="true"></div>
 
-      <p class="hero-bio">I'm Terry, a master's student at CMU working with Prof. Shinji Watanabe at WavLab. I study speech restoration and speech quality: how to recover a speaker's voice from damaged audio, and how to tell whether it sounds right.</p>
+      <p class="hero-bio">I'm Terry, a master's student at CMU working with <a class="meta-link" href="https://sites.google.com/view/shinjiwatanabe" target="_blank" rel="noopener">Prof. Shinji Watanabe</a> at <a class="meta-link" href="https://wavlab.org" target="_blank" rel="noopener">WavLab</a>. I study speech restoration and speech quality: how to recover a speaker's voice from damaged audio, and how to tell whether it sounds right.</p>
 
 
       <a href="#contact" class="hero-status">
@@ -1363,8 +1375,8 @@
       <h3 class="group-label">Peer-reviewed</h3>
       <div class="pub-list">
         <article class="pub-item" id="pub-anchor">
-          <a class="pub-thumb" href="https://www.isca-archive.org/interspeech_2026/tao26_interspeech.html" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
-            <img src="assets/papers/anchor.webp" width="502" height="232" loading="lazy" decoding="async" alt="" />
+          <a class="pub-thumb" href="assets/papers/anchor.webp" aria-label="Enlarge figure: ANCHOR model overview">
+            <img src="assets/papers/anchor.webp" width="502" height="232" loading="lazy" decoding="async" alt="ANCHOR model overview" />
           </a>
           <div class="pub-body">
             <h4 class="pub-title"><a href="https://www.isca-archive.org/interspeech_2026/tao26_interspeech.html" target="_blank" rel="noopener">ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling</a></h4>
@@ -1399,8 +1411,8 @@
           </div>
         </article>
         <article class="pub-item" id="pub-turnbench">
-          <a class="pub-thumb" href="https://arxiv.org/abs/2608.25218" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
-            <img src="assets/papers/turnbench.webp" width="720" height="308" loading="lazy" decoding="async" alt="" />
+          <a class="pub-thumb" href="assets/papers/turnbench.webp" aria-label="Enlarge figure: TurnBench turn-taking overview">
+            <img src="assets/papers/turnbench.webp" width="720" height="308" loading="lazy" decoding="async" alt="TurnBench turn-taking overview" />
           </a>
           <div class="pub-body">
             <h4 class="pub-title"><a href="https://arxiv.org/abs/2608.25218" target="_blank" rel="noopener">TurnBench: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue</a></h4>
@@ -1437,8 +1449,8 @@
       <h3 class="group-label">Under review</h3>
       <div class="pub-list">
         <article class="pub-item" id="pub-otpm">
-          <a class="pub-thumb" href="https://arxiv.org/abs/2611.13430" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
-            <img src="assets/papers/otpm.webp" width="720" height="238" loading="lazy" decoding="async" alt="" />
+          <a class="pub-thumb" href="assets/papers/otpm.webp" aria-label="Enlarge figure: Off-target posterior mass and probe gain prediction">
+            <img src="assets/papers/otpm.webp" width="720" height="238" loading="lazy" decoding="async" alt="Off-target posterior mass and probe gain prediction" />
           </a>
           <div class="pub-body">
             <h4 class="pub-title"><a href="https://arxiv.org/abs/2611.13430" target="_blank" rel="noopener">Off-target posterior mass: A training-free diagnostic for fine-tuning spoken language diarization probes</a></h4>
@@ -1489,8 +1501,7 @@
             <div class="xp-role">Researcher · Speech &amp; Audio ML <span class="xp-where">· Advisor: Prof. Shinji Watanabe · Pittsburgh, PA</span></div>
             <ul class="xp-points">
               <li>Lead student researcher on <strong>target-speaker speech restoration</strong> with Amazon AGI (<a class="meta-link" href="#research">project overview</a>).</li>
-              <li>First-author <strong>Interspeech 2026 oral</strong> on speech-quality prediction from partial audio; English–Spanish system for the Interspeech 2026 S2ST Challenge.</li>
-              <li>Merged ESPnet and VERSA contributions, including the Sidon restoration recipe and a <strong>&gt;20× speaker-embedding speedup</strong>.</li>
+              <li>Built an English–Spanish speech-to-speech translation system for the Interspeech 2026 S2ST Challenge.</li>
             </ul>
 
           </div>
@@ -1501,7 +1512,7 @@
             <h4 class="xp-org"><a href="https://sail.usc.edu" target="_blank" rel="noopener">USC SAIL Lab <span aria-hidden="true">↗&#xFE0E;</span></a></h4>
             <div class="xp-role">Student Researcher · Multilingual Speech <span class="xp-where">· Advisor: Prof. Shrikanth Narayanan · Los Angeles, CA</span></div>
             <ul class="xp-points">
-              <li>Built <strong>off-target posterior mass</strong>, a training-free diagnostic for when fine-tuning spoken language diarization probes pays off; first-author paper submitted to JASA Express Letters.</li>
+              <li>Studied language identity in pre-trained speech encoders; developed the <a class="meta-link" href="#pub-otpm">off-target posterior mass diagnostic</a>.</li>
               <li>Pre-registered the evaluation on unseen language pairs and tested it on two held-out real-world corpora; isolated which utterances gain most in low-resource and code-switching settings.</li>
             </ul>
           </div>
@@ -1711,6 +1722,26 @@
   <script>
     (function () {
       'use strict';
+
+      const figureDialog = document.getElementById('figureDialog');
+      const figureImage = document.getElementById('figureImage');
+      document.querySelectorAll('.pub-thumb').forEach(link => {
+        link.addEventListener('click', event => {
+          if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+          event.preventDefault();
+          const thumbnail = link.querySelector('img');
+          figureImage.src = link.href;
+          figureImage.alt = thumbnail.alt;
+          document.getElementById('figureTitle').textContent = thumbnail.alt;
+          figureDialog.showModal();
+        });
+      });
+      figureDialog.querySelector('button').addEventListener('click', () => figureDialog.close());
+      figureDialog.addEventListener('click', event => {
+        if (event.target !== figureDialog) return;
+        const bounds = figureDialog.getBoundingClientRect();
+        if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) figureDialog.close();
+      });
 
       // ── Nav scroll state
       const nav = document.getElementById('nav');
