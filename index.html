@@ -1113,6 +1113,21 @@
     .contact-note + .contact-note { margin-top: 0.75rem; }
     @media (max-width: 600px) { .contribution-list { grid-template-columns: 1fr; gap: 1.25rem; } }
 
+    /* Readable metadata and clear anchor destinations. */
+    main section[id] { scroll-margin-top: 5.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .nav-links a, .hero-links a, .footer-links a, .footer-note,
+    h3.group-label, .meta-key, .meta-foot, .degree-abbr, .news-date,
+    .news-more summary, .r-eyebrow, .pub-venue, .pub-role, .pub-contrib span {
+      font-size: 0.75rem; letter-spacing: 0.06em;
+    }
+    .r-link, .pub-link { font-size: 0.8rem; letter-spacing: 0.03em; }
+    .r-eyebrow { padding-right: 0; line-height: 1.6; }
+    .degree { grid-template-columns: 2.8rem 1fr; }
+    .kicker-text { font-size: 0.75rem; letter-spacing: 0.08em; }
+    @media (max-width: 1024px) { .nav-links a { font-size: 0.95rem; } }
+    @media (max-width: 600px) { .kicker-text { font-size: 0.7rem; } }
+
     /* Restrained portfolio layout */
     body::after, .hero::before, .hero-photo-wrap::after, .hero-photo-wrap::before,
     .sec-head::after, .xp-list::before, .xp-item::before, .r-card::before,
@@ -1284,7 +1299,7 @@
         <div class="r-card">
           <div class="r-eyebrow">CMU WavLab · Interspeech 2026 oral</div>
           <h3 class="r-title">Perceptual Speech Quality</h3>
-          <p class="r-body">I developed ANCHOR to predict speech quality before an utterance finishes. It reduces PLCMOS error by <strong>21–35%</strong> on two-second audio prefixes.</p>
+          <p class="r-body">I developed ANCHOR to estimate how speech will sound to listeners from just the first two seconds of audio, helping streaming systems assess quality before a clip ends.</p>
           <a class="r-link" href="#pub-anchor">Paper →</a>
           <a class="r-link" href="https://huggingface.co/spaces/ZhuoyanTao/anchor-demo" target="_blank" rel="noopener">Try the demo ↗&#xFE0E;</a>
         </div>
@@ -1358,10 +1373,10 @@
             <div class="pub-authors">Freeman Jiang, Ramon Sanabria, Soham Deshmukh, …, <strong>Zhuoyan Tao</strong>, …, Hung-yi Lee, Shinji Watanabe <span class="pub-count">(19 authors)</span></div>
             <div class="pub-cite">Proc. IEEE Spoken Language Technology Workshop (SLT) 2026</div>
             <p class="pub-tldr">No current turn-taking system matches humans, who start speaking a median <strong>151 ms</strong> before a turn ends, without excessive false positives.</p>
+            <p class="pub-contrib"><span>My contribution</span> Helped design the evaluation protocol and submitted an ANCHOR-based model as an initial baseline.</p>
             <details class="pub-details">
               <summary>Details</summary>
               <p class="pub-summary">Thirty hours of hand-labeled, triple-annotated dyadic conversation across six interaction styles, a standardized protocol for end-of-turn and interruption detection, 14 benchmarked systems, and a released 104-hour training set and public leaderboard.</p>
-            <p class="pub-contrib"><span>My contribution</span> Helped design the evaluation protocol and submitted an ANCHOR-based model as an initial baseline.</p>
             </details>
             <div class="pub-meta">
               <span class="pub-venue">IEEE SLT 2026</span>
@@ -1674,6 +1689,7 @@
         ticking = true;
         requestAnimationFrame(() => {
           nav.classList.toggle('scrolled', window.scrollY > 50);
+          updateActiveSection();
           const max = document.documentElement.scrollHeight - window.innerHeight;
           progress.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ')';
           ticking = false;
@@ -1709,17 +1725,26 @@
       navLinks.querySelectorAll('a[href^="#"]').forEach(a => linkMap.set(a.getAttribute('href').slice(1), a));
       const spySections = document.querySelectorAll('main section[id]');
 
-      if ('IntersectionObserver' in window && spySections.length) {
-        const spy = new IntersectionObserver(entries => {
-          entries.forEach(e => {
-            if (!e.isIntersecting) return;
-            linkMap.forEach(a => a.classList.remove('active'));
-            const active = linkMap.get(e.target.id);
-            if (active) active.classList.add('active');
-          });
-        }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-        spySections.forEach(s => spy.observe(s));
+      function updateActiveSection() {
+        if (nav.classList.contains('menu-open')) return;
+        const threshold = nav.getBoundingClientRect().height + 40;
+        let current = null;
+        spySections.forEach(section => {
+          if (section.getBoundingClientRect().top <= threshold) current = section.id;
+        });
+        if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
+          current = spySections[spySections.length - 1]?.id;
+        }
+        linkMap.forEach((link, id) => {
+          const active = id === current;
+          link.classList.toggle('active', active);
+          if (active) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        });
       }
+      updateActiveSection();
+      window.addEventListener('resize', updateActiveSection, { passive: true });
+      window.addEventListener('load', updateActiveSection);
 
       // ── BibTeX: toggle + copy to clipboard
       document.querySelectorAll('.bib-toggle').forEach(btn => {
