@@ -1165,6 +1165,48 @@
       .wrap { padding-top: 3rem; padding-bottom: 3rem; }
     }
 
+    /* Academic typography: ordinary labels, quiet links, and content-led spacing. */
+    .nav-links a, .hero-links a, .footer-links a, .footer-note,
+    .kicker-text, h3.group-label, .meta-key, .meta-foot, .degree-abbr,
+    .news-date, .news-more summary, .r-eyebrow, .r-link, .pub-link,
+    .pub-venue, .pub-role, .pub-contrib span, .xp-when {
+      font-family: var(--sans); text-transform: none; letter-spacing: 0;
+      font-size: 0.85rem;
+    }
+    .kicker-text, .r-eyebrow { color: var(--body); }
+    h3.group-label, .meta-key { font-weight: 500; }
+    .pub-role, .pub-venue { font-weight: 500; }
+    .pub-venue, .pub-venue.pending { padding: 0; border: 0; border-radius: 0; background: none; }
+    .pub-meta { gap: 0.5rem 1rem; }
+    .nav-links a.nav-cta, .btn-outline { border-radius: 4px; }
+    .hero-btns { align-items: center; gap: 1.5rem; }
+    .research-link { color: var(--blue-text); font-size: 0.9rem; text-underline-offset: 0.25em; }
+    .research-link:hover { color: var(--ink); }
+    .btn-outline { padding: 0.6rem 1rem; }
+    .btn-outline:hover, .pub-item:hover .pub-thumb { transform: none; }
+    .pub-thumb { transition: border-color 0.2s; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .hero-rule { display: none; }
+    .hero { padding-top: 4.5rem; }
+    .hero-inner { padding-top: 3rem; padding-bottom: 3.5rem; }
+    .hero-kicker { margin-bottom: 1.25rem; }
+    .hero-name { margin-bottom: 1.5rem; }
+    #research .wrap, #experience .wrap { padding-top: 3rem; padding-bottom: 3rem; }
+    #about .wrap, #news .wrap, #contact .wrap { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+    #publications .wrap { padding-top: 3.5rem; padding-bottom: 4rem; }
+    #news .sec-head, #contact .sec-head { margin-bottom: 1.5rem; }
+    @media (max-width: 1024px) { .nav-links a { font-size: 1rem; } }
+    @media (max-width: 600px) {
+      .hero { padding-top: 4rem; }
+      .hero-inner { padding-top: 2rem; padding-bottom: 2.5rem; }
+      .hero-name { margin-bottom: 0; }
+      .hero-bio { margin-top: 1.5rem; }
+      .hero-btns { flex-direction: row; }
+      .hero-btns .btn-outline { width: auto; }
+      #research .wrap, #experience .wrap, #publications .wrap { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+      .kicker-text { font-size: 0.8rem; }
+    }
+
     @media print {
       body::after, .progress, .sec-head::after, .xp-list::before, .xp-item::before { display: none !important; }
     }
@@ -1211,13 +1253,6 @@
   <!-- NAV -->
   <nav id="nav" aria-label="Primary">
     <a href="#" class="nav-logo" aria-label="Zhuoyan Tao — home">
-      <div class="logo-bars" aria-hidden="true">
-        <div class="logo-bar"></div>
-        <div class="logo-bar"></div>
-        <div class="logo-bar"></div>
-        <div class="logo-bar"></div>
-        <div class="logo-bar"></div>
-      </div>
       <span class="logo-text">Zhuoyan <em>Tao</em></span>
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
@@ -1238,7 +1273,6 @@
 
   <!-- HERO -->
   <section class="hero" aria-label="Introduction">
-    <canvas id="waveCanvas" aria-hidden="true"></canvas>
 
     <div class="hero-inner">
     <div class="hero-content">
@@ -1261,7 +1295,7 @@
       </a>
 
       <div class="hero-btns">
-        <a href="#research" class="btn-primary">Explore research</a>
+        <a href="#research" class="research-link">Explore research</a>
         <a href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener" class="btn-outline">Résumé ↗&#xFE0E;</a>
       </div>
 
@@ -1678,8 +1712,6 @@
     (function () {
       'use strict';
 
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
       // ── Nav scroll state
       const nav = document.getElementById('nav');
       const progress = document.getElementById('progress');
@@ -1780,17 +1812,6 @@
         });
       });
 
-      // ── Pointer spotlight on cards (fine pointers only; skipped for reduced motion)
-      if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-        document.querySelectorAll('.hl, .r-card, .cl').forEach(card => {
-          card.addEventListener('pointermove', e => {
-            const r = card.getBoundingClientRect();
-            card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-            card.style.setProperty('--my', (e.clientY - r.top) + 'px');
-          }, { passive: true });
-        });
-      }
-
       // ── Copy email address (recruiters often paste into an ATS or their own client)
       document.querySelectorAll('.copy-email').forEach(btn => {
         const label = btn.textContent;
@@ -1804,85 +1825,6 @@
         });
       });
 
-      // ── Canvas helpers: crisp on HiDPI, paused when off-screen or backgrounded
-      function fitCanvas(canvas, ctx) {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        const w = canvas.offsetWidth;
-        const h = canvas.offsetHeight;
-        canvas.width = Math.max(1, Math.round(w * dpr));
-        canvas.height = Math.max(1, Math.round(h * dpr));
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        return { w, h };
-      }
-
-      function runLoop(el, step) {
-        if (reduceMotion) { step(); return; }
-        let visible = true;
-        let running = false;
-
-        function frame() {
-          if (!visible || document.hidden) { running = false; return; }
-          step();
-          requestAnimationFrame(frame);
-        }
-        function kick() {
-          if (visible && !document.hidden && !running) { running = true; requestAnimationFrame(frame); }
-        }
-
-        if ('IntersectionObserver' in window) {
-          new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; kick(); }, { threshold: 0 }).observe(el);
-        }
-        document.addEventListener('visibilitychange', kick);
-        kick();
-      }
-
-      // ── Hero waveform canvas
-      const canvas = document.getElementById('waveCanvas');
-      const ctx = canvas.getContext('2d');
-      let heroSize = fitCanvas(canvas, ctx);
-
-      const waves = [
-        { amp: 18, freq: 0.012, speed: 0.006, phase: 0,   color: 'rgba(106,140,175,0.6)' },
-        { amp: 10, freq: 0.025, speed: 0.010, phase: 1.2, color: 'rgba(106,140,175,0.4)' },
-        { amp: 6,  freq: 0.048, speed: 0.018, phase: 2.5, color: 'rgba(106,140,175,0.25)' },
-      ];
-
-      let t = 0;
-
-      function drawWave() {
-        const W = heroSize.w;
-        const H = heroSize.h;
-        ctx.clearRect(0, 0, W, H);
-        const cy = H / 2;
-
-        waves.forEach(w => {
-          ctx.beginPath();
-          ctx.strokeStyle = w.color;
-          ctx.lineWidth = 1.2;
-
-          for (let x = 0; x <= W; x += 2) {
-            const y = cy + Math.sin(x * w.freq + t * w.speed + w.phase) * w.amp
-                         + Math.sin(x * w.freq * 2.3 + t * w.speed * 1.4 + w.phase) * (w.amp * 0.4);
-            x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-          }
-
-          ctx.stroke();
-          w.phase += w.speed;
-        });
-
-        t++;
-      }
-
-      let resizeTimer;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          heroSize = fitCanvas(canvas, ctx);
-          if (reduceMotion) { drawWave(); }
-        }, 150);
-      }, { passive: true });
-
-      runLoop(document.querySelector('.hero'), drawWave);
     })();
   </script>
 </body>
