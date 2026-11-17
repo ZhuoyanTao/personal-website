@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="theme-dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,7 +7,19 @@
   <meta name="description" content="Zhuoyan (Terry) Tao is an M.S. student at CMU's Language Technologies Institute and a WavLab researcher working on speech restoration, speech quality, and multilingual speech. Open to Summer 2027 internships." />
   <meta name="author" content="Zhuoyan Tao" />
   <meta name="theme-color" content="#0d0e14" />
-  <meta name="color-scheme" content="dark" />
+  <meta name="color-scheme" content="dark light" />
+  <script>
+    /* Set the theme before first paint: saved choice, else the system preference. */
+    (function () {
+      var theme = null;
+      try { theme = localStorage.getItem('theme'); } catch (e) {}
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+      document.querySelector('meta[name="theme-color"]').content = theme === 'light' ? '#fafaf8' : '#0d0e14';
+    })();
+  </script>
   <link rel="canonical" href="https://www.zhuoyantao.com/" />
 
   <!-- Social previews (LinkedIn, Slack, X, iMessage) -->
@@ -172,6 +184,8 @@
     :root {
       color-scheme: dark;
 
+      --bg-rgb:      13,14,20;
+      --ink-rgb:     244,244,246;
       --bg:          #0d0e14;   /* page */
       --bg-alt:      #10121a;   /* alternating sections */
       --surface:     #13151f;   /* cards */
@@ -261,7 +275,7 @@
       transition: background 0.5s, border-color 0.5s, padding 0.4s;
     }
     nav.scrolled {
-      background: rgba(13,14,20,0.82);
+      background: rgba(var(--bg-rgb),0.82);
       backdrop-filter: blur(18px) saturate(140%);
       -webkit-backdrop-filter: blur(18px) saturate(140%);
       border-bottom-color: var(--line);
@@ -287,7 +301,7 @@
     .nav-links { display: flex; align-items: center; gap: 2.1rem; list-style: none; }
     .nav-links a {
       position: relative; display: inline-block;
-      font-size: 0.66rem; color: rgba(244,244,246,0.62); text-decoration: none;
+      font-size: 0.66rem; color: rgba(var(--ink-rgb),0.62); text-decoration: none;
       padding-bottom: 2px; transition: color 0.25s;
     }
     .nav-links a::after {
@@ -309,7 +323,7 @@
       width: 28px; height: 20px; position: relative; z-index: 310; flex-shrink: 0;
     }
     .nav-toggle span {
-      display: block; width: 100%; height: 1.5px; background: rgba(244,244,246,0.7); border-radius: 1px;
+      display: block; width: 100%; height: 1.5px; background: rgba(var(--ink-rgb),0.7); border-radius: 1px;
       position: absolute; left: 0; transition: transform 0.3s, opacity 0.3s, top 0.3s;
     }
     .nav-toggle span:nth-child(1) { top: 0; }
@@ -369,7 +383,7 @@
       font-size: clamp(2.2rem, 3.4vw, 3.7rem); font-weight: 400;
       letter-spacing: -0.01em; line-height: 1.08;
     }
-    .name-zhuoyan { color: rgba(244,244,246,0.62); }
+    .name-zhuoyan { color: rgba(var(--ink-rgb),0.62); }
     .name-tao { font-style: italic; color: var(--blue); }
     .name-terry {
       display: block; font-family: var(--serif);
@@ -389,11 +403,11 @@
     }
 
     .hero-bio {
-      font-size: 1.05rem; line-height: 1.8; color: rgba(244,244,246,0.66);
+      font-size: 1.05rem; line-height: 1.8; color: rgba(var(--ink-rgb),0.66);
       max-width: 33rem; margin-bottom: 1.5rem;
       opacity: 0; animation: riseIn 0.7s var(--ease) forwards 0.22s;
     }
-    .hero-bio strong { color: rgba(244,244,246,0.94); }
+    .hero-bio strong { color: rgba(var(--ink-rgb),0.94); }
 
     .hero-creds {
       display: grid; grid-template-columns: repeat(2, max-content);
@@ -403,7 +417,7 @@
     .hero-creds li {
       position: relative; padding-left: 1.05rem;
       font: 400 0.72rem/1.55 var(--mono); letter-spacing: 0.02em;
-      color: rgba(244,244,246,0.8);
+      color: rgba(var(--ink-rgb),0.8);
     }
     .hero-creds li::before {
       content: ''; position: absolute; left: 0; top: 0.78em;
@@ -412,7 +426,7 @@
 
     .hero-status {
       display: flex; width: fit-content; align-items: center; gap: 0.65rem;
-      font-size: 0.64rem; letter-spacing: 0.12em; color: rgba(244,244,246,0.82);
+      font-size: 0.64rem; letter-spacing: 0.12em; color: rgba(var(--ink-rgb),0.82);
       text-decoration: none; margin-bottom: 1.4rem;
       opacity: 0; animation: riseIn 0.7s var(--ease) forwards 0.34s;
       transition: color 0.25s;
@@ -444,7 +458,7 @@
       box-shadow: 0 6px 24px -8px rgba(106,140,175,0.6), inset 0 1px 0 rgba(255,255,255,0.12);
     }
     .btn-primary:hover { background: #557797; transform: translateY(-2px); box-shadow: 0 12px 30px -10px rgba(106,140,175,0.7), inset 0 1px 0 rgba(255,255,255,0.14); }
-    .btn-outline { background: transparent; border: 1px solid var(--line-2); color: rgba(244,244,246,0.78); font-weight: 400; }
+    .btn-outline { background: transparent; border: 1px solid var(--line-2); color: rgba(var(--ink-rgb),0.78); font-weight: 400; }
     .btn-outline:hover { border-color: var(--blue-mid); color: var(--ink); transform: translateY(-2px); }
     .btn-sm { padding: 0.6rem 1.3rem; font-size: 0.8rem; }
 
@@ -453,7 +467,7 @@
       opacity: 0; animation: riseIn 0.7s var(--ease) forwards 0.46s;
     }
     .hero-links a {
-      font-size: 0.64rem; color: rgba(244,244,246,0.62); text-decoration: none;
+      font-size: 0.64rem; color: rgba(var(--ink-rgb),0.62); text-decoration: none;
       border-bottom: 1px solid transparent; padding-bottom: 2px;
       transition: color 0.2s, border-color 0.2s;
     }
@@ -477,10 +491,10 @@
     }
     .hero-photo-caption {
       position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
-      background: linear-gradient(to top, rgba(13,14,20,0.88) 0%, transparent 100%);
+      background: linear-gradient(to top, rgba(var(--bg-rgb),0.88) 0%, transparent 100%);
       padding: 2.2rem 1rem 0.85rem;
     }
-    .hero-photo-caption span { font-size: 0.6rem; letter-spacing: 0.12em; color: rgba(244,244,246,0.62); }
+    .hero-photo-caption span { font-size: 0.6rem; letter-spacing: 0.12em; color: rgba(var(--ink-rgb),0.62); }
 
     /* ═══ DIVIDER ═══ */
     .freq-divider { display: block; width: 100%; height: 72px; background: var(--bg); }
@@ -555,7 +569,7 @@
       line-height: 1.05; letter-spacing: -0.02em; color: var(--ink); margin-top: 0.2rem; white-space: nowrap;
     }
     .hl-num em { font-style: italic; font-weight: 400; color: var(--blue); }
-    .hl-label { font-size: 0.82rem; line-height: 1.5; color: rgba(244,244,246,0.64); }
+    .hl-label { font-size: 0.82rem; line-height: 1.5; color: rgba(var(--ink-rgb),0.64); }
 
     .about-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 4.5rem; align-items: start; }
     .about-text p { font-size: 1.02rem; line-height: 1.85; margin-bottom: 1.25rem; }
@@ -636,7 +650,7 @@
       font-family: var(--serif); font-size: 1.24rem; font-weight: 500;
       color: var(--ink); line-height: 1.3; margin-bottom: 0.75rem; padding-right: 3.5rem;
     }
-    .r-body { font-size: 0.9rem; line-height: 1.75; color: rgba(244,244,246,0.66); }
+    .r-body { font-size: 0.9rem; line-height: 1.75; color: rgba(var(--ink-rgb),0.66); }
 
     .r-card.featured {
       grid-column: 1 / -1;
@@ -650,12 +664,12 @@
     .r-card.featured:hover { background: radial-gradient(110% 140% at 0% 0%, rgba(106,140,175,0.16), transparent 55%), var(--surface-2); }
     .r-card.featured .r-eyebrow { grid-area: e; color: var(--blue-text); }
     .r-card.featured .r-title { grid-area: t; font-size: 1.7rem; line-height: 1.2; }
-    .r-card.featured .r-body { grid-area: b; font-size: 0.98rem; color: rgba(244,244,246,0.74); }
+    .r-card.featured .r-body { grid-area: b; font-size: 0.98rem; color: rgba(var(--ink-rgb),0.74); }
     .r-card.featured .r-points { grid-area: p; margin-top: 0.15rem; padding-left: 2.25rem; border-left: 1px solid var(--line); align-self: start; }
     .r-card.featured .r-tags { grid-area: g; align-self: end; }
 
     .r-points { list-style: none; margin-top: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
-    .r-points li { position: relative; padding-left: 1.15rem; font-size: 0.88rem; line-height: 1.7; color: rgba(244,244,246,0.68); }
+    .r-points li { position: relative; padding-left: 1.15rem; font-size: 0.88rem; line-height: 1.7; color: rgba(var(--ink-rgb),0.68); }
     .r-points li::before { content: ''; position: absolute; left: 0; top: 0.8rem; width: 6px; height: 1px; background: var(--blue); }
 
     .r-link {
@@ -758,7 +772,7 @@
     .xp-org a { color: inherit; text-decoration: none; transition: color 0.2s; }
     .xp-org a span { font-size: 0.72em; color: var(--faint); transition: color 0.2s; }
     .xp-org a:hover, .xp-org a:hover span { color: var(--blue-text); }
-    .xp-role { font-size: 0.86rem; color: rgba(244,244,246,0.86); margin-top: 0.2rem; line-height: 1.55; }
+    .xp-role { font-size: 0.86rem; color: rgba(var(--ink-rgb),0.86); margin-top: 0.2rem; line-height: 1.55; }
     .xp-where { color: var(--faint); }
     .xp-item.compact .xp-role { color: var(--body); }
     .xp-points { list-style: none; margin-top: 0.9rem; display: flex; flex-direction: column; gap: 0.5rem; max-width: 48rem; }
@@ -798,13 +812,13 @@
     .cl-icon { display: flex; width: 2.4rem; height: 2.4rem; align-items: center; justify-content: center; border-radius: 50%; background: var(--blue-dim); color: var(--blue-text); }
     .cl-icon svg { width: 1.1rem; height: 1.1rem; }
     .cl-name { font-family: var(--serif); font-size: 1.06rem; font-weight: 500; color: var(--ink); }
-    .cl-handle { font: 400 0.7rem/1.5 var(--mono); color: rgba(244,244,246,0.6); word-break: break-all; margin-top: 0.1rem; }
+    .cl-handle { font: 400 0.7rem/1.5 var(--mono); color: rgba(var(--ink-rgb),0.6); word-break: break-all; margin-top: 0.1rem; }
     .cl.cl-primary {
       grid-column: span 2; border-color: var(--blue-mid);
       background: radial-gradient(120% 160% at 0% 0%, rgba(106,140,175,0.16), transparent 60%), var(--surface);
     }
     .cl.cl-primary .cl-name { font-size: 1.3rem; }
-    .cl.cl-primary .cl-handle { font-size: 0.82rem; color: rgba(244,244,246,0.78); }
+    .cl.cl-primary .cl-handle { font-size: 0.82rem; color: rgba(var(--ink-rgb),0.78); }
 
     /* Pointer spotlight on cards (set via --mx / --my in JS) */
     .hl::after, .r-card::after, .cl::after {
@@ -823,11 +837,11 @@
     .footer-left { display: flex; align-items: center; gap: 0.85rem; }
     .footer-wave { display: flex; align-items: center; gap: 2px; height: 14px; }
     .footer-wave span { display: block; width: 2px; background: var(--blue); border-radius: 1px; opacity: 0.4; }
-    .footer-name { font-family: var(--serif); font-style: italic; font-size: 0.95rem; color: rgba(244,244,246,0.58); }
+    .footer-name { font-family: var(--serif); font-style: italic; font-size: 0.95rem; color: rgba(var(--ink-rgb),0.58); }
     .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 1.4rem; list-style: none; }
-    .footer-links a { font-size: 0.6rem; letter-spacing: 0.1em; color: rgba(244,244,246,0.58); text-decoration: none; transition: color 0.2s; }
+    .footer-links a { font-size: 0.6rem; letter-spacing: 0.1em; color: rgba(var(--ink-rgb),0.58); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--ink); }
-    .footer-note { font-size: 0.6rem; letter-spacing: 0.1em; color: rgba(244,244,246,0.58); }
+    .footer-note { font-size: 0.6rem; letter-spacing: 0.1em; color: rgba(var(--ink-rgb),0.58); }
 
     /* ═══ MOTION ═══ */
     @keyframes riseIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
@@ -1285,6 +1299,80 @@
       .background-list > div { grid-template-columns: 1fr; gap: 0.4rem; }
     }
 
+    /* ═══ CURRENT WORK vs. PUBLICATIONS ═══
+       Ongoing work sits in a tinted panel with a live status badge;
+       published papers stay as a plain figure-led list under their own label. */
+    .current-project {
+      margin-bottom: 0.25rem; padding: 1.15rem 1.4rem 1.25rem;
+      border: 1px solid var(--blue-mid); border-radius: var(--radius);
+      background: var(--blue-dim);
+    }
+    .current-badge {
+      display: flex; align-items: center; gap: 0.55rem; margin-bottom: 0.6rem;
+      font: 500 0.85rem/1.4 var(--sans); color: var(--blue-text);
+    }
+    .current-badge .status-dot { animation-iteration-count: infinite; }
+    #research h3.group-label { margin: 1.6rem 0 0; }
+    @media (max-width: 600px) { .current-project { padding: 1rem 1.05rem 1.1rem; } }
+
+    /* ═══ THEME SWITCH ═══ */
+    nav { justify-content: flex-start; gap: 1.5rem; }
+    .nav-logo { margin-right: auto; }
+    .theme-toggle {
+      order: 3; display: none; align-items: center; justify-content: center; flex-shrink: 0;
+      width: 2.25rem; height: 2.25rem; padding: 0;
+      background: none; border: 1px solid var(--line-2); border-radius: 4px;
+      color: rgba(var(--ink-rgb),0.7); cursor: pointer;
+      transition: color 0.25s, border-color 0.25s, background 0.25s;
+    }
+    html[data-theme] .theme-toggle { display: inline-flex; } /* needs JS */
+    .theme-toggle:hover { color: var(--ink); border-color: var(--blue-mid); background: var(--blue-dim); }
+    .theme-toggle svg { width: 1rem; height: 1rem; }
+    .theme-toggle .icon-moon, html[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
+    @media (max-width: 1024px) {
+      nav { gap: 1.1rem; }
+      .theme-toggle { order: 0; }
+    }
+
+    /* ═══ LIGHT THEME ═══ */
+    html[data-theme="light"] {
+      color-scheme: light;
+
+      --bg-rgb:      250,250,248;
+      --ink-rgb:     20,22,29;
+      --bg:          #fafaf8;
+      --bg-alt:      #f4f4f1;
+      --surface:     #ffffff;
+      --surface-2:   #f1f2f4;
+      --line:        rgba(20,22,29,0.10);
+      --line-2:      rgba(20,22,29,0.18);
+
+      --ink:         #14161d;
+      --body:        #3d424c;   /* running text  (9.6:1) */
+      --faint:       #626873;   /* dates, meta   (5.4:1) */
+
+      --blue:        #3f6388;
+      --blue-soft:   #3f6388;
+      --blue-text:   #2f5578;   /* links, labels (7.4:1) */
+      --blue-deep:   #3a5d80;
+      --blue-glow:   rgba(63,99,136,0.05);
+      --blue-dim:    rgba(63,99,136,0.08);
+      --blue-mid:    rgba(63,99,136,0.34);
+      --ok:          #2f9a72;
+
+      scrollbar-color: #c6c9d0 var(--bg);
+    }
+    html[data-theme="light"] body { font-weight: 400; } /* dark-on-light type reads thinner */
+    html[data-theme="light"] ::selection { background: rgba(63,99,136,0.24); color: var(--ink); }
+    html[data-theme="light"] ::-webkit-scrollbar-thumb { background: #cdd0d6; }
+    html[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: #b6bac2; }
+    html[data-theme="light"] .hero-bio { color: var(--body); }
+    html[data-theme="light"] .nav-links a, html[data-theme="light"] .hero-links a { color: rgba(var(--ink-rgb),0.72); }
+    html[data-theme="light"] .nav-links a:hover, html[data-theme="light"] .nav-links a.active,
+    html[data-theme="light"] .nav-links a.nav-cta, html[data-theme="light"] .hero-links a:hover { color: var(--ink); }
+    html[data-theme="light"] .footer-name, html[data-theme="light"] .footer-note { color: var(--faint); }
+
     @media print {
       body::after, .progress, .sec-head::after, .xp-list::before, .xp-item::before { display: none !important; }
     }
@@ -1333,6 +1421,10 @@
     <a href="#" class="nav-logo" aria-label="Zhuoyan Tao — home">
       <span class="logo-text">Zhuoyan <em>Tao</em></span>
     </a>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light theme" title="Switch theme">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.55 1.55M17.15 17.15l1.55 1.55M5.3 18.7l1.55-1.55M17.15 6.85l1.55-1.55"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg>
+    </button>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
     </button>
@@ -1406,10 +1498,12 @@
     <div class="wrap">
       <div class="sec-head"><h2 id="research-h">Selected research</h2></div>
       <article class="current-project">
+        <p class="current-badge"><span class="status-dot" aria-hidden="true"></span>Current work · in progress</p>
         <h3>Target-speaker speech restoration</h3>
-        <p class="r-eyebrow">Current work · CMU WavLab × Amazon AGI · Lead student researcher</p>
+        <p class="r-eyebrow">CMU WavLab × Amazon AGI · Lead student researcher</p>
         <p>Recovering one voice from a damaged two-person call. Trained models on 7.8K calls and benchmarked nine external systems.</p>
       </article>
+      <h3 class="group-label">Publications</h3>
       <div class="pub-list" id="publications">
         <article class="pub-item" id="pub-anchor">
           <a class="pub-thumb" href="assets/papers/anchor.webp" aria-label="Enlarge figure: ANCHOR model overview">
@@ -1572,6 +1666,28 @@
         if (event.target !== figureDialog) return;
         const bounds = figureDialog.getBoundingClientRect();
         if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) figureDialog.close();
+      });
+
+      // ── Theme switch (initial theme is set by the inline script in <head>)
+      const root = document.documentElement;
+      const themeToggle = document.getElementById('themeToggle');
+      const themeMeta = document.querySelector('meta[name="theme-color"]');
+      function applyTheme(theme) {
+        root.setAttribute('data-theme', theme);
+        themeMeta.content = theme === 'light' ? '#fafaf8' : '#0d0e14';
+        themeToggle.setAttribute('aria-label', 'Switch to ' + (theme === 'light' ? 'dark' : 'light') + ' theme');
+      }
+      applyTheme(root.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+      themeToggle.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        applyTheme(next);
+        try { localStorage.setItem('theme', next); } catch (_) { /* storage blocked: choice lasts this visit */ }
+      });
+      // Follow the system setting until the visitor picks a theme themselves.
+      window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', event => {
+        let saved = null;
+        try { saved = localStorage.getItem('theme'); } catch (_) {}
+        if (!saved) applyTheme(event.matches ? 'light' : 'dark');
       });
 
       // ── Nav scroll state

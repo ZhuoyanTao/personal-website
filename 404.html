@@ -7,6 +7,18 @@
   <meta name="robots" content="noindex" />
   <meta name="theme-color" content="#0d0e14" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <script>
+    /* Same theme choice as the home page: saved choice, else the system preference. */
+    (function () {
+      var theme = null;
+      try { theme = localStorage.getItem('theme'); } catch (e) {}
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+      document.querySelector('meta[name="theme-color"]').content = theme === 'light' ? '#fafaf8' : '#0d0e14';
+    })();
+  </script>
   <style>
     @font-face { font-family: 'Playfair Display'; font-style: normal; font-weight: 400 600; font-display: swap; src: url('/assets/fonts/playfair-display-latin.woff2') format('woff2'); }
     @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 300 500; font-display: swap; src: url('/assets/fonts/dm-sans-latin.woff2') format('woff2'); }
@@ -34,6 +46,16 @@
     a:hover, a:focus-visible { border-color: #6a8caf; background: rgba(106,140,175,0.12); }
     a.primary { background: #6a8caf; border-color: #6a8caf; color: #fff; font-weight: 500; }
     :focus-visible { outline: 2px solid #8fb0cf; outline-offset: 3px; }
+
+    html[data-theme="light"] { color-scheme: light; }
+    html[data-theme="light"] body { background: #fafaf8; color: #14161d; font-weight: 400; }
+    html[data-theme="light"] .bars span { background: #3f6388; }
+    html[data-theme="light"] .code { color: #2f5578; }
+    html[data-theme="light"] p { color: #3d424c; }
+    html[data-theme="light"] a { color: #14161d; border-color: rgba(63,99,136,0.34); }
+    html[data-theme="light"] a:hover, html[data-theme="light"] a:focus-visible { border-color: #3f6388; background: rgba(63,99,136,0.08); }
+    html[data-theme="light"] a.primary { background: #3a5d80; border-color: #3a5d80; color: #fff; }
+    html[data-theme="light"] :focus-visible { outline-color: #2f5578; }
   </style>
 </head>
 <body>
