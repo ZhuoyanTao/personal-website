@@ -1379,21 +1379,21 @@
        Four text sizes, the same on every screen width:
        title · lead · body (anything you read as a sentence) · small (labels, links, metadata). */
     :root {
-      --text-title: 1.2rem;
-      --text-lead:  1.125rem;
-      --text-body:  1rem;
-      --text-small: 0.875rem;
-      --text-code:  0.8125rem;
-      --lh-title: 1.3;
-      --lh-body:  1.65;
-      --lh-small: 1.5;
+      --text-title: 1.3rem;
+      --text-lead:  1.1875rem;
+      --text-body:  1.0625rem;
+      --text-small: 0.9375rem;
+      --text-code:  0.85rem;
+      --lh-title: 1.25;
+      --lh-body:  1.55;
+      --lh-small: 1.45;
     }
     body { font-size: var(--text-body); line-height: var(--lh-body); }
 
     .current-project h3, .pub-title { font: 500 var(--text-title)/var(--lh-title) var(--serif); }
 
     .logo-text, .name-familiar, .hero-bio { font-size: var(--text-lead); }
-    .hero-bio { line-height: 1.6; color: var(--body); }
+    .hero-bio { line-height: 1.5; color: var(--body); }
 
     .hero-status, .background-list dd, .background-list dt .institution-name, .background-personal,
     .current-project > p:last-child, .pub-tldr, .pub-contrib, .paper-full-title, .pub-summary,
@@ -1412,6 +1412,42 @@
     .bib pre { font-size: var(--text-code); line-height: 1.6; }
     .bib-copy { font: 500 0.75rem/1 var(--sans); letter-spacing: 0; text-transform: none; }
     @media (max-width: 1024px) { .nav-links a { font-size: var(--text-body); } }
+
+    /* ═══ COMPACT RHYTHM ═══
+       Larger text, tighter space around it: smaller headings and gaps, never smaller reading text. */
+    h2 { font-size: clamp(1.6rem, 2.2vw, 1.9rem); }
+    .hero { padding-top: 4rem; }
+    .hero-inner { padding-top: 1rem; padding-bottom: 1.25rem; }
+    .hero-kicker { margin-bottom: 0.4rem; }
+    .hero-bio { margin-bottom: 0.6rem; }
+    .hero-links { margin-top: 0.7rem; }
+    @media (min-width: 601px) {
+      .name-primary { font-size: clamp(2.3rem, 3.8vw, 3.25rem); }
+      .hero-name { margin-bottom: 0.6rem; }
+    }
+    #research .wrap, #background .wrap, #contact .wrap { padding-top: 1.35rem; padding-bottom: 1.35rem; }
+    .sec-head, #contact .sec-head { margin-bottom: 0.75rem; }
+
+    .background-list > div { padding: 0.5rem 0; }
+    .background-list dt .institution-mark, .background-list dt .cmu-mark { flex-basis: 40px; }
+    .cmu-mark img { width: 40px; height: 40px; }
+    .background-list dt .usc-mark { height: 40px; }
+    .usc-mark img { width: 32px; }
+    .apple-mark svg { width: 24px; height: 24px; }
+    .background-personal { margin: 0.75rem 0 0.4rem; }
+
+    .current-project { padding: 0.85rem 1.2rem 0.95rem; }
+    .current-badge { margin-bottom: 0.35rem; }
+    .current-project .r-eyebrow { margin: 0.15rem 0 0.3rem; }
+    #research h3.group-label { margin: 1.1rem 0 0; }
+    #research .pub-item { padding: 0.8rem 0; }
+    .pub-title { margin-bottom: 0.25rem; }
+    .pub-tldr { margin-top: 0; }
+    .pub-contrib { margin-top: 0.3rem; }
+    .pub-details { margin: 0.3rem 0; }
+    .pub-meta { margin-top: 0.35rem; gap: 0.3rem 1rem; }
+    .open-source-note { margin-top: 0.65rem; }
+    footer { padding-top: 0.75rem; padding-bottom: 0.75rem; }
 
     @media print {
       body::after, .progress, .sec-head::after, .xp-list::before, .xp-item::before { display: none !important; }
