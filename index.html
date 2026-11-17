@@ -1500,16 +1500,19 @@
     .fold.current-project > summary .r-eyebrow { grid-column: 1 / -1; margin: 0.1rem 0 0; }
     .fold.current-project > p { margin-top: 0.5rem; }
 
-    /* Papers: the figure is always visible; the row beside it folds */
+    /* Papers: figure with venue and role beneath it on the left (always visible); the text beside it folds */
     .paper {
-      display: grid; grid-template-columns: 120px minmax(0, 1fr); column-gap: 1.25rem; align-items: start;
-      padding: 0.65rem 0; border-bottom: 1px solid var(--line); scroll-margin-top: 5.5rem;
+      display: grid; grid-template-columns: 172px minmax(0, 1fr); column-gap: 1.5rem; align-items: start;
+      padding: 0.8rem 0; border-bottom: 1px solid var(--line); scroll-margin-top: 5.5rem;
     }
-    #research .paper > .pub-thumb { float: none; width: auto; margin: 0.2rem 0 0; padding: 0.35rem; }
-    .paper:hover > .pub-thumb { border-color: var(--blue-mid); }
+    .paper-side { display: flex; flex-direction: column; gap: 0.4rem; }
+    #research .paper .pub-thumb { float: none; width: auto; margin: 0; padding: 0.35rem; aspect-ratio: 2 / 1; }
+    .paper:hover .pub-thumb { border-color: var(--blue-mid); }
+    .paper-meta { display: flex; flex-direction: column; padding-left: 1px; }
     .paper > .fold { border-bottom: 0; }
-    .paper > .fold > summary { padding: 0; }
-    .paper .pub-tldr { grid-column: 1 / -1; margin-top: 0.15rem; }
+    .paper > .fold > summary { padding: 0; row-gap: 0.2rem; }
+    .paper > .fold > summary > .pub-title { grid-column: 1 / 3; }
+    .paper > .fold > summary > .pub-tldr { grid-column: 1 / -1; }
     .paper-main { padding: 0.45rem 0 0.3rem; }
     .paper-main > .paper-full-title { margin: 0 0 0.2rem; }
     .paper-main > .pub-contrib { margin: 0 0 0.5rem; }
@@ -1522,13 +1525,15 @@
       .fold-meta { white-space: normal; flex-wrap: wrap; gap: 0 0.85rem; }
       .fold.bg > .fold-body { padding: 0 0 0.6rem; }
       .fold.current-project { padding: 0.7rem 1rem 0.75rem; }
+      /* Phones: figure beside the title, text full width below it, venue line last. */
       .paper { grid-template-columns: minmax(0, 1fr) 84px; column-gap: 0.8rem; }
-      .paper > .pub-thumb { grid-column: 2; grid-row: 1; }
+      .paper-side { display: contents; }
+      .paper .pub-thumb { grid-column: 2; grid-row: 1; }
       .paper > .fold { grid-column: 1; grid-row: 1; }
-      .paper > .fold > summary { min-height: 3.75rem; align-content: start; }
-      /* Below the figure, text runs the full width again. */
-      .paper .pub-tldr { margin-top: 0.5rem; }
-      .paper .pub-tldr, .paper-main { margin-right: calc(-84px - 0.8rem); }
+      .paper-meta { grid-column: 1 / -1; grid-row: 2; flex-direction: row; flex-wrap: wrap; gap: 0 0.85rem; margin-top: 0.25rem; padding: 0; }
+      .paper > .fold > summary > .pub-title { grid-column: 1; min-height: 3rem; }
+      .paper > .fold > summary > .pub-tldr { margin-top: 0.3rem; }
+      .paper > .fold > summary > .pub-tldr, .paper-main { margin-right: calc(-84px - 0.8rem); }
     }
 
     /* ═══ TYPE PASS ═══
@@ -1705,13 +1710,15 @@
       <h3 class="group-label">Publications</h3>
       <div class="fold-list" id="publications">
         <article class="paper" id="pub-anchor">
-          <a class="pub-thumb" href="assets/papers/anchor.webp" aria-label="Enlarge figure: ANCHOR model overview">
-            <img src="assets/papers/anchor.webp" width="502" height="232" loading="lazy" decoding="async" alt="ANCHOR model overview" />
-          </a>
+          <div class="paper-side">
+            <a class="pub-thumb" href="assets/papers/anchor.webp" aria-label="Enlarge figure: ANCHOR model overview">
+              <img src="assets/papers/anchor.webp" width="502" height="232" loading="lazy" decoding="async" alt="ANCHOR model overview" />
+            </a>
+            <p class="paper-meta"><span class="pub-venue">Interspeech 2026 · Oral</span><span class="pub-role">First author</span></p>
+          </div>
           <details class="fold">
             <summary>
               <h4 class="pub-title">ANCHOR — speech quality from partial audio</h4>
-              <span class="fold-meta"><span class="pub-venue">Interspeech 2026 · Oral</span><span class="pub-role">First author</span></span>
               <span class="pub-tldr">Predicts how listeners will rate speech before the utterance finishes, with <strong>21–35% lower PLCMOS error</strong> than ARECHO on 2-second prefixes.</span>
             </summary>
             <div class="paper-main">
@@ -1740,13 +1747,15 @@
           </details>
         </article>
         <article class="paper" id="pub-turnbench">
-          <a class="pub-thumb" href="assets/papers/turnbench.webp" aria-label="Enlarge figure: TurnBench turn-taking overview">
-            <img src="assets/papers/turnbench.webp" width="720" height="308" loading="lazy" decoding="async" alt="TurnBench turn-taking overview" />
-          </a>
+          <div class="paper-side">
+            <a class="pub-thumb" href="assets/papers/turnbench.webp" aria-label="Enlarge figure: TurnBench turn-taking overview">
+              <img src="assets/papers/turnbench.webp" width="720" height="308" loading="lazy" decoding="async" alt="TurnBench turn-taking overview" />
+            </a>
+            <p class="paper-meta"><span class="pub-venue">IEEE SLT 2026</span></p>
+          </div>
           <details class="fold">
             <summary>
               <h4 class="pub-title">TurnBench — evaluating conversational turn-taking</h4>
-              <span class="fold-meta"><span class="pub-venue">IEEE SLT 2026</span></span>
               <span class="pub-tldr">A benchmark for when conversational systems should speak or wait.</span>
             </summary>
             <div class="paper-main">
@@ -1775,13 +1784,15 @@
           </details>
         </article>
         <article class="paper" id="pub-otpm">
-          <a class="pub-thumb" href="assets/papers/otpm.webp" aria-label="Enlarge figure: Off-target posterior mass and probe gain prediction">
-            <img src="assets/papers/otpm.webp" width="720" height="238" loading="lazy" decoding="async" alt="Off-target posterior mass and probe gain prediction" />
-          </a>
+          <div class="paper-side">
+            <a class="pub-thumb" href="assets/papers/otpm.webp" aria-label="Enlarge figure: Off-target posterior mass and probe gain prediction">
+              <img src="assets/papers/otpm.webp" width="720" height="238" loading="lazy" decoding="async" alt="Off-target posterior mass and probe gain prediction" />
+            </a>
+            <p class="paper-meta"><span class="pub-venue pending">JASA-EL · Under review</span><span class="pub-role">First author</span></p>
+          </div>
           <details class="fold">
             <summary>
               <h4 class="pub-title">When does language-ID fine-tuning help?</h4>
-              <span class="fold-meta"><span class="pub-venue pending">JASA-EL · Under review</span><span class="pub-role">First author</span></span>
               <span class="pub-tldr">A single training-free number, computed from language-ID posteriors, that forecasts whether fine-tuning a diarization probe will pay off.</span>
             </summary>
             <div class="paper-main">
