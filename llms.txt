@@ -73,5 +73,8 @@ PyTorch, torchaudio, Hugging Face Transformers, ESPnet, VERSA, LoRA; Whisper, MM
 - [Website](https://www.zhuoyantao.com/)
 - [Résumé (PDF)](https://www.zhuoyantao.com/assets/Zhuoyan_Terry_Tao_Resume.pdf)
 - [Google Scholar](https://scholar.google.com/citations?user=V1Z3wyoAAAAJ)
+- [ORCID](https://orcid.org/0009-0000-6819-0195)
+- [Semantic Scholar](https://www.semanticscholar.org/author/Zhuo-Yan-Tao/2395377233)
+- [DBLP](https://dblp.org/pid/423/5800.html)
 - [GitHub](https://github.com/ZhuoyanTao)
 - [LinkedIn](https://www.linkedin.com/in/zhuoyan-tao/)
