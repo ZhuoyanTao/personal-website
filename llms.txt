@@ -64,7 +64,7 @@ BibTeX for the three papers above:
 
 ## Education
 - Carnegie Mellon University: M.S. Intelligent Information Systems, Language Technologies Institute (expected Dec 2027).
-- University of Southern California: B.S. Computer Science and B.S. Applied and Computational Mathematics, Magna Cum Laude, GPA 3.84 (May 2026). Phi Beta Kappa; Trustee Scholar; NAE Grand Challenges Scholar.
+- University of Southern California: B.S. Computer Science and B.S. Applied and Computational Mathematics, Magna Cum Laude, GPA 3.84 (May 2026). Phi Beta Kappa; Trustee Scholar (full-tuition merit scholarship); NAE Grand Challenges Scholar.
 
 ## Skills
 PyTorch, torchaudio, Hugging Face Transformers, ESPnet, VERSA, LoRA; Whisper, MMS, WavLM, HuBERT, w2v-BERT; Python, C++, Go, Bash, Docker, Linux, SLURM; distributed training (DDP), profiling, vectorization; NCSA Delta and PSC Bridges-2 GPU clusters.
