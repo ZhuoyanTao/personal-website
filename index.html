@@ -1534,7 +1534,7 @@
     .paper-grid > .paper-more, .paper-grid > .bib { max-width: none; margin: 0 0 1rem; }
 
     @media (min-width: 821px) {
-      .paper-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; grid-auto-flow: row dense; border-bottom: 0; }
+      .paper-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 1rem; row-gap: 0; border-bottom: 0; }
       .paper, .paper:first-child {
         display: flex; flex-direction: column;
         padding: 0.9rem 1rem 1rem; background: var(--surface);
@@ -1544,16 +1544,24 @@
       .paper-body { display: flex; flex-direction: column; flex: 1 1 auto; }
       .paper .pub-title { margin-top: 0; }
       .paper .pub-meta { margin-top: auto; padding-top: 0.8rem; }
-      .paper-grid > .paper-more, .paper-grid > .bib { grid-column: 1 / -1; margin: 0; }
+      /* A paper's details open in its own column, fused to the bottom of its card:
+         card + details + BibTeX read as one enclosed region, and nothing else moves. */
+      .paper, .paper-grid > .paper-more, .paper-grid > .bib { grid-column: var(--col); }
+      .paper { grid-row: 1; }
+      .paper-grid > .paper-more { grid-row: 2; }
+      .paper-grid > .bib { grid-row: 3; }
+      .paper-grid > .paper-more, .paper-grid > .bib { margin: 0; border-top: 0; border-radius: 0 0 var(--radius) var(--radius); }
+      .paper.is-open { border-radius: var(--radius) var(--radius) 0 0; border-bottom-color: var(--line); }
+      .paper-grid > .paper-more:has(+ .bib:not([hidden])) { border-radius: 0; border-bottom-color: var(--line); }
       .open-source-note { margin-top: 1rem; }
     }
 
-    .more-toggle::after, .bib-toggle::after, .authors-toggle::after {
+    .more-toggle::after, .bib-toggle::after, .authors-toggle::after, .fold-all::after {
       content: ''; display: inline-block; width: 0.36rem; height: 0.36rem; margin-left: 0.5rem;
       border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
       transform: translateY(-0.18rem) rotate(45deg); transition: transform 0.2s var(--ease);
     }
-    .more-toggle[aria-expanded="true"]::after, .bib-toggle[aria-expanded="true"]::after, .authors-toggle[aria-expanded="true"]::after { transform: translateY(0.05rem) rotate(-135deg); }
+    .more-toggle[aria-expanded="true"]::after, .bib-toggle[aria-expanded="true"]::after, .authors-toggle[aria-expanded="true"]::after, .fold-all[aria-expanded="true"]::after { transform: translateY(0.05rem) rotate(-135deg); }
 
     .paper-more, .paper-grid > .bib { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
     .paper-grid > .bib pre { background: none; border: 0; border-radius: 0; }
@@ -1566,18 +1574,14 @@
     .oss-list span { font-size: var(--text-small); line-height: var(--lh-small); color: var(--faint); }
     @media (max-width: 820px) { .oss-list { grid-template-columns: minmax(0, 1fr); } }
 
-    /* Which paper an open panel belongs to: its name heads the panel, and card and panel share an accent border. */
-    .panel-head { display: none; }
+    /* Which paper an open panel belongs to: contiguity and a shared enclosing border, not a label. */
     .paper.is-open, .paper-grid > .paper-more, .paper-grid > .bib { border-color: var(--blue-mid); }
-    @media (min-width: 821px) {
-      .panel-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.75rem; }
-      .paper-more .panel-head { margin-bottom: 0.75rem; padding-bottom: 0.65rem; border-bottom: 1px solid var(--line); }
-      .bib .panel-head { padding: 0.8rem 6rem 0.65rem 1.1rem; border-bottom: 1px solid var(--line); }
-      .panel-name { font: 500 var(--text-lead)/var(--lh-title) var(--serif); color: var(--ink); }
-      .panel-kind { font-size: var(--text-small); line-height: var(--lh-small); color: var(--faint); }
-    }
+    .paper-grid > .paper-more:not([hidden]), .paper-grid > .bib:not([hidden]) { animation: panelIn 0.2s var(--ease); }
+    @keyframes panelIn { from { opacity: 0; transform: translateY(-6px); } }
+    .paper-grid > .bib pre { padding: 2.7rem 1.1rem 1rem; }
     .paper-more { padding: 0.85rem 1.1rem 0.95rem; }
-    .paper-more dl > div { display: grid; grid-template-columns: 4.75rem minmax(0, 1fr); column-gap: 1rem; align-items: baseline; }
+    .paper-more dl > div { display: grid; grid-template-columns: minmax(0, 1fr); column-gap: 1rem; align-items: baseline; }
+    @media (min-width: 601px) and (max-width: 820px) { .paper-more dl > div { grid-template-columns: 4.75rem minmax(0, 1fr); } }
     .paper-more dl > div + div { margin-top: 0.5rem; }
     .paper-more dt { font-size: var(--text-small); line-height: var(--lh-small); color: var(--faint); }
     .paper-more dd { font-size: var(--text-body); line-height: var(--lh-body); color: var(--body); }
@@ -1771,7 +1775,7 @@
 
   <section class="light-section" id="background" aria-labelledby="background-h">
     <div class="wrap">
-      <div class="sec-head"><h2 id="background-h">Background</h2><button class="fold-all" type="button">Expand all</button></div>
+      <div class="sec-head"><h2 id="background-h">Background</h2><button class="fold-all" type="button" data-open="Expand all" data-close="Collapse all">Expand all</button></div>
       <div class="fold-list">
         <details class="fold bg">
           <summary>
@@ -1802,9 +1806,9 @@
 
   <section class="dark-section" id="research" aria-labelledby="research-h">
     <div class="wrap">
-      <div class="sec-head"><h2 id="research-h">Selected research</h2><button class="fold-all" type="button">Expand all</button></div>
+      <div class="sec-head"><h2 id="research-h">Selected research</h2><button class="fold-all" type="button" data-open="Show all details" data-close="Hide all details">Show all details</button></div>
       <div class="paper-grid" id="publications">
-        <article class="paper" id="pub-anchor">
+        <article class="paper" id="pub-anchor" style="--col: 1">
           <div class="paper-side">
             <a class="pub-thumb" href="assets/papers/anchor.webp" aria-label="Enlarge figure: ANCHOR model overview">
               <img src="assets/papers/anchor.webp" width="502" height="232" loading="lazy" decoding="async" alt="ANCHOR model overview" />
@@ -1823,16 +1827,14 @@
             </div>
           </div>
         </article>
-        <div class="paper-more" id="more-anchor" hidden>
-          <p class="panel-head"><span class="panel-name">ANCHOR — speech quality from partial audio</span><span class="panel-kind">Details</span></p>
+        <div class="paper-more" id="more-anchor" style="--col: 1" hidden>
           <dl>
             <div><dt>Title</dt><dd>ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling</dd></div>
             <div><dt>Venue</dt><dd>Proc. Interspeech 2026, pp. 5672–5677</dd></div>
             <div><dt>Summary</dt><dd>Streaming and generative systems need quality estimates from partial audio, but existing predictors assume the full utterance. Extending ARECHO (NeurIPS 2025 Spotlight), ANCHOR models chunk- and utterance-level quality in one autoregressive decoder with dual-resolution query tokens, and shows that judgments converge after a 4–6 s perceptual context horizon.</dd></div>
           </dl>
         </div>
-        <div class="bib" id="bib-anchor" hidden>
-          <p class="panel-head"><span class="panel-name">ANCHOR — speech quality from partial audio</span><span class="panel-kind">BibTeX</span></p>
+        <div class="bib" id="bib-anchor" style="--col: 1" hidden>
 <pre><code>@inproceedings{tao26_interspeech,
   title     = {{ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling}},
   author    = {Zhuoyan Tao and Jiatong Shi and Hye-jin Shim and Shinji Watanabe},
@@ -1844,7 +1846,7 @@
 }</code></pre>
           <button class="bib-copy" type="button">Copy</button>
         </div>
-        <article class="paper" id="pub-turnbench">
+        <article class="paper" id="pub-turnbench" style="--col: 2">
           <div class="paper-side">
             <a class="pub-thumb" href="assets/papers/turnbench.webp" aria-label="Enlarge figure: TurnBench turn-taking overview">
               <img src="assets/papers/turnbench.webp" width="720" height="308" loading="lazy" decoding="async" alt="TurnBench turn-taking overview" />
@@ -1867,8 +1869,7 @@
             </div>
           </div>
         </article>
-        <div class="paper-more" id="more-turnbench" hidden>
-          <p class="panel-head"><span class="panel-name">TurnBench — evaluating conversational turn-taking</span><span class="panel-kind">Details</span></p>
+        <div class="paper-more" id="more-turnbench" style="--col: 2" hidden>
           <dl>
             <div><dt>Title</dt><dd>TurnBench: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue</dd></div>
             <div><dt>My role</dt><dd>I helped design the evaluation protocol and contributed an ANCHOR-based baseline.</dd></div>
@@ -1876,8 +1877,7 @@
             <div><dt>Summary</dt><dd>Thirty hours of hand-labeled, triple-annotated dyadic conversation across six interaction styles, a standardized protocol for end-of-turn and interruption detection, 14 benchmarked systems, and a released 104-hour training set and public leaderboard.</dd></div>
           </dl>
         </div>
-        <div class="bib" id="bib-turnbench" hidden>
-          <p class="panel-head"><span class="panel-name">TurnBench — evaluating conversational turn-taking</span><span class="panel-kind">BibTeX</span></p>
+        <div class="bib" id="bib-turnbench" style="--col: 2" hidden>
 <pre><code>@inproceedings{jiang2026turnbench,
   title         = {{TurnBench}: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue},
   author        = {Freeman Jiang and Ramon Sanabria and Soham Deshmukh and Bandhav Veluri and Simon Michael Vuch Williams and Elliott K. Suen and Garreth Lee and Kevin Yoonho Choi and Takuya Umeki and Riku Kubo and Sathvik Udupa and Chien-yu Huang and Shih-Yun Shan Kuan and Zhuoyan Tao and Satyapriya Krishna and Sefik Emre Eskimez and Yu Tsao and Hung-yi Lee and Shinji Watanabe},
@@ -1888,7 +1888,7 @@
 }</code></pre>
           <button class="bib-copy" type="button">Copy</button>
         </div>
-        <article class="paper" id="pub-otpm">
+        <article class="paper" id="pub-otpm" style="--col: 3">
           <div class="paper-side">
             <a class="pub-thumb" href="assets/papers/otpm.webp" aria-label="Enlarge figure: Off-target posterior mass and probe gain prediction">
               <img src="assets/papers/otpm.webp" width="720" height="238" loading="lazy" decoding="async" alt="Off-target posterior mass and probe gain prediction" />
@@ -1906,16 +1906,14 @@
             </div>
           </div>
         </article>
-        <div class="paper-more" id="more-otpm" hidden>
-          <p class="panel-head"><span class="panel-name">When does language-ID fine-tuning help?</span><span class="panel-kind">Details</span></p>
+        <div class="paper-more" id="more-otpm" style="--col: 3" hidden>
           <dl>
             <div><dt>Title</dt><dd>Off-target posterior mass: A training-free diagnostic for fine-tuning spoken language diarization probes</dd></div>
             <div><dt>Venue</dt><dd>Submitted to JASA Express Letters · arXiv:2611.13430</dd></div>
             <div><dt>Summary</dt><dd>Off-target posterior mass (OTPM) correlates with probe gains at 0.56 on unseen synthetic bilingual data and 0.23 on real-world corpora (DISPLACE; MUCS Hindi–English code-switching). The evaluation was pre-registered on unseen language pairs and run across Whisper, MMS, and classical language-ID encoders.</dd></div>
           </dl>
         </div>
-        <div class="bib" id="bib-otpm" hidden>
-          <p class="panel-head"><span class="panel-name">When does language-ID fine-tuning help?</span><span class="panel-kind">BibTeX</span></p>
+        <div class="bib" id="bib-otpm" style="--col: 3" hidden>
 <pre><code>@misc{tao2026offtarget,
   title         = {Off-target posterior mass: A training-free diagnostic for fine-tuning spoken language diarization probes},
   author        = {Zhuoyan Tao and Aditya Kommineni and Shrikanth Narayanan},
@@ -2109,7 +2107,7 @@
         const folds = Array.from(section.querySelectorAll(FOLDS));
         const sync = () => {
           const allOpen = folds.every(isOpen);
-          btn.textContent = allOpen ? 'Collapse all' : 'Expand all';
+          btn.textContent = allOpen ? btn.dataset.close : btn.dataset.open;
           btn.setAttribute('aria-expanded', String(allOpen));
         };
         btn.addEventListener('click', () => {
