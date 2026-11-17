@@ -1373,6 +1373,46 @@
     html[data-theme="light"] .nav-links a.nav-cta, html[data-theme="light"] .hero-links a:hover { color: var(--ink); }
     html[data-theme="light"] .footer-name, html[data-theme="light"] .footer-note { color: var(--faint); }
 
+    /* ═══ TYPE SYSTEM ═══
+       Two families: serif for the name, section headings and item titles;
+       sans for everything else (mono only for BibTeX).
+       Four text sizes, the same on every screen width:
+       title · lead · body (anything you read as a sentence) · small (labels, links, metadata). */
+    :root {
+      --text-title: 1.2rem;
+      --text-lead:  1.125rem;
+      --text-body:  1rem;
+      --text-small: 0.875rem;
+      --text-code:  0.8125rem;
+      --lh-title: 1.3;
+      --lh-body:  1.65;
+      --lh-small: 1.5;
+    }
+    body { font-size: var(--text-body); line-height: var(--lh-body); }
+
+    .current-project h3, .pub-title { font: 500 var(--text-title)/var(--lh-title) var(--serif); }
+
+    .logo-text, .name-familiar, .hero-bio { font-size: var(--text-lead); }
+    .hero-bio { line-height: 1.6; color: var(--body); }
+
+    .hero-status, .background-list dd, .background-list dt .institution-name, .background-personal,
+    .current-project > p:last-child, .pub-tldr, .pub-contrib, .paper-full-title, .pub-summary,
+    .open-source-note, .contact-note {
+      font-size: var(--text-body); line-height: var(--lh-body);
+    }
+
+    .nav-links a, .hero-links a, .kicker-text, .background-list dt .institution-date,
+    .current-badge, .current-project .r-eyebrow, h3.group-label, .pub-details summary,
+    .pub-authors, .pub-count, .pub-cite, .pub-venue, .pub-role, .pub-link,
+    .footer-name, .footer-note, .figure-close {
+      font-family: var(--sans); font-size: var(--text-small); line-height: var(--lh-small);
+    }
+    .footer-name { font-style: normal; }
+
+    .bib pre { font-size: var(--text-code); line-height: 1.6; }
+    .bib-copy { font: 500 0.75rem/1 var(--sans); letter-spacing: 0; text-transform: none; }
+    @media (max-width: 1024px) { .nav-links a { font-size: var(--text-body); } }
+
     @media print {
       body::after, .progress, .sec-head::after, .xp-list::before, .xp-item::before { display: none !important; }
     }
