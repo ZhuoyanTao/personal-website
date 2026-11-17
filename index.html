@@ -1500,9 +1500,19 @@
     .fold.current-project > summary .r-eyebrow { grid-column: 1 / -1; margin: 0.1rem 0 0; }
     .fold.current-project > p { margin-top: 0.5rem; }
 
-    /* Papers */
-    .paper-body { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 1.25rem; padding: 0.15rem 0 1rem; }
-    .paper-main > .paper-full-title { margin: 0.6rem 0 0.2rem; }
+    /* Papers: the figure is always visible; the row beside it folds */
+    .paper {
+      display: grid; grid-template-columns: 120px minmax(0, 1fr); column-gap: 1.25rem; align-items: start;
+      padding: 0.65rem 0; border-bottom: 1px solid var(--line); scroll-margin-top: 5.5rem;
+    }
+    #research .paper > .pub-thumb { float: none; width: auto; margin: 0.2rem 0 0; padding: 0.35rem; }
+    .paper:hover > .pub-thumb { border-color: var(--blue-mid); }
+    .paper > .fold { border-bottom: 0; }
+    .paper > .fold > summary { padding: 0; }
+    .paper .pub-tldr { grid-column: 1 / -1; margin-top: 0.15rem; }
+    .paper-main { padding: 0.45rem 0 0.3rem; }
+    .paper-main > .paper-full-title { margin: 0 0 0.2rem; }
+    .paper-main > .pub-contrib { margin: 0 0 0.5rem; }
     .paper-main > .pub-meta { margin-top: 0.6rem; }
 
     @media (max-width: 600px) {
@@ -1512,8 +1522,35 @@
       .fold-meta { white-space: normal; flex-wrap: wrap; gap: 0 0.85rem; }
       .fold.bg > .fold-body { padding: 0 0 0.6rem; }
       .fold.current-project { padding: 0.7rem 1rem 0.75rem; }
-      .paper-body { display: flow-root; }
+      .paper { grid-template-columns: minmax(0, 1fr) 84px; column-gap: 0.8rem; }
+      .paper > .pub-thumb { grid-column: 2; grid-row: 1; }
+      .paper > .fold { grid-column: 1; grid-row: 1; }
+      .paper > .fold > summary { min-height: 3.75rem; align-content: start; }
+      /* Below the figure, text runs the full width again. */
+      .paper .pub-tldr { margin-top: 0.5rem; }
+      .paper .pub-tldr, .paper-main { margin-right: calc(-84px - 0.8rem); }
     }
+
+    /* ═══ TYPE PASS ═══
+       Measured every text element in the browser and removed the strays:
+       two weights (regular, strong), three line heights (title, body, small),
+       no leftover mono/uppercase labels, and BibTeX actually set in DM Mono. */
+    :root { --w-regular: 350; --w-strong: 500; }
+    html[data-theme="light"] { --w-regular: 400; } /* dark-on-light type reads thinner */
+    body, button, .hero-status, .pub-tldr, .name-familiar, .nav-links a, .hero-links a, .kicker-text,
+    .fold-all, .r-eyebrow, .pub-link, .pub-role, .footer-note, .figure-close { font-weight: var(--w-regular); }
+    strong, .current-badge, h3.group-label, .pub-venue, .bib-copy, .skip-link { font-weight: var(--w-strong); }
+
+    .hero-bio, .bg-role { line-height: var(--lh-body); }
+    .institution-name, .name-familiar, .logo-text { line-height: var(--lh-title); }
+    .institution-date { line-height: var(--lh-small); }
+    .logo-text { letter-spacing: 0; }
+
+    .skip-link { font-family: var(--sans); font-size: var(--text-small); line-height: var(--lh-small); letter-spacing: 0; text-transform: none; }
+    .bib-copy { font-size: var(--text-small); padding: 0.3rem 0.7rem; }
+    .bib code { font: inherit; }
+    .figure-dialog h2 { font: var(--w-strong) var(--text-body)/var(--lh-body) var(--sans); }
+    .paper-full-title { color: var(--ink); }
 
     @media print {
       body::after, .progress, .sec-head::after, .xp-list::before, .xp-item::before { display: none !important; }
@@ -1667,17 +1704,17 @@
       </details>
       <h3 class="group-label">Publications</h3>
       <div class="fold-list" id="publications">
-        <details class="fold paper" id="pub-anchor">
-          <summary>
-            <h4 class="pub-title">ANCHOR — speech quality from partial audio</h4>
-            <span class="fold-meta"><span class="pub-venue">Interspeech 2026 · Oral</span><span class="pub-role">First author</span></span>
-          </summary>
-          <div class="paper-body">
-            <a class="pub-thumb" href="assets/papers/anchor.webp" aria-label="Enlarge figure: ANCHOR model overview">
-              <img src="assets/papers/anchor.webp" width="502" height="232" loading="lazy" decoding="async" alt="ANCHOR model overview" />
-            </a>
+        <article class="paper" id="pub-anchor">
+          <a class="pub-thumb" href="assets/papers/anchor.webp" aria-label="Enlarge figure: ANCHOR model overview">
+            <img src="assets/papers/anchor.webp" width="502" height="232" loading="lazy" decoding="async" alt="ANCHOR model overview" />
+          </a>
+          <details class="fold">
+            <summary>
+              <h4 class="pub-title">ANCHOR — speech quality from partial audio</h4>
+              <span class="fold-meta"><span class="pub-venue">Interspeech 2026 · Oral</span><span class="pub-role">First author</span></span>
+              <span class="pub-tldr">Predicts how listeners will rate speech before the utterance finishes, with <strong>21–35% lower PLCMOS error</strong> than ARECHO on 2-second prefixes.</span>
+            </summary>
             <div class="paper-main">
-              <p class="pub-tldr">Predicts how listeners will rate speech before the utterance finishes, with <strong>21–35% lower PLCMOS error</strong> than ARECHO on 2-second prefixes.</p>
               <p class="paper-full-title"><a class="meta-link" href="https://www.isca-archive.org/interspeech_2026/tao26_interspeech.html" target="_blank" rel="noopener">ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling</a></p>
               <div class="pub-authors"><strong>Zhuoyan Tao</strong>, Jiatong Shi, Hye-jin Shim, Shinji Watanabe</div>
               <div class="pub-cite">Proc. Interspeech 2026, pp. 5672–5677</div>
@@ -1687,7 +1724,7 @@
                 <a class="pub-link" href="https://huggingface.co/spaces/ZhuoyanTao/anchor-demo" target="_blank" rel="noopener" aria-label="ANCHOR live demo on Hugging Face">Try the demo ↗&#xFE0E;</a>
                 <button class="pub-link bib-toggle" type="button" aria-expanded="false" aria-controls="bib-anchor" aria-label="BibTeX for ANCHOR">BibTeX</button>
               </div>
-            <div class="bib" id="bib-anchor" hidden>
+              <div class="bib" id="bib-anchor" hidden>
 <pre><code>@inproceedings{tao26_interspeech,
   title     = {{ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling}},
   author    = {Zhuoyan Tao and Jiatong Shi and Hye-jin Shim and Shinji Watanabe},
@@ -1698,21 +1735,21 @@
   issn      = {2958-1796},
 }</code></pre>
               <button class="bib-copy" type="button">Copy</button>
+              </div>
             </div>
-            </div>
-          </div>
-        </details>
-        <details class="fold paper" id="pub-turnbench">
-          <summary>
-            <h4 class="pub-title">TurnBench — evaluating conversational turn-taking</h4>
-            <span class="fold-meta"><span class="pub-venue">IEEE SLT 2026</span></span>
-          </summary>
-          <div class="paper-body">
-            <a class="pub-thumb" href="assets/papers/turnbench.webp" aria-label="Enlarge figure: TurnBench turn-taking overview">
-              <img src="assets/papers/turnbench.webp" width="720" height="308" loading="lazy" decoding="async" alt="TurnBench turn-taking overview" />
-            </a>
+          </details>
+        </article>
+        <article class="paper" id="pub-turnbench">
+          <a class="pub-thumb" href="assets/papers/turnbench.webp" aria-label="Enlarge figure: TurnBench turn-taking overview">
+            <img src="assets/papers/turnbench.webp" width="720" height="308" loading="lazy" decoding="async" alt="TurnBench turn-taking overview" />
+          </a>
+          <details class="fold">
+            <summary>
+              <h4 class="pub-title">TurnBench — evaluating conversational turn-taking</h4>
+              <span class="fold-meta"><span class="pub-venue">IEEE SLT 2026</span></span>
+              <span class="pub-tldr">A benchmark for when conversational systems should speak or wait.</span>
+            </summary>
             <div class="paper-main">
-              <p class="pub-tldr">A benchmark for when conversational systems should speak or wait.</p>
               <p class="pub-contrib">I helped design the evaluation protocol and contributed an ANCHOR-based baseline.</p>
               <p class="paper-full-title"><a class="meta-link" href="https://arxiv.org/abs/2608.25218" target="_blank" rel="noopener">TurnBench: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue</a></p>
               <div class="pub-authors">Freeman Jiang, Ramon Sanabria, Soham Deshmukh, …, <strong>Zhuoyan Tao</strong>, …, Hung-yi Lee, Shinji Watanabe <span class="pub-count">(19 authors)</span></div>
@@ -1723,7 +1760,7 @@
                 <a class="pub-link" href="https://turnbench.sesame.com" target="_blank" rel="noopener" aria-label="TurnBench leaderboard">Leaderboard ↗&#xFE0E;</a>
                 <button class="pub-link bib-toggle" type="button" aria-expanded="false" aria-controls="bib-turnbench" aria-label="BibTeX for TurnBench">BibTeX</button>
               </div>
-            <div class="bib" id="bib-turnbench" hidden>
+              <div class="bib" id="bib-turnbench" hidden>
 <pre><code>@inproceedings{jiang2026turnbench,
   title         = {{TurnBench}: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue},
   author        = {Freeman Jiang and Ramon Sanabria and Soham Deshmukh and Bandhav Veluri and Simon Michael Vuch Williams and Elliott K. Suen and Garreth Lee and Kevin Yoonho Choi and Takuya Umeki and Riku Kubo and Sathvik Udupa and Chien-yu Huang and Shih-Yun Shan Kuan and Zhuoyan Tao and Satyapriya Krishna and Sefik Emre Eskimez and Yu Tsao and Hung-yi Lee and Shinji Watanabe},
@@ -1733,21 +1770,21 @@
   archivePrefix = {arXiv},
 }</code></pre>
               <button class="bib-copy" type="button">Copy</button>
+              </div>
             </div>
-            </div>
-          </div>
-        </details>
-        <details class="fold paper" id="pub-otpm">
-          <summary>
-            <h4 class="pub-title">When does language-ID fine-tuning help?</h4>
-            <span class="fold-meta"><span class="pub-venue pending">JASA-EL · Under review</span><span class="pub-role">First author</span></span>
-          </summary>
-          <div class="paper-body">
-            <a class="pub-thumb" href="assets/papers/otpm.webp" aria-label="Enlarge figure: Off-target posterior mass and probe gain prediction">
-              <img src="assets/papers/otpm.webp" width="720" height="238" loading="lazy" decoding="async" alt="Off-target posterior mass and probe gain prediction" />
-            </a>
+          </details>
+        </article>
+        <article class="paper" id="pub-otpm">
+          <a class="pub-thumb" href="assets/papers/otpm.webp" aria-label="Enlarge figure: Off-target posterior mass and probe gain prediction">
+            <img src="assets/papers/otpm.webp" width="720" height="238" loading="lazy" decoding="async" alt="Off-target posterior mass and probe gain prediction" />
+          </a>
+          <details class="fold">
+            <summary>
+              <h4 class="pub-title">When does language-ID fine-tuning help?</h4>
+              <span class="fold-meta"><span class="pub-venue pending">JASA-EL · Under review</span><span class="pub-role">First author</span></span>
+              <span class="pub-tldr">A single training-free number, computed from language-ID posteriors, that forecasts whether fine-tuning a diarization probe will pay off.</span>
+            </summary>
             <div class="paper-main">
-              <p class="pub-tldr">A single training-free number, computed from language-ID posteriors, that forecasts whether fine-tuning a diarization probe will pay off.</p>
               <p class="paper-full-title"><a class="meta-link" href="https://arxiv.org/abs/2611.13430" target="_blank" rel="noopener">Off-target posterior mass: A training-free diagnostic for fine-tuning spoken language diarization probes</a></p>
               <div class="pub-authors"><strong>Zhuoyan Tao</strong>, Aditya Kommineni, Shrikanth Narayanan</div>
               <div class="pub-cite">Submitted to JASA Express Letters · arXiv:2611.13430</div>
@@ -1756,7 +1793,7 @@
                 <a class="pub-link" href="https://arxiv.org/pdf/2611.13430" target="_blank" rel="noopener" aria-label="Off-target posterior mass paper PDF">PDF ↗&#xFE0E;</a>
                 <button class="pub-link bib-toggle" type="button" aria-expanded="false" aria-controls="bib-otpm" aria-label="BibTeX for off-target posterior mass">BibTeX</button>
               </div>
-            <div class="bib" id="bib-otpm" hidden>
+              <div class="bib" id="bib-otpm" hidden>
 <pre><code>@misc{tao2026offtarget,
   title         = {Off-target posterior mass: A training-free diagnostic for fine-tuning spoken language diarization probes},
   author        = {Zhuoyan Tao and Aditya Kommineni and Shrikanth Narayanan},
@@ -1766,10 +1803,10 @@
   primaryClass  = {eess.AS},
 }</code></pre>
               <button class="bib-copy" type="button">Copy</button>
+              </div>
             </div>
-            </div>
-          </div>
-        </details>
+          </details>
+        </article>
       </div>
       <p class="open-source-note">Open source: led ESPnet’s <a class="meta-link" href="https://github.com/espnet/espnet/pull/6636" target="_blank" rel="noopener">Sidon restoration recipe</a> and made <a class="meta-link" href="https://github.com/espnet/espnet/pull/6227" target="_blank" rel="noopener">speaker-embedding extraction &gt;20× faster</a>.</p>
     </div>
@@ -1932,7 +1969,7 @@
       function openHashTarget() {
         const id = decodeURIComponent(location.hash.slice(1));
         const target = id && document.getElementById(id);
-        const fold = target && target.closest('details.fold');
+        const fold = target && (target.closest('details.fold') || (target.classList.contains('paper') && target.querySelector('details.fold')));
         if (fold) { fold.open = true; fold.scrollIntoView(); }
       }
       openHashTarget();
