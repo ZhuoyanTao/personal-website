@@ -98,6 +98,9 @@
         "@type": "ScholarlyArticle",
         "@id": "https://www.zhuoyantao.com/#pub-anchor",
         "headline": "ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling",
+        "description": "Non-intrusive speech quality prediction from partial audio. ANCHOR extends ARECHO to model chunk- and utterance-level quality in one autoregressive decoder with dual-resolution query tokens, giving 21–35% lower PLCMOS error than ARECHO on 2-second prefixes and showing that quality judgments converge after a 4–6 s perceptual context horizon.",
+        "keywords": ["speech quality assessment", "non-intrusive MOS prediction", "streaming speech quality", "partial-utterance quality estimation", "PLCMOS", "ARECHO", "autoregressive decoder"],
+        "inLanguage": "en",
         "author": [
           { "@id": "https://www.zhuoyantao.com/#person" },
           { "@type": "Person", "name": "Jiatong Shi" },
@@ -115,6 +118,9 @@
         "@type": "ScholarlyArticle",
         "@id": "https://www.zhuoyantao.com/#pub-turnbench",
         "headline": "TurnBench: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue",
+        "description": "A benchmark for when conversational systems should speak or wait: thirty hours of hand-labeled, triple-annotated dyadic conversation across six interaction styles, a standardized protocol for end-of-turn and interruption detection, 14 benchmarked systems, a released 104-hour training set, and a public leaderboard.",
+        "keywords": ["turn-taking", "spoken dialogue systems", "end-of-turn detection", "interruption detection", "full-duplex conversation", "benchmark"],
+        "inLanguage": "en",
         "author": [
           { "@type": "Person", "name": "Freeman Jiang" },
           { "@type": "Person", "name": "Ramon Sanabria" },
@@ -138,19 +144,24 @@
         ],
         "datePublished": "2026",
         "isPartOf": { "@type": "PublicationVolume", "name": "Proceedings of the IEEE Spoken Language Technology Workshop (SLT) 2026" },
-        "url": "https://arxiv.org/abs/2608.25218"
+        "url": "https://arxiv.org/abs/2608.25218",
+        "sameAs": ["https://arxiv.org/pdf/2608.25218", "https://turnbench.sesame.com"]
       },
       {
         "@type": "ScholarlyArticle",
         "@id": "https://www.zhuoyantao.com/#pub-otpm",
         "headline": "Off-target posterior mass: A training-free diagnostic for fine-tuning spoken language diarization probes",
+        "description": "Off-target posterior mass (OTPM) is a single training-free number, computed from language-ID posteriors, that forecasts whether fine-tuning a spoken language diarization probe will pay off. It correlates with probe gains at 0.56 on unseen synthetic bilingual data and 0.23 on real-world corpora (DISPLACE; MUCS Hindi–English code-switching), across Whisper, MMS, and classical language-ID encoders.",
+        "keywords": ["spoken language diarization", "language identification", "code-switching", "fine-tuning diagnostics", "Whisper", "MMS", "multilingual speech"],
+        "inLanguage": "en",
         "author": [
           { "@id": "https://www.zhuoyantao.com/#person" },
           { "@type": "Person", "name": "Aditya Kommineni" },
           { "@type": "Person", "name": "Shrikanth Narayanan" }
         ],
         "datePublished": "2026-11-10",
-        "url": "https://arxiv.org/abs/2611.13430"
+        "url": "https://arxiv.org/abs/2611.13430",
+        "sameAs": ["https://arxiv.org/pdf/2611.13430"]
       }
     ]
   }
@@ -1544,13 +1555,25 @@
     }
     .more-toggle[aria-expanded="true"]::after, .bib-toggle[aria-expanded="true"]::after, .authors-toggle[aria-expanded="true"]::after { transform: translateY(0.05rem) rotate(-135deg); }
 
-    .paper-more, .bib pre { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+    .paper-more, .paper-grid > .bib { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+    .paper-grid > .bib pre { background: none; border: 0; border-radius: 0; }
+
+    /* Which paper an open panel belongs to: its name heads the panel, and card and panel share an accent border. */
+    .panel-head { display: none; }
+    .paper.is-open, .paper-grid > .paper-more, .paper-grid > .bib { border-color: var(--blue-mid); }
+    @media (min-width: 821px) {
+      .panel-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.75rem; }
+      .paper-more .panel-head { margin-bottom: 0.75rem; padding-bottom: 0.65rem; border-bottom: 1px solid var(--line); }
+      .bib .panel-head { padding: 0.8rem 6rem 0.65rem 1.1rem; border-bottom: 1px solid var(--line); }
+      .panel-name { font: 500 var(--text-lead)/var(--lh-title) var(--serif); color: var(--ink); }
+      .panel-kind { font-size: var(--text-small); line-height: var(--lh-small); color: var(--faint); }
+    }
     .paper-more { padding: 0.85rem 1.1rem 0.95rem; }
-    .paper-more > div { display: grid; grid-template-columns: 4.75rem minmax(0, 1fr); column-gap: 1rem; align-items: baseline; }
-    .paper-more > div + div { margin-top: 0.5rem; }
+    .paper-more dl > div { display: grid; grid-template-columns: 4.75rem minmax(0, 1fr); column-gap: 1rem; align-items: baseline; }
+    .paper-more dl > div + div { margin-top: 0.5rem; }
     .paper-more dt { font-size: var(--text-small); line-height: var(--lh-small); color: var(--faint); }
     .paper-more dd { font-size: var(--text-body); line-height: var(--lh-body); color: var(--body); }
-    .paper-more > div:first-child dd { color: var(--ink); }
+    .paper-more dl > div:first-child dd { color: var(--ink); }
     .paper .bib { max-width: none; margin-top: 0.7rem; }
 
     @media (max-width: 600px) {
@@ -1567,7 +1590,7 @@
       .paper .pub-thumb { grid-column: 2; grid-row: 1; }
       .paper .pub-title { grid-column: 1; grid-row: 1; margin: 0; }
       .paper-meta { margin: 0.3rem 0 0.1rem; padding: 0; }
-      .paper-more > div { grid-template-columns: 1fr; }
+      .paper-more dl > div { grid-template-columns: 1fr; }
       .paper-more { padding: 0.75rem 0.9rem 0.85rem; }
     }
 
@@ -1792,12 +1815,16 @@
             </div>
           </div>
         </article>
-        <dl class="paper-more" id="more-anchor" hidden>
-          <div><dt>Title</dt><dd>ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling</dd></div>
-          <div><dt>Venue</dt><dd>Proc. Interspeech 2026, pp. 5672–5677</dd></div>
-          <div><dt>Summary</dt><dd>Streaming and generative systems need quality estimates from partial audio, but existing predictors assume the full utterance. Extending ARECHO (NeurIPS 2025 Spotlight), ANCHOR models chunk- and utterance-level quality in one autoregressive decoder with dual-resolution query tokens, and shows that judgments converge after a 4–6 s perceptual context horizon.</dd></div>
-        </dl>
+        <div class="paper-more" id="more-anchor" hidden>
+          <p class="panel-head"><span class="panel-name">ANCHOR — speech quality from partial audio</span><span class="panel-kind">Details</span></p>
+          <dl>
+            <div><dt>Title</dt><dd>ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling</dd></div>
+            <div><dt>Venue</dt><dd>Proc. Interspeech 2026, pp. 5672–5677</dd></div>
+            <div><dt>Summary</dt><dd>Streaming and generative systems need quality estimates from partial audio, but existing predictors assume the full utterance. Extending ARECHO (NeurIPS 2025 Spotlight), ANCHOR models chunk- and utterance-level quality in one autoregressive decoder with dual-resolution query tokens, and shows that judgments converge after a 4–6 s perceptual context horizon.</dd></div>
+          </dl>
+        </div>
         <div class="bib" id="bib-anchor" hidden>
+          <p class="panel-head"><span class="panel-name">ANCHOR — speech quality from partial audio</span><span class="panel-kind">BibTeX</span></p>
 <pre><code>@inproceedings{tao26_interspeech,
   title     = {{ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling}},
   author    = {Zhuoyan Tao and Jiatong Shi and Hye-jin Shim and Shinji Watanabe},
@@ -1832,13 +1859,17 @@
             </div>
           </div>
         </article>
-        <dl class="paper-more" id="more-turnbench" hidden>
-          <div><dt>Title</dt><dd>TurnBench: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue</dd></div>
-          <div><dt>My role</dt><dd>I helped design the evaluation protocol and contributed an ANCHOR-based baseline.</dd></div>
-          <div><dt>Venue</dt><dd>Proc. IEEE Spoken Language Technology Workshop (SLT) 2026</dd></div>
-          <div><dt>Summary</dt><dd>Thirty hours of hand-labeled, triple-annotated dyadic conversation across six interaction styles, a standardized protocol for end-of-turn and interruption detection, 14 benchmarked systems, and a released 104-hour training set and public leaderboard.</dd></div>
-        </dl>
+        <div class="paper-more" id="more-turnbench" hidden>
+          <p class="panel-head"><span class="panel-name">TurnBench — evaluating conversational turn-taking</span><span class="panel-kind">Details</span></p>
+          <dl>
+            <div><dt>Title</dt><dd>TurnBench: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue</dd></div>
+            <div><dt>My role</dt><dd>I helped design the evaluation protocol and contributed an ANCHOR-based baseline.</dd></div>
+            <div><dt>Venue</dt><dd>Proc. IEEE Spoken Language Technology Workshop (SLT) 2026</dd></div>
+            <div><dt>Summary</dt><dd>Thirty hours of hand-labeled, triple-annotated dyadic conversation across six interaction styles, a standardized protocol for end-of-turn and interruption detection, 14 benchmarked systems, and a released 104-hour training set and public leaderboard.</dd></div>
+          </dl>
+        </div>
         <div class="bib" id="bib-turnbench" hidden>
+          <p class="panel-head"><span class="panel-name">TurnBench — evaluating conversational turn-taking</span><span class="panel-kind">BibTeX</span></p>
 <pre><code>@inproceedings{jiang2026turnbench,
   title         = {{TurnBench}: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue},
   author        = {Freeman Jiang and Ramon Sanabria and Soham Deshmukh and Bandhav Veluri and Simon Michael Vuch Williams and Elliott K. Suen and Garreth Lee and Kevin Yoonho Choi and Takuya Umeki and Riku Kubo and Sathvik Udupa and Chien-yu Huang and Shih-Yun Shan Kuan and Zhuoyan Tao and Satyapriya Krishna and Sefik Emre Eskimez and Yu Tsao and Hung-yi Lee and Shinji Watanabe},
@@ -1867,12 +1898,16 @@
             </div>
           </div>
         </article>
-        <dl class="paper-more" id="more-otpm" hidden>
-          <div><dt>Title</dt><dd>Off-target posterior mass: A training-free diagnostic for fine-tuning spoken language diarization probes</dd></div>
-          <div><dt>Venue</dt><dd>Submitted to JASA Express Letters · arXiv:2611.13430</dd></div>
-          <div><dt>Summary</dt><dd>Off-target posterior mass (OTPM) correlates with probe gains at 0.56 on unseen synthetic bilingual data and 0.23 on real-world corpora (DISPLACE; MUCS Hindi–English code-switching). The evaluation was pre-registered on unseen language pairs and run across Whisper, MMS, and classical language-ID encoders.</dd></div>
-        </dl>
+        <div class="paper-more" id="more-otpm" hidden>
+          <p class="panel-head"><span class="panel-name">When does language-ID fine-tuning help?</span><span class="panel-kind">Details</span></p>
+          <dl>
+            <div><dt>Title</dt><dd>Off-target posterior mass: A training-free diagnostic for fine-tuning spoken language diarization probes</dd></div>
+            <div><dt>Venue</dt><dd>Submitted to JASA Express Letters · arXiv:2611.13430</dd></div>
+            <div><dt>Summary</dt><dd>Off-target posterior mass (OTPM) correlates with probe gains at 0.56 on unseen synthetic bilingual data and 0.23 on real-world corpora (DISPLACE; MUCS Hindi–English code-switching). The evaluation was pre-registered on unseen language pairs and run across Whisper, MMS, and classical language-ID encoders.</dd></div>
+          </dl>
+        </div>
         <div class="bib" id="bib-otpm" hidden>
+          <p class="panel-head"><span class="panel-name">When does language-ID fine-tuning help?</span><span class="panel-kind">BibTeX</span></p>
 <pre><code>@misc{tao2026offtarget,
   title         = {Off-target posterior mass: A training-free diagnostic for fine-tuning spoken language diarization probes},
   author        = {Zhuoyan Tao and Aditya Kommineni and Shrikanth Narayanan},
@@ -2032,6 +2067,8 @@
         if (!panel) return;
         btn.setAttribute('aria-expanded', String(open));
         panel.hidden = !open;
+        const card = btn.closest('.paper');
+        if (card) card.classList.toggle('is-open', Boolean(card.querySelector('.more-toggle[aria-expanded="true"], .bib-toggle[aria-expanded="true"]')));
         btn.dispatchEvent(new CustomEvent('panelchange', { bubbles: true }));
       }
       document.querySelectorAll('.more-toggle, .bib-toggle').forEach(btn => {

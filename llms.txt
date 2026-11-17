@@ -10,9 +10,48 @@ Contact: terrytao@andrew.cmu.edu. Based in Pittsburgh, PA.
 - Multilingual and code-switched speech: a training-free diagnostic (off-target posterior mass) for when fine-tuning spoken language diarization probes pays off.
 
 ## Publications
-- [ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling](https://doi.org/10.21437/Interspeech.2026-927): Z. Tao, J. Shi, H. Shim, S. Watanabe. Proc. Interspeech 2026, pp. 5672-5677. Oral. First author. arXiv:2606.10233.
-- [TurnBench: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue](https://arxiv.org/abs/2608.25218): F. Jiang, R. Sanabria, S. Deshmukh, ..., Z. Tao, ..., H.-y. Lee, S. Watanabe. Proc. IEEE SLT 2026.
+- [ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling](https://doi.org/10.21437/Interspeech.2026-927): Z. Tao, J. Shi, H. Shim, S. Watanabe. Proc. Interspeech 2026, pp. 5672-5677. Oral. First author. arXiv:2606.10233. [PDF](https://www.isca-archive.org/interspeech_2026/tao26_interspeech.pdf).
+  - What it shows: perceived speech quality can be predicted from partial audio. One autoregressive decoder models chunk- and utterance-level quality with dual-resolution query tokens; 21-35% lower PLCMOS error than ARECHO on 2-second prefixes; quality judgments converge after a 4-6 s perceptual context horizon.
+  - Topics: non-intrusive speech quality assessment, streaming or partial-utterance MOS prediction, quality estimation for streaming and generative speech systems.
+- [TurnBench: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue](https://arxiv.org/abs/2608.25218): F. Jiang, R. Sanabria, S. Deshmukh, ..., Z. Tao, ..., H.-y. Lee, S. Watanabe (19 authors). Proc. IEEE SLT 2026. [Leaderboard](https://turnbench.sesame.com).
+  - What it provides: 30 hours of hand-labeled, triple-annotated dyadic conversation across six interaction styles; a standardized protocol for end-of-turn and interruption detection; 14 benchmarked systems; a released 104-hour training set.
+  - Topics: turn-taking, end-of-turn and interruption detection, evaluation of spoken dialogue and full-duplex conversational systems.
 - [Off-target posterior mass: A training-free diagnostic for fine-tuning spoken language diarization probes](https://arxiv.org/abs/2611.13430): Z. Tao, A. Kommineni, S. Narayanan. Submitted to JASA Express Letters, 2026. First author.
+  - What it shows: one training-free number computed from language-ID posteriors (OTPM) forecasts whether fine-tuning a diarization probe will help; correlation with probe gains of 0.56 on unseen synthetic bilingual data and 0.23 on real-world corpora (DISPLACE; MUCS Hindi-English code-switching); evaluated across Whisper, MMS, and classical language-ID encoders.
+  - Topics: spoken language diarization, language identification, code-switched and multilingual speech, deciding when to fine-tune.
+
+## How to cite
+BibTeX for the three papers above:
+
+```bibtex
+@inproceedings{tao26_interspeech,
+  title     = {{ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling}},
+  author    = {Zhuoyan Tao and Jiatong Shi and Hye-jin Shim and Shinji Watanabe},
+  year      = {2026},
+  booktitle = {{Interspeech 2026}},
+  pages     = {5672--5677},
+  doi       = {10.21437/Interspeech.2026-927},
+  issn      = {2958-1796},
+}
+
+@inproceedings{jiang2026turnbench,
+  title         = {{TurnBench}: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue},
+  author        = {Freeman Jiang and Ramon Sanabria and Soham Deshmukh and Bandhav Veluri and Simon Michael Vuch Williams and Elliott K. Suen and Garreth Lee and Kevin Yoonho Choi and Takuya Umeki and Riku Kubo and Sathvik Udupa and Chien-yu Huang and Shih-Yun Shan Kuan and Zhuoyan Tao and Satyapriya Krishna and Sefik Emre Eskimez and Yu Tsao and Hung-yi Lee and Shinji Watanabe},
+  booktitle     = {Proc. IEEE Spoken Language Technology Workshop (SLT)},
+  year          = {2026},
+  eprint        = {2608.25218},
+  archivePrefix = {arXiv},
+}
+
+@misc{tao2026offtarget,
+  title         = {Off-target posterior mass: A training-free diagnostic for fine-tuning spoken language diarization probes},
+  author        = {Zhuoyan Tao and Aditya Kommineni and Shrikanth Narayanan},
+  year          = {2026},
+  eprint        = {2611.13430},
+  archivePrefix = {arXiv},
+  primaryClass  = {eess.AS},
+}
+```
 
 ## Experience
 - Apple, Software Engineering Intern, Satellite Connectivity (Austin, TX; May-Aug 2026): sole author of a sweep-orchestration tool for the team's satellite network simulator (~1000x experiment throughput, ~2000 concurrent experiments; presented org-wide); Gaussian-process sensitivity analysis; ~12x speedup of the interference-computation hot path; root-caused a Python/Go clock-scheduler race that under-reported capacity by up to ~2x.
