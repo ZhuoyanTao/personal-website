@@ -1511,7 +1511,9 @@
     #research .paper .pub-thumb { float: none; width: auto; margin: 0; padding: 0.35rem; aspect-ratio: 2 / 1; }
     .paper:hover .pub-thumb { border-color: var(--blue-mid); }
     .paper-meta { display: flex; flex-direction: column; padding-left: 1px; }
-    .paper .pub-title { margin: -0.15rem 0 0.3rem; }
+    .paper .pub-title { margin: -0.15rem 0 0.2rem; }
+    .paper .pub-authors { max-width: 46rem; margin-bottom: 0.4rem; color: var(--faint); }
+    .paper .pub-authors strong { color: var(--ink); }
     .paper .pub-tldr { max-width: 44rem; }
     .paper .pub-meta { margin-top: 0.55rem; gap: 0.3rem 1.25rem; }
 
@@ -1544,7 +1546,7 @@
       .paper-side > *, .paper-body > * { grid-column: 1 / -1; }
       .paper .pub-thumb { grid-column: 2; grid-row: 1; }
       .paper .pub-title { grid-column: 1; grid-row: 1; margin: 0; }
-      .paper-meta { flex-direction: row; flex-wrap: wrap; gap: 0 0.85rem; margin: 0.3rem 0 0.35rem; padding: 0; }
+      .paper-meta { margin: 0.3rem 0 0.1rem; padding: 0; }
       .paper-more > div { grid-template-columns: 1fr; }
       .paper-more { padding: 0.75rem 0.9rem 0.85rem; }
     }
@@ -1599,7 +1601,7 @@
 
     /* Small organisation mark that rides along with its name in running text. */
     .org-inline { white-space: nowrap; }
-    .inline-mark { display: inline-block; width: 0.95em; height: 0.95em; margin-left: 0.3em; vertical-align: -0.14em; fill: var(--ink); }
+    .inline-mark { display: inline-block; width: 0.95em; height: 0.95em; margin-right: 0.3em; vertical-align: -0.14em; fill: var(--ink); }
 
     /* Not clickable, so not blue. */
     .pub-venue { color: var(--ink); }
@@ -1689,7 +1691,7 @@
 
       <div class="hero-rule" aria-hidden="true"></div>
 
-      <p class="hero-bio">I'm Terry, a master's student at CMU working with <a class="meta-link" href="https://sw005320.github.io/" target="_blank" rel="noopener">Prof. Shinji Watanabe</a> at <a class="meta-link" href="https://wavlab.org" target="_blank" rel="noopener">WavLab</a>. I work on recovering speech from damaged audio and predicting how it sounds to listeners. I'm currently the lead student researcher on an <span class="org-inline">Amazon AGI<!-- Amazon icon: Simple Icons, CC0 (simple-icons/simple-icons). --><svg class="inline-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 7.594 3.166 11.87 3.166 2.852 0 5.668-.533 8.447-1.595l.315-.14c.138-.06.234-.1.293-.13.226-.088.39-.046.525.13.12.174.09.336-.12.48-.256.19-.6.41-1.006.654-1.244.743-2.64 1.316-4.185 1.726a17.617 17.617 0 01-10.951-.577 17.88 17.88 0 01-5.43-3.35c-.1-.074-.151-.15-.151-.22 0-.047.021-.09.051-.13zm6.565-6.218c0-1.005.247-1.863.743-2.577.495-.71 1.17-1.25 2.04-1.615.796-.335 1.756-.575 2.912-.72.39-.046 1.033-.103 1.92-.174v-.37c0-.93-.105-1.558-.3-1.875-.302-.43-.78-.65-1.44-.65h-.182c-.48.046-.896.196-1.246.46-.35.27-.575.63-.675 1.096-.06.3-.206.465-.435.51l-2.52-.315c-.248-.06-.372-.18-.372-.39 0-.046.007-.09.022-.15.247-1.29.855-2.25 1.82-2.88.976-.616 2.1-.975 3.39-1.05h.54c1.65 0 2.957.434 3.888 1.29.135.15.27.3.405.48.12.165.224.314.283.45.075.134.15.33.195.57.06.254.105.42.135.51.03.104.062.3.076.615.01.313.02.493.02.553v5.28c0 .376.06.72.165 1.036.105.313.21.54.315.674l.51.674c.09.136.136.256.136.36 0 .12-.06.226-.18.314-1.2 1.05-1.86 1.62-1.963 1.71-.165.135-.375.15-.63.045a6.062 6.062 0 01-.526-.496l-.31-.347a9.391 9.391 0 01-.317-.42l-.3-.435c-.81.886-1.603 1.44-2.4 1.665-.494.15-1.093.227-1.83.227-1.11 0-2.04-.343-2.76-1.034-.72-.69-1.08-1.665-1.08-2.94l-.05-.076zm3.753-.438c0 .566.14 1.02.425 1.364.285.34.675.512 1.155.512.045 0 .106-.007.195-.02.09-.016.134-.023.166-.023.614-.16 1.08-.553 1.424-1.178.165-.28.285-.58.36-.91.09-.32.12-.59.135-.8.015-.195.015-.54.015-1.005v-.54c-.84 0-1.484.06-1.92.18-1.275.36-1.92 1.17-1.92 2.43l-.035-.02zm9.162 7.027c.03-.06.075-.11.132-.17.362-.243.714-.41 1.05-.5a8.094 8.094 0 011.612-.24c.14-.012.28 0 .41.03.65.06 1.05.168 1.172.33.063.09.099.228.099.39v.15c0 .51-.149 1.11-.424 1.8-.278.69-.664 1.248-1.156 1.68-.073.06-.14.09-.197.09-.03 0-.06 0-.09-.012-.09-.044-.107-.12-.064-.24.54-1.26.806-2.143.806-2.64 0-.15-.03-.27-.087-.344-.145-.166-.55-.257-1.224-.257-.243 0-.533.016-.87.046-.363.045-.7.09-1 .135-.09 0-.148-.014-.18-.044-.03-.03-.036-.047-.02-.077 0-.017.006-.03.02-.063v-.06z"/></svg></span> project on target-speaker speech restoration.</p>
+      <p class="hero-bio">I'm Terry, a master's student at CMU working with <a class="meta-link" href="https://sw005320.github.io/" target="_blank" rel="noopener">Prof. Shinji Watanabe</a> at <a class="meta-link" href="https://wavlab.org" target="_blank" rel="noopener">WavLab</a>. I work on recovering speech from damaged audio and predicting how it sounds to listeners. I'm currently the lead student researcher on an <span class="org-inline"><!-- Amazon icon: Simple Icons, CC0 (simple-icons/simple-icons). --><svg class="inline-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 7.594 3.166 11.87 3.166 2.852 0 5.668-.533 8.447-1.595l.315-.14c.138-.06.234-.1.293-.13.226-.088.39-.046.525.13.12.174.09.336-.12.48-.256.19-.6.41-1.006.654-1.244.743-2.64 1.316-4.185 1.726a17.617 17.617 0 01-10.951-.577 17.88 17.88 0 01-5.43-3.35c-.1-.074-.151-.15-.151-.22 0-.047.021-.09.051-.13zm6.565-6.218c0-1.005.247-1.863.743-2.577.495-.71 1.17-1.25 2.04-1.615.796-.335 1.756-.575 2.912-.72.39-.046 1.033-.103 1.92-.174v-.37c0-.93-.105-1.558-.3-1.875-.302-.43-.78-.65-1.44-.65h-.182c-.48.046-.896.196-1.246.46-.35.27-.575.63-.675 1.096-.06.3-.206.465-.435.51l-2.52-.315c-.248-.06-.372-.18-.372-.39 0-.046.007-.09.022-.15.247-1.29.855-2.25 1.82-2.88.976-.616 2.1-.975 3.39-1.05h.54c1.65 0 2.957.434 3.888 1.29.135.15.27.3.405.48.12.165.224.314.283.45.075.134.15.33.195.57.06.254.105.42.135.51.03.104.062.3.076.615.01.313.02.493.02.553v5.28c0 .376.06.72.165 1.036.105.313.21.54.315.674l.51.674c.09.136.136.256.136.36 0 .12-.06.226-.18.314-1.2 1.05-1.86 1.62-1.963 1.71-.165.135-.375.15-.63.045a6.062 6.062 0 01-.526-.496l-.31-.347a9.391 9.391 0 01-.317-.42l-.3-.435c-.81.886-1.603 1.44-2.4 1.665-.494.15-1.093.227-1.83.227-1.11 0-2.04-.343-2.76-1.034-.72-.69-1.08-1.665-1.08-2.94l-.05-.076zm3.753-.438c0 .566.14 1.02.425 1.364.285.34.675.512 1.155.512.045 0 .106-.007.195-.02.09-.016.134-.023.166-.023.614-.16 1.08-.553 1.424-1.178.165-.28.285-.58.36-.91.09-.32.12-.59.135-.8.015-.195.015-.54.015-1.005v-.54c-.84 0-1.484.06-1.92.18-1.275.36-1.92 1.17-1.92 2.43l-.035-.02zm9.162 7.027c.03-.06.075-.11.132-.17.362-.243.714-.41 1.05-.5a8.094 8.094 0 011.612-.24c.14-.012.28 0 .41.03.65.06 1.05.168 1.172.33.063.09.099.228.099.39v.15c0 .51-.149 1.11-.424 1.8-.278.69-.664 1.248-1.156 1.68-.073.06-.14.09-.197.09-.03 0-.06 0-.09-.012-.09-.044-.107-.12-.064-.24.54-1.26.806-2.143.806-2.64 0-.15-.03-.27-.087-.344-.145-.166-.55-.257-1.224-.257-.243 0-.533.016-.87.046-.363.045-.7.09-1 .135-.09 0-.148-.014-.18-.044-.03-.03-.036-.047-.02-.077 0-.017.006-.03.02-.063v-.06z"/></svg>Amazon AGI</span> project on target-speaker speech restoration.</p>
 
 
       <p class="hero-status">
@@ -1756,10 +1758,11 @@
             <a class="pub-thumb" href="assets/papers/anchor.webp" aria-label="Enlarge figure: ANCHOR model overview">
               <img src="assets/papers/anchor.webp" width="502" height="232" loading="lazy" decoding="async" alt="ANCHOR model overview" />
             </a>
-            <p class="paper-meta"><span class="pub-venue">Interspeech 2026 · Oral</span><span class="pub-role">First author</span></p>
+            <p class="paper-meta"><span class="pub-venue">Interspeech 2026 · Oral</span></p>
           </div>
           <div class="paper-body">
             <h3 class="pub-title"><a href="https://www.isca-archive.org/interspeech_2026/tao26_interspeech.html" target="_blank" rel="noopener">ANCHOR — speech quality from partial audio</a></h3>
+            <p class="pub-authors"><strong>Zhuoyan Tao</strong>, Jiatong Shi, Hye-jin Shim, Shinji Watanabe</p>
             <p class="pub-tldr">Predicts how listeners will rate speech before the utterance finishes, with <strong>21–35% lower PLCMOS error</strong> than ARECHO on 2-second prefixes.</p>
             <div class="pub-meta">
               <button class="pub-link more-toggle" type="button" aria-expanded="false" aria-controls="more-anchor" aria-label="Details for ANCHOR">Details</button>
@@ -1769,7 +1772,6 @@
             </div>
             <dl class="paper-more" id="more-anchor" hidden>
               <div><dt>Title</dt><dd>ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling</dd></div>
-              <div><dt>Authors</dt><dd><strong>Zhuoyan Tao</strong>, Jiatong Shi, Hye-jin Shim, Shinji Watanabe</dd></div>
               <div><dt>Venue</dt><dd>Proc. Interspeech 2026, pp. 5672–5677</dd></div>
               <div><dt>Summary</dt><dd>Streaming and generative systems need quality estimates from partial audio, but existing predictors assume the full utterance. Extending ARECHO (NeurIPS 2025 Spotlight), ANCHOR models chunk- and utterance-level quality in one autoregressive decoder with dual-resolution query tokens, and shows that judgments converge after a 4–6 s perceptual context horizon.</dd></div>
             </dl>
@@ -1792,10 +1794,11 @@
             <a class="pub-thumb" href="assets/papers/turnbench.webp" aria-label="Enlarge figure: TurnBench turn-taking overview">
               <img src="assets/papers/turnbench.webp" width="720" height="308" loading="lazy" decoding="async" alt="TurnBench turn-taking overview" />
             </a>
-            <p class="paper-meta"><span class="pub-venue">IEEE SLT 2026</span><span class="pub-role">Co-author</span></p>
+            <p class="paper-meta"><span class="pub-venue">IEEE SLT 2026</span></p>
           </div>
           <div class="paper-body">
             <h3 class="pub-title"><a href="https://arxiv.org/abs/2608.25218" target="_blank" rel="noopener">TurnBench — evaluating conversational turn-taking</a></h3>
+            <p class="pub-authors">Freeman Jiang, Ramon Sanabria, Soham Deshmukh, Bandhav Veluri, Simon Michael Vuch Williams, Elliott K. Suen, Garreth Lee, Kevin Yoonho Choi, Takuya Umeki, Riku Kubo, Sathvik Udupa, Chien-yu Huang, Shih-Yun Shan Kuan, <strong>Zhuoyan Tao</strong>, Satyapriya Krishna, Sefik Emre Eskimez, Yu Tsao, Hung-yi Lee, Shinji Watanabe</p>
             <p class="pub-tldr">A benchmark for when conversational systems should speak or wait.</p>
             <div class="pub-meta">
               <button class="pub-link more-toggle" type="button" aria-expanded="false" aria-controls="more-turnbench" aria-label="Details for TurnBench">Details</button>
@@ -1805,7 +1808,6 @@
             </div>
             <dl class="paper-more" id="more-turnbench" hidden>
               <div><dt>Title</dt><dd>TurnBench: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue</dd></div>
-              <div><dt>Authors</dt><dd>Freeman Jiang, Ramon Sanabria, Soham Deshmukh, …, <strong>Zhuoyan Tao</strong>, …, Hung-yi Lee, Shinji Watanabe (19 authors)</dd></div>
               <div><dt>My role</dt><dd>I helped design the evaluation protocol and contributed an ANCHOR-based baseline.</dd></div>
               <div><dt>Venue</dt><dd>Proc. IEEE Spoken Language Technology Workshop (SLT) 2026</dd></div>
               <div><dt>Summary</dt><dd>Thirty hours of hand-labeled, triple-annotated dyadic conversation across six interaction styles, a standardized protocol for end-of-turn and interruption detection, 14 benchmarked systems, and a released 104-hour training set and public leaderboard.</dd></div>
@@ -1828,10 +1830,11 @@
             <a class="pub-thumb" href="assets/papers/otpm.webp" aria-label="Enlarge figure: Off-target posterior mass and probe gain prediction">
               <img src="assets/papers/otpm.webp" width="720" height="238" loading="lazy" decoding="async" alt="Off-target posterior mass and probe gain prediction" />
             </a>
-            <p class="paper-meta"><span class="pub-venue pending">JASA-EL · Under review</span><span class="pub-role">First author</span></p>
+            <p class="paper-meta"><span class="pub-venue pending">JASA-EL · Under review</span></p>
           </div>
           <div class="paper-body">
             <h3 class="pub-title"><a href="https://arxiv.org/abs/2611.13430" target="_blank" rel="noopener">When does language-ID fine-tuning help?</a></h3>
+            <p class="pub-authors"><strong>Zhuoyan Tao</strong>, Aditya Kommineni, Shrikanth Narayanan</p>
             <p class="pub-tldr">A single training-free number, computed from language-ID posteriors, that forecasts whether fine-tuning a diarization probe will pay off.</p>
             <div class="pub-meta">
               <button class="pub-link more-toggle" type="button" aria-expanded="false" aria-controls="more-otpm" aria-label="Details for off-target posterior mass">Details</button>
@@ -1840,7 +1843,6 @@
             </div>
             <dl class="paper-more" id="more-otpm" hidden>
               <div><dt>Title</dt><dd>Off-target posterior mass: A training-free diagnostic for fine-tuning spoken language diarization probes</dd></div>
-              <div><dt>Authors</dt><dd><strong>Zhuoyan Tao</strong>, Aditya Kommineni, Shrikanth Narayanan</dd></div>
               <div><dt>Venue</dt><dd>Submitted to JASA Express Letters · arXiv:2611.13430</dd></div>
               <div><dt>Summary</dt><dd>Off-target posterior mass (OTPM) correlates with probe gains at 0.56 on unseen synthetic bilingual data and 0.23 on real-world corpora (DISPLACE; MUCS Hindi–English code-switching). The evaluation was pre-registered on unseen language pairs and run across Whisper, MMS, and classical language-ID encoders.</dd></div>
             </dl>
