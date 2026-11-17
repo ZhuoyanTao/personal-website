@@ -1368,9 +1368,9 @@
     html[data-theme="light"] ::-webkit-scrollbar-thumb { background: #cdd0d6; }
     html[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: #b6bac2; }
     html[data-theme="light"] .hero-bio { color: var(--body); }
-    html[data-theme="light"] .nav-links a, html[data-theme="light"] .hero-links a { color: rgba(var(--ink-rgb),0.72); }
+    html[data-theme="light"] .nav-links a { color: rgba(var(--ink-rgb),0.72); }
     html[data-theme="light"] .nav-links a:hover, html[data-theme="light"] .nav-links a.active,
-    html[data-theme="light"] .nav-links a.nav-cta, html[data-theme="light"] .hero-links a:hover { color: var(--ink); }
+    html[data-theme="light"] .nav-links a.nav-cta { color: var(--ink); }
     html[data-theme="light"] .footer-name, html[data-theme="light"] .footer-note { color: var(--faint); }
 
     /* ═══ TYPE SYSTEM ═══
@@ -1500,23 +1500,36 @@
     .fold.current-project > summary .r-eyebrow { grid-column: 1 / -1; margin: 0.1rem 0 0; }
     .fold.current-project > p { margin-top: 0.5rem; }
 
-    /* Papers: figure with venue and role beneath it on the left (always visible); the text beside it folds */
+    /* ═══ PUBLICATIONS ═══
+       Left: figure, with venue and role beneath it. Right: linked title, the one-line result,
+       then one row of actions. "Details" opens a labelled fact sheet; nothing else is hidden. */
     .paper {
       display: grid; grid-template-columns: 172px minmax(0, 1fr); column-gap: 1.5rem; align-items: start;
-      padding: 0.8rem 0; border-bottom: 1px solid var(--line); scroll-margin-top: 5.5rem;
+      padding: 1rem 0; border-bottom: 1px solid var(--line); scroll-margin-top: 5.5rem;
     }
     .paper-side { display: flex; flex-direction: column; gap: 0.4rem; }
     #research .paper .pub-thumb { float: none; width: auto; margin: 0; padding: 0.35rem; aspect-ratio: 2 / 1; }
     .paper:hover .pub-thumb { border-color: var(--blue-mid); }
     .paper-meta { display: flex; flex-direction: column; padding-left: 1px; }
-    .paper > .fold { border-bottom: 0; }
-    .paper > .fold > summary { padding: 0; row-gap: 0.2rem; }
-    .paper > .fold > summary > .pub-title { grid-column: 1 / 3; }
-    .paper > .fold > summary > .pub-tldr { grid-column: 1 / -1; }
-    .paper-main { padding: 0.45rem 0 0.3rem; }
-    .paper-main > .paper-full-title { margin: 0 0 0.2rem; }
-    .paper-main > .pub-contrib { margin: 0 0 0.5rem; }
-    .paper-main > .pub-meta { margin-top: 0.6rem; }
+    .paper .pub-title { margin: -0.15rem 0 0.3rem; }
+    .paper .pub-tldr { max-width: 44rem; }
+    .paper .pub-meta { margin-top: 0.55rem; gap: 0.3rem 1.25rem; }
+
+    .more-toggle::after, .bib-toggle::after {
+      content: ''; display: inline-block; width: 0.36rem; height: 0.36rem; margin-left: 0.5rem;
+      border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+      transform: translateY(-0.18rem) rotate(45deg); transition: transform 0.2s var(--ease);
+    }
+    .more-toggle[aria-expanded="true"]::after, .bib-toggle[aria-expanded="true"]::after { transform: translateY(0.05rem) rotate(-135deg); }
+
+    .paper-more, .bib pre { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+    .paper-more { margin-top: 0.7rem; padding: 0.85rem 1.1rem 0.95rem; }
+    .paper-more > div { display: grid; grid-template-columns: 4.75rem minmax(0, 1fr); column-gap: 1rem; align-items: baseline; }
+    .paper-more > div + div { margin-top: 0.5rem; }
+    .paper-more dt { font-size: var(--text-small); line-height: var(--lh-small); color: var(--faint); }
+    .paper-more dd { font-size: var(--text-body); line-height: var(--lh-body); color: var(--body); }
+    .paper-more > div:first-child dd { color: var(--ink); }
+    .paper .bib { max-width: none; margin-top: 0.7rem; }
 
     @media (max-width: 600px) {
       .fold > summary, .fold.bg > summary { grid-template-columns: minmax(0, 1fr) 0.9rem; row-gap: 0.15rem; }
@@ -1525,15 +1538,15 @@
       .fold-meta { white-space: normal; flex-wrap: wrap; gap: 0 0.85rem; }
       .fold.bg > .fold-body { padding: 0 0 0.6rem; }
       .fold.current-project { padding: 0.7rem 1rem 0.75rem; }
-      /* Phones: figure beside the title, text full width below it, venue line last. */
+      /* Phones: title beside a small figure, then venue line, result, actions: all full width. */
       .paper { grid-template-columns: minmax(0, 1fr) 84px; column-gap: 0.8rem; }
-      .paper-side { display: contents; }
+      .paper-side, .paper-body { display: contents; }
+      .paper-side > *, .paper-body > * { grid-column: 1 / -1; }
       .paper .pub-thumb { grid-column: 2; grid-row: 1; }
-      .paper > .fold { grid-column: 1; grid-row: 1; }
-      .paper-meta { grid-column: 1 / -1; grid-row: 2; flex-direction: row; flex-wrap: wrap; gap: 0 0.85rem; margin-top: 0.25rem; padding: 0; }
-      .paper > .fold > summary > .pub-title { grid-column: 1; min-height: 3rem; }
-      .paper > .fold > summary > .pub-tldr { margin-top: 0.3rem; }
-      .paper > .fold > summary > .pub-tldr, .paper-main { margin-right: calc(-84px - 0.8rem); }
+      .paper .pub-title { grid-column: 1; grid-row: 1; margin: 0; }
+      .paper-meta { flex-direction: row; flex-wrap: wrap; gap: 0 0.85rem; margin: 0.3rem 0 0.35rem; padding: 0; }
+      .paper-more > div { grid-template-columns: 1fr; }
+      .paper-more { padding: 0.75rem 0.9rem 0.85rem; }
     }
 
     /* ═══ TYPE PASS ═══
@@ -1556,6 +1569,44 @@
     .bib code { font: inherit; }
     .figure-dialog h2 { font: var(--w-strong) var(--text-body)/var(--lh-body) var(--sans); }
     .paper-full-title { color: var(--ink); }
+
+    /* ═══ LINKS ═══
+       One rule: link-blue means clickable, and nothing else is link-blue.
+       · In a sentence: blue and underlined.
+       · Standing alone: blue; underline on hover. ↗ = opens a new tab, ⌄ = opens right here.
+       · Whole rows that open: blue chevron, tint on hover. */
+    .meta-link, .hero-links a, .pub-link, .fold-all {
+      color: var(--blue-text); border-bottom: 0;
+      text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.22em;
+      transition: text-decoration-color 0.2s, color 0.2s;
+    }
+    .meta-link { text-decoration-color: var(--blue-mid); }
+    .hero-links a, .pub-link, .fold-all { text-decoration-color: transparent; }
+    .meta-link:hover, .hero-links a:hover, .pub-link:hover, .fold-all:hover { color: var(--blue-text); text-decoration-color: currentColor; }
+    button.pub-link { border-bottom: 0; }
+    button.pub-link[aria-expanded="true"] { color: var(--ink); text-decoration-color: var(--blue); }
+
+    .pub-title a { background-image: none; }
+    .pub-title a::after {
+      content: '\2197\FE0E'; margin-left: 0.45em; vertical-align: 0.1em;
+      font: var(--w-regular) var(--text-small)/1 var(--sans); color: var(--blue-text);
+    }
+    .pub-title a:hover { color: var(--blue-text); }
+
+    .fold.bg > summary { margin: 0 -0.6rem; padding: 0.45rem 0.6rem; border-radius: 6px; transition: background 0.2s; }
+    .fold.bg > summary:hover { background: var(--blue-dim); }
+    .fold > summary::after { border-color: var(--blue-text); }
+
+    /* Small organisation mark that rides along with its name in running text. */
+    .org-inline { white-space: nowrap; }
+    .inline-mark { display: inline-block; width: 0.95em; height: 0.95em; margin-left: 0.3em; vertical-align: -0.14em; fill: var(--ink); }
+
+    /* Not clickable, so not blue. */
+    .pub-venue { color: var(--ink); }
+    .pub-venue.pending { color: var(--body); }
+    .paper .pub-tldr { color: var(--body); }
+    .pub-tldr strong { color: var(--ink); }
+    .hero-status, .hero-status:hover { color: var(--body); }
 
     @media print {
       body::after, .progress, .sec-head::after, .xp-list::before, .xp-item::before { display: none !important; }
@@ -1593,7 +1644,7 @@
       footer { border: none; padding: 1rem 0 0; display: block; }
     }
   </style>
-  <noscript><style>.reveal { opacity: 1; transform: none; }</style></noscript>
+  <noscript><style>.reveal { opacity: 1; transform: none; } .paper-more[hidden] { display: block; } .more-toggle, .bib-toggle { display: none; }</style></noscript>
 </head>
 <body>
 
@@ -1638,19 +1689,19 @@
 
       <div class="hero-rule" aria-hidden="true"></div>
 
-      <p class="hero-bio">I'm Terry, a master's student at CMU working with <a class="meta-link" href="https://sw005320.github.io/" target="_blank" rel="noopener">Prof. Shinji Watanabe</a> at <a class="meta-link" href="https://wavlab.org" target="_blank" rel="noopener">WavLab</a>. I work on recovering speech from damaged audio and predicting how it sounds to listeners.</p>
+      <p class="hero-bio">I'm Terry, a master's student at CMU working with <a class="meta-link" href="https://sw005320.github.io/" target="_blank" rel="noopener">Prof. Shinji Watanabe</a> at <a class="meta-link" href="https://wavlab.org" target="_blank" rel="noopener">WavLab</a>. I work on recovering speech from damaged audio and predicting how it sounds to listeners. I'm currently the lead student researcher on an <span class="org-inline">Amazon AGI<!-- Amazon icon: Simple Icons, CC0 (simple-icons/simple-icons). --><svg class="inline-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 7.594 3.166 11.87 3.166 2.852 0 5.668-.533 8.447-1.595l.315-.14c.138-.06.234-.1.293-.13.226-.088.39-.046.525.13.12.174.09.336-.12.48-.256.19-.6.41-1.006.654-1.244.743-2.64 1.316-4.185 1.726a17.617 17.617 0 01-10.951-.577 17.88 17.88 0 01-5.43-3.35c-.1-.074-.151-.15-.151-.22 0-.047.021-.09.051-.13zm6.565-6.218c0-1.005.247-1.863.743-2.577.495-.71 1.17-1.25 2.04-1.615.796-.335 1.756-.575 2.912-.72.39-.046 1.033-.103 1.92-.174v-.37c0-.93-.105-1.558-.3-1.875-.302-.43-.78-.65-1.44-.65h-.182c-.48.046-.896.196-1.246.46-.35.27-.575.63-.675 1.096-.06.3-.206.465-.435.51l-2.52-.315c-.248-.06-.372-.18-.372-.39 0-.046.007-.09.022-.15.247-1.29.855-2.25 1.82-2.88.976-.616 2.1-.975 3.39-1.05h.54c1.65 0 2.957.434 3.888 1.29.135.15.27.3.405.48.12.165.224.314.283.45.075.134.15.33.195.57.06.254.105.42.135.51.03.104.062.3.076.615.01.313.02.493.02.553v5.28c0 .376.06.72.165 1.036.105.313.21.54.315.674l.51.674c.09.136.136.256.136.36 0 .12-.06.226-.18.314-1.2 1.05-1.86 1.62-1.963 1.71-.165.135-.375.15-.63.045a6.062 6.062 0 01-.526-.496l-.31-.347a9.391 9.391 0 01-.317-.42l-.3-.435c-.81.886-1.603 1.44-2.4 1.665-.494.15-1.093.227-1.83.227-1.11 0-2.04-.343-2.76-1.034-.72-.69-1.08-1.665-1.08-2.94l-.05-.076zm3.753-.438c0 .566.14 1.02.425 1.364.285.34.675.512 1.155.512.045 0 .106-.007.195-.02.09-.016.134-.023.166-.023.614-.16 1.08-.553 1.424-1.178.165-.28.285-.58.36-.91.09-.32.12-.59.135-.8.015-.195.015-.54.015-1.005v-.54c-.84 0-1.484.06-1.92.18-1.275.36-1.92 1.17-1.92 2.43l-.035-.02zm9.162 7.027c.03-.06.075-.11.132-.17.362-.243.714-.41 1.05-.5a8.094 8.094 0 011.612-.24c.14-.012.28 0 .41.03.65.06 1.05.168 1.172.33.063.09.099.228.099.39v.15c0 .51-.149 1.11-.424 1.8-.278.69-.664 1.248-1.156 1.68-.073.06-.14.09-.197.09-.03 0-.06 0-.09-.012-.09-.044-.107-.12-.064-.24.54-1.26.806-2.143.806-2.64 0-.15-.03-.27-.087-.344-.145-.166-.55-.257-1.224-.257-.243 0-.533.016-.87.046-.363.045-.7.09-1 .135-.09 0-.148-.014-.18-.044-.03-.03-.036-.047-.02-.077 0-.017.006-.03.02-.063v-.06z"/></svg></span> project on target-speaker speech restoration.</p>
 
 
-      <a href="#contact" class="hero-status">
+      <p class="hero-status">
         Seeking Summer 2027 research or ML engineering internships in speech and audio
-      </a>
+      </p>
 
       <ul class="hero-links" aria-label="Profiles">
         <li><a href="mailto:terrytao@andrew.cmu.edu">Email</a></li>
-        <li><a href="https://scholar.google.com/citations?user=V1Z3wyoAAAAJ" target="_blank" rel="me noopener">Google Scholar</a></li>
-        <li><a href="https://github.com/ZhuoyanTao" target="_blank" rel="me noopener">GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/zhuoyan-tao/" target="_blank" rel="me noopener">LinkedIn</a></li>
-        <li><a href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a></li>
+        <li><a href="https://scholar.google.com/citations?user=V1Z3wyoAAAAJ" target="_blank" rel="me noopener">Google Scholar ↗&#xFE0E;</a></li>
+        <li><a href="https://github.com/ZhuoyanTao" target="_blank" rel="me noopener">GitHub ↗&#xFE0E;</a></li>
+        <li><a href="https://www.linkedin.com/in/zhuoyan-tao/" target="_blank" rel="me noopener">LinkedIn ↗&#xFE0E;</a></li>
+        <li><a href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener">Résumé ↗&#xFE0E;</a></li>
       </ul>
     </div>
 
@@ -1692,22 +1743,13 @@
           <p class="fold-body">Magna cum laude. Multilingual speech research with <a class="meta-link" href="https://sail.usc.edu/people/shri.html" target="_blank" rel="noopener">Prof. Shrikanth Narayanan</a> at SAIL.</p>
         </details>
       </div>
-      <p class="background-personal">Outside research, I led the audio team for <a class="meta-link" href="https://store.steampowered.com/app/2372070/Bone_Boy/" target="_blank" rel="noopener">Bone Boy</a>, a game released on Steam, and taught multivariable calculus review sessions. <a class="meta-link" href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener">Full experience and honors in my résumé ↗</a></p>
+      <p class="background-personal">Outside research, I led the audio team for <a class="meta-link" href="https://store.steampowered.com/app/2372070/Bone_Boy/" target="_blank" rel="noopener">Bone Boy</a>, a game released on Steam, and taught multivariable calculus review sessions. <a class="meta-link" href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener">Full experience and honors in my résumé ↗&#xFE0E;</a></p>
     </div>
   </section>
 
   <section class="dark-section" id="research" aria-labelledby="research-h">
     <div class="wrap">
       <div class="sec-head"><h2 id="research-h">Selected research</h2><button class="fold-all" type="button">Expand all</button></div>
-      <details class="fold current-project">
-        <summary>
-          <h3>Target-speaker speech restoration</h3>
-          <span class="fold-meta current-badge"><span class="status-dot" aria-hidden="true"></span>Current work · in progress</span>
-          <span class="r-eyebrow">CMU WavLab × Amazon AGI · Lead student researcher</span>
-        </summary>
-        <p>Recovering one voice from a damaged two-person call. Trained models on 7.8K calls and benchmarked nine external systems.</p>
-      </details>
-      <h3 class="group-label">Publications</h3>
       <div class="fold-list" id="publications">
         <article class="paper" id="pub-anchor">
           <div class="paper-side">
@@ -1716,22 +1758,22 @@
             </a>
             <p class="paper-meta"><span class="pub-venue">Interspeech 2026 · Oral</span><span class="pub-role">First author</span></p>
           </div>
-          <details class="fold">
-            <summary>
-              <h4 class="pub-title">ANCHOR — speech quality from partial audio</h4>
-              <span class="pub-tldr">Predicts how listeners will rate speech before the utterance finishes, with <strong>21–35% lower PLCMOS error</strong> than ARECHO on 2-second prefixes.</span>
-            </summary>
-            <div class="paper-main">
-              <p class="paper-full-title"><a class="meta-link" href="https://www.isca-archive.org/interspeech_2026/tao26_interspeech.html" target="_blank" rel="noopener">ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling</a></p>
-              <div class="pub-authors"><strong>Zhuoyan Tao</strong>, Jiatong Shi, Hye-jin Shim, Shinji Watanabe</div>
-              <div class="pub-cite">Proc. Interspeech 2026, pp. 5672–5677</div>
-              <p class="pub-summary">Streaming and generative systems need quality estimates from partial audio, but existing predictors assume the full utterance. Extending ARECHO (NeurIPS 2025 Spotlight), ANCHOR models chunk- and utterance-level quality in one autoregressive decoder with dual-resolution query tokens, and shows that judgments converge after a 4–6 s perceptual context horizon.</p>
-              <div class="pub-meta">
-                <a class="pub-link" href="https://www.isca-archive.org/interspeech_2026/tao26_interspeech.pdf" target="_blank" rel="noopener" aria-label="ANCHOR paper PDF">PDF ↗&#xFE0E;</a>
-                <a class="pub-link" href="https://huggingface.co/spaces/ZhuoyanTao/anchor-demo" target="_blank" rel="noopener" aria-label="ANCHOR live demo on Hugging Face">Try the demo ↗&#xFE0E;</a>
-                <button class="pub-link bib-toggle" type="button" aria-expanded="false" aria-controls="bib-anchor" aria-label="BibTeX for ANCHOR">BibTeX</button>
-              </div>
-              <div class="bib" id="bib-anchor" hidden>
+          <div class="paper-body">
+            <h3 class="pub-title"><a href="https://www.isca-archive.org/interspeech_2026/tao26_interspeech.html" target="_blank" rel="noopener">ANCHOR — speech quality from partial audio</a></h3>
+            <p class="pub-tldr">Predicts how listeners will rate speech before the utterance finishes, with <strong>21–35% lower PLCMOS error</strong> than ARECHO on 2-second prefixes.</p>
+            <div class="pub-meta">
+              <button class="pub-link more-toggle" type="button" aria-expanded="false" aria-controls="more-anchor" aria-label="Details for ANCHOR">Details</button>
+              <a class="pub-link" href="https://www.isca-archive.org/interspeech_2026/tao26_interspeech.pdf" target="_blank" rel="noopener" aria-label="ANCHOR paper PDF">PDF ↗&#xFE0E;</a>
+              <a class="pub-link" href="https://huggingface.co/spaces/ZhuoyanTao/anchor-demo" target="_blank" rel="noopener" aria-label="ANCHOR live demo on Hugging Face">Try the demo ↗&#xFE0E;</a>
+              <button class="pub-link bib-toggle" type="button" aria-expanded="false" aria-controls="bib-anchor" aria-label="BibTeX for ANCHOR">BibTeX</button>
+            </div>
+            <dl class="paper-more" id="more-anchor" hidden>
+              <div><dt>Title</dt><dd>ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling</dd></div>
+              <div><dt>Authors</dt><dd><strong>Zhuoyan Tao</strong>, Jiatong Shi, Hye-jin Shim, Shinji Watanabe</dd></div>
+              <div><dt>Venue</dt><dd>Proc. Interspeech 2026, pp. 5672–5677</dd></div>
+              <div><dt>Summary</dt><dd>Streaming and generative systems need quality estimates from partial audio, but existing predictors assume the full utterance. Extending ARECHO (NeurIPS 2025 Spotlight), ANCHOR models chunk- and utterance-level quality in one autoregressive decoder with dual-resolution query tokens, and shows that judgments converge after a 4–6 s perceptual context horizon.</dd></div>
+            </dl>
+            <div class="bib" id="bib-anchor" hidden>
 <pre><code>@inproceedings{tao26_interspeech,
   title     = {{ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling}},
   author    = {Zhuoyan Tao and Jiatong Shi and Hye-jin Shim and Shinji Watanabe},
@@ -1742,34 +1784,33 @@
   issn      = {2958-1796},
 }</code></pre>
               <button class="bib-copy" type="button">Copy</button>
-              </div>
             </div>
-          </details>
+          </div>
         </article>
         <article class="paper" id="pub-turnbench">
           <div class="paper-side">
             <a class="pub-thumb" href="assets/papers/turnbench.webp" aria-label="Enlarge figure: TurnBench turn-taking overview">
               <img src="assets/papers/turnbench.webp" width="720" height="308" loading="lazy" decoding="async" alt="TurnBench turn-taking overview" />
             </a>
-            <p class="paper-meta"><span class="pub-venue">IEEE SLT 2026</span></p>
+            <p class="paper-meta"><span class="pub-venue">IEEE SLT 2026</span><span class="pub-role">Co-author</span></p>
           </div>
-          <details class="fold">
-            <summary>
-              <h4 class="pub-title">TurnBench — evaluating conversational turn-taking</h4>
-              <span class="pub-tldr">A benchmark for when conversational systems should speak or wait.</span>
-            </summary>
-            <div class="paper-main">
-              <p class="pub-contrib">I helped design the evaluation protocol and contributed an ANCHOR-based baseline.</p>
-              <p class="paper-full-title"><a class="meta-link" href="https://arxiv.org/abs/2608.25218" target="_blank" rel="noopener">TurnBench: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue</a></p>
-              <div class="pub-authors">Freeman Jiang, Ramon Sanabria, Soham Deshmukh, …, <strong>Zhuoyan Tao</strong>, …, Hung-yi Lee, Shinji Watanabe <span class="pub-count">(19 authors)</span></div>
-              <div class="pub-cite">Proc. IEEE Spoken Language Technology Workshop (SLT) 2026</div>
-              <p class="pub-summary">Thirty hours of hand-labeled, triple-annotated dyadic conversation across six interaction styles, a standardized protocol for end-of-turn and interruption detection, 14 benchmarked systems, and a released 104-hour training set and public leaderboard.</p>
-              <div class="pub-meta">
-                <a class="pub-link" href="https://arxiv.org/pdf/2608.25218" target="_blank" rel="noopener" aria-label="TurnBench paper PDF">PDF ↗&#xFE0E;</a>
-                <a class="pub-link" href="https://turnbench.sesame.com" target="_blank" rel="noopener" aria-label="TurnBench leaderboard">Leaderboard ↗&#xFE0E;</a>
-                <button class="pub-link bib-toggle" type="button" aria-expanded="false" aria-controls="bib-turnbench" aria-label="BibTeX for TurnBench">BibTeX</button>
-              </div>
-              <div class="bib" id="bib-turnbench" hidden>
+          <div class="paper-body">
+            <h3 class="pub-title"><a href="https://arxiv.org/abs/2608.25218" target="_blank" rel="noopener">TurnBench — evaluating conversational turn-taking</a></h3>
+            <p class="pub-tldr">A benchmark for when conversational systems should speak or wait.</p>
+            <div class="pub-meta">
+              <button class="pub-link more-toggle" type="button" aria-expanded="false" aria-controls="more-turnbench" aria-label="Details for TurnBench">Details</button>
+              <a class="pub-link" href="https://arxiv.org/pdf/2608.25218" target="_blank" rel="noopener" aria-label="TurnBench paper PDF">PDF ↗&#xFE0E;</a>
+              <a class="pub-link" href="https://turnbench.sesame.com" target="_blank" rel="noopener" aria-label="TurnBench leaderboard">Leaderboard ↗&#xFE0E;</a>
+              <button class="pub-link bib-toggle" type="button" aria-expanded="false" aria-controls="bib-turnbench" aria-label="BibTeX for TurnBench">BibTeX</button>
+            </div>
+            <dl class="paper-more" id="more-turnbench" hidden>
+              <div><dt>Title</dt><dd>TurnBench: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue</dd></div>
+              <div><dt>Authors</dt><dd>Freeman Jiang, Ramon Sanabria, Soham Deshmukh, …, <strong>Zhuoyan Tao</strong>, …, Hung-yi Lee, Shinji Watanabe (19 authors)</dd></div>
+              <div><dt>My role</dt><dd>I helped design the evaluation protocol and contributed an ANCHOR-based baseline.</dd></div>
+              <div><dt>Venue</dt><dd>Proc. IEEE Spoken Language Technology Workshop (SLT) 2026</dd></div>
+              <div><dt>Summary</dt><dd>Thirty hours of hand-labeled, triple-annotated dyadic conversation across six interaction styles, a standardized protocol for end-of-turn and interruption detection, 14 benchmarked systems, and a released 104-hour training set and public leaderboard.</dd></div>
+            </dl>
+            <div class="bib" id="bib-turnbench" hidden>
 <pre><code>@inproceedings{jiang2026turnbench,
   title         = {{TurnBench}: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue},
   author        = {Freeman Jiang and Ramon Sanabria and Soham Deshmukh and Bandhav Veluri and Simon Michael Vuch Williams and Elliott K. Suen and Garreth Lee and Kevin Yoonho Choi and Takuya Umeki and Riku Kubo and Sathvik Udupa and Chien-yu Huang and Shih-Yun Shan Kuan and Zhuoyan Tao and Satyapriya Krishna and Sefik Emre Eskimez and Yu Tsao and Hung-yi Lee and Shinji Watanabe},
@@ -1779,9 +1820,8 @@
   archivePrefix = {arXiv},
 }</code></pre>
               <button class="bib-copy" type="button">Copy</button>
-              </div>
             </div>
-          </details>
+          </div>
         </article>
         <article class="paper" id="pub-otpm">
           <div class="paper-side">
@@ -1790,21 +1830,21 @@
             </a>
             <p class="paper-meta"><span class="pub-venue pending">JASA-EL · Under review</span><span class="pub-role">First author</span></p>
           </div>
-          <details class="fold">
-            <summary>
-              <h4 class="pub-title">When does language-ID fine-tuning help?</h4>
-              <span class="pub-tldr">A single training-free number, computed from language-ID posteriors, that forecasts whether fine-tuning a diarization probe will pay off.</span>
-            </summary>
-            <div class="paper-main">
-              <p class="paper-full-title"><a class="meta-link" href="https://arxiv.org/abs/2611.13430" target="_blank" rel="noopener">Off-target posterior mass: A training-free diagnostic for fine-tuning spoken language diarization probes</a></p>
-              <div class="pub-authors"><strong>Zhuoyan Tao</strong>, Aditya Kommineni, Shrikanth Narayanan</div>
-              <div class="pub-cite">Submitted to JASA Express Letters · arXiv:2611.13430</div>
-              <p class="pub-summary">Off-target posterior mass (OTPM) correlates with probe gains at 0.56 on unseen synthetic bilingual data and 0.23 on real-world corpora (DISPLACE; MUCS Hindi–English code-switching). The evaluation was pre-registered on unseen language pairs and run across Whisper, MMS, and classical language-ID encoders.</p>
-              <div class="pub-meta">
-                <a class="pub-link" href="https://arxiv.org/pdf/2611.13430" target="_blank" rel="noopener" aria-label="Off-target posterior mass paper PDF">PDF ↗&#xFE0E;</a>
-                <button class="pub-link bib-toggle" type="button" aria-expanded="false" aria-controls="bib-otpm" aria-label="BibTeX for off-target posterior mass">BibTeX</button>
-              </div>
-              <div class="bib" id="bib-otpm" hidden>
+          <div class="paper-body">
+            <h3 class="pub-title"><a href="https://arxiv.org/abs/2611.13430" target="_blank" rel="noopener">When does language-ID fine-tuning help?</a></h3>
+            <p class="pub-tldr">A single training-free number, computed from language-ID posteriors, that forecasts whether fine-tuning a diarization probe will pay off.</p>
+            <div class="pub-meta">
+              <button class="pub-link more-toggle" type="button" aria-expanded="false" aria-controls="more-otpm" aria-label="Details for off-target posterior mass">Details</button>
+              <a class="pub-link" href="https://arxiv.org/pdf/2611.13430" target="_blank" rel="noopener" aria-label="Off-target posterior mass paper PDF">PDF ↗&#xFE0E;</a>
+              <button class="pub-link bib-toggle" type="button" aria-expanded="false" aria-controls="bib-otpm" aria-label="BibTeX for off-target posterior mass">BibTeX</button>
+            </div>
+            <dl class="paper-more" id="more-otpm" hidden>
+              <div><dt>Title</dt><dd>Off-target posterior mass: A training-free diagnostic for fine-tuning spoken language diarization probes</dd></div>
+              <div><dt>Authors</dt><dd><strong>Zhuoyan Tao</strong>, Aditya Kommineni, Shrikanth Narayanan</dd></div>
+              <div><dt>Venue</dt><dd>Submitted to JASA Express Letters · arXiv:2611.13430</dd></div>
+              <div><dt>Summary</dt><dd>Off-target posterior mass (OTPM) correlates with probe gains at 0.56 on unseen synthetic bilingual data and 0.23 on real-world corpora (DISPLACE; MUCS Hindi–English code-switching). The evaluation was pre-registered on unseen language pairs and run across Whisper, MMS, and classical language-ID encoders.</dd></div>
+            </dl>
+            <div class="bib" id="bib-otpm" hidden>
 <pre><code>@misc{tao2026offtarget,
   title         = {Off-target posterior mass: A training-free diagnostic for fine-tuning spoken language diarization probes},
   author        = {Zhuoyan Tao and Aditya Kommineni and Shrikanth Narayanan},
@@ -1814,9 +1854,8 @@
   primaryClass  = {eess.AS},
 }</code></pre>
               <button class="bib-copy" type="button">Copy</button>
-              </div>
             </div>
-          </details>
+          </div>
         </article>
       </div>
       <p class="open-source-note">Open source: led ESPnet’s <a class="meta-link" href="https://github.com/espnet/espnet/pull/6636" target="_blank" rel="noopener">Sidon restoration recipe</a> and made <a class="meta-link" href="https://github.com/espnet/espnet/pull/6227" target="_blank" rel="noopener">speaker-embedding extraction &gt;20× faster</a>.</p>
@@ -1831,10 +1870,10 @@
       </div>
       <p class="contact-note">For research collaborations or Summer 2027 internships: <a class="meta-link" href="mailto:terrytao@andrew.cmu.edu">terrytao@andrew.cmu.edu</a>.</p>
       <ul class="hero-links" aria-label="Contact and profiles">
-        <li><a href="https://scholar.google.com/citations?user=V1Z3wyoAAAAJ" target="_blank" rel="noopener">Google Scholar</a></li>
-        <li><a href="https://github.com/ZhuoyanTao" target="_blank" rel="noopener">GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/zhuoyan-tao/" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a></li>
+        <li><a href="https://scholar.google.com/citations?user=V1Z3wyoAAAAJ" target="_blank" rel="noopener">Google Scholar ↗&#xFE0E;</a></li>
+        <li><a href="https://github.com/ZhuoyanTao" target="_blank" rel="noopener">GitHub ↗&#xFE0E;</a></li>
+        <li><a href="https://www.linkedin.com/in/zhuoyan-tao/" target="_blank" rel="noopener">LinkedIn ↗&#xFE0E;</a></li>
+        <li><a href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener">Résumé ↗&#xFE0E;</a></li>
       </ul>
     </div>
   </section>
@@ -1961,49 +2000,58 @@
       window.addEventListener('resize', updateActiveSection, { passive: true });
       window.addEventListener('load', updateActiveSection);
 
+      // ── Toggle buttons (Details, BibTeX) show or hide the panel named by aria-controls
+      function setPanel(btn, open) {
+        const panel = document.getElementById(btn.getAttribute('aria-controls'));
+        if (!panel) return;
+        btn.setAttribute('aria-expanded', String(open));
+        panel.hidden = !open;
+        btn.dispatchEvent(new CustomEvent('panelchange', { bubbles: true }));
+      }
+      document.querySelectorAll('.more-toggle, .bib-toggle').forEach(btn => {
+        btn.addEventListener('click', () => setPanel(btn, btn.getAttribute('aria-expanded') !== 'true'));
+      });
+
       // ── Folds: expand/collapse a whole section, open deep-linked entries, open everything for print
+      const FOLDS = 'details.fold, .more-toggle';
+      const isOpen = fold => fold.matches('details') ? fold.open : fold.getAttribute('aria-expanded') === 'true';
+      const setOpen = (fold, open) => { if (fold.matches('details')) fold.open = open; else setPanel(fold, open); };
+
       document.querySelectorAll('.fold-all').forEach(btn => {
-        const folds = Array.from(btn.closest('section').querySelectorAll('details.fold'));
+        const section = btn.closest('section');
+        const folds = Array.from(section.querySelectorAll(FOLDS));
         const sync = () => {
-          const allOpen = folds.every(fold => fold.open);
+          const allOpen = folds.every(isOpen);
           btn.textContent = allOpen ? 'Collapse all' : 'Expand all';
           btn.setAttribute('aria-expanded', String(allOpen));
         };
         btn.addEventListener('click', () => {
-          const open = !folds.every(fold => fold.open);
-          folds.forEach(fold => { fold.open = open; });
+          const open = !folds.every(isOpen);
+          folds.forEach(fold => setOpen(fold, open));
         });
         folds.forEach(fold => fold.addEventListener('toggle', sync));
+        section.addEventListener('panelchange', sync);
         sync();
       });
 
       function openHashTarget() {
         const id = decodeURIComponent(location.hash.slice(1));
         const target = id && document.getElementById(id);
-        const fold = target && (target.closest('details.fold') || (target.classList.contains('paper') && target.querySelector('details.fold')));
-        if (fold) { fold.open = true; fold.scrollIntoView(); }
+        if (!target) return;
+        const fold = target.closest('details.fold') || (target.classList.contains('paper') && target.querySelector('.more-toggle'));
+        if (fold) { setOpen(fold, true); target.scrollIntoView(); }
       }
       openHashTarget();
       window.addEventListener('hashchange', openHashTarget);
 
       let closedBeforePrint = [];
       window.addEventListener('beforeprint', () => {
-        closedBeforePrint = Array.from(document.querySelectorAll('details.fold:not([open])'));
-        closedBeforePrint.forEach(fold => { fold.open = true; });
+        closedBeforePrint = Array.from(document.querySelectorAll(FOLDS)).filter(fold => !isOpen(fold));
+        closedBeforePrint.forEach(fold => setOpen(fold, true));
       });
-      window.addEventListener('afterprint', () => { closedBeforePrint.forEach(fold => { fold.open = false; }); });
+      window.addEventListener('afterprint', () => { closedBeforePrint.forEach(fold => setOpen(fold, false)); });
 
-      // ── BibTeX: toggle + copy to clipboard
-      document.querySelectorAll('.bib-toggle').forEach(btn => {
-        const panel = document.getElementById(btn.getAttribute('aria-controls'));
-        if (!panel) return;
-        btn.addEventListener('click', () => {
-          const open = btn.getAttribute('aria-expanded') !== 'true';
-          btn.setAttribute('aria-expanded', String(open));
-          panel.hidden = !open;
-        });
-      });
-
+      // ── BibTeX: copy to clipboard
       document.querySelectorAll('.bib-copy').forEach(btn => {
         btn.addEventListener('click', async () => {
           const code = btn.parentElement.querySelector('code');
