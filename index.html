@@ -1514,15 +1514,16 @@
     .paper .pub-title { margin: -0.15rem 0 0.2rem; }
     .paper .pub-authors { max-width: 46rem; margin-bottom: 0.4rem; color: var(--faint); }
     .paper .pub-authors strong { color: var(--ink); }
+    .authors-toggle { margin-left: 0.35rem; white-space: nowrap; }
     .paper .pub-tldr { max-width: 44rem; }
     .paper .pub-meta { margin-top: 0.55rem; gap: 0.3rem 1.25rem; }
 
-    .more-toggle::after, .bib-toggle::after {
+    .more-toggle::after, .bib-toggle::after, .authors-toggle::after {
       content: ''; display: inline-block; width: 0.36rem; height: 0.36rem; margin-left: 0.5rem;
       border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
       transform: translateY(-0.18rem) rotate(45deg); transition: transform 0.2s var(--ease);
     }
-    .more-toggle[aria-expanded="true"]::after, .bib-toggle[aria-expanded="true"]::after { transform: translateY(0.05rem) rotate(-135deg); }
+    .more-toggle[aria-expanded="true"]::after, .bib-toggle[aria-expanded="true"]::after, .authors-toggle[aria-expanded="true"]::after { transform: translateY(0.05rem) rotate(-135deg); }
 
     .paper-more, .bib pre { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
     .paper-more { margin-top: 0.7rem; padding: 0.85rem 1.1rem 0.95rem; }
@@ -1646,7 +1647,7 @@
       footer { border: none; padding: 1rem 0 0; display: block; }
     }
   </style>
-  <noscript><style>.reveal { opacity: 1; transform: none; } .paper-more[hidden] { display: block; } .more-toggle, .bib-toggle { display: none; }</style></noscript>
+  <noscript><style>.reveal { opacity: 1; transform: none; } .paper-more[hidden] { display: block; } .more-toggle, .bib-toggle, .authors-toggle, .authors-short { display: none; } .authors-full[hidden] { display: inline; }</style></noscript>
 </head>
 <body>
 
@@ -1798,7 +1799,11 @@
           </div>
           <div class="paper-body">
             <h3 class="pub-title"><a href="https://arxiv.org/abs/2608.25218" target="_blank" rel="noopener">TurnBench — evaluating conversational turn-taking</a></h3>
-            <p class="pub-authors">Freeman Jiang, Ramon Sanabria, Soham Deshmukh, …, <strong>Zhuoyan Tao</strong>, …, Hung-yi Lee, Shinji Watanabe <span class="pub-count">(19 authors)</span></p>
+            <p class="pub-authors">
+              <span class="authors-short">Freeman Jiang, Ramon Sanabria, …, <strong>Zhuoyan Tao</strong>, …, Hung-yi Lee, Shinji Watanabe</span>
+              <span class="authors-full" hidden>Freeman Jiang, Ramon Sanabria, Soham Deshmukh, Bandhav Veluri, Simon Michael Vuch Williams, Elliott K. Suen, Garreth Lee, Kevin Yoonho Choi, Takuya Umeki, Riku Kubo, Sathvik Udupa, Chien-yu Huang, Shih-Yun Shan Kuan, <strong>Zhuoyan Tao</strong>, Satyapriya Krishna, Sefik Emre Eskimez, Yu Tsao, Hung-yi Lee, Shinji Watanabe</span>
+              <button class="pub-link authors-toggle" type="button" aria-expanded="false" data-more="All 19 authors" data-less="Show fewer">All 19 authors</button>
+            </p>
             <p class="pub-tldr">A benchmark for when conversational systems should speak or wait.</p>
             <div class="pub-meta">
               <button class="pub-link more-toggle" type="button" aria-expanded="false" aria-controls="more-turnbench" aria-label="Details for TurnBench">Details</button>
@@ -2012,6 +2017,18 @@
       }
       document.querySelectorAll('.more-toggle, .bib-toggle').forEach(btn => {
         btn.addEventListener('click', () => setPanel(btn, btn.getAttribute('aria-expanded') !== 'true'));
+      });
+
+      // ── Long author lists: swap the shortened line for the full one
+      document.querySelectorAll('.authors-toggle').forEach(btn => {
+        const line = btn.closest('.pub-authors');
+        btn.addEventListener('click', () => {
+          const open = btn.getAttribute('aria-expanded') !== 'true';
+          btn.setAttribute('aria-expanded', String(open));
+          line.querySelector('.authors-short').hidden = open;
+          line.querySelector('.authors-full').hidden = !open;
+          btn.textContent = open ? btn.dataset.less : btn.dataset.more;
+        });
       });
 
       // ── Folds: expand/collapse a whole section, open deep-linked entries, open everything for print
