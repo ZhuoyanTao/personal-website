@@ -1219,6 +1219,29 @@
     @media (max-width: 600px) { .figure-dialog img { min-width: 640px; } }
     .figure-dialog img { display: block; width: 100%; height: auto; background: white; }
 
+    /* A short reading path: research, background, contact. */
+    #research .wrap, #background .wrap { padding-top: 2.75rem; padding-bottom: 2.75rem; }
+    .current-project { padding-bottom: 1.75rem; }
+    .current-project h3 { font: 500 1.2rem/1.4 var(--serif); color: var(--ink); }
+    .current-project .r-eyebrow { margin: 0.4rem 0 0.65rem; }
+    .current-project > p:last-child { max-width: 46rem; line-height: 1.7; }
+    #research .pub-item { grid-template-columns: 150px minmax(0, 1fr); gap: 1.75rem; padding: 1.75rem 0; }
+    #research .pub-thumb { padding: 0.5rem; }
+    .paper-full-title { color: var(--ink); margin: 0.75rem 0; }
+    .open-source-note { margin-top: 1.5rem; line-height: 1.7; }
+    .background-list { margin: 0; }
+    .background-list > div { display: grid; grid-template-columns: 11rem 1fr; gap: 1.5rem; padding: 0.85rem 0; border-bottom: 1px solid var(--line); }
+    .background-list dt { color: var(--ink); }
+    .background-list dt span { display: block; color: var(--faint); font-size: 0.85rem; }
+    .background-list dd { margin: 0; line-height: 1.7; }
+    .background-personal { margin: 1.5rem 0 0.75rem; line-height: 1.7; }
+    @media (max-width: 600px) {
+      #research .pub-item { grid-template-columns: 1fr; gap: 0.75rem; }
+      #research .pub-thumb { width: 150px; margin: 0; }
+      .background-list > div { grid-template-columns: 1fr; gap: 0.35rem; }
+      .background-list dt span { display: inline; margin-left: 0.5rem; }
+    }
+
     @media print {
       body::after, .progress, .sec-head::after, .xp-list::before, .xp-item::before { display: none !important; }
     }
@@ -1272,10 +1295,7 @@
     </button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#research">Research</a></li>
-      <li><a href="#publications">Publications</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#news">News</a></li>
+      <li><a href="#background">Background</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener" class="nav-cta">Résumé ↗&#xFE0E;</a></li>
     </ul>
@@ -1299,7 +1319,7 @@
 
       <div class="hero-rule" aria-hidden="true"></div>
 
-      <p class="hero-bio">I'm Terry, a master's student at CMU working with <a class="meta-link" href="https://sw005320.github.io/" target="_blank" rel="noopener">Prof. Shinji Watanabe</a> at <a class="meta-link" href="https://wavlab.org" target="_blank" rel="noopener">WavLab</a>. I study speech restoration and speech quality: how to recover a speaker's voice from damaged audio, and how to tell whether it sounds right.</p>
+      <p class="hero-bio">I'm Terry, a master's student at CMU working with <a class="meta-link" href="https://sw005320.github.io/" target="_blank" rel="noopener">Prof. Shinji Watanabe</a> at <a class="meta-link" href="https://wavlab.org" target="_blank" rel="noopener">WavLab</a>. I work on recovering speech from damaged audio and predicting how it sounds to listeners.</p>
 
 
       <a href="#contact" class="hero-status">
@@ -1330,69 +1350,34 @@
     </div>
   </section>
 
-  <!-- RESEARCH -->
-  <section class="light-section" id="research" aria-labelledby="research-h">
+  <section class="dark-section" id="research" aria-labelledby="research-h">
     <div class="wrap">
-      <div class="sec-head">
-        <h2 id="research-h">Current research</h2>
-      </div>
-      <div class="research-grid">
-        <div class="r-card">
-          <div class="r-eyebrow">CMU WavLab × Amazon AGI · Lead student researcher</div>
-          <h3 class="r-title">Target-Speaker Speech Restoration</h3>
-          <p class="r-body">Recovering one speaker from a damaged two-person phone call using a short voice sample. Trained models on <strong>7.8K calls</strong> and built an evaluation suite benchmarking <strong>nine external systems</strong>.</p>
-        </div>
-        <div class="r-card">
-          <div class="r-eyebrow">CMU WavLab · Interspeech 2026 oral</div>
-          <h3 class="r-title">Perceptual Speech Quality</h3>
-          <p class="r-body">I developed ANCHOR to estimate how speech will sound to listeners from just the first two seconds of audio, helping streaming systems assess quality before a clip ends.</p>
-          <a class="r-link" href="#pub-anchor">Paper →</a>
-          <a class="r-link" href="https://huggingface.co/spaces/ZhuoyanTao/anchor-demo" target="_blank" rel="noopener">Try the demo ↗&#xFE0E;</a>
-        </div>
-      </div>
-      <h3 class="group-label">Open-source contributions</h3>
-      <ul class="contribution-list">
-        <li>
-          <a class="meta-link" href="https://github.com/espnet/espnet/pull/6636" target="_blank" rel="noopener">Speech restoration in ESPnet ↗</a>
-          <p>Led development of the Sidon recipe, including GPU-side speech feature extraction and vocoder stages.</p>
-        </li>
-        <li>
-          <a class="meta-link" href="https://github.com/espnet/espnet/pull/6227" target="_blank" rel="noopener">Faster speaker embeddings ↗</a>
-          <p>Built parallel extraction for ESPnet's TTS recipes, making a step that took over 40 hours more than 20× faster.</p>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- PUBLICATIONS -->
-  <section class="dark-section" id="publications" aria-labelledby="publications-h">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2 id="publications-h">Publications</h2>
-      </div>
-      <p class="sec-intro">Author names in order; my name in bold. Also on <a class="meta-link" href="https://scholar.google.com/citations?user=V1Z3wyoAAAAJ" target="_blank" rel="noopener">Google Scholar</a>.</p>
-
-      <h3 class="group-label">Peer-reviewed</h3>
-      <div class="pub-list">
+      <div class="sec-head"><h2 id="research-h">Selected research</h2></div>
+      <article class="current-project">
+        <h3>Target-speaker speech restoration</h3>
+        <p class="r-eyebrow">Current work · CMU WavLab × Amazon AGI · Lead student researcher</p>
+        <p>Recovering one voice from a damaged two-person call. Trained models on 7.8K calls and benchmarked nine external systems.</p>
+      </article>
+      <div class="pub-list" id="publications">
         <article class="pub-item" id="pub-anchor">
           <a class="pub-thumb" href="assets/papers/anchor.webp" aria-label="Enlarge figure: ANCHOR model overview">
             <img src="assets/papers/anchor.webp" width="502" height="232" loading="lazy" decoding="async" alt="ANCHOR model overview" />
           </a>
           <div class="pub-body">
-            <h4 class="pub-title"><a href="https://www.isca-archive.org/interspeech_2026/tao26_interspeech.html" target="_blank" rel="noopener">ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling</a></h4>
-            <div class="pub-authors"><strong>Zhuoyan Tao</strong>, Jiatong Shi, Hye-jin Shim, Shinji Watanabe</div>
-            <div class="pub-cite">Proc. Interspeech 2026, pp. 5672–5677</div>
+            <h4 class="pub-title"><a href="https://www.isca-archive.org/interspeech_2026/tao26_interspeech.html" target="_blank" rel="noopener">ANCHOR — speech quality from partial audio</a></h4>
             <p class="pub-tldr">Predicts how listeners will rate speech before the utterance finishes, with <strong>21–35% lower PLCMOS error</strong> than ARECHO on 2-second prefixes.</p>
             <details class="pub-details">
-              <summary>Details</summary>
+              <summary>Paper details &amp; authors</summary>
+              <p class="paper-full-title">ANCHOR: Autoregressive Non-intrusive Chunk-Ordered Refinement for Joint Multi-Resolution Speech Quality Modeling</p>
+            <div class="pub-authors"><strong>Zhuoyan Tao</strong>, Jiatong Shi, Hye-jin Shim, Shinji Watanabe</div>
+            <div class="pub-cite">Proc. Interspeech 2026, pp. 5672–5677</div>
+
               <p class="pub-summary">Streaming and generative systems need quality estimates from partial audio, but existing predictors assume the full utterance. Extending ARECHO (NeurIPS 2025 Spotlight), ANCHOR models chunk- and utterance-level quality in one autoregressive decoder with dual-resolution query tokens, and shows that judgments converge after a 4–6 s perceptual context horizon.</p>
             </details>
             <div class="pub-meta">
               <span class="pub-venue">Interspeech 2026 · Oral</span>
               <span class="pub-role">First author</span>
               <a class="pub-link" href="https://www.isca-archive.org/interspeech_2026/tao26_interspeech.pdf" target="_blank" rel="noopener" aria-label="ANCHOR paper PDF">PDF ↗&#xFE0E;</a>
-              <a class="pub-link" href="https://doi.org/10.21437/Interspeech.2026-927" target="_blank" rel="noopener" aria-label="ANCHOR DOI">DOI ↗&#xFE0E;</a>
-              <a class="pub-link" href="https://arxiv.org/abs/2606.10233" target="_blank" rel="noopener" aria-label="ANCHOR on arXiv">arXiv ↗&#xFE0E;</a>
               <a class="pub-link" href="https://huggingface.co/spaces/ZhuoyanTao/anchor-demo" target="_blank" rel="noopener" aria-label="ANCHOR live demo on Hugging Face">Try the demo ↗&#xFE0E;</a>
               <button class="pub-link bib-toggle" type="button" aria-expanded="false" aria-controls="bib-anchor" aria-label="BibTeX for ANCHOR">BibTeX</button>
             </div>
@@ -1415,19 +1400,20 @@
             <img src="assets/papers/turnbench.webp" width="720" height="308" loading="lazy" decoding="async" alt="TurnBench turn-taking overview" />
           </a>
           <div class="pub-body">
-            <h4 class="pub-title"><a href="https://arxiv.org/abs/2608.25218" target="_blank" rel="noopener">TurnBench: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue</a></h4>
+            <h4 class="pub-title"><a href="https://arxiv.org/abs/2608.25218" target="_blank" rel="noopener">TurnBench — evaluating conversational turn-taking</a></h4>
+            <p class="pub-tldr">A benchmark for when conversational systems should speak or wait.</p>
+            <p class="pub-contrib">I helped design the evaluation protocol and contributed an ANCHOR-based baseline.</p>
+            <details class="pub-details">
+              <summary>Paper details &amp; authors</summary>
+              <p class="paper-full-title">TurnBench: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue</p>
             <div class="pub-authors">Freeman Jiang, Ramon Sanabria, Soham Deshmukh, …, <strong>Zhuoyan Tao</strong>, …, Hung-yi Lee, Shinji Watanabe <span class="pub-count">(19 authors)</span></div>
             <div class="pub-cite">Proc. IEEE Spoken Language Technology Workshop (SLT) 2026</div>
-            <p class="pub-tldr">No current turn-taking system matches humans, who start speaking a median <strong>151 ms</strong> before a turn ends, without excessive false positives.</p>
-            <p class="pub-contrib"><span>My contribution</span> Helped design the evaluation protocol and submitted an ANCHOR-based model as an initial baseline.</p>
-            <details class="pub-details">
-              <summary>Details</summary>
+
               <p class="pub-summary">Thirty hours of hand-labeled, triple-annotated dyadic conversation across six interaction styles, a standardized protocol for end-of-turn and interruption detection, 14 benchmarked systems, and a released 104-hour training set and public leaderboard.</p>
             </details>
             <div class="pub-meta">
               <span class="pub-venue">IEEE SLT 2026</span>
               <a class="pub-link" href="https://arxiv.org/pdf/2608.25218" target="_blank" rel="noopener" aria-label="TurnBench paper PDF">PDF ↗&#xFE0E;</a>
-              <a class="pub-link" href="https://arxiv.org/abs/2608.25218" target="_blank" rel="noopener" aria-label="TurnBench on arXiv">arXiv ↗&#xFE0E;</a>
               <a class="pub-link" href="https://turnbench.sesame.com" target="_blank" rel="noopener" aria-label="TurnBench leaderboard">Leaderboard ↗&#xFE0E;</a>
               <button class="pub-link bib-toggle" type="button" aria-expanded="false" aria-controls="bib-turnbench" aria-label="BibTeX for TurnBench">BibTeX</button>
             </div>
@@ -1446,26 +1432,26 @@
         </article>
       </div>
 
-      <h3 class="group-label">Under review</h3>
       <div class="pub-list">
         <article class="pub-item" id="pub-otpm">
           <a class="pub-thumb" href="assets/papers/otpm.webp" aria-label="Enlarge figure: Off-target posterior mass and probe gain prediction">
             <img src="assets/papers/otpm.webp" width="720" height="238" loading="lazy" decoding="async" alt="Off-target posterior mass and probe gain prediction" />
           </a>
           <div class="pub-body">
-            <h4 class="pub-title"><a href="https://arxiv.org/abs/2611.13430" target="_blank" rel="noopener">Off-target posterior mass: A training-free diagnostic for fine-tuning spoken language diarization probes</a></h4>
-            <div class="pub-authors"><strong>Zhuoyan Tao</strong>, Aditya Kommineni, Shrikanth Narayanan</div>
-            <div class="pub-cite">Submitted to JASA Express Letters · arXiv:2611.13430</div>
+            <h4 class="pub-title"><a href="https://arxiv.org/abs/2611.13430" target="_blank" rel="noopener">When does language-ID fine-tuning help?</a></h4>
             <p class="pub-tldr">A single training-free number, computed from language-ID posteriors, that forecasts whether fine-tuning a diarization probe will pay off.</p>
             <details class="pub-details">
-              <summary>Details</summary>
+              <summary>Paper details &amp; authors</summary>
+              <p class="paper-full-title">Off-target posterior mass: A training-free diagnostic for fine-tuning spoken language diarization probes</p>
+            <div class="pub-authors"><strong>Zhuoyan Tao</strong>, Aditya Kommineni, Shrikanth Narayanan</div>
+            <div class="pub-cite">Submitted to JASA Express Letters · arXiv:2611.13430</div>
+
               <p class="pub-summary">Off-target posterior mass (OTPM) correlates with probe gains at 0.56 on unseen synthetic bilingual data and 0.23 on real-world corpora (DISPLACE; MUCS Hindi–English code-switching). The evaluation was pre-registered on unseen language pairs and run across Whisper, MMS, and classical language-ID encoders.</p>
             </details>
             <div class="pub-meta">
               <span class="pub-venue pending">JASA-EL · Under review</span>
               <span class="pub-role">First author</span>
               <a class="pub-link" href="https://arxiv.org/pdf/2611.13430" target="_blank" rel="noopener" aria-label="Off-target posterior mass paper PDF">PDF ↗&#xFE0E;</a>
-              <a class="pub-link" href="https://arxiv.org/abs/2611.13430" target="_blank" rel="noopener" aria-label="Off-target posterior mass on arXiv">arXiv ↗&#xFE0E;</a>
               <button class="pub-link bib-toggle" type="button" aria-expanded="false" aria-controls="bib-otpm" aria-label="BibTeX for off-target posterior mass">BibTeX</button>
             </div>
             <div class="bib" id="bib-otpm" hidden>
@@ -1482,206 +1468,20 @@
           </div>
         </article>
       </div>
+      <p class="open-source-note">Open source: led ESPnet’s <a class="meta-link" href="https://github.com/espnet/espnet/pull/6636" target="_blank" rel="noopener">Sidon restoration recipe</a> and made <a class="meta-link" href="https://github.com/espnet/espnet/pull/6227" target="_blank" rel="noopener">speaker-embedding extraction &gt;20× faster</a>.</p>
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
-  <section class="light-section" id="experience" aria-labelledby="experience-h">
+  <section class="light-section" id="background" aria-labelledby="background-h">
     <div class="wrap">
-      <div class="sec-head">
-        <h2 id="experience-h">Experience</h2>
-      </div>
-
-      <h3 class="group-label">Research positions</h3>
-      <div class="xp-list">
-        <article class="xp-item">
-          <div class="xp-when">Jun&nbsp;2025 – Present</div>
-          <div>
-            <h4 class="xp-org"><a href="https://wavlab.org" target="_blank" rel="noopener">CMU WavLab <span aria-hidden="true">↗&#xFE0E;</span></a></h4>
-            <div class="xp-role">Researcher · Speech &amp; Audio ML <span class="xp-where">· Advisor: Prof. Shinji Watanabe · Pittsburgh, PA</span></div>
-            <ul class="xp-points">
-              <li>Lead student researcher on <strong>target-speaker speech restoration</strong> with Amazon AGI (<a class="meta-link" href="#research">project overview</a>).</li>
-              <li>Built an English–Spanish speech-to-speech translation system for the Interspeech 2026 S2ST Challenge.</li>
-            </ul>
-
-          </div>
-        </article>
-        <article class="xp-item">
-          <div class="xp-when">Aug&nbsp;2023 – May&nbsp;2026</div>
-          <div>
-            <h4 class="xp-org"><a href="https://sail.usc.edu" target="_blank" rel="noopener">USC SAIL Lab <span aria-hidden="true">↗&#xFE0E;</span></a></h4>
-            <div class="xp-role">Student Researcher · Multilingual Speech <span class="xp-where">· Advisor: Prof. Shrikanth Narayanan · Los Angeles, CA</span></div>
-            <ul class="xp-points">
-              <li>Studied language identity in pre-trained speech encoders; developed the <a class="meta-link" href="#pub-otpm">off-target posterior mass diagnostic</a>.</li>
-              <li>Pre-registered the evaluation on unseen language pairs and tested it on two held-out real-world corpora; isolated which utterances gain most in low-resource and code-switching settings.</li>
-            </ul>
-          </div>
-        </article>
-        <article class="xp-item compact">
-          <div class="xp-when">2023</div>
-          <div>
-            <h4 class="xp-org"><a href="https://uscinteractionlab.web.app/" target="_blank" rel="noopener">USC Interaction Lab <span aria-hidden="true">↗&#xFE0E;</span></a></h4>
-            <div class="xp-role">Student Researcher · Multimodal ML for early Alzheimer's detection</div>
-          </div>
-        </article>
-      </div>
-
-      <h3 class="group-label">Industry</h3>
-      <div class="xp-list">
-        <article class="xp-item">
-          <div class="xp-when">May&nbsp;–&nbsp;Aug&nbsp;2026</div>
-          <div>
-            <h4 class="xp-org">Apple</h4>
-            <div class="xp-role">Software Engineering Intern · Satellite Connectivity <span class="xp-where">· Austin, TX</span></div>
-            <ul class="xp-points">
-              <li>Built a tool to run satellite-network simulations at scale, increasing experiment throughput <strong>~1000×</strong> and supporting ~2000 concurrent experiments.</li>
-              <li>Sped up interference calculations <strong>~12×</strong> and fixed timing issues that caused the simulator to under-report network capacity.</li>
-            </ul>
-
-          </div>
-        </article>
-      </div>
-
-      <h3 class="group-label">Teaching &amp; projects</h3>
-      <div class="xp-list">
-        <article class="xp-item compact">
-          <div class="xp-when">Aug&nbsp;2023 – May&nbsp;2026</div>
-          <div>
-            <h4 class="xp-org">USC MATH 229 · Multivariable Calculus</h4>
-            <div class="xp-role">Supplemental Instruction Leader · 3–4 weekly sessions for 98 students; review sessions reached ~300 attendees, the highest in program history</div>
-          </div>
-        </article>
-        <article class="xp-item compact">
-          <div class="xp-when">2023&nbsp;–&nbsp;2024</div>
-          <div>
-            <h4 class="xp-org"><a href="https://store.steampowered.com/app/2372070/Bone_Boy/" target="_blank" rel="noopener">Unity 2D Platformer · Open Alpha Game Design Club <span aria-hidden="true">↗&#xFE0E;</span></a></h4>
-            <div class="xp-role">VP &amp; Executive Producer · Led a 10-member audio team (Ableton &amp; Wwise); shipped on Steam, 85% positive · Taught a Unity &amp; SFX curriculum to 40 students</div>
-          </div>
-        </article>
-      </div>
-
-
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="light-section" id="about" aria-labelledby="about-h">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2 id="about-h">About</h2>
-      </div>
-
-
-      <div class="about-grid">
-        <div class="about-text">
-          <p>Before CMU, I studied computer science and applied mathematics at USC, where I worked on multilingual speech with Prof. Shrikanth Narayanan at SAIL. I spent summer 2026 at Apple building simulation tools for satellite connectivity.</p>
-          <p>I also enjoy making games and working with audio. At USC, I led the audio team for <a class="meta-link" href="https://store.steampowered.com/app/2372070/Bone_Boy/" target="_blank" rel="noopener">Bone Boy</a>, a student-built game released on Steam, and taught multivariable calculus review sessions.</p>
-        </div>
-        <div class="meta-list">
-          <div class="meta-item">
-            <span class="meta-key">Education</span>
-            <span class="meta-val">
-              <span class="edu-block">
-                Carnegie Mellon University
-                <span class="degree-list">
-                  <span class="degree">
-                    <span class="degree-abbr">M.S.</span>
-                    <span class="degree-name">Intelligent Information Systems
-                      <span class="degree-where">Language Technologies Institute</span>
-                    </span>
-                  </span>
-                </span>
-                <span class="meta-foot">Expected Dec 2027</span>
-              </span>
-              <span class="edu-block">
-                University of Southern California
-                <span class="degree-list">
-                  <span class="degree">
-                    <span class="degree-abbr">B.S.</span>
-                    <span class="degree-name">Computer Science</span>
-                  </span>
-                  <span class="degree">
-                    <span class="degree-abbr">B.S.</span>
-                    <span class="degree-name">Applied and Computational Mathematics</span>
-                  </span>
-                </span>
-                <span class="meta-foot">GPA 3.84 · Magna Cum Laude · May 2026</span>
-              </span>
-            </span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-key">Advisors</span>
-            <span class="meta-val">
-              <span class="fact-list">
-                <span class="fact">
-                  <span class="fact-body"><a class="meta-link" href="https://sw005320.github.io/" target="_blank" rel="noopener">Prof. Shinji Watanabe</a>
-                    <span class="fact-note">CMU WavLab · 2025–Present</span>
-                  </span>
-                </span>
-                <span class="fact">
-                  <span class="fact-body"><a class="meta-link" href="https://sail.usc.edu/people/shri.html" target="_blank" rel="noopener">Prof. Shrikanth Narayanan</a>
-                    <span class="fact-note">USC SAIL · 2023–2026</span>
-                  </span>
-                </span>
-              </span>
-            </span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-key">Publishes as</span>
-            <span class="meta-val">Zhuoyan Tao · <a class="meta-link" href="https://scholar.google.com/citations?user=V1Z3wyoAAAAJ" target="_blank" rel="noopener">Google Scholar</a></span>
-          </div>
-        </div>
-      </div>
-      <h3 class="group-label">Honors</h3>
-      <ul class="honors-row">
-        <li><span class="honor-name"><a class="meta-link" href="https://www.pbk.org/" target="_blank" rel="noopener">Phi Beta Kappa</a></span><span class="honor-note">Elected 2025</span></li>
-        <li><span class="honor-name"><a class="meta-link" href="https://admission.usc.edu/scholarship-guide/" target="_blank" rel="noopener">Trustee Scholar</a></span><span class="honor-note">Full-tuition merit scholarship, USC</span></li>
-        <li><span class="honor-name"><a class="meta-link" href="https://viterbiundergrad.usc.edu/gcsp/" target="_blank" rel="noopener">Grand Challenges Scholar</a></span><span class="honor-note">NAE · USC Viterbi, 2026</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- NEWS -->
-  <section class="dark-section" id="news" aria-labelledby="news-h">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2 id="news-h">News</h2>
-      </div>
-      <ul class="news-list">
-        <li class="news-item">
-          <time class="news-date" datetime="2026-11">Nov 2026</time>
-          <p class="news-body">New preprint with Aditya Kommineni and Prof. Shrikanth Narayanan: <a class="meta-link" href="#pub-otpm">Off-target posterior mass</a>, a training-free diagnostic for fine-tuning spoken language diarization probes. Submitted to <strong>JASA Express Letters</strong>.</p>
-        </li>
-        <li class="news-item">
-          <time class="news-date" datetime="2026-10">Oct 2026</time>
-          <p class="news-body">The <strong>Sidon speech-restoration recipe</strong> was merged into ESPnet (<a class="meta-link" href="https://github.com/espnet/espnet/pull/6636" target="_blank" rel="noopener">#6636</a>; I wrote 41 of its 52 commits).</p>
-        </li>
-        <li class="news-item">
-          <time class="news-date" datetime="2026-09">Sep 2026</time>
-          <p class="news-body"><a class="meta-link" href="#pub-anchor">ANCHOR</a> was presented as an <strong>oral at Interspeech 2026</strong> in Sydney.</p>
-        </li>
-        <li class="news-item">
-          <time class="news-date" datetime="2026-09">Sep 2026</time>
-          <p class="news-body"><a class="meta-link" href="#pub-turnbench">TurnBench</a>, a multi-domain benchmark for turn-taking in spoken dialogue, was accepted to <strong>IEEE SLT 2026</strong> (Palermo, December 2026).</p>
-        </li>
-        <li class="news-item">
-          <time class="news-date" datetime="2026-08">Aug 2026</time>
-          <p class="news-body">Started the M.S. in Intelligent Information Systems at <strong>CMU LTI</strong>, after a summer as a software engineering intern at <strong>Apple</strong>.</p>
-        </li>
-      </ul>
-      <details class="news-more">
-        <summary>Earlier news</summary>
-        <ul class="news-list">
-          <li class="news-item">
-            <time class="news-date" datetime="2026-06">Jun 2026</time>
-            <p class="news-body">First-author paper ANCHOR accepted to <strong>Interspeech 2026</strong>.</p>
-          </li>
-          <li class="news-item">
-            <time class="news-date" datetime="2026-05">May 2026</time>
-            <p class="news-body">Graduated from <strong>USC</strong> with B.S. degrees in Computer Science and Applied &amp; Computational Mathematics, Magna Cum Laude, and was named a Grand Challenges Scholar.</p>
-          </li>
-        </ul>
-      </details>
+      <div class="sec-head"><h2 id="background-h">Background</h2></div>
+      <dl class="background-list">
+        <div><dt>CMU <span>2025–present</span></dt><dd>Speech research at WavLab. M.S. in Intelligent Information Systems, expected Dec 2027.</dd></div>
+        <div><dt>Apple <span>Summer 2026</span></dt><dd>Software engineering intern, satellite connectivity. Built simulation tooling with ~1000× higher experiment throughput.</dd></div>
+        <div><dt>USC <span>Graduated 2026</span></dt><dd>B.S. degrees in Computer Science and Applied and Computational Mathematics, magna cum laude. Multilingual speech research with <a class="meta-link" href="https://sail.usc.edu/people/shri.html" target="_blank" rel="noopener">Prof. Shrikanth Narayanan</a> at SAIL.</dd></div>
+      </dl>
+      <p class="background-personal">Outside research, I led the audio team for <a class="meta-link" href="https://store.steampowered.com/app/2372070/Bone_Boy/" target="_blank" rel="noopener">Bone Boy</a>, a game released on Steam, and taught multivariable calculus review sessions.</p>
+      <a class="meta-link" href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener">Full experience and honors in my résumé ↗</a>
     </div>
   </section>
 
@@ -1691,8 +1491,7 @@
       <div class="sec-head">
         <h2 id="contact-h">Contact</h2>
       </div>
-      <p class="contact-note">I'm seeking Summer 2027 research or ML engineering internships in speech and audio. Reach me at <a class="meta-link" href="mailto:terrytao@andrew.cmu.edu">terrytao@andrew.cmu.edu</a>.</p>
-      <p class="contact-note">Interested in collaborating on speech restoration, perceptual evaluation, or multilingual speech? I'd be glad to hear from you.</p>
+      <p class="contact-note">For research collaborations or Summer 2027 internships: <a class="meta-link" href="mailto:terrytao@andrew.cmu.edu">terrytao@andrew.cmu.edu</a>.</p>
       <ul class="hero-links" aria-label="Contact and profiles">
         <li><a href="https://scholar.google.com/citations?user=V1Z3wyoAAAAJ" target="_blank" rel="noopener">Google Scholar</a></li>
         <li><a href="https://github.com/ZhuoyanTao" target="_blank" rel="noopener">GitHub</a></li>
@@ -1709,14 +1508,7 @@
     <div class="footer-left">
       <div class="footer-name">Zhuoyan (Terry) Tao</div>
     </div>
-    <ul class="footer-links" aria-label="Elsewhere">
-      <li><a href="mailto:terrytao@andrew.cmu.edu">Email</a></li>
-      <li><a href="https://scholar.google.com/citations?user=V1Z3wyoAAAAJ" target="_blank" rel="noopener">Scholar</a></li>
-      <li><a href="https://github.com/ZhuoyanTao" target="_blank" rel="noopener">GitHub</a></li>
-      <li><a href="https://www.linkedin.com/in/zhuoyan-tao/" target="_blank" rel="noopener">LinkedIn</a></li>
-      <li><a href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener">Résumé</a></li>
-    </ul>
-    <div class="footer-note">Pittsburgh · Updated <time datetime="2026-11-13">Nov 2026</time></div>
+    <div class="footer-note">Pittsburgh · Updated <time datetime="2026-11-16">Nov 2026</time></div>
   </footer>
 
   <script>
