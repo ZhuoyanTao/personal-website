@@ -1558,6 +1558,14 @@
     .paper-more, .paper-grid > .bib { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
     .paper-grid > .bib pre { background: none; border: 0; border-radius: 0; }
 
+    /* Open source: a labelled pair of contributions on the same three-column grid as the cards. */
+    #research h3.group-label { margin: 1.4rem 0 0.6rem; color: var(--faint); }
+    .oss-list { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.6rem 1rem; }
+    .oss-list li { display: flex; flex-direction: column; }
+    .oss-list a { width: fit-content; font-size: var(--text-body); line-height: var(--lh-body); }
+    .oss-list span { font-size: var(--text-small); line-height: var(--lh-small); color: var(--faint); }
+    @media (max-width: 820px) { .oss-list { grid-template-columns: minmax(0, 1fr); } }
+
     /* Which paper an open panel belongs to: its name heads the panel, and card and panel share an accent border. */
     .panel-head { display: none; }
     .paper.is-open, .paper-grid > .paper-more, .paper-grid > .bib { border-color: var(--blue-mid); }
@@ -1919,7 +1927,11 @@
           <button class="bib-copy" type="button">Copy</button>
         </div>
       </div>
-      <p class="open-source-note">Open source: led ESPnet’s <a class="meta-link" href="https://github.com/espnet/espnet/pull/6636" target="_blank" rel="noopener">Sidon restoration recipe</a> and made <a class="meta-link" href="https://github.com/espnet/espnet/pull/6227" target="_blank" rel="noopener">speaker-embedding extraction &gt;20× faster</a>.</p>
+      <h3 class="group-label">Open source</h3>
+      <ul class="oss-list">
+        <li><a class="pub-link" href="https://github.com/espnet/espnet/pull/6636" target="_blank" rel="noopener">Sidon speech-restoration recipe ↗&#xFE0E;</a><span>Led this recipe in ESPnet</span></li>
+        <li><a class="pub-link" href="https://github.com/espnet/espnet/pull/6227" target="_blank" rel="noopener">Speaker-embedding extraction ↗&#xFE0E;</a><span>Made it &gt;20× faster in ESPnet</span></li>
+      </ul>
     </div>
   </section>
 
