@@ -1263,9 +1263,11 @@
     .open-source-note { margin-top: 0.75rem; }
     .background-list > div { grid-template-columns: 13rem 1fr; padding: 0.65rem 0; }
     .background-list dt { display: flex; align-items: center; gap: 0.75rem; }
-    .background-list dt .institution-mark { display: flex; align-items: center; justify-content: center; flex: 0 0 38px; margin: 0; font: 600 0.95rem/1 var(--serif); }
-    .background-list dt .cmu-mark { color: #ed7777; }
-    .background-list dt .usc-mark { color: #eac66c; }
+    .background-list dt .institution-mark { display: flex; align-items: center; justify-content: center; flex: 0 0 48px; margin: 0; font: 600 0.95rem/1 var(--serif); }
+    .background-list dt .cmu-mark { flex-basis: 48px; }
+    .cmu-mark img { display: block; width: 48px; height: 48px; object-fit: contain; }
+    .background-list dt .usc-mark { height: 48px; background: #ffcc00; }
+    .usc-mark img { display: block; width: 38px; height: auto; }
     .background-list dt .apple-mark { color: var(--ink); }
     .apple-mark svg { width: 27px; height: 27px; fill: currentColor; }
     .background-list dt .institution-name { margin: 0; font-size: 1rem; color: var(--ink); }
@@ -1335,8 +1337,8 @@
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#research">Research</a></li>
       <li><a href="#background">Background</a></li>
+      <li><a href="#research">Research</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener" class="nav-cta">Résumé ↗&#xFE0E;</a></li>
     </ul>
@@ -1384,6 +1386,19 @@
         </div>
       </div>
     </div>
+    </div>
+  </section>
+
+  <section class="light-section" id="background" aria-labelledby="background-h">
+    <div class="wrap">
+      <div class="sec-head"><h2 id="background-h">Background</h2></div>
+      <dl class="background-list">
+        <div><dt><span class="institution-mark cmu-mark" aria-hidden="true"><img src="assets/cmu-logo.png" width="48" height="48" alt="" /></span><span class="institution-name">Carnegie Mellon<span class="institution-date">2025–present</span></span></dt><dd>Speech research at WavLab. M.S. in Intelligent Information Systems, expected Dec 2027.</dd></div>
+        <div><dt><!-- Apple icon: Simple Icons, CC0 (simple-icons/simple-icons). --><span class="institution-mark apple-mark" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></span><span class="institution-name">Apple<span class="institution-date">Summer 2026</span></span></dt><dd>Software engineering intern, satellite connectivity. Built simulation tooling with ~1000× higher experiment throughput.</dd></div>
+        <div><dt><span class="institution-mark usc-mark" aria-hidden="true"><img src="assets/usc-monogram.png" width="38" height="16" alt="" /></span><span class="institution-name">USC<span class="institution-date">Graduated 2026</span></span></dt><dd>B.S. degrees in Computer Science and Applied and Computational Mathematics, magna cum laude. Multilingual speech research with <a class="meta-link" href="https://sail.usc.edu/people/shri.html" target="_blank" rel="noopener">Prof. Shrikanth Narayanan</a> at SAIL.</dd></div>
+      </dl>
+      <p class="background-personal">Outside research, I led the audio team for <a class="meta-link" href="https://store.steampowered.com/app/2372070/Bone_Boy/" target="_blank" rel="noopener">Bone Boy</a>, a game released on Steam, and taught multivariable calculus review sessions.</p>
+      <a class="meta-link" href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener">Full experience and honors in my résumé ↗</a>
     </div>
   </section>
 
@@ -1506,19 +1521,6 @@
         </article>
       </div>
       <p class="open-source-note">Open source: led ESPnet’s <a class="meta-link" href="https://github.com/espnet/espnet/pull/6636" target="_blank" rel="noopener">Sidon restoration recipe</a> and made <a class="meta-link" href="https://github.com/espnet/espnet/pull/6227" target="_blank" rel="noopener">speaker-embedding extraction &gt;20× faster</a>.</p>
-    </div>
-  </section>
-
-  <section class="light-section" id="background" aria-labelledby="background-h">
-    <div class="wrap">
-      <div class="sec-head"><h2 id="background-h">Background</h2></div>
-      <dl class="background-list">
-        <div><dt><span class="institution-mark cmu-mark" aria-hidden="true">CMU</span><span class="institution-name">Carnegie Mellon<span class="institution-date">2025–present</span></span></dt><dd>Speech research at WavLab. M.S. in Intelligent Information Systems, expected Dec 2027.</dd></div>
-        <div><dt><!-- Apple icon: Simple Icons, CC0 (simple-icons/simple-icons). --><span class="institution-mark apple-mark" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></span><span class="institution-name">Apple<span class="institution-date">Summer 2026</span></span></dt><dd>Software engineering intern, satellite connectivity. Built simulation tooling with ~1000× higher experiment throughput.</dd></div>
-        <div><dt><span class="institution-mark usc-mark" aria-hidden="true">USC</span><span class="institution-name">USC<span class="institution-date">Graduated 2026</span></span></dt><dd>B.S. degrees in Computer Science and Applied and Computational Mathematics, magna cum laude. Multilingual speech research with <a class="meta-link" href="https://sail.usc.edu/people/shri.html" target="_blank" rel="noopener">Prof. Shrikanth Narayanan</a> at SAIL.</dd></div>
-      </dl>
-      <p class="background-personal">Outside research, I led the audio team for <a class="meta-link" href="https://store.steampowered.com/app/2372070/Bone_Boy/" target="_blank" rel="noopener">Bone Boy</a>, a game released on Steam, and taught multivariable calculus review sessions.</p>
-      <a class="meta-link" href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener">Full experience and honors in my résumé ↗</a>
     </div>
   </section>
 
