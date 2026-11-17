@@ -33,7 +33,7 @@
   <link rel="icon" href="assets/favicon.ico" sizes="32x32" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-  <link rel="preload" as="image" href="assets/portrait.webp" imagesrcset="assets/portrait-400.webp 400w, assets/portrait.webp 600w" imagesizes="(max-width: 600px) 112px, (max-width: 1024px) 260px, 300px" type="image/webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="assets/portrait.webp" imagesrcset="assets/portrait-400.webp 400w, assets/portrait.webp 600w" imagesizes="(max-width: 600px) 88px, 180px" type="image/webp" fetchpriority="high" />
   <link rel="preload" as="font" href="assets/fonts/playfair-display-latin.woff2" type="font/woff2" crossorigin />
   <link rel="preload" as="font" href="assets/fonts/dm-sans-latin.woff2" type="font/woff2" crossorigin />
   <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable summary" />
@@ -1242,6 +1242,47 @@
       .background-list dt span { display: inline; margin-left: 0.5rem; }
     }
 
+    /* Compact spacing without shrinking the reading text. */
+    .hero-inner { grid-template-columns: minmax(0, 1fr) 180px; gap: 2.5rem; padding-top: 1.75rem; padding-bottom: 1.75rem; }
+    .hero-content, .hero-bio { max-width: 42rem; }
+    .hero-photo-wrap { width: 180px; }
+    .hero-photo-col { padding-top: 0; }
+    .hero-kicker { margin-bottom: 0.7rem; }
+    .hero-name { margin-bottom: 1rem; }
+    .hero-bio { margin-bottom: 0.85rem; line-height: 1.65; }
+    .hero-status { margin-bottom: 0; max-width: 42rem; }
+    .hero-links { margin-top: 1rem; }
+    #research .wrap, #background .wrap, #contact .wrap { padding-top: 1.75rem; padding-bottom: 1.75rem; }
+    .sec-head, #contact .sec-head { margin-bottom: 1.25rem; }
+    .current-project { padding-bottom: 0.75rem; }
+    .current-project .r-eyebrow { margin: 0.25rem 0 0.35rem; }
+    #research .pub-item { padding: 1rem 0; gap: 1.25rem; }
+    .pub-tldr { margin-top: 0.45rem; }
+    .pub-details { margin: 0.4rem 0; }
+    .pub-meta { margin-top: 0.5rem; }
+    .open-source-note { margin-top: 0.75rem; }
+    .background-list > div { grid-template-columns: 13rem 1fr; padding: 0.65rem 0; }
+    .background-list dt { display: flex; align-items: center; gap: 0.75rem; }
+    .background-list dt .institution-mark { display: flex; align-items: center; justify-content: center; flex: 0 0 38px; margin: 0; font: 600 0.95rem/1 var(--serif); }
+    .background-list dt .cmu-mark { color: #ed7777; }
+    .background-list dt .usc-mark { color: #eac66c; }
+    .background-list dt .apple-mark { color: var(--ink); }
+    .apple-mark svg { width: 27px; height: 27px; fill: currentColor; }
+    .background-list dt .institution-name { margin: 0; font-size: 1rem; color: var(--ink); }
+    .background-list dt .institution-date { display: block; margin: 0; font-size: 0.85rem; }
+    .background-personal { margin-top: 1rem; }
+    footer { padding-top: 1rem; padding-bottom: 1rem; }
+    @media (max-width: 600px) {
+      .hero-inner { grid-template-columns: minmax(0, 1fr) 88px; gap: 0 1rem; padding-top: 1rem; padding-bottom: 1.5rem; }
+      .hero-photo-wrap { width: 88px; }
+      .hero-name { margin-bottom: 0; }
+      .hero-bio { margin-top: 1rem; }
+      #research .pub-item { display: flow-root; }
+      #research .pub-thumb { float: right; width: 88px; margin: 0 0 0.5rem 0.75rem; }
+      .pub-meta { clear: both; }
+      .background-list > div { grid-template-columns: 1fr; gap: 0.4rem; }
+    }
+
     @media print {
       body::after, .progress, .sec-head::after, .xp-list::before, .xp-item::before { display: none !important; }
     }
@@ -1326,16 +1367,12 @@
         Seeking Summer 2027 research or ML engineering internships in speech and audio
       </a>
 
-      <div class="hero-btns">
-        <a href="#research" class="research-link">Explore research</a>
-        <a href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener" class="btn-outline">Résumé ↗&#xFE0E;</a>
-      </div>
-
       <ul class="hero-links" aria-label="Profiles">
         <li><a href="mailto:terrytao@andrew.cmu.edu">Email</a></li>
         <li><a href="https://scholar.google.com/citations?user=V1Z3wyoAAAAJ" target="_blank" rel="me noopener">Google Scholar</a></li>
         <li><a href="https://github.com/ZhuoyanTao" target="_blank" rel="me noopener">GitHub</a></li>
         <li><a href="https://www.linkedin.com/in/zhuoyan-tao/" target="_blank" rel="me noopener">LinkedIn</a></li>
+        <li><a href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a></li>
       </ul>
     </div>
 
@@ -1343,7 +1380,7 @@
     <div class="hero-photo-col">
       <div class="hero-photo-wrap">
         <div class="hero-photo-frame">
-          <img src="assets/portrait.webp" srcset="assets/portrait-400.webp 400w, assets/portrait.webp 600w" sizes="(max-width: 600px) 112px, (max-width: 1024px) 260px, 300px" width="300" height="400" fetchpriority="high" alt="Portrait of Zhuoyan (Terry) Tao" />
+          <img src="assets/portrait.webp" srcset="assets/portrait-400.webp 400w, assets/portrait.webp 600w" sizes="(max-width: 600px) 88px, 180px" width="300" height="400" fetchpriority="high" alt="Portrait of Zhuoyan (Terry) Tao" />
         </div>
       </div>
     </div>
@@ -1476,9 +1513,9 @@
     <div class="wrap">
       <div class="sec-head"><h2 id="background-h">Background</h2></div>
       <dl class="background-list">
-        <div><dt>CMU <span>2025–present</span></dt><dd>Speech research at WavLab. M.S. in Intelligent Information Systems, expected Dec 2027.</dd></div>
-        <div><dt>Apple <span>Summer 2026</span></dt><dd>Software engineering intern, satellite connectivity. Built simulation tooling with ~1000× higher experiment throughput.</dd></div>
-        <div><dt>USC <span>Graduated 2026</span></dt><dd>B.S. degrees in Computer Science and Applied and Computational Mathematics, magna cum laude. Multilingual speech research with <a class="meta-link" href="https://sail.usc.edu/people/shri.html" target="_blank" rel="noopener">Prof. Shrikanth Narayanan</a> at SAIL.</dd></div>
+        <div><dt><span class="institution-mark cmu-mark" aria-hidden="true">CMU</span><span class="institution-name">Carnegie Mellon<span class="institution-date">2025–present</span></span></dt><dd>Speech research at WavLab. M.S. in Intelligent Information Systems, expected Dec 2027.</dd></div>
+        <div><dt><!-- Apple icon: Simple Icons, CC0 (simple-icons/simple-icons). --><span class="institution-mark apple-mark" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></span><span class="institution-name">Apple<span class="institution-date">Summer 2026</span></span></dt><dd>Software engineering intern, satellite connectivity. Built simulation tooling with ~1000× higher experiment throughput.</dd></div>
+        <div><dt><span class="institution-mark usc-mark" aria-hidden="true">USC</span><span class="institution-name">USC<span class="institution-date">Graduated 2026</span></span></dt><dd>B.S. degrees in Computer Science and Applied and Computational Mathematics, magna cum laude. Multilingual speech research with <a class="meta-link" href="https://sail.usc.edu/people/shri.html" target="_blank" rel="noopener">Prof. Shrikanth Narayanan</a> at SAIL.</dd></div>
       </dl>
       <p class="background-personal">Outside research, I led the audio team for <a class="meta-link" href="https://store.steampowered.com/app/2372070/Bone_Boy/" target="_blank" rel="noopener">Bone Boy</a>, a game released on Steam, and taught multivariable calculus review sessions.</p>
       <a class="meta-link" href="assets/Zhuoyan_Terry_Tao_Resume.pdf" target="_blank" rel="noopener">Full experience and honors in my résumé ↗</a>
