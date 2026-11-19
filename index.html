@@ -1685,8 +1685,51 @@
       .nav-logo { visibility: hidden; }       /* the name sits in the rail */
     }
     @media (min-width: 1180px) and (min-height: 760px) {
-      main > .hero { position: sticky; top: 6.25rem; }
+      main > .hero { position: static; }
+      html.rail-fits main > .hero { position: sticky; top: 6.25rem; }
     }
+
+    /* Evidence-led refinements: explicit specialty, visible outcomes, predictable actions. */
+    html { scroll-padding-top: 6rem; }
+    .meta-link { overflow-wrap: anywhere; }
+    .paper-body, .paper-more, .bib { min-width: 0; }
+    .hero-specialty { font: var(--w-strong) var(--text-body)/var(--lh-small) var(--sans); color: var(--ink); margin: 0.1rem 0 0.65rem; }
+    .bg-highlight { display: block; font-size: var(--text-small); color: var(--body); margin-top: 0.15rem; }
+    .pub-contribution { font-size: var(--text-small); line-height: var(--lh-small); color: var(--body); margin-top: 0.35rem; }
+    .paper .pub-meta { gap: 0.15rem 1rem; }
+    .paper .pub-meta > * { min-height: 32px; display: inline-flex; align-items: center; }
+    .hero-links a { display: inline-flex; align-items: center; min-height: 32px; }
+    @media (max-width: 600px) {
+      .hero-specialty { grid-column: 1; grid-row: 2; margin: 0.35rem 0; }
+      .hero-roles { grid-row: 3 !important; grid-column: 1 / -1 !important; }
+      .hero-photo-col { grid-row: 1 / span 2; }
+      .hero-bio { font-size: var(--text-body); }
+      .paper .pub-meta > *, .hero-links a { min-height: 44px; }
+    }
+
+    /* Text-only enlargement needs the same single-column fallback as browser zoom. */
+    html.large-text main { display: block; padding: 6rem 1rem 1rem; }
+    html.large-text main > .hero { position: static; padding: 0; }
+    html.large-text .hero-inner { display: flex; flex-direction: column; padding: 0; }
+    html.large-text .hero-content { display: block; max-width: 100%; }
+    html.large-text .wrap { padding-left: 0; padding-right: 0; }
+    html.large-text .hero-roles { margin-bottom: 1rem; }
+    html.large-text .paper { grid-template-columns: minmax(0, 1fr); }
+    html.large-text .paper-side, html.large-text .paper-body { display: block; }
+    html.large-text .paper .pub-thumb { max-width: 172px; }
+    html.large-text .pub-title { margin-top: 0.5rem; }
+    html.large-text .paper-grid > .paper-more, html.large-text .paper-grid > .bib { margin-left: 0; }
+    html.large-text .paper-more dl > div { grid-template-columns: minmax(0, 1fr); }
+    html.large-text .fold.bg > summary { grid-template-columns: minmax(0, 1fr) 0.9rem; }
+    html.large-text .fold.bg > summary > :nth-child(2) { grid-column: 1; }
+    html.large-text .fold.bg > summary::after { grid-column: 2; }
+    html.large-text .fold.bg > .fold-body { padding-left: 0; }
+    html.large-text .pub-venue, html.large-text .org-inline, html.large-text .nb { white-space: normal; }
+    html.large-text .sec-head { flex-wrap: wrap; }
+    html.large-text nav, html.large-text nav.scrolled { position: relative; padding: 0.5rem 1rem; gap: 12px; flex-wrap: wrap; }
+    html.large-text .nav-logo { display: none; }
+    html.large-text .nav-links { flex-wrap: wrap; }
+    html.large-text .oss-list { grid-template-columns: minmax(0, 1fr); }
 
     /* ═══ AFFILIATIONS ═══
        Directly under the name, where attention is highest (top-left; NN/g 2017/2018).
@@ -1784,7 +1827,9 @@
         <span class="name-familiar">(Terry)</span>
       </h1>
 
-      <!-- Title + organisation pairs, the part of a profile recruiters look at first. -->
+      <p class="hero-specialty">Speech &amp; audio ML researcher</p>
+
+      <!-- Current education and prior industry experience. -->
       <ul class="hero-roles" aria-label="Affiliations">
         <li><span class="role-mark" aria-hidden="true"><img src="assets/cmu-logo.png" width="48" height="48" alt="" /></span><span><strong>Carnegie Mellon</strong> · M.S. student, <abbr title="Language Technologies Institute">LTI</abbr></span></li>
         <li><!-- Apple icon: Simple Icons, CC0 (simple-icons/simple-icons). --><span class="role-mark" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></span><span><strong>Apple</strong> · Software engineering intern, 2026</span></li>
@@ -1792,15 +1837,15 @@
 
       <div class="hero-rule" aria-hidden="true"></div>
 
-      <p class="hero-bio">I'm Terry. I work with <a class="meta-link" href="https://sw005320.github.io/" target="_blank" rel="noopener">Prof. Shinji Watanabe</a> at <a class="meta-link" href="https://wavlab.org" target="_blank" rel="noopener">WavLab</a> on recovering speech from damaged audio and predicting how it sounds to listeners. I'm currently the lead student researcher on an <span class="org-inline"><!-- Amazon icon: Simple Icons, CC0 (simple-icons/simple-icons). --><svg class="inline-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 7.594 3.166 11.87 3.166 2.852 0 5.668-.533 8.447-1.595l.315-.14c.138-.06.234-.1.293-.13.226-.088.39-.046.525.13.12.174.09.336-.12.48-.256.19-.6.41-1.006.654-1.244.743-2.64 1.316-4.185 1.726a17.617 17.617 0 01-10.951-.577 17.88 17.88 0 01-5.43-3.35c-.1-.074-.151-.15-.151-.22 0-.047.021-.09.051-.13zm6.565-6.218c0-1.005.247-1.863.743-2.577.495-.71 1.17-1.25 2.04-1.615.796-.335 1.756-.575 2.912-.72.39-.046 1.033-.103 1.92-.174v-.37c0-.93-.105-1.558-.3-1.875-.302-.43-.78-.65-1.44-.65h-.182c-.48.046-.896.196-1.246.46-.35.27-.575.63-.675 1.096-.06.3-.206.465-.435.51l-2.52-.315c-.248-.06-.372-.18-.372-.39 0-.046.007-.09.022-.15.247-1.29.855-2.25 1.82-2.88.976-.616 2.1-.975 3.39-1.05h.54c1.65 0 2.957.434 3.888 1.29.135.15.27.3.405.48.12.165.224.314.283.45.075.134.15.33.195.57.06.254.105.42.135.51.03.104.062.3.076.615.01.313.02.493.02.553v5.28c0 .376.06.72.165 1.036.105.313.21.54.315.674l.51.674c.09.136.136.256.136.36 0 .12-.06.226-.18.314-1.2 1.05-1.86 1.62-1.963 1.71-.165.135-.375.15-.63.045a6.062 6.062 0 01-.526-.496l-.31-.347a9.391 9.391 0 01-.317-.42l-.3-.435c-.81.886-1.603 1.44-2.4 1.665-.494.15-1.093.227-1.83.227-1.11 0-2.04-.343-2.76-1.034-.72-.69-1.08-1.665-1.08-2.94l-.05-.076zm3.753-.438c0 .566.14 1.02.425 1.364.285.34.675.512 1.155.512.045 0 .106-.007.195-.02.09-.016.134-.023.166-.023.614-.16 1.08-.553 1.424-1.178.165-.28.285-.58.36-.91.09-.32.12-.59.135-.8.015-.195.015-.54.015-1.005v-.54c-.84 0-1.484.06-1.92.18-1.275.36-1.92 1.17-1.92 2.43l-.035-.02zm9.162 7.027c.03-.06.075-.11.132-.17.362-.243.714-.41 1.05-.5a8.094 8.094 0 011.612-.24c.14-.012.28 0 .41.03.65.06 1.05.168 1.172.33.063.09.099.228.099.39v.15c0 .51-.149 1.11-.424 1.8-.278.69-.664 1.248-1.156 1.68-.073.06-.14.09-.197.09-.03 0-.06 0-.09-.012-.09-.044-.107-.12-.064-.24.54-1.26.806-2.143.806-2.64 0-.15-.03-.27-.087-.344-.145-.166-.55-.257-1.224-.257-.243 0-.533.016-.87.046-.363.045-.7.09-1 .135-.09 0-.148-.014-.18-.044-.03-.03-.036-.047-.02-.077 0-.017.006-.03.02-.063v-.06z"/></svg>Amazon AGI</span> project on target-speaker speech restoration.</p>
+      <p class="hero-bio">I study <a class="meta-link" href="#pub-anchor">speech quality</a>, <a class="meta-link" href="#pub-otpm">multilingual speech</a>, and speech restoration with <a class="meta-link" href="https://sw005320.github.io/" target="_blank" rel="noopener">Prof. Shinji Watanabe</a> at <a class="meta-link" href="https://wavlab.org" target="_blank" rel="noopener">WavLab</a>. I lead student research on an <span class="org-inline"><!-- Amazon icon: Simple Icons, CC0 (simple-icons/simple-icons). --><svg class="inline-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 7.594 3.166 11.87 3.166 2.852 0 5.668-.533 8.447-1.595l.315-.14c.138-.06.234-.1.293-.13.226-.088.39-.046.525.13.12.174.09.336-.12.48-.256.19-.6.41-1.006.654-1.244.743-2.64 1.316-4.185 1.726a17.617 17.617 0 01-10.951-.577 17.88 17.88 0 01-5.43-3.35c-.1-.074-.151-.15-.151-.22 0-.047.021-.09.051-.13zm6.565-6.218c0-1.005.247-1.863.743-2.577.495-.71 1.17-1.25 2.04-1.615.796-.335 1.756-.575 2.912-.72.39-.046 1.033-.103 1.92-.174v-.37c0-.93-.105-1.558-.3-1.875-.302-.43-.78-.65-1.44-.65h-.182c-.48.046-.896.196-1.246.46-.35.27-.575.63-.675 1.096-.06.3-.206.465-.435.51l-2.52-.315c-.248-.06-.372-.18-.372-.39 0-.046.007-.09.022-.15.247-1.29.855-2.25 1.82-2.88.976-.616 2.1-.975 3.39-1.05h.54c1.65 0 2.957.434 3.888 1.29.135.15.27.3.405.48.12.165.224.314.283.45.075.134.15.33.195.57.06.254.105.42.135.51.03.104.062.3.076.615.01.313.02.493.02.553v5.28c0 .376.06.72.165 1.036.105.313.21.54.315.674l.51.674c.09.136.136.256.136.36 0 .12-.06.226-.18.314-1.2 1.05-1.86 1.62-1.963 1.71-.165.135-.375.15-.63.045a6.062 6.062 0 01-.526-.496l-.31-.347a9.391 9.391 0 01-.317-.42l-.3-.435c-.81.886-1.603 1.44-2.4 1.665-.494.15-1.093.227-1.83.227-1.11 0-2.04-.343-2.76-1.034-.72-.69-1.08-1.665-1.08-2.94l-.05-.076zm3.753-.438c0 .566.14 1.02.425 1.364.285.34.675.512 1.155.512.045 0 .106-.007.195-.02.09-.016.134-.023.166-.023.614-.16 1.08-.553 1.424-1.178.165-.28.285-.58.36-.91.09-.32.12-.59.135-.8.015-.195.015-.54.015-1.005v-.54c-.84 0-1.484.06-1.92.18-1.275.36-1.92 1.17-1.92 2.43l-.035-.02zm9.162 7.027c.03-.06.075-.11.132-.17.362-.243.714-.41 1.05-.5a8.094 8.094 0 011.612-.24c.14-.012.28 0 .41.03.65.06 1.05.168 1.172.33.063.09.099.228.099.39v.15c0 .51-.149 1.11-.424 1.8-.278.69-.664 1.248-1.156 1.68-.073.06-.14.09-.197.09-.03 0-.06 0-.09-.012-.09-.044-.107-.12-.064-.24.54-1.26.806-2.143.806-2.64 0-.15-.03-.27-.087-.344-.145-.166-.55-.257-1.224-.257-.243 0-.533.016-.87.046-.363.045-.7.09-1 .135-.09 0-.148-.014-.18-.044-.03-.03-.036-.047-.02-.077 0-.017.006-.03.02-.063v-.06z"/></svg>Amazon AGI</span> project on target-speaker speech restoration.</p>
 
 
       <p class="hero-status">
-        Seeking Summer 2027 research or ML engineering internships in speech and audio
+        Open to Summer 2027 research &amp; ML engineering internships
       </p>
 
       <ul class="hero-links" aria-label="Profiles">
-        <li><a href="mailto:terrytao@andrew.cmu.edu">Email</a></li>
+        <li><a href="mailto:terrytao@andrew.cmu.edu">Email me</a></li>
         <li><a href="https://scholar.google.com/citations?user=V1Z3wyoAAAAJ" target="_blank" rel="me noopener">Google Scholar ↗&#xFE0E;</a></li>
         <li><a href="https://github.com/ZhuoyanTao" target="_blank" rel="me noopener">GitHub ↗&#xFE0E;</a></li>
         <li><a href="https://www.linkedin.com/in/zhuoyan-tao/" target="_blank" rel="me noopener">LinkedIn ↗&#xFE0E;</a></li>
@@ -1821,7 +1866,7 @@
 
   <section class="dark-section" id="research" aria-labelledby="research-h">
     <div class="wrap">
-      <div class="sec-head"><h2 id="research-h">Selected research</h2><button class="fold-all" type="button" data-open="Show all details" data-close="Hide all details">Show all details</button></div>
+      <div class="sec-head"><h2 id="research-h">Selected publications</h2><button class="fold-all" type="button" data-open="Show all details" data-close="Hide all details">Show all details</button></div>
       <div class="paper-grid" id="publications">
         <article class="paper" id="pub-anchor" style="--col: 1">
           <div class="paper-side">
@@ -1835,8 +1880,8 @@
             <p class="pub-authors"><strong>Zhuoyan Tao</strong>, Jiatong Shi, Hye-jin Shim, Shinji Watanabe</p>
             <p class="pub-tldr">Predicts how listeners will rate speech before the utterance finishes, with <strong>21–35% lower PLCMOS error</strong> than ARECHO on <span class="nb">2-second</span> prefixes.</p>
             <div class="pub-meta">
-              <button class="pub-link more-toggle" type="button" aria-expanded="false" aria-controls="more-anchor" aria-label="Details for ANCHOR">Details</button>
-              <a class="pub-link" href="https://www.isca-archive.org/interspeech_2026/tao26_interspeech.pdf" target="_blank" rel="noopener" aria-label="ANCHOR paper PDF">PDF ↗&#xFE0E;</a>
+              <button class="pub-link more-toggle" type="button" aria-expanded="false" aria-controls="more-anchor" aria-label="Research summary for ANCHOR">Research summary</button>
+              <a class="pub-link" href="https://www.isca-archive.org/interspeech_2026/tao26_interspeech.pdf" target="_blank" rel="noopener" aria-label="ANCHOR paper PDF">Paper (PDF) ↗&#xFE0E;</a>
               <a class="pub-link" href="https://huggingface.co/spaces/ZhuoyanTao/anchor-demo" target="_blank" rel="noopener" aria-label="ANCHOR live demo on Hugging Face">Try the demo ↗&#xFE0E;</a>
               <button class="pub-link bib-toggle" type="button" aria-expanded="false" aria-controls="bib-anchor" aria-label="BibTeX for ANCHOR">BibTeX</button>
             </div>
@@ -1875,10 +1920,11 @@
               <span class="authors-full" hidden>Freeman Jiang, Ramon Sanabria, Soham Deshmukh, Bandhav Veluri, Simon Michael Vuch Williams, Elliott K. Suen, Garreth Lee, Kevin Yoonho Choi, Takuya Umeki, Riku Kubo, Sathvik Udupa, Chien-yu Huang, Shih-Yun Shan Kuan, <strong>Zhuoyan Tao</strong>, Satyapriya Krishna, Sefik Emre Eskimez, Yu Tsao, Hung-yi Lee, Shinji Watanabe</span>
               <button class="pub-link authors-toggle" type="button" aria-expanded="false" data-more="All 19 authors" data-less="Show fewer">All 19 authors</button>
             </p>
-            <p class="pub-tldr">A benchmark for when conversational systems should speak or wait, with <strong>30 hours of hand-labeled conversation</strong> and <strong>14 systems</strong> benchmarked.</p>
+            <p class="pub-tldr">A benchmark for when conversational systems should speak or wait: <strong>30 hours of conversation · 14 systems evaluated.</strong></p>
+            <p class="pub-contribution">My contribution: evaluation protocol and an ANCHOR-based baseline.</p>
             <div class="pub-meta">
-              <button class="pub-link more-toggle" type="button" aria-expanded="false" aria-controls="more-turnbench" aria-label="Details for TurnBench">Details</button>
-              <a class="pub-link" href="https://arxiv.org/pdf/2608.25218" target="_blank" rel="noopener" aria-label="TurnBench paper PDF">PDF ↗&#xFE0E;</a>
+              <button class="pub-link more-toggle" type="button" aria-expanded="false" aria-controls="more-turnbench" aria-label="Research summary for TurnBench">Research summary</button>
+              <a class="pub-link" href="https://arxiv.org/pdf/2608.25218" target="_blank" rel="noopener" aria-label="TurnBench paper PDF">Paper (PDF) ↗&#xFE0E;</a>
               <a class="pub-link" href="https://turnbench.sesame.com" target="_blank" rel="noopener" aria-label="TurnBench leaderboard">Leaderboard ↗&#xFE0E;</a>
               <button class="pub-link bib-toggle" type="button" aria-expanded="false" aria-controls="bib-turnbench" aria-label="BibTeX for TurnBench">BibTeX</button>
             </div>
@@ -1913,10 +1959,10 @@
           <div class="paper-body">
             <h3 class="pub-title"><a href="https://arxiv.org/abs/2611.13430" target="_blank" rel="noopener">When does <span class="nb">language-ID</span> fine-tuning help?</a></h3>
             <p class="pub-authors"><strong>Zhuoyan Tao</strong>, Aditya Kommineni, Shrikanth Narayanan</p>
-            <p class="pub-tldr">A single training-free number, computed from <span class="nb">language-ID</span> posteriors, that forecasts whether fine-tuning a diarization probe will pay off.</p>
+            <p class="pub-tldr">Predicts whether fine-tuning will improve language diarization—identifying which language is spoken when—using <strong>one training-free diagnostic</strong>.</p>
             <div class="pub-meta">
-              <button class="pub-link more-toggle" type="button" aria-expanded="false" aria-controls="more-otpm" aria-label="Details for off-target posterior mass">Details</button>
-              <a class="pub-link" href="https://arxiv.org/pdf/2611.13430" target="_blank" rel="noopener" aria-label="Off-target posterior mass paper PDF">PDF ↗&#xFE0E;</a>
+              <button class="pub-link more-toggle" type="button" aria-expanded="false" aria-controls="more-otpm" aria-label="Research summary for off-target posterior mass">Research summary</button>
+              <a class="pub-link" href="https://arxiv.org/pdf/2611.13430" target="_blank" rel="noopener" aria-label="Off-target posterior mass paper PDF">Paper (PDF) ↗&#xFE0E;</a>
               <button class="pub-link bib-toggle" type="button" aria-expanded="false" aria-controls="bib-otpm" aria-label="BibTeX for off-target posterior mass">BibTeX</button>
             </div>
           </div>
@@ -1955,7 +2001,7 @@
         <details class="fold bg">
           <summary>
             <span class="bg-who"><span class="institution-mark cmu-mark" aria-hidden="true"><img src="assets/cmu-logo.png" width="48" height="48" alt="" /></span><span class="institution-name">Carnegie Mellon<span class="institution-date">2025–present</span></span></span>
-            <span class="bg-role">M.S. student · speech research at WavLab</span>
+            <span class="bg-role">M.S. Intelligent Information Systems<span class="bg-highlight">WavLab · Expected Dec 2027</span></span>
           </summary>
           <p class="fold-body">M.S. in Intelligent Information Systems, expected Dec 2027. Speech research at <a class="meta-link" href="https://wavlab.org" target="_blank" rel="noopener">WavLab</a> with <a class="meta-link" href="https://sw005320.github.io/" target="_blank" rel="noopener">Prof. Shinji Watanabe</a>.</p>
         </details>
@@ -1963,14 +2009,14 @@
           <summary>
             <!-- Apple icon: Simple Icons, CC0 (simple-icons/simple-icons). -->
             <span class="bg-who"><span class="institution-mark apple-mark" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></span><span class="institution-name">Apple<span class="institution-date">Summer 2026</span></span></span>
-            <span class="bg-role">Software engineering intern · satellite connectivity</span>
+            <span class="bg-role">Software engineering intern<span class="bg-highlight">Satellite connectivity · ~1000× experiment throughput</span></span>
           </summary>
           <p class="fold-body">Built simulation tooling with ~1000× higher experiment throughput.</p>
         </details>
         <details class="fold bg">
           <summary>
             <span class="bg-who"><span class="institution-mark usc-mark" aria-hidden="true"><img src="assets/usc-monogram.png" width="38" height="16" alt="" /></span><span class="institution-name">USC<span class="institution-date">Graduated 2026</span></span></span>
-            <span class="bg-role">B.S. Computer Science · B.S. Applied and Computational Mathematics</span>
+            <span class="bg-role">B.S. Computer Science · B.S. Applied and Computational Mathematics<span class="bg-highlight">Trustee Scholar · Full-tuition merit scholarship</span></span>
           </summary>
           <p class="fold-body"><a class="meta-link" href="https://admission.usc.edu/cost-and-financial-aid/scholarships/" target="_blank" rel="noopener">Trustee Scholar</a> (full-tuition merit scholarship); graduated magna cum laude. Multilingual speech research with <a class="meta-link" href="https://sail.usc.edu/people/shri.html" target="_blank" rel="noopener">Prof. Shrikanth Narayanan</a> at SAIL.</p>
         </details>
@@ -2008,6 +2054,18 @@
   <script>
     (function () {
       'use strict';
+
+      // Pin the identity rail only when its actual content fits in the viewport.
+      const rail = document.querySelector('.hero-inner');
+      const fitRail = () => {
+        const root = document.documentElement;
+        root.classList.toggle('large-text', parseFloat(getComputedStyle(root).fontSize) > 20);
+        root.classList.toggle('rail-fits', rail.getBoundingClientRect().height + 116 <= window.innerHeight);
+      };
+      if ('ResizeObserver' in window) new ResizeObserver(() => requestAnimationFrame(fitRail)).observe(rail);
+      window.addEventListener('resize', fitRail);
+      document.fonts.ready.then(fitRail);
+      fitRail();
 
       const figureDialog = document.getElementById('figureDialog');
       const figureImage = document.getElementById('figureImage');
