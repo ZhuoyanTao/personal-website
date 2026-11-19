@@ -1147,7 +1147,6 @@
     @media (max-width: 600px) { .contribution-list { grid-template-columns: 1fr; gap: 1.25rem; } }
 
     /* Readable metadata and clear anchor destinations. */
-    main section[id] { scroll-margin-top: 5.5rem; }
     .nav-links { gap: 1.5rem; }
     .nav-links a, .hero-links a, .footer-links a, .footer-note,
     h3.group-label, .meta-key, .meta-foot, .degree-abbr, .news-date,
@@ -1468,7 +1467,7 @@
     /* ═══ FOLDS ═══
        Every entry is one skimmable row; click to open the detail.
        Native <details>, so it works without JS and is searchable/keyboard-friendly. */
-    .fold { border-bottom: 1px solid var(--line); scroll-margin-top: 5.5rem; }
+    .fold { border-bottom: 1px solid var(--line); }
     .fold > summary {
       display: grid; grid-template-columns: minmax(0, 1fr) auto 0.9rem;
       column-gap: 1.25rem; align-items: baseline;
@@ -1523,7 +1522,7 @@
     .paper-grid { display: grid; grid-template-columns: minmax(0, 1fr); border-bottom: 1px solid var(--line); }
     .paper {
       display: grid; grid-template-columns: 172px minmax(0, 1fr); column-gap: 1.5rem; align-items: start;
-      padding: 1rem 0; border-top: 1px solid var(--line); scroll-margin-top: 5.5rem;
+      padding: 1rem 0; border-top: 1px solid var(--line);
     }
     .paper:first-child { border-top: 0; padding-top: 0.25rem; }
     #research .paper .pub-thumb { display: block; float: none; width: auto; margin: 0; padding: 0.4rem; aspect-ratio: auto; }
@@ -1689,19 +1688,23 @@
       html.rail-fits main > .hero { position: sticky; top: 6.25rem; }
     }
 
-    /* Topic links identify their destination without relying on a transient animation. */
-    .paper:target, .oss-list li:target {
-      background: var(--blue-dim);
-      box-shadow: inset 3px 0 0 var(--blue-text);
-      outline: 1px solid var(--blue-mid);
-      outline-offset: 4px;
-      border-radius: 4px;
+    /* Topic links identify their destination without relying on a transient animation:
+       the same tint and bleed as a hovered Background row, drawn behind the target so nothing inside moves. */
+    .paper:target, .oss-list li:target { position: relative; isolation: isolate; }
+    .paper:target::before, .oss-list li:target::before {
+      content: ''; position: absolute; z-index: -1; pointer-events: none;
+      inset: 0.35rem -0.6rem; border-radius: 6px; background: var(--blue-dim);
     }
-    .paper:target { box-shadow: -6px 0 0 var(--blue-text); }
-    .oss-list li:target { padding-left: 0.75rem; scroll-margin-top: 6rem; }
-    .paper:target + .paper-more:not([hidden]) { border-color: var(--blue-text); }
+    .paper:first-child:target::before { top: -0.45rem; }
+    .oss-list li:target::before { inset: -0.35rem -0.6rem; }
+    /* Linked entries keep their heading in view instead of sliding it under the nav:
+       the first paper lands where the Research nav link does, and open-source items keep their group label. */
+    .paper:first-child { scroll-margin-top: 4rem; }
+    @media (min-width: 1180px) { .paper:first-child { scroll-margin-top: 3.25rem; } }
+    @media (max-width: 600px) { .paper:first-child { scroll-margin-top: 6.5rem; } }
+    .oss-list li { scroll-margin-top: 3.5rem; }
     @media print {
-      .paper:target, .oss-list li:target { box-shadow: none; outline: none; background: none; }
+      .paper:target::before, .oss-list li:target::before { display: none; }
     }
 
     /* Evidence-led refinements: explicit specialty, visible outcomes, predictable actions. */
@@ -2169,6 +2172,27 @@
       navLinks.querySelectorAll('a[href^="#"]').forEach(a => linkMap.set(a.getAttribute('href').slice(1), a));
       const spySections = document.querySelectorAll('main section[id]');
 
+      // After following an in-page link, the nav names the section that link went to,
+      // even where the page bottoms out before that section reaches the top. Cleared once the reader scrolls.
+      let pinnedSection = null;
+      function pinSectionFor(hash) {
+        let target = null;
+        try { target = hash && document.getElementById(decodeURIComponent(hash.slice(1))); } catch (_) {}
+        pinnedSection = target ? target.closest('main section[id]')?.id || null : null;
+      }
+      const unpin = () => { if (pinnedSection) { pinnedSection = null; updateActiveSection(); } };
+      window.addEventListener('wheel', unpin, { passive: true });
+      window.addEventListener('touchmove', unpin, { passive: true });
+      window.addEventListener('pointerdown', e => { if (e.target === document.documentElement) unpin(); }); // scrollbar drag
+      window.addEventListener('keydown', e => {
+        if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(e.key)) unpin();
+      });
+      document.addEventListener('click', e => {
+        const link = e.target.closest('a[href^="#"]');
+        if (link) { pinSectionFor(link.hash); updateActiveSection(); }
+      });
+      pinSectionFor(location.hash);
+
       function updateActiveSection() {
         if (nav.classList.contains('menu-open')) return;
         const threshold = nav.getBoundingClientRect().height + 40;
@@ -2179,6 +2203,7 @@
         if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
           current = spySections[spySections.length - 1]?.id;
         }
+        if (pinnedSection) current = pinnedSection;
         linkMap.forEach((link, id) => {
           const active = id === current;
           link.classList.toggle('active', active);
