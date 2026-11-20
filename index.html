@@ -1731,6 +1731,7 @@
       .hero-photo-col { grid-row: 1 / span 2; }
       .hero-bio { font-size: var(--text-body); }
       .paper .pub-meta > *, .hero-links a { min-height: 44px; }
+      .hero-links { row-gap: 0; } /* the 44px targets already space the rows */
     }
 
     /* Text-only enlargement needs the same single-column fallback as browser zoom. */
@@ -1892,7 +1893,7 @@
 
   <section class="dark-section" id="research" aria-labelledby="research-h">
     <div class="wrap">
-      <div class="sec-head"><h2 id="research-h">Selected publications</h2><button class="fold-all" type="button" data-open="Show all details" data-close="Hide all details">Show all details</button></div>
+      <div class="sec-head"><h2 id="research-h">Selected publications</h2><button class="fold-all" type="button" data-open="Expand all" data-close="Collapse all">Expand all</button></div>
       <div class="paper-grid" id="publications">
         <article class="paper" id="pub-anchor" style="--col: 1">
           <div class="paper-side">
@@ -2083,10 +2084,16 @@
 
       // Pin the identity rail only when its actual content fits in the viewport.
       const rail = document.querySelector('.hero-inner');
+      // A link to the first paper lands where the Research nav link does, however the heading wraps.
+      const leadPaper = document.querySelector('#publications > .paper:first-child');
       const fitRail = () => {
         const root = document.documentElement;
         root.classList.toggle('large-text', parseFloat(getComputedStyle(root).fontSize) > 20);
         root.classList.toggle('rail-fits', rail.getBoundingClientRect().height + 116 <= window.innerHeight);
+        if (leadPaper) {
+          const lead = leadPaper.getBoundingClientRect().top - leadPaper.closest('section').getBoundingClientRect().top;
+          leadPaper.style.scrollMarginTop = Math.max(0, Math.round(lead)) + 'px';
+        }
       };
       if ('ResizeObserver' in window) new ResizeObserver(() => requestAnimationFrame(fitRail)).observe(rail);
       window.addEventListener('resize', fitRail);
