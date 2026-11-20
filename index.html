@@ -1681,7 +1681,14 @@
       .light-section::before, .dark-section::before { width: 100%; }
       #research::before { display: none; }
       #contact .hero-links { display: none; } /* the same links sit in the rail */
-      .nav-logo { visibility: hidden; }       /* the name sits in the rail */
+    }
+    /* The nav repeats the name only once the page's own heading has scrolled under it
+       (with JS; without it the logo simply stays). */
+    .nav-logo { transition: opacity 0.25s var(--ease), visibility 0.25s; }
+    html[data-theme] nav:not(.name-out):not(.menu-open) .nav-logo { opacity: 0; visibility: hidden; }
+    /* Tablet: portrait top-aligned with the name rather than floating mid-intro. */
+    @media (min-width: 601px) and (max-width: 1179px) {
+      .hero-photo-col { align-self: start; padding-top: 0.5rem; }
     }
     @media (min-width: 1180px) and (min-height: 760px) {
       main > .hero { position: static; }
@@ -1849,8 +1856,8 @@
 
       <!-- Current education and prior industry experience. -->
       <ul class="hero-roles" aria-label="Affiliations">
-        <li><span class="role-mark" aria-hidden="true"><img src="assets/cmu-logo.png" width="48" height="48" alt="" /></span><span><strong>Carnegie Mellon</strong> · M.S. student, <abbr title="Language Technologies Institute">LTI</abbr></span></li>
-        <li><!-- Apple icon: Simple Icons, CC0 (simple-icons/simple-icons). --><span class="role-mark" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></span><span><strong>Apple</strong> · Software engineering intern, 2026</span></li>
+        <li><span class="role-mark" aria-hidden="true"><img src="assets/cmu-logo.png" width="48" height="48" alt="" /></span><span><strong>Carnegie Mellon</strong>&nbsp;· M.S. student, <abbr title="Language Technologies Institute">LTI</abbr></span></li>
+        <li><!-- Apple icon: Simple Icons, CC0 (simple-icons/simple-icons). --><span class="role-mark" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></span><span><strong>Apple</strong>&nbsp;· Software engineering intern, 2026</span></li>
       </ul>
 
       <div class="hero-rule" aria-hidden="true"></div>
@@ -1891,10 +1898,10 @@
             <a class="pub-thumb" href="assets/papers/anchor.webp" aria-label="Enlarge figure: ANCHOR model overview">
               <img src="assets/papers/anchor.webp" width="502" height="232" loading="lazy" decoding="async" alt="ANCHOR model overview" />
             </a>
-            <p class="paper-meta"><span class="pub-venue">Interspeech 2026 · Oral</span></p>
+            <p class="paper-meta"><span class="pub-venue">Interspeech 2026&nbsp;· Oral</span></p>
           </div>
           <div class="paper-body">
-            <h3 class="pub-title"><a href="https://www.isca-archive.org/interspeech_2026/tao26_interspeech.html" target="_blank" rel="noopener">ANCHOR — speech quality from partial audio</a></h3>
+            <h3 class="pub-title"><a href="https://www.isca-archive.org/interspeech_2026/tao26_interspeech.html" target="_blank" rel="noopener">ANCHOR&nbsp;— speech quality from partial audio</a></h3>
             <p class="pub-authors"><strong>Zhuoyan Tao</strong>, Jiatong Shi, Hye-jin Shim, Shinji Watanabe</p>
             <p class="pub-tldr">Predicts how listeners will rate speech before the utterance finishes, with <strong>21–35% lower PLCMOS error</strong> than ARECHO on <span class="nb">2-second</span> prefixes.</p>
             <div class="pub-meta">
@@ -1932,13 +1939,13 @@
             <p class="paper-meta"><span class="pub-venue">IEEE SLT 2026</span></p>
           </div>
           <div class="paper-body">
-            <h3 class="pub-title"><a href="https://arxiv.org/abs/2608.25218" target="_blank" rel="noopener">TurnBench — evaluating conversational turn-taking</a></h3>
+            <h3 class="pub-title"><a href="https://arxiv.org/abs/2608.25218" target="_blank" rel="noopener">TurnBench&nbsp;— evaluating conversational turn-taking</a></h3>
             <p class="pub-authors">
               <span class="authors-short">Freeman Jiang, Ramon Sanabria, …, <strong>Zhuoyan Tao</strong>, …, <span class="nb">Hung-yi Lee</span>, Shinji Watanabe</span>
               <span class="authors-full" hidden>Freeman Jiang, Ramon Sanabria, Soham Deshmukh, Bandhav Veluri, Simon Michael Vuch Williams, Elliott K. Suen, Garreth Lee, Kevin Yoonho Choi, Takuya Umeki, Riku Kubo, Sathvik Udupa, Chien-yu Huang, Shih-Yun Shan Kuan, <strong>Zhuoyan Tao</strong>, Satyapriya Krishna, Sefik Emre Eskimez, Yu Tsao, Hung-yi Lee, Shinji Watanabe</span>
               <button class="pub-link authors-toggle" type="button" aria-expanded="false" data-more="All 19 authors" data-less="Show fewer">All 19 authors</button>
             </p>
-            <p class="pub-tldr">A benchmark for when conversational systems should speak or wait: <strong>30 hours of conversation · 14 systems evaluated.</strong></p>
+            <p class="pub-tldr">A benchmark for when conversational systems should speak or wait: <strong>30 hours of conversation&nbsp;· 14 systems evaluated</strong>.</p>
             <p class="pub-contribution">My contribution: evaluation protocol and an ANCHOR-based baseline.</p>
             <div class="pub-meta">
               <button class="pub-link more-toggle" type="button" aria-expanded="false" aria-controls="more-turnbench" aria-label="Research summary for TurnBench">Research summary</button>
@@ -1972,12 +1979,12 @@
             <a class="pub-thumb" href="assets/papers/otpm.webp" aria-label="Enlarge figure: Off-target posterior mass and probe gain prediction">
               <img src="assets/papers/otpm.webp" width="720" height="238" loading="lazy" decoding="async" alt="Off-target posterior mass and probe gain prediction" />
             </a>
-            <p class="paper-meta"><span class="pub-venue pending">JASA-EL · Under review</span></p>
+            <p class="paper-meta"><span class="pub-venue pending">JASA-EL&nbsp;· Under review</span></p>
           </div>
           <div class="paper-body">
             <h3 class="pub-title"><a href="https://arxiv.org/abs/2611.13430" target="_blank" rel="noopener">When does <span class="nb">language-ID</span> fine-tuning help?</a></h3>
             <p class="pub-authors"><strong>Zhuoyan Tao</strong>, Aditya Kommineni, Shrikanth Narayanan</p>
-            <p class="pub-tldr">Predicts whether fine-tuning will improve language diarization—identifying which language is spoken when—using <strong>one training-free diagnostic</strong>.</p>
+            <p class="pub-tldr">Predicts whether fine-tuning will improve language diarization&#x2060;—identifying which language is spoken when&#x2060;—using <strong>one <span class="nb">training-free</span> diagnostic</strong>.</p>
             <div class="pub-meta">
               <button class="pub-link more-toggle" type="button" aria-expanded="false" aria-controls="more-otpm" aria-label="Research summary for off-target posterior mass">Research summary</button>
               <a class="pub-link" href="https://arxiv.org/pdf/2611.13430" target="_blank" rel="noopener" aria-label="Off-target posterior mass paper PDF">Paper (PDF) ↗&#xFE0E;</a>
@@ -1988,8 +1995,8 @@
         <div class="paper-more" id="more-otpm" style="--col: 3" hidden>
           <dl>
             <div><dt>Title</dt><dd>Off-target posterior mass: A training-free diagnostic for fine-tuning spoken language diarization probes</dd></div>
-            <div><dt>Venue</dt><dd>Submitted to JASA Express Letters · arXiv:2611.13430</dd></div>
-            <div><dt>Summary</dt><dd>Off-target posterior mass (OTPM) correlates with probe gains at 0.56 on unseen synthetic bilingual data and 0.23 on real-world corpora (DISPLACE; MUCS Hindi–English code-switching). The evaluation was pre-registered on unseen language pairs and run across Whisper, MMS, and classical language-ID encoders.</dd></div>
+            <div><dt>Venue</dt><dd>Submitted to JASA Express Letters&nbsp;· arXiv:2611.13430</dd></div>
+            <div><dt>Summary</dt><dd>Off-target posterior mass (OTPM) correlates with probe gains at 0.56 on unseen synthetic bilingual data and 0.23 on real-world corpora (DISPLACE; MUCS Hindi–English code-switching). The evaluation was pre-registered on unseen language pairs and run across Whisper, MMS, and classical <span class="nb">language-ID</span> encoders.</dd></div>
           </dl>
         </div>
         <div class="bib" id="bib-otpm" style="--col: 3" hidden>
@@ -2019,7 +2026,7 @@
         <details class="fold bg">
           <summary>
             <span class="bg-who"><span class="institution-mark cmu-mark" aria-hidden="true"><img src="assets/cmu-logo.png" width="48" height="48" alt="" /></span><span class="institution-name">Carnegie Mellon<span class="institution-date">2025–present</span></span></span>
-            <span class="bg-role">M.S. Intelligent Information Systems<span class="bg-highlight">WavLab · Expected Dec 2027</span></span>
+            <span class="bg-role">M.S. Intelligent Information Systems<span class="bg-highlight">WavLab&nbsp;· Expected Dec 2027</span></span>
           </summary>
           <p class="fold-body">M.S. in Intelligent Information Systems, expected Dec 2027. Speech research at <a class="meta-link" href="https://wavlab.org" target="_blank" rel="noopener">WavLab</a> with <a class="meta-link" href="https://sw005320.github.io/" target="_blank" rel="noopener">Prof. Shinji Watanabe</a>.</p>
         </details>
@@ -2027,14 +2034,14 @@
           <summary>
             <!-- Apple icon: Simple Icons, CC0 (simple-icons/simple-icons). -->
             <span class="bg-who"><span class="institution-mark apple-mark" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></span><span class="institution-name">Apple<span class="institution-date">Summer 2026</span></span></span>
-            <span class="bg-role">Software engineering intern<span class="bg-highlight">Satellite connectivity · ~1000× experiment throughput</span></span>
+            <span class="bg-role">Software engineering intern<span class="bg-highlight">Satellite connectivity&nbsp;· ~1000× experiment throughput</span></span>
           </summary>
           <p class="fold-body">Built simulation tooling with ~1000× higher experiment throughput.</p>
         </details>
         <details class="fold bg">
           <summary>
             <span class="bg-who"><span class="institution-mark usc-mark" aria-hidden="true"><img src="assets/usc-monogram.png" width="38" height="16" alt="" /></span><span class="institution-name">USC<span class="institution-date">Graduated 2026</span></span></span>
-            <span class="bg-role">B.S. Computer Science · B.S. Applied and Computational Mathematics<span class="bg-highlight">Trustee Scholar · Full-tuition merit scholarship</span></span>
+            <span class="bg-role">B.S. Computer Science&nbsp;· B.S. Applied and Computational Mathematics<span class="bg-highlight">Trustee Scholar&nbsp;· Full-tuition merit scholarship</span></span>
           </summary>
           <p class="fold-body"><a class="meta-link" href="https://admission.usc.edu/cost-and-financial-aid/scholarships/" target="_blank" rel="noopener">Trustee Scholar</a> (full-tuition merit scholarship); graduated magna cum laude. Multilingual speech research with <a class="meta-link" href="https://sail.usc.edu/people/shri.html" target="_blank" rel="noopener">Prof. Shrikanth Narayanan</a> at SAIL.</p>
         </details>
@@ -2066,7 +2073,7 @@
     <div class="footer-left">
       <div class="footer-name">Zhuoyan (Terry) Tao</div>
     </div>
-    <div class="footer-note">Pittsburgh · Updated <time datetime="2026-11-17">Nov 2026</time></div>
+    <div class="footer-note">Pittsburgh&nbsp;· Updated <time datetime="2026-11-17">Nov 2026</time></div>
   </footer>
 
   <script>
@@ -2129,6 +2136,13 @@
 
       // ── Nav scroll state
       const nav = document.getElementById('nav');
+      const heroName = document.querySelector('.hero-name');
+      if (heroName && 'IntersectionObserver' in window) {
+        new IntersectionObserver(([entry]) => nav.classList.toggle('name-out', !entry.isIntersecting),
+          { rootMargin: '-72px 0px 0px 0px' }).observe(heroName);
+      } else {
+        nav.classList.add('name-out');
+      }
       const progress = document.getElementById('progress');
       let ticking = false;
       window.addEventListener('scroll', () => {
